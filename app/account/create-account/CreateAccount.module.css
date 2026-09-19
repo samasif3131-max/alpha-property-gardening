@@ -1,0 +1,1148 @@
+/* =========================================================
+   CREATE ACCOUNT PAGE
+   Page-specific CSS Module
+========================================================= */
+
+.createAccountPage {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #27332e;
+  background: #ffffff;
+}
+
+.createAccountPage *,
+.createAccountPage *::before,
+.createAccountPage *::after {
+  box-sizing: border-box;
+}
+
+.createAccountPage a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.createAccountPage img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* =========================================================
+   HEADER - PAGE-SCOPED FIX
+   CSS Modules require :global for Header classes
+========================================================= */
+
+/* Header background */
+.createAccountPage :global(.site-header) {
+  position: relative;
+  z-index: 100;
+  background: #ffffff;
+  color: #34423b;
+}
+
+/* Header container */
+.createAccountPage :global(.header-container) {
+  color: #34423b;
+}
+
+/* Main navigation */
+.createAccountPage :global(.main-navigation) {
+  color: #34423b;
+}
+
+.createAccountPage :global(.main-navigation a) {
+  color: #34423b !important;
+  text-decoration: none;
+}
+
+.createAccountPage :global(.main-navigation a:hover) {
+  color: #087f45 !important;
+}
+
+.createAccountPage :global(.main-navigation a.active) {
+  color: #087f45 !important;
+}
+
+.createAccountPage :global(.main-navigation a.active::after) {
+  background: #087f45 !important;
+}
+
+/* Header right text */
+.createAccountPage :global(.header-right) {
+  color: #34423b;
+}
+
+.createAccountPage :global(.header-right p) {
+  color: #6a746f !important;
+}
+
+/* Quote / login button */
+.createAccountPage :global(.quote-button) {
+  background: #087f45;
+  color: #ffffff !important;
+}
+
+/* Mobile menu button */
+.createAccountPage :global(.mobile-menu-button) {
+  background: #ffffff;
+  color: #10251d;
+}
+
+.createAccountPage :global(.mobile-menu-button span) {
+  background: #10251d !important;
+}
+
+/* Mobile navigation */
+.createAccountPage :global(.site-header.mobile-open .main-navigation) {
+  background: #ffffff;
+}
+
+.createAccountPage :global(.site-header.mobile-open .main-navigation a) {
+  color: #34423b !important;
+}
+
+.createAccountPage :global(.site-header.mobile-open .main-navigation a:hover) {
+  color: #087f45 !important;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.createAccountHero {
+  min-height: 520px;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(7, 42, 27, 0.94) 0%,
+      rgba(7, 42, 27, 0.82) 40%,
+      rgba(7, 42, 27, 0.45) 70%,
+      rgba(7, 42, 27, 0.16) 100%
+    ),
+    url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=88");
+
+  background-size: cover;
+  background-position: center;
+}
+
+.createAccountHeroOverlay {
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+}
+
+.createAccountHeroContainer {
+  width: min(1260px, calc(100% - 50px));
+  margin: 0 auto;
+}
+
+.createAccountHeroContent {
+  max-width: 720px;
+  padding: 80px 0;
+  color: #ffffff;
+}
+
+.createAccountEyebrow {
+  margin: 0 0 18px;
+
+  color: #f4c430;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.createAccountHeroContent h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(50px, 6vw, 82px);
+  line-height: 0.98;
+
+  letter-spacing: -3px;
+  font-weight: 800;
+}
+
+.createAccountHeroContent h1 span {
+  color: #f4c430;
+}
+
+.createAccountHeroText {
+  margin: 28px 0 0;
+
+  color: rgba(255, 255, 255, 0.94);
+
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.createAccountPoints {
+  margin-top: 38px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.createAccountPoints > div {
+  min-height: 46px;
+
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.09);
+
+  backdrop-filter: blur(5px);
+}
+
+.createAccountPoints > div > span {
+  color: #f4c430;
+
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.createAccountPoints > div > strong {
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   MAIN SECTION
+========================================================= */
+
+.createAccountSection {
+  padding: 90px 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f5f8f6 0%,
+      #ffffff 100%
+    );
+}
+
+.createAccountContainer {
+  width: min(1260px, calc(100% - 50px));
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    0.9fr
+    1.1fr
+    0.9fr;
+
+  gap: 28px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   LEFT COLUMN
+========================================================= */
+
+.createAccountInfoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.createAccountInfoCard {
+  padding: 32px 28px;
+
+  border: 1px solid #dce6e0;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 12px 35px rgba(25, 53, 40, 0.06);
+}
+
+.createAccountCardLabel {
+  margin-bottom: 9px;
+
+  color: #087f45;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.createAccountInfoCard h2 {
+  margin: 0 0 24px;
+
+  color: #10251d;
+
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.createAccountInfoItem {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 13px;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid #edf1ee;
+}
+
+.createAccountInfoItem:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.createAccountInfoIcon {
+  width: 29px;
+  height: 29px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #eaf7f0;
+  color: #087f45;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.createAccountInfoItem p {
+  margin: 5px 0 0;
+
+  color: #4d5b54;
+
+  font-size: 12px;
+  line-height: 1.45;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   LEFT HELP BOX
+========================================================= */
+
+.createAccountHelpBox {
+  padding: 23px;
+
+  border-radius: 15px;
+
+  background: #087f45;
+
+  display: flex;
+
+  gap: 15px;
+
+  color: #ffffff;
+}
+
+.createAccountHelpIcon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.13);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #f4c430;
+
+  font-size: 17px;
+}
+
+.createAccountHelpBox h3 {
+  margin: 0 0 6px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+}
+
+.createAccountHelpBox p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.createAccountHelpBox a {
+  color: #f4c430;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   FORM CARD
+========================================================= */
+
+.createAccountFormCard {
+  padding: 40px;
+
+  border: 1px solid #dce6e0;
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 18px 50px rgba(25, 53, 40, 0.09);
+
+  text-align: center;
+}
+
+.createAccountAlphaBrand {
+  display: flex;
+  justify-content: center;
+}
+
+.createAccountAlphaBrand span {
+  color: #087f45;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 57px;
+  line-height: 0.95;
+
+  font-weight: 900;
+
+  letter-spacing: -3px;
+}
+
+.createAccountAlphaSubtitle {
+  margin-top: 8px;
+
+  color: #6c7771;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 2.5px;
+}
+
+.createAccountFormCard h2 {
+  margin: 27px 0 0;
+
+  color: #10251d;
+
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.createAccountFormDescription {
+  max-width: 390px;
+
+  margin: 10px auto 28px;
+
+  color: #6d7873;
+
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.createAccountForm {
+  text-align: left;
+}
+
+.createAccountFormField {
+  margin-bottom: 17px;
+}
+
+.createAccountFormField label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #36433d;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.createAccountInputWrapper {
+  position: relative;
+
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #d8e2dc;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.createAccountInputWrapper:focus-within {
+  border-color: #087f45;
+
+  box-shadow:
+    0 0 0 3px rgba(8, 127, 69, 0.09);
+}
+
+.createAccountInputWrapper > span {
+  width: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #83908a;
+
+  font-size: 15px;
+}
+
+.createAccountInputWrapper input {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 13px 0 0;
+
+  border: 0;
+  outline: 0;
+
+  color: #10251d;
+
+  background: transparent;
+
+  font-size: 13px;
+}
+
+.createAccountInputWrapper input::placeholder {
+  color: #a1aaa5;
+}
+
+
+/* =========================================================
+   TERMS
+========================================================= */
+
+.createAccountTerms {
+  margin: 4px 0 21px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  color: #68746e;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  cursor: pointer;
+}
+
+.createAccountTerms input {
+  margin-top: 2px;
+
+  flex-shrink: 0;
+
+  accent-color: #087f45;
+}
+
+.createAccountTerms a {
+  color: #087f45;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.createAccountSubmit {
+  width: 100%;
+  min-height: 52px;
+
+  padding: 0 18px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #087f45;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.createAccountSubmit:hover {
+  background: #056638;
+
+  transform: translateY(-1px);
+}
+
+.createAccountSubmit span:last-child {
+  font-size: 19px;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.createAccountDivider {
+  margin: 27px 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+}
+
+.createAccountDivider span {
+  height: 1px;
+
+  flex: 1;
+
+  background: #e4eae6;
+}
+
+.createAccountDivider strong {
+  color: #a0aaa5;
+
+  font-size: 8px;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.createAccountLoginButton {
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #087f45;
+  border-radius: 8px;
+
+  color: #087f45;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.createAccountLoginButton:hover {
+  background: #087f45;
+  color: #ffffff;
+}
+
+.createAccountNewUser {
+  margin: 18px 0 0;
+
+  color: #89938e;
+
+  font-size: 10px;
+}
+
+.createAccountNewUser a {
+  color: #087f45;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+========================================================= */
+
+.createAccountRightColumn {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+
+/* =========================================================
+   TESTIMONIAL
+========================================================= */
+
+.createAccountTestimonialCard {
+  overflow: hidden;
+
+  border: 1px solid #dce6e0;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 12px 35px rgba(25, 53, 40, 0.06);
+}
+
+.createAccountTestimonialCard > img {
+  width: 100%;
+  height: 210px;
+
+  object-fit: cover;
+}
+
+.createAccountTestimonialContent {
+  position: relative;
+
+  padding: 24px;
+}
+
+.createAccountTestimonialMark {
+  position: absolute;
+
+  top: 8px;
+  right: 20px;
+
+  color: #e0ebe5;
+
+  font-family: Georgia, serif;
+
+  font-size: 65px;
+  line-height: 1;
+}
+
+.createAccountTestimonialContent p {
+  position: relative;
+  z-index: 1;
+
+  margin: 0;
+
+  color: #435149;
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  font-weight: 600;
+}
+
+.createAccountTestimonialRating {
+  margin-top: 18px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.createAccountTestimonialRating span {
+  color: #f4c430;
+
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.createAccountTestimonialRating strong {
+  color: #85908a;
+
+  font-size: 9px;
+
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+
+/* =========================================================
+   CONTACT CARD
+========================================================= */
+
+.createAccountContactCard {
+  padding: 27px;
+
+  border-radius: 16px;
+
+  background: #eef7f1;
+
+  border: 1px solid #d8eadf;
+}
+
+.createAccountContactHeading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 20px;
+}
+
+.createAccountContactHeading > span {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #d7ecdf;
+
+  color: #087f45;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.createAccountContactHeading h2 {
+  margin: 0;
+
+  color: #10251d;
+
+  font-size: 21px;
+}
+
+.createAccountContactHeading p {
+  margin: 4px 0 0;
+
+  color: #75827b;
+
+  font-size: 10px;
+}
+
+.createAccountContactLine {
+  min-height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  border-top: 1px solid #dbe9e0;
+
+  color: #53625a;
+
+  font-size: 11px;
+}
+
+.createAccountContactLine > span:first-child {
+  width: 20px;
+
+  flex-shrink: 0;
+
+  color: #087f45;
+
+  text-align: center;
+}
+
+.createAccountContactLine strong {
+  color: #087f45;
+
+  font-size: 13px;
+}
+
+.createAccountContactLine a {
+  color: #087f45;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   FOOTER - PAGE-SCOPED PROTECTION
+========================================================= */
+
+.createAccountPage :global(.site-footer) {
+  color: #ffffff;
+}
+
+.createAccountPage :global(.site-footer a) {
+  text-decoration: none;
+}
+
+.createAccountPage :global(.site-footer h2),
+.createAccountPage :global(.site-footer h3),
+.createAccountPage :global(.site-footer p),
+.createAccountPage :global(.site-footer li),
+.createAccountPage :global(.site-footer span) {
+  color: inherit;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1150px) {
+  .createAccountContainer {
+    grid-template-columns: 1fr 1.15fr;
+  }
+
+  .createAccountRightColumn {
+    grid-column: 1 / -1;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .createAccountHeroContent h1 {
+    font-size: 68px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+  .createAccountHero,
+  .createAccountHeroOverlay {
+    min-height: 560px;
+  }
+
+  .createAccountHeroContainer {
+    width: calc(100% - 30px);
+  }
+
+  .createAccountHeroContent {
+    padding: 65px 0;
+  }
+
+  .createAccountHeroContent h1 {
+    font-size: 54px;
+    letter-spacing: -2px;
+  }
+
+  .createAccountHeroText {
+    font-size: 15px;
+  }
+
+  .createAccountHeroText br {
+    display: none;
+  }
+
+  .createAccountPoints {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .createAccountPoints > div {
+    width: 100%;
+  }
+
+  .createAccountSection {
+    padding: 60px 0;
+  }
+
+  .createAccountContainer {
+    width: calc(100% - 30px);
+
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+  }
+
+  .createAccountRightColumn {
+    grid-column: auto;
+
+    display: flex;
+  }
+
+  .createAccountInfoCard {
+    padding: 28px 22px;
+  }
+
+  .createAccountFormCard {
+    padding: 32px 24px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .createAccountHero,
+  .createAccountHeroOverlay {
+    min-height: 570px;
+  }
+
+  .createAccountHero {
+    background-position: 65% center;
+  }
+
+  .createAccountHeroContent {
+    padding: 55px 0;
+  }
+
+  .createAccountEyebrow {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  .createAccountHeroContent h1 {
+    font-size: 45px;
+    letter-spacing: -1.5px;
+  }
+
+  .createAccountHeroText {
+    margin-top: 22px;
+
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .createAccountPoints {
+    margin-top: 28px;
+    gap: 9px;
+  }
+
+  .createAccountPoints > div {
+    min-height: 43px;
+    padding: 0 13px;
+  }
+
+  .createAccountPoints > div > strong {
+    font-size: 10px;
+  }
+
+  .createAccountSection {
+    padding: 45px 0;
+  }
+
+  .createAccountContainer {
+    width: calc(100% - 24px);
+  }
+
+  .createAccountFormCard {
+    padding: 28px 18px;
+    border-radius: 16px;
+  }
+
+  .createAccountAlphaBrand span {
+    font-size: 49px;
+  }
+
+  .createAccountAlphaSubtitle {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  .createAccountFormCard h2 {
+    margin-top: 24px;
+    font-size: 24px;
+  }
+
+  .createAccountFormDescription {
+    font-size: 11px;
+  }
+
+  .createAccountInfoCard h2 {
+    font-size: 24px;
+  }
+
+  .createAccountTestimonialCard > img {
+    height: 190px;
+  }
+
+  .createAccountTestimonialRating {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .createAccountContactCard {
+    padding: 22px 18px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+  .createAccountHeroContent h1 {
+    font-size: 39px;
+  }
+
+  .createAccountHeroText {
+    font-size: 13px;
+  }
+
+  .createAccountFormCard {
+    padding: 25px 15px;
+  }
+
+  .createAccountInfoCard {
+    padding: 24px 18px;
+  }
+
+  .createAccountHelpBox {
+    padding: 19px;
+  }
+
+  .createAccountContactCard {
+    padding: 20px 16px;
+  }
+
+  .createAccountContactLine {
+    font-size: 10px;
+  }
+}

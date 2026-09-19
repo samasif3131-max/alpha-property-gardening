@@ -1,0 +1,828 @@
+/* =========================================================
+   HOMEOWNER LOGIN PAGE
+   ========================================================= */
+
+.loginPage {
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f7f5;
+  color: #1d2a24;
+}
+
+
+/* =========================================================
+   LOGIN HERO
+   ========================================================= */
+
+.loginHero {
+  position: relative;
+  min-height: 500px;
+  background-image: url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=90");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.loginHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(18, 38, 29, 0.88) 0%,
+    rgba(18, 38, 29, 0.72) 45%,
+    rgba(18, 38, 29, 0.35) 100%
+  );
+}
+
+.loginHeroContainer {
+  position: relative;
+  z-index: 2;
+  max-width: 1250px;
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  display: flex;
+  align-items: center;
+}
+
+.loginHeroContent {
+  max-width: 700px;
+}
+
+.loginEyebrow {
+  margin: 0 0 18px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.loginHeroContent h1 {
+  margin: 0;
+  font-size: clamp(46px, 5vw, 72px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: #ffffff;
+}
+
+.loginHeroContent h1 span {
+  color: #ffffff;
+}
+
+.loginHeroText {
+  margin: 25px 0 30px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HERO TRUST BADGES / POINTS
+   ========================================================= */
+
+.loginHeroPoints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 28px;
+  margin-top: 30px;
+  color: #ffffff;
+}
+
+.loginHeroPoint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+}
+
+.loginHeroPoint strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.loginHeroPointIcon {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   LOGIN MAIN SECTION
+   ========================================================= */
+
+.loginSection {
+  padding: 75px 30px 90px;
+  background: #f5f7f5;
+}
+
+.loginContainer {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+
+/* =========================================================
+   LEFT INFORMATION COLUMN
+   ========================================================= */
+
+.loginInfoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.loginInfoCard {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 32px 30px;
+  border: 1px solid #e3e9e4;
+  box-shadow: 0 10px 30px rgba(22, 40, 30, 0.07);
+}
+
+.loginCardLabel {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #718379;
+}
+
+.loginInfoCard h2 {
+  margin: 0 0 26px;
+  font-size: 28px;
+  line-height: 1.2;
+  color: #20352a;
+}
+
+.loginInfoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #edf1ee;
+}
+
+.loginInfoItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.loginInfoIcon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf5ef;
+  color: #315d43;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.loginInfoItem p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #526259;
+}
+
+
+/* =========================================================
+   HELP BOX
+   ========================================================= */
+
+.loginHelpBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 22px;
+  background: #203d2d;
+  border-radius: 16px;
+  color: #ffffff;
+}
+
+.loginHelpIcon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.loginHelpBox h3 {
+  margin: 0 0 7px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.loginHelpBox p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.loginHelpBox a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   LOGIN FORM CARD
+   ========================================================= */
+
+.loginFormCard {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 38px;
+  border: 1px solid #e1e8e2;
+  box-shadow: 0 15px 40px rgba(20, 40, 29, 0.09);
+  text-align: center;
+}
+
+.loginAlphaBrand {
+  margin-bottom: 2px;
+}
+
+.loginAlphaBrand span {
+  display: inline-block;
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -2px;
+  font-style: italic;
+  color: #284b36;
+}
+
+.loginAlphaSubtitle {
+  margin-bottom: 25px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #819087;
+}
+
+.loginFormCard h2 {
+  margin: 0;
+  font-size: 27px;
+  line-height: 1.2;
+  color: #20352a;
+}
+
+.loginFormDescription {
+  max-width: 390px;
+  margin: 12px auto 28px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #718078;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.loginForm {
+  text-align: left;
+}
+
+.loginFormField {
+  margin-bottom: 20px;
+}
+
+.loginFormField label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #304139;
+}
+
+.loginInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.loginInputIcon {
+  position: absolute;
+  left: 15px;
+  z-index: 2;
+  color: #809087;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.loginInputWrapper input {
+  width: 100%;
+  height: 50px;
+  padding: 0 45px;
+  border: 1px solid #dce4de;
+  border-radius: 9px;
+  outline: none;
+  background: #fafcfb;
+  color: #25352c;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.loginInputWrapper input::placeholder {
+  color: #a1aba5;
+}
+
+.loginInputWrapper input:focus {
+  border-color: #4b7659;
+  box-shadow: 0 0 0 3px rgba(75, 118, 89, 0.1);
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   PASSWORD BUTTON
+   ========================================================= */
+
+.passwordButton {
+  position: absolute;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: #78867e;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   FORM OPTIONS
+   ========================================================= */
+
+.loginOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 3px 0 22px;
+  font-size: 12px;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #68756e;
+  cursor: pointer;
+}
+
+.rememberMe input {
+  width: 15px;
+  height: 15px;
+  accent-color: #315d43;
+}
+
+.loginOptions a {
+  color: #315d43;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.loginOptions a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+   ========================================================= */
+
+.loginSubmitButton {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #284b36;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.loginSubmitButton:hover {
+  background: #1e3b2a;
+  transform: translateY(-1px);
+}
+
+.loginSubmitButton span:last-child {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.loginDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.loginDividerLine {
+  flex: 1;
+  height: 1px;
+  background: #e4e9e5;
+}
+
+.loginDivider strong {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #98a29c;
+}
+
+
+/* =========================================================
+   CREATE ACCOUNT
+   ========================================================= */
+
+.createAccountButton {
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid #d5dfd7;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #315d43;
+  background: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.createAccountButton:hover {
+  background: #f3f7f4;
+  border-color: #b8cbbd;
+}
+
+.newUserText {
+  margin: 18px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7a857f;
+}
+
+.newUserText a {
+  color: #315d43;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.newUserText a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+   ========================================================= */
+
+.loginRightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+
+/* =========================================================
+   TESTIMONIAL CARD
+   ========================================================= */
+
+.testimonialCard {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #e2e8e3;
+  box-shadow: 0 10px 30px rgba(22, 40, 30, 0.07);
+}
+
+.testimonialCard img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.testimonialContent {
+  position: relative;
+  padding: 28px;
+}
+
+.testimonialMark {
+  position: absolute;
+  top: 10px;
+  right: 24px;
+  font-size: 55px;
+  line-height: 1;
+  color: #dfe9e1;
+  font-family: Georgia, serif;
+}
+
+.testimonialContent p {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #4e5c54;
+}
+
+.testimonialRating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.testimonialRating span {
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #315d43;
+}
+
+.testimonialRating strong {
+  font-size: 11px;
+  color: #78857d;
+}
+
+
+/* =========================================================
+   CONTACT CARD
+   ========================================================= */
+
+.contactCard {
+  padding: 27px;
+  border-radius: 18px;
+  background: #203d2d;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(22, 40, 30, 0.1);
+}
+
+.contactHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-bottom: 22px;
+}
+
+.contactHeadingIcon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.contactHeading h2 {
+  margin: 0 0 3px;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.contactHeading p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contactLine {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.contactLineIcon {
+  width: 20px;
+  flex-shrink: 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.contactLine strong {
+  color: #ffffff;
+}
+
+.contactLine a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .loginContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .loginInfoColumn {
+    order: 1;
+  }
+
+  .loginFormCard {
+    order: 2;
+  }
+
+  .loginRightColumn {
+    order: 3;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .loginHero {
+    min-height: 480px;
+  }
+
+  .loginHeroContainer {
+    min-height: 480px;
+    padding: 65px 25px;
+  }
+
+  .loginHeroContent h1 {
+    font-size: 48px;
+  }
+
+  .loginHeroText {
+    font-size: 16px;
+  }
+
+  .loginHeroText br {
+    display: none;
+  }
+
+  .loginHeroPoints {
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .loginSection {
+    padding: 50px 20px 65px;
+  }
+
+  .loginContainer {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .loginInfoColumn {
+    order: 1;
+  }
+
+  .loginFormCard {
+    order: 2;
+  }
+
+  .loginRightColumn {
+    order: 3;
+    grid-column: auto;
+    display: flex;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+  .loginHero {
+    min-height: 440px;
+  }
+
+  .loginHeroContainer {
+    min-height: 440px;
+    padding: 50px 20px;
+  }
+
+  .loginEyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .loginHeroContent h1 {
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .loginHeroText {
+    margin: 20px 0 25px;
+    font-size: 14px;
+  }
+
+  .loginHeroPoint strong {
+    font-size: 13px;
+  }
+
+  .loginHeroPointIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .loginSection {
+    padding: 35px 14px 50px;
+  }
+
+  .loginInfoCard {
+    padding: 25px 20px;
+  }
+
+  .loginInfoCard h2 {
+    font-size: 24px;
+  }
+
+  .loginFormCard {
+    padding: 30px 20px;
+    border-radius: 16px;
+  }
+
+  .loginAlphaBrand span {
+    font-size: 36px;
+  }
+
+  .loginFormCard h2 {
+    font-size: 24px;
+  }
+
+  .loginOptions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .testimonialCard img {
+    height: 190px;
+  }
+
+  .testimonialContent {
+    padding: 22px;
+  }
+
+  .contactCard {
+    padding: 23px 20px;
+  }
+}
