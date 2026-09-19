@@ -1,165 +1,275 @@
+import Link from "next/link";
+import styles from "./Footer.module.css";
+
 export default function Footer() {
   return (
-    <footer className="site-footer">
+    <footer className={styles.footer}>
+      {/* =========================================
+          MAIN FOOTER
+      ========================================== */}
+      <div className={styles.footerMain}>
+        <div className={styles.footerContainer}>
+          <div className={styles.footerGrid}>
 
-      {/* MAIN FOOTER */}
-      <div className="footer-main">
-        <div className="footer-container">
+            {/* =========================================
+                BRAND COLUMN
+            ========================================== */}
+            <div className={styles.brandColumn}>
+              <Link href="/" className={styles.logo}>
+                <span className={styles.logoMark}>A</span>
 
-          {/* BRAND */}
-          <div className="footer-brand">
-            <a href="/" className="footer-logo-link">
-              <img
-                src="/images/logo/logo.png"
-                alt="Alpha Property And Gardening Services"
-                className="footer-logo"
-              />
-            </a>
+                <span className={styles.logoText}>
+                  <span className={styles.logoMain}>ALPHA</span>
+                  <span className={styles.logoSub}>
+                    PROPERTY CARE
+                  </span>
+                </span>
+              </Link>
 
-            <div className="footer-tagline">
-              <span>One Team.</span>
-              <span>Complete Property Care.</span>
+              <p className={styles.tagline}>
+                Complete Property Care. One Trusted Team.
+              </p>
+
+              <p className={styles.brandDescription}>
+                Complete property care for homes, landlords and letting
+                agents. One trusted team for gardens, maintenance,
+                plumbing, bathrooms and kitchens.
+              </p>
+
+              <div className={styles.socialLinks}>
+                <a
+                  href="#"
+                  className={styles.socialLink}
+                  aria-label="Facebook"
+                >
+                  f
+                </a>
+
+                <a
+                  href="#"
+                  className={styles.socialLink}
+                  aria-label="Instagram"
+                >
+                  ◎
+                </a>
+
+                <a
+                  href="#"
+                  className={styles.socialLink}
+                  aria-label="LinkedIn"
+                >
+                  in
+                </a>
+              </div>
             </div>
 
-            <div className="footer-gold-line"></div>
-          </div>
+            {/* =========================================
+                SERVICES
+            ========================================== */}
+            <div className={styles.footerColumn}>
+              <h3>Services</h3>
 
-          {/* QUICK LINKS */}
-          <div className="footer-column">
-            <h3>Quick Links</h3>
+              <div className={styles.goldLine}></div>
 
-            <a href="/">Home</a>
-            <a href="/services">Services</a>
-            <a href="/landlords-letting-agents">
-              Landlords &amp; Letting Agents
-            </a>
-            <a href="/about">About</a>
-            <a href="/our-work">Our Work</a>
-            <a href="/areas-we-cover">Areas</a>
-            <a href="/contact">Contact</a>
-          </div>
+              <Link href="/garden-services">
+                Garden Services
+              </Link>
 
-          {/* PORTAL ACCESS */}
-          <div className="footer-column">
-            <h3>Portal Access</h3>
+              <Link href="/property-maintenance">
+                Property Maintenance
+              </Link>
 
-            <a href="/account/homeowner-login">
-              Homeowner Login
-            </a>
+              <Link href="/plumbing-services">
+                Plumbing Services
+              </Link>
 
-            <a href="/account/landlord-login">
-              Landlord Login
-            </a>
+              <Link href="/bathroom-services">
+                Bathroom Installation
+              </Link>
 
-            <a href="/account/agent-login">
-              Agent Login
-            </a>
+              <Link href="/kitchen-services">
+                Kitchen Installation
+              </Link>
 
-            <a href="/account/create-account">
-              Create an Account
-            </a>
-
-            <a href="/account/forgot-password">
-              Forgotten Password?
-            </a>
-          </div>
-
-          {/* GET IN TOUCH */}
-          <div className="footer-column footer-contact">
-            <h3>Get In Touch</h3>
-
-            <a href="tel:01234567890">
-              <span className="footer-contact-icon">☎</span>
-              <span>01234 567890</span>
-            </a>
-
-            <a href="mailto:info@alphapropertyandgarden.co.uk">
-              <span className="footer-contact-icon">✉</span>
-              <span>info@alphapropertyandgarden.co.uk</span>
-            </a>
-
-            <div className="footer-contact-item">
-              <span className="footer-contact-icon">⌖</span>
-              <span>Your Area, UK</span>
+              <Link
+                href="/services"
+                className={styles.footerGoldLink}
+              >
+                View All Services →
+              </Link>
             </div>
 
-            {/* SOCIAL ICONS */}
-            <div className="footer-socials">
-              <a href="#" aria-label="Facebook">
-                f
-              </a>
+            {/* =========================================
+                COMPANY
+            ========================================== */}
+            <div className={styles.footerColumn}>
+              <h3>Company</h3>
 
-              <a href="#" aria-label="Instagram">
-                ◎
-              </a>
+              <div className={styles.goldLine}></div>
 
-              <a href="#" aria-label="LinkedIn">
-                in
-              </a>
+              <Link href="/">
+                Home
+              </Link>
 
-              <a href="#" aria-label="YouTube">
-                ▶
-              </a>
+              <Link href="/about">
+                About Us
+              </Link>
+
+              <Link href="/landlords-letting-agents">
+                Landlords &amp; Letting Agents
+              </Link>
+
+              <Link href="/client-login">
+                Client Login
+              </Link>
+
+              <Link href="/contact">
+                Contact Us
+              </Link>
             </div>
+
+            {/* =========================================
+                CONTACT
+            ========================================== */}
+            <div className={styles.contactColumn}>
+              <h3>Get In Touch</h3>
+
+              <div className={styles.goldLine}></div>
+
+              <a
+                href="tel:+440000000000"
+                className={styles.contactItem}
+              >
+                <span className={styles.contactIcon}>
+                  ☎
+                </span>
+
+                <span className={styles.contactText}>
+                  <strong>Call Us</strong>
+                  <small>+44 0000 000 000</small>
+                </span>
+              </a>
+
+              <a
+                href="mailto:info@alphapropertycare.co.uk"
+                className={styles.contactItem}
+              >
+                <span className={styles.contactIcon}>
+                  ✉
+                </span>
+
+                <span className={styles.contactText}>
+                  <strong>Email Us</strong>
+                  <small>
+                    info@alphapropertycare.co.uk
+                  </small>
+                </span>
+              </a>
+
+              <div className={styles.contactItem}>
+                <span className={styles.contactIcon}>
+                  ⌖
+                </span>
+
+                <span className={styles.contactText}>
+                  <strong>Service Area</strong>
+                  <small>
+                    Local &amp; surrounding areas
+                  </small>
+                </span>
+              </div>
+
+              <Link
+                href="/contact"
+                className={styles.quoteButton}
+              >
+                <span>Request a Quote</span>
+                <span className={styles.arrow}>→</span>
+              </Link>
+            </div>
+
+            {/* =========================================
+                SOCIAL / TRUST COLUMN
+            ========================================== */}
+            <div className={styles.socialColumn}>
+              <h3>Connect With Us</h3>
+
+              <div className={styles.goldLine}></div>
+
+              <p className={styles.socialDescription}>
+                Follow Alpha Property Care for updates,
+                property tips and recent projects.
+              </p>
+
+              <div className={styles.socialLinks}>
+                <a
+                  href="#"
+                  className={styles.socialLink}
+                  aria-label="Facebook"
+                >
+                  f
+                </a>
+
+                <a
+                  href="#"
+                  className={styles.socialLink}
+                  aria-label="Instagram"
+                >
+                  ◎
+                </a>
+
+                <a
+                  href="#"
+                  className={styles.socialLink}
+                  aria-label="LinkedIn"
+                >
+                  in
+                </a>
+              </div>
+
+              <div className={styles.trustBadge}>
+                <span className={styles.trustIcon}>✓</span>
+
+                <span>
+                  <strong>Trusted Property Care</strong>
+                  <small>
+                    Professional &amp; reliable service
+                  </small>
+                </span>
+              </div>
+            </div>
+
           </div>
-
-          {/* NEWSLETTER */}
-          <div className="footer-column footer-newsletter">
-            <h3>Newsletter</h3>
-
-            <p>
-              Get updates, tips and special offers.
-            </p>
-
-            <form
-              className="newsletter-form"
-              onSubmit={(event) => event.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="Your email address"
-                aria-label="Your email address"
-              />
-
-              <button type="submit" aria-label="Subscribe">
-                →
-              </button>
-            </form>
-          </div>
-
         </div>
       </div>
 
-      {/* BOTTOM FOOTER */}
-      <div className="footer-bottom">
-        <div className="footer-bottom-container">
-
+      {/* =========================================
+          BOTTOM BAR
+      ========================================== */}
+      <div className={styles.footerBottom}>
+        <div className={styles.bottomContainer}>
           <p>
-            © 2024 Alpha Property &amp; Gardening Services.
+            © {new Date().getFullYear()} Alpha Property Care.
             All rights reserved.
           </p>
 
-          <div className="footer-legal-links">
-            <a href="/privacy-policy">
+          <div className={styles.legalLinks}>
+            <Link href="/privacy-policy">
               Privacy Policy
-            </a>
+            </Link>
 
-            <span></span>
+            <span>•</span>
 
-            <a href="/terms-conditions">
+            <Link href="/terms">
               Terms &amp; Conditions
-            </a>
-
-            <span></span>
-
-            <a href="/sitemap">
-              Sitemap
-            </a>
+            </Link>
           </div>
 
+          <span className={styles.bottomBrand}>
+            Professional Property Care
+          </span>
         </div>
       </div>
-
     </footer>
   );
 }

@@ -1,0 +1,918 @@
+/* =========================================================
+   ALPHA PROPERTY CARE
+   FOOTER MODULE CSS
+
+   File:
+   app/components/Footer.module.css
+   ========================================================= */
+
+
+/* =========================================================
+   FOOTER ROOT
+   ========================================================= */
+
+.footer {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  background: #031e17;
+  border-top: 4px solid #c99b3b;
+}
+
+
+/* =========================================================
+   MAIN FOOTER
+   ========================================================= */
+
+.footerMain {
+  width: 100%;
+  padding: 65px 0 45px;
+}
+
+.footerContainer {
+  width: min(1280px, calc(100% - 60px));
+  margin: 0 auto;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns:
+    1.5fr
+    1fr
+    1fr
+    1.35fr
+    0.9fr;
+
+  gap: 42px;
+  align-items: start;
+}
+
+
+/* =========================================================
+   BRAND COLUMN
+   ========================================================= */
+
+.brandColumn {
+  min-width: 0;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+
+  color: #ffffff;
+  text-decoration: none;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.logo:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+
+/* Logo symbol */
+
+.logoMark {
+  width: 52px;
+  height: 52px;
+
+  flex: 0 0 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #e1b85b;
+
+  border: 2px solid #c99b3b;
+
+  background: rgba(201, 155, 59, 0.04);
+
+  clip-path: polygon(
+    50% 0%,
+    100% 100%,
+    0% 100%
+  );
+
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+
+/* Logo text */
+
+.logoText {
+  display: block;
+}
+
+.logoMain {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 29px;
+  line-height: 1;
+
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.logoSub {
+  display: block;
+
+  margin-top: 6px;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 9px;
+  line-height: 1.2;
+
+  font-weight: 500;
+  letter-spacing: 1.3px;
+}
+
+
+/* Brand tagline */
+
+.tagline {
+  max-width: 330px;
+
+  margin: 21px 0 11px;
+
+  color: #e1b85b;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 15px;
+  line-height: 1.5;
+
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+/* Brand description */
+
+.brandDescription {
+  max-width: 330px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   FOOTER COLUMNS
+   ========================================================= */
+
+.footerColumn {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footerColumn h3,
+.contactColumn h3,
+.socialColumn h3 {
+  margin: 0 0 11px;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  line-height: 1.3;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* Gold heading line */
+
+.goldLine {
+  width: 30px;
+  height: 2px;
+
+  margin-bottom: 19px;
+
+  background: #c99b3b;
+}
+
+
+/* Footer links */
+
+.footerColumn a {
+  display: block;
+
+  margin: 0 0 10px;
+
+  color: rgba(255, 255, 255, 0.57);
+
+  text-decoration: none;
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  font-weight: 500;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footerColumn a:hover {
+  color: #e1b85b;
+  transform: translateX(3px);
+}
+
+
+/* Gold footer link */
+
+.footerColumn .footerGoldLink {
+  margin-top: 5px;
+
+  color: #e1b85b;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CONTACT COLUMN
+   ========================================================= */
+
+.contactColumn {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+/* Contact item */
+
+.contactItem {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin: 0 0 13px;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  text-decoration: none;
+
+  font-size: 11px;
+  line-height: 1.45;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+a.contactItem:hover {
+  color: #e1b85b;
+  transform: translateX(2px);
+}
+
+
+/* Contact icon */
+
+.contactIcon {
+  width: 19px;
+  min-width: 19px;
+
+  flex: 0 0 19px;
+
+  color: #e1b85b;
+
+  font-size: 14px;
+  line-height: 1.3;
+
+  text-align: center;
+}
+
+
+/* Contact text */
+
+.contactText {
+  min-width: 0;
+
+  display: block;
+}
+
+.contactText strong,
+.contactText small {
+  display: block;
+}
+
+.contactText strong {
+  margin-bottom: 2px;
+
+  color: #ffffff;
+
+  font-size: 11px;
+  line-height: 1.3;
+
+  font-weight: 700;
+}
+
+.contactText small {
+  color: rgba(255, 255, 255, 0.53);
+
+  font-size: 10px;
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   QUOTE BUTTON
+   ========================================================= */
+
+.quoteButton {
+  width: 100%;
+
+  min-height: 43px;
+
+  margin-top: 5px;
+
+  padding: 0 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  color: #ffffff;
+
+  background: #c99b3b;
+
+  border: 1px solid #c99b3b;
+  border-radius: 4px;
+
+  text-decoration: none;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.quoteButton:hover {
+  color: #ffffff;
+
+  background: #a97d25;
+  border-color: #a97d25;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.arrow {
+  display: inline-block;
+
+  font-size: 16px;
+  line-height: 1;
+
+  transition: transform 0.25s ease;
+}
+
+.quoteButton:hover .arrow {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   SOCIAL COLUMN
+   ========================================================= */
+
+.socialColumn {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.socialDescription {
+  max-width: 180px;
+
+  margin: 0 0 17px;
+
+  color: rgba(255, 255, 255, 0.53);
+
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   SOCIAL LINKS
+   ========================================================= */
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+
+  background: transparent;
+
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.socialLink:hover {
+  color: #03291f;
+
+  background: #e1b85b;
+
+  border-color: #e1b85b;
+
+  transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   TRUST BADGE
+   ========================================================= */
+
+.trustBadge {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 22px;
+}
+
+.trustIcon {
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #e1b85b;
+
+  border: 1px solid rgba(201, 155, 59, 0.65);
+  border-radius: 50%;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.trustBadge strong,
+.trustBadge small {
+  display: block;
+}
+
+.trustBadge strong {
+  color: #ffffff;
+
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.trustBadge small {
+  margin-top: 3px;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+   ========================================================= */
+
+.footerBottom {
+  width: 100%;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bottomContainer {
+  width: min(1280px, calc(100% - 60px));
+
+  min-height: 62px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+/* Copyright */
+
+.bottomContainer p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.38);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+
+/* Legal links */
+
+.legalLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.legalLinks a {
+  color: rgba(255, 255, 255, 0.42);
+
+  text-decoration: none;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  transition: color 0.2s ease;
+}
+
+.legalLinks a:hover {
+  color: #e1b85b;
+}
+
+.legalLinks span {
+  color: rgba(255, 255, 255, 0.22);
+
+  font-size: 9px;
+}
+
+
+/* Bottom brand */
+
+.bottomBrand {
+  color: rgba(255, 255, 255, 0.35);
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .footerContainer,
+  .bottomContainer {
+    width: min(100% - 48px, 960px);
+  }
+
+  .footerMain {
+    padding: 58px 0 40px;
+  }
+
+  .footerGrid {
+    grid-template-columns:
+      1.4fr
+      1fr
+      1fr;
+
+    gap: 40px 35px;
+  }
+
+  .brandColumn {
+    grid-column: 1 / -1;
+  }
+
+  .socialColumn {
+    grid-column: 1 / -1;
+  }
+
+  .socialDescription {
+    max-width: 400px;
+  }
+
+  .bottomContainer {
+    min-height: auto;
+
+    padding: 20px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+
+  .legalLinks {
+    justify-content: flex-start;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .footerMain {
+    padding: 50px 0 35px;
+  }
+
+  .footerContainer,
+  .bottomContainer {
+    width: calc(100% - 30px);
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 35px 24px;
+  }
+
+  .brandColumn {
+    grid-column: 1 / -1;
+  }
+
+  .socialColumn {
+    grid-column: 1 / -1;
+  }
+
+  .logoMark {
+    width: 50px;
+    height: 50px;
+
+    flex-basis: 50px;
+
+    font-size: 22px;
+  }
+
+  .logoMain {
+    font-size: 25px;
+  }
+
+  .logoSub {
+    font-size: 8px;
+  }
+
+  .tagline {
+    font-size: 15px;
+  }
+
+  .brandDescription {
+    max-width: 100%;
+
+    font-size: 12px;
+
+    line-height: 1.75;
+  }
+
+  .footerColumn h3,
+  .contactColumn h3,
+  .socialColumn h3 {
+    font-size: 12px;
+  }
+
+  .footerColumn a {
+    font-size: 11px;
+  }
+
+  .contactItem {
+    font-size: 11px;
+  }
+
+  .quoteButton {
+    max-width: 220px;
+  }
+
+  .socialDescription {
+    max-width: 100%;
+
+    font-size: 11px;
+  }
+
+  .bottomContainer {
+    padding: 18px 0;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+
+  .bottomContainer p,
+  .legalLinks a,
+  .bottomBrand {
+    font-size: 10px;
+  }
+
+  .bottomBrand {
+    white-space: normal;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .footerMain {
+    padding: 45px 0 30px;
+  }
+
+  .footerContainer,
+  .bottomContainer {
+    width: calc(100% - 24px);
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+
+    gap: 31px;
+  }
+
+  .brandColumn,
+  .socialColumn {
+    grid-column: auto;
+  }
+
+  .logo {
+    gap: 11px;
+  }
+
+  .logoMark {
+    width: 48px;
+    height: 48px;
+
+    flex-basis: 48px;
+
+    font-size: 21px;
+  }
+
+  .logoMain {
+    font-size: 23px;
+
+    letter-spacing: 1.5px;
+  }
+
+  .logoSub {
+    font-size: 8px;
+  }
+
+  .tagline {
+    margin-top: 18px;
+
+    font-size: 14px;
+  }
+
+  .brandDescription {
+    font-size: 12px;
+  }
+
+  .footerColumn h3,
+  .contactColumn h3,
+  .socialColumn h3 {
+    font-size: 12px;
+  }
+
+  .footerColumn a,
+  .contactItem {
+    font-size: 11px;
+  }
+
+  .quoteButton {
+    max-width: 100%;
+  }
+
+  .socialLinks {
+    gap: 8px;
+  }
+
+  .socialLink {
+    width: 36px;
+    height: 36px;
+  }
+
+  .trustBadge {
+    margin-top: 20px;
+  }
+
+  .bottomContainer {
+    gap: 13px;
+  }
+
+  .legalLinks {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 7px;
+  }
+
+  .legalLinks span {
+    display: none;
+  }
+
+  .bottomBrand {
+    white-space: normal;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.logo:focus-visible,
+.footerColumn a:focus-visible,
+.contactItem:focus-visible,
+.quoteButton:focus-visible,
+.socialLink:focus-visible,
+.legalLinks a:focus-visible {
+  outline: 2px solid #e1b85b;
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .footerColumn a,
+  .contactItem,
+  .quoteButton,
+  .socialLink,
+  .legalLinks a,
+  .arrow {
+    transition: none;
+  }
+}
