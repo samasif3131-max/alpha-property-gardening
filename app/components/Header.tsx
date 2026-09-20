@@ -42,40 +42,65 @@ export default function Header() {
   const pathname = usePathname();
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
 
-  /*
-   * Main Services page + individual service pages
-   * are treated as service pages.
-   */
   const isServicesPage =
     pathname === "/services" ||
     services.some((service) => pathname.startsWith(service.href));
 
-  /*
-   * Close mobile menu
-   */
+  /* =========================================
+     CLOSE MOBILE MENU
+  ========================================= */
+
   const closeMobileMenu = () => {
     setMobileOpen(false);
-    setServicesOpen(false);
+    setMobileServicesOpen(false);
+  };
+
+  /* =========================================
+     MOBILE MENU TOGGLE
+  ========================================= */
+
+  const handleMobileToggle = () => {
+    setMobileOpen((current) => {
+      const next = !current;
+
+      if (!next) {
+        setMobileServicesOpen(false);
+      }
+
+      return next;
+    });
+  };
+
+  /* =========================================
+     MOBILE SERVICES TOGGLE
+  ========================================= */
+
+  const handleMobileServicesToggle = () => {
+    setMobileServicesOpen((current) => !current);
   };
 
   return (
     <header className={styles.header}>
-      {/* =========================
+      {/* =====================================================
           TOP BAR
-      ========================== */}
+      ====================================================== */}
+
       <div className={styles.topBar}>
         <div className={styles.topInner}>
-          <span>Reliable. Professional. Local.</span>
+          <span className={styles.topMessage}>
+            Reliable. Professional. Local.
+          </span>
 
           <span className={styles.coverage}>
-            <span className={styles.coverageDot}>◉</span>
+            <span className={styles.coverageDot}>●</span>
             Covering Spalding and surrounding areas
           </span>
 
           <div className={styles.topRight}>
-            <span>Follow Us</span>
+            <span className={styles.followText}>Follow Us</span>
             <span>f</span>
             <span>◎</span>
             <span>♪</span>
@@ -92,12 +117,14 @@ export default function Header() {
         </div>
       </div>
 
-      {/* =========================
+      {/* =====================================================
           MAIN NAVIGATION
-      ========================== */}
+      ====================================================== */}
+
       <div className={styles.navBar}>
         <div className={styles.navInner}>
           {/* LOGO */}
+
           <Link href="/" className={styles.logo}>
             <div className={styles.logoMark}>
               <span>▲</span>
@@ -105,16 +132,24 @@ export default function Header() {
 
             <div className={styles.logoText}>
               <strong>ALPHA</strong>
-              <small>PROPERTY &amp; GARDENING SERVICES</small>
-              <em>One Team. Complete Property Care.</em>
+
+              <small>
+                PROPERTY &amp; GARDENING SERVICES
+              </small>
+
+              <em>
+                One Team. Complete Property Care.
+              </em>
             </div>
           </Link>
 
-          {/* =========================
+          {/* =================================================
               DESKTOP NAV
-          ========================== */}
+          ================================================== */}
+
           <nav className={styles.desktopNav}>
             {/* HOME */}
+
             <Link
               href="/"
               className={`${styles.navLink} ${
@@ -124,83 +159,114 @@ export default function Header() {
               Home
             </Link>
 
-            {/* =========================
-                OUR SERVICES
-            ========================== */}
+            {/* OUR SERVICES */}
+
             <div
               className={`${styles.servicesNav} ${
-                isServicesPage ? styles.serviceActive : ""
+                isServicesPage
+                  ? styles.serviceActive
+                  : ""
               }`}
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              onMouseEnter={() =>
+                setDesktopServicesOpen(true)
+              }
+              onMouseLeave={() =>
+                setDesktopServicesOpen(false)
+              }
             >
-              {/*
-                IMPORTANT:
-                Clicking the main "Our Services" text now
-                opens /services directly.
-              */}
               <Link
                 href="/services"
                 className={styles.navLinkButton}
-                onClick={() => setServicesOpen(false)}
+                onClick={() =>
+                  setDesktopServicesOpen(false)
+                }
               >
-                Our Services
+                <span>Our Services</span>
 
                 <span
-                  className={`${styles.chevron} ${
-                    servicesOpen ? styles.chevronOpen : ""
+                  className={`${styles.desktopChevron} ${
+                    desktopServicesOpen
+                      ? styles.desktopChevronOpen
+                      : ""
                   }`}
                 >
                   ⌄
                 </span>
               </Link>
 
-              {/* SERVICES DROPDOWN */}
+              {/* DESKTOP DROPDOWN */}
+
               <div
                 className={`${styles.dropdown} ${
-                  servicesOpen ? styles.dropdownVisible : ""
+                  desktopServicesOpen
+                    ? styles.dropdownVisible
+                    : ""
                 }`}
               >
                 <div className={styles.dropdownHeader}>
                   <span>OUR SERVICES</span>
 
                   <p>
-                    Complete property care from one trusted local team.
+                    Complete property care from one
+                    trusted local team.
                   </p>
                 </div>
 
-                <div className={styles.serviceDropdownGrid}>
+                <div
+                  className={styles.serviceDropdownGrid}
+                >
                   {services.map((service, index) => (
                     <Link
                       key={service.href}
                       href={service.href}
-                      className={styles.serviceDropdownItem}
-                      onClick={() => setServicesOpen(false)}
+                      className={
+                        styles.serviceDropdownItem
+                      }
+                      onClick={() =>
+                        setDesktopServicesOpen(false)
+                      }
                     >
-                      <span className={styles.serviceNumber}>
+                      <span
+                        className={styles.serviceNumber}
+                      >
                         0{index + 1}
                       </span>
 
-                      <span className={styles.serviceDropdownContent}>
-                        <strong>{service.title}</strong>
+                      <span
+                        className={
+                          styles.serviceDropdownContent
+                        }
+                      >
+                        <strong>
+                          {service.title}
+                        </strong>
 
-                        <small>{service.description}</small>
+                        <small>
+                          {service.description}
+                        </small>
                       </span>
 
-                      <span className={styles.serviceArrow}>
+                      <span
+                        className={styles.serviceArrow}
+                      >
                         →
                       </span>
                     </Link>
                   ))}
                 </div>
 
-                {/* VIEW ALL SERVICES */}
-                <div className={styles.dropdownFooter}>
-                  <span>View all services</span>
+                <div
+                  className={styles.dropdownFooter}
+                >
+                  <span>
+                    View all services
+                  </span>
 
                   <Link
                     href="/services"
-                    onClick={() => setServicesOpen(false)}
+                    onClick={() =>
+                      setDesktopServicesOpen(false)
+                    }
                   >
                     Our Services →
                   </Link>
@@ -208,11 +274,13 @@ export default function Header() {
               </div>
             </div>
 
-            {/* LANDLORDS & AGENTS */}
+            {/* LANDLORDS */}
+
             <Link
               href="/landlords-letting-agents"
               className={`${styles.navLink} ${
-                pathname === "/landlords-letting-agents"
+                pathname ===
+                "/landlords-letting-agents"
                   ? styles.active
                   : ""
               }`}
@@ -221,16 +289,20 @@ export default function Header() {
             </Link>
 
             {/* OUR WORK */}
+
             <Link
               href="/our-work"
               className={`${styles.navLink} ${
-                pathname === "/our-work" ? styles.active : ""
+                pathname === "/our-work"
+                  ? styles.active
+                  : ""
               }`}
             >
               Our Work
             </Link>
 
             {/* AREAS */}
+
             <Link
               href="/areas-we-cover"
               className={`${styles.navLink} ${
@@ -243,162 +315,260 @@ export default function Header() {
             </Link>
 
             {/* ADVICE */}
+
             <Link
               href="/advice"
               className={`${styles.navLink} ${
-                pathname === "/advice" ? styles.active : ""
+                pathname === "/advice"
+                  ? styles.active
+                  : ""
               }`}
             >
               Advice
             </Link>
 
             {/* ABOUT */}
+
             <Link
               href="/about-us"
               className={`${styles.navLink} ${
-                pathname === "/about-us" ? styles.active : ""
+                pathname === "/about-us"
+                  ? styles.active
+                  : ""
               }`}
             >
               About Us
             </Link>
 
             {/* CONTACT */}
+
             <Link
               href="/contact"
               className={`${styles.navLink} ${
-                pathname === "/contact" ? styles.active : ""
+                pathname === "/contact"
+                  ? styles.active
+                  : ""
               }`}
             >
               Contact
             </Link>
           </nav>
 
-          {/* =========================
+          {/* =================================================
               DESKTOP ACTIONS
-          ========================== */}
+          ================================================== */}
+
           <div className={styles.navActions}>
             <Link
               href="/account/homeowner-login"
               className={styles.loginButton}
             >
-              <span className={styles.personIcon}>♙</span>
-              Client Login
+              <span className={styles.personIcon}>
+                ♙
+              </span>
+
+              <span>Client Login</span>
             </Link>
 
             <Link
               href="/request-a-quote"
               className={styles.quoteButton}
             >
-              Request a Quote
+              <span>Request a Quote</span>
               <span>→</span>
             </Link>
           </div>
 
-          {/* =========================
-              MOBILE TOGGLE
-          ========================== */}
+          {/* =================================================
+              MOBILE HAMBURGER
+          ================================================== */}
+
           <button
             type="button"
+            className={`${styles.mobileToggle} ${
+              mobileOpen
+                ? styles.mobileToggleOpen
+                : ""
+            }`}
             aria-label={
-              mobileOpen ? "Close navigation" : "Open navigation"
+              mobileOpen
+                ? "Close navigation"
+                : "Open navigation"
             }
             aria-expanded={mobileOpen}
-            className={styles.mobileToggle}
-            onClick={() => setMobileOpen((value) => !value)}
+            onClick={handleMobileToggle}
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            <span />
+            <span />
+            <span />
           </button>
         </div>
       </div>
 
-      {/* =========================
+      {/* =====================================================
           MOBILE MENU
-      ========================== */}
+      ====================================================== */}
+
       <div
         className={`${styles.mobileMenu} ${
-          mobileOpen ? styles.mobileMenuOpen : ""
+          mobileOpen
+            ? styles.mobileMenuOpen
+            : ""
         }`}
       >
         {/* HOME */}
-        <Link href="/" onClick={closeMobileMenu}>
-          Home
-        </Link>
 
-        {/* =========================
-            MOBILE OUR SERVICES
-        ========================== */}
         <Link
-          href="/services"
-          className={styles.mobileServicesButton}
+          href="/"
+          className={styles.mobileNavLink}
           onClick={closeMobileMenu}
         >
-          <span>Our Services</span>
-          <span>→</span>
+          <span>Home</span>
         </Link>
 
-        {/* INDIVIDUAL SERVICES */}
-        <div className={styles.mobileServices}>
-          {services.map((service) => (
+        {/* =================================================
+            MOBILE SERVICES
+        ================================================== */}
+
+        <div className={styles.mobileServicesWrapper}>
+          <button
+            type="button"
+            className={`${styles.mobileServicesButton} ${
+              mobileServicesOpen
+                ? styles.mobileServicesButtonOpen
+                : ""
+            }`}
+            aria-expanded={mobileServicesOpen}
+            aria-controls="mobile-services-dropdown"
+            onClick={handleMobileServicesToggle}
+          >
+            <span>Our Services</span>
+
+            <span
+              className={`${styles.mobileChevron} ${
+                mobileServicesOpen
+                  ? styles.mobileChevronOpen
+                  : ""
+              }`}
+            >
+              ⌄
+            </span>
+          </button>
+
+          {/* MOBILE SERVICES DROPDOWN */}
+
+          <div
+            id="mobile-services-dropdown"
+            className={`${styles.mobileServices} ${
+              mobileServicesOpen
+                ? styles.mobileServicesOpen
+                : ""
+            }`}
+          >
+            {/* ALL SERVICES */}
+
             <Link
-              key={service.href}
-              href={service.href}
+              href="/services"
+              className={`${styles.mobileServiceLink} ${styles.mobileAllServices}`}
               onClick={closeMobileMenu}
             >
-              <span>{service.title}</span>
+              <span>All Services</span>
               <span>→</span>
             </Link>
-          ))}
+
+            {/* INDIVIDUAL SERVICES */}
+
+            {services.map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className={styles.mobileServiceLink}
+                onClick={closeMobileMenu}
+              >
+                <span>{service.title}</span>
+                <span>→</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* LANDLORDS */}
+
         <Link
           href="/landlords-letting-agents"
+          className={styles.mobileNavLink}
           onClick={closeMobileMenu}
         >
-          Landlords &amp; Agents
+          <span>Landlords &amp; Agents</span>
         </Link>
 
         {/* OUR WORK */}
-        <Link href="/our-work" onClick={closeMobileMenu}>
-          Our Work
+
+        <Link
+          href="/our-work"
+          className={styles.mobileNavLink}
+          onClick={closeMobileMenu}
+        >
+          <span>Our Work</span>
         </Link>
 
         {/* AREAS */}
-        <Link href="/areas-we-cover" onClick={closeMobileMenu}>
-          Areas We Cover
+
+        <Link
+          href="/areas-we-cover"
+          className={styles.mobileNavLink}
+          onClick={closeMobileMenu}
+        >
+          <span>Areas We Cover</span>
         </Link>
 
         {/* ADVICE */}
-        <Link href="/advice" onClick={closeMobileMenu}>
-          Advice
+
+        <Link
+          href="/advice"
+          className={styles.mobileNavLink}
+          onClick={closeMobileMenu}
+        >
+          <span>Advice</span>
         </Link>
 
         {/* ABOUT */}
-        <Link href="/about-us" onClick={closeMobileMenu}>
-          About Us
+
+        <Link
+          href="/about-us"
+          className={styles.mobileNavLink}
+          onClick={closeMobileMenu}
+        >
+          <span>About Us</span>
         </Link>
 
         {/* CONTACT */}
-        <Link href="/contact" onClick={closeMobileMenu}>
-          Contact
+
+        <Link
+          href="/contact"
+          className={styles.mobileNavLink}
+          onClick={closeMobileMenu}
+        >
+          <span>Contact</span>
         </Link>
 
-        {/* MOBILE ACTIONS */}
+        {/* =================================================
+            MOBILE ACTION BUTTONS
+        ================================================== */}
+
         <div className={styles.mobileActions}>
           <Link
             href="/account/homeowner-login"
-            onClick={closeMobileMenu}
             className={styles.mobileLogin}
+            onClick={closeMobileMenu}
           >
             Client Login
           </Link>
 
           <Link
             href="/request-a-quote"
-            onClick={closeMobileMenu}
             className={styles.mobileQuote}
+            onClick={closeMobileMenu}
           >
             Request a Quote →
           </Link>
