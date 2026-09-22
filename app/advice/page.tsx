@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useMemo, useState } from "react";
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -200,16 +204,23 @@ const types = [
 
 const resultsPerPage = 6;
 
-export default function AdvicePage() {
+/* =========================================================
+   MAIN CLIENT CONTENT
+========================================================= */
+
+function AdvicePageContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const initialSearch = searchParams.get("search") || "";
-  const initialCategory = searchParams.get("category") || "All Categories";
+  const initialCategory =
+    searchParams.get("category") || "All Categories";
   const initialType = searchParams.get("type") || "All Types";
   const initialSort = searchParams.get("sort") || "newest";
-  const initialPage = Number(searchParams.get("page")) || 1;
+
+  const parsedPage = Number(searchParams.get("page")) || 1;
+  const initialPage = Math.max(parsedPage, 1);
 
   const [search, setSearch] = useState(initialSearch);
   const [category, setCategory] = useState(initialCategory);
@@ -217,12 +228,16 @@ export default function AdvicePage() {
   const [sort, setSort] = useState(initialSort);
   const [page, setPage] = useState(initialPage);
 
+  /* =========================================================
+     UPDATE URL
+  ========================================================= */
+
   const updateUrl = (
     nextSearch: string,
     nextCategory: string,
     nextType: string,
     nextSort: string,
-    nextPage = 1
+    nextPage: number = 1
   ) => {
     const params = new URLSearchParams();
 
@@ -249,10 +264,18 @@ export default function AdvicePage() {
     const queryString = params.toString();
 
     router.replace(
-      queryString ? `${pathname}?${queryString}` : pathname,
-      { scroll: false }
+      queryString
+        ? `${pathname}?${queryString}`
+        : pathname,
+      {
+        scroll: false,
+      }
     );
   };
+
+  /* =========================================================
+     FILTER + SORT
+  ========================================================= */
 
   const filteredArticles = useMemo(() => {
     let result = articles.filter((article) => {
@@ -266,12 +289,18 @@ export default function AdvicePage() {
         article.type.toLowerCase().includes(searchText);
 
       const matchesCategory =
-        category === "All Categories" || article.category === category;
+        category === "All Categories" ||
+        article.category === category;
 
       const matchesType =
-        type === "All Types" || article.type === type;
+        type === "All Types" ||
+        article.type === type;
 
-      return matchesSearch && matchesCategory && matchesType;
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesType
+      );
     });
 
     result = [...result].sort((a, b) => {
@@ -293,19 +322,34 @@ export default function AdvicePage() {
     return result;
   }, [search, category, type, sort]);
 
+  /* =========================================================
+     PAGINATION
+  ========================================================= */
+
   const totalPages = Math.max(
     1,
-    Math.ceil(filteredArticles.length / resultsPerPage)
+    Math.ceil(
+      filteredArticles.length / resultsPerPage
+    )
   );
 
-  const safePage = Math.min(Math.max(page, 1), totalPages);
+  const safePage = Math.min(
+    Math.max(page, 1),
+    totalPages
+  );
 
   const visibleArticles = filteredArticles.slice(
     (safePage - 1) * resultsPerPage,
     safePage * resultsPerPage
   );
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+  /* =========================================================
+     SEARCH
+  ========================================================= */
+
+  const handleSearch = (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
     setPage(1);
@@ -319,6 +363,10 @@ export default function AdvicePage() {
     );
   };
 
+  /* =========================================================
+     CATEGORY
+  ========================================================= */
+
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -327,8 +375,18 @@ export default function AdvicePage() {
     setCategory(value);
     setPage(1);
 
-    updateUrl(search, value, type, sort, 1);
+    updateUrl(
+      search,
+      value,
+      type,
+      sort,
+      1
+    );
   };
+
+  /* =========================================================
+     TYPE
+  ========================================================= */
 
   const handleTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -338,8 +396,18 @@ export default function AdvicePage() {
     setType(value);
     setPage(1);
 
-    updateUrl(search, category, value, sort, 1);
+    updateUrl(
+      search,
+      category,
+      value,
+      sort,
+      1
+    );
   };
+
+  /* =========================================================
+     SORT
+  ========================================================= */
 
   const handleSortChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -349,11 +417,26 @@ export default function AdvicePage() {
     setSort(value);
     setPage(1);
 
-    updateUrl(search, category, type, value, 1);
+    updateUrl(
+      search,
+      category,
+      type,
+      value,
+      1
+    );
   };
 
+  /* =========================================================
+     CHANGE PAGE
+  ========================================================= */
+
   const changePage = (nextPage: number) => {
-    if (nextPage < 1 || nextPage > totalPages) return;
+    if (
+      nextPage < 1 ||
+      nextPage > totalPages
+    ) {
+      return;
+    }
 
     setPage(nextPage);
 
@@ -370,6 +453,10 @@ export default function AdvicePage() {
       behavior: "smooth",
     });
   };
+
+  /* =========================================================
+     CLEAR FILTERS
+  ========================================================= */
 
   const clearFilters = () => {
     setSearch("");
@@ -389,21 +476,26 @@ export default function AdvicePage() {
     type !== "All Types" ||
     sort !== "newest";
 
+  /* =========================================================
+     PAGE
+  ========================================================= */
+
   return (
     <>
-      <Header />
-
       <main className={styles.page}>
-        {/* =========================================
+        {/* =================================================
             HERO
-        ========================================= */}
+        ================================================= */}
+
         <section className={styles.hero}>
           <div className={styles.heroOverlay} />
 
           <div className={styles.heroContent}>
             <div className={styles.breadcrumb}>
               <Link href="/">Home</Link>
+
               <span>/</span>
+
               <span>Advice</span>
             </div>
 
@@ -414,26 +506,37 @@ export default function AdvicePage() {
             <h1>Advice Search Results</h1>
 
             <p>
-              Helpful advice, practical guides and useful information
-              for homeowners, landlords and gardens.
+              Helpful advice, practical guides and
+              useful information for homeowners,
+              landlords and gardens.
             </p>
           </div>
         </section>
 
-        {/* =========================================
+        {/* =================================================
             SEARCH / FILTER AREA
-        ========================================= */}
+        ================================================= */}
+
         <section className={styles.searchSection}>
           <div className={styles.container}>
             <div className={styles.searchBox}>
               <div className={styles.searchHeading}>
-                <span className={styles.headingLine} />
+                <span
+                  className={styles.headingLine}
+                />
+
                 <div>
-                  <span className={styles.smallHeading}>
+                  <span
+                    className={
+                      styles.smallHeading
+                    }
+                  >
                     FIND THE RIGHT ADVICE
                   </span>
 
-                  <h2>Search our advice</h2>
+                  <h2>
+                    Search our advice
+                  </h2>
                 </div>
               </div>
 
@@ -441,11 +544,17 @@ export default function AdvicePage() {
                 className={styles.searchForm}
                 onSubmit={handleSearch}
               >
-                <div className={styles.searchInputWrap}>
+                <div
+                  className={
+                    styles.searchInputWrap
+                  }
+                >
                   <svg
                     viewBox="0 0 24 24"
                     aria-hidden="true"
-                    className={styles.searchIcon}
+                    className={
+                      styles.searchIcon
+                    }
                   >
                     <path
                       d="m21 21-4.35-4.35m1.35-5.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"
@@ -460,7 +569,9 @@ export default function AdvicePage() {
                     type="text"
                     value={search}
                     onChange={(event) =>
-                      setSearch(event.target.value)
+                      setSearch(
+                        event.target.value
+                      )
                     }
                     placeholder="Search advice..."
                     aria-label="Search advice"
@@ -469,8 +580,12 @@ export default function AdvicePage() {
                   {search && (
                     <button
                       type="button"
-                      className={styles.clearInput}
-                      onClick={() => setSearch("")}
+                      className={
+                        styles.clearInput
+                      }
+                      onClick={() =>
+                        setSearch("")
+                      }
                       aria-label="Clear search"
                     >
                       ×
@@ -480,77 +595,130 @@ export default function AdvicePage() {
 
                 <button
                   type="submit"
-                  className={styles.searchButton}
+                  className={
+                    styles.searchButton
+                  }
                 >
                   Search
                 </button>
               </form>
 
+              {/* FILTERS */}
+
               <div className={styles.filters}>
-                <div className={styles.filterItem}>
+                {/* CATEGORY */}
+
+                <div
+                  className={
+                    styles.filterItem
+                  }
+                >
                   <label htmlFor="category">
                     Category
                   </label>
 
-                  <div className={styles.selectWrap}>
+                  <div
+                    className={
+                      styles.selectWrap
+                    }
+                  >
                     <select
                       id="category"
                       value={category}
-                      onChange={handleCategoryChange}
+                      onChange={
+                        handleCategoryChange
+                      }
                     >
-                      {categories.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
+                      {categories.map(
+                        (item) => (
+                          <option
+                            key={item}
+                            value={item}
+                          >
+                            {item}
+                          </option>
+                        )
+                      )}
                     </select>
 
                     <span>⌄</span>
                   </div>
                 </div>
 
-                <div className={styles.filterItem}>
+                {/* TYPE */}
+
+                <div
+                  className={
+                    styles.filterItem
+                  }
+                >
                   <label htmlFor="type">
                     Advice Type
                   </label>
 
-                  <div className={styles.selectWrap}>
+                  <div
+                    className={
+                      styles.selectWrap
+                    }
+                  >
                     <select
                       id="type"
                       value={type}
-                      onChange={handleTypeChange}
+                      onChange={
+                        handleTypeChange
+                      }
                     >
-                      {types.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
+                      {types.map(
+                        (item) => (
+                          <option
+                            key={item}
+                            value={item}
+                          >
+                            {item}
+                          </option>
+                        )
+                      )}
                     </select>
 
                     <span>⌄</span>
                   </div>
                 </div>
 
-                <div className={styles.filterItem}>
+                {/* SORT */}
+
+                <div
+                  className={
+                    styles.filterItem
+                  }
+                >
                   <label htmlFor="sort">
                     Sort By
                   </label>
 
-                  <div className={styles.selectWrap}>
+                  <div
+                    className={
+                      styles.selectWrap
+                    }
+                  >
                     <select
                       id="sort"
                       value={sort}
-                      onChange={handleSortChange}
+                      onChange={
+                        handleSortChange
+                      }
                     >
                       <option value="newest">
                         Newest First
                       </option>
+
                       <option value="oldest">
                         Oldest First
                       </option>
+
                       <option value="az">
                         Title A-Z
                       </option>
+
                       <option value="za">
                         Title Z-A
                       </option>
@@ -563,7 +731,9 @@ export default function AdvicePage() {
                 {hasFilters && (
                   <button
                     type="button"
-                    className={styles.clearFilters}
+                    className={
+                      styles.clearFilters
+                    }
                     onClick={clearFilters}
                   >
                     Clear all
@@ -574,14 +744,21 @@ export default function AdvicePage() {
           </div>
         </section>
 
-        {/* =========================================
+        {/* =================================================
             RESULTS
-        ========================================= */}
-        <section className={styles.resultsSection}>
+        ================================================= */}
+
+        <section
+          className={styles.resultsSection}
+        >
           <div className={styles.container}>
             <div className={styles.resultsTop}>
               <div>
-                <span className={styles.resultsLabel}>
+                <span
+                  className={
+                    styles.resultsLabel
+                  }
+                >
                   ADVICE & GUIDANCE
                 </span>
 
@@ -592,10 +769,18 @@ export default function AdvicePage() {
                 </h2>
               </div>
 
-              <div className={styles.resultsCount}>
-                <strong>{filteredArticles.length}</strong>
+              <div
+                className={
+                  styles.resultsCount
+                }
+              >
+                <strong>
+                  {filteredArticles.length}
+                </strong>
+
                 <span>
-                  {filteredArticles.length === 1
+                  {filteredArticles.length ===
+                  1
                     ? "result"
                     : "results"}
                 </span>
@@ -604,102 +789,205 @@ export default function AdvicePage() {
 
             {visibleArticles.length > 0 ? (
               <>
-                <div className={styles.resultsLayout}>
-                  <div className={styles.articleGrid}>
-                    {visibleArticles.map((article) => (
-                      <article
-                        className={styles.articleCard}
-                        key={article.id}
-                      >
-                        <Link
-                          href={article.href}
-                          className={styles.imageLink}
+                <div
+                  className={
+                    styles.resultsLayout
+                  }
+                >
+                  {/* ARTICLES */}
+
+                  <div
+                    className={
+                      styles.articleGrid
+                    }
+                  >
+                    {visibleArticles.map(
+                      (article) => (
+                        <article
+                          className={
+                            styles.articleCard
+                          }
+                          key={article.id}
                         >
-                          <div className={styles.imageWrap}>
-                            <img
-                              src={article.image}
-                              alt={article.title}
-                            />
-
-                            <span className={styles.cardCategory}>
-                              {article.category}
-                            </span>
-                          </div>
-                        </Link>
-
-                        <div className={styles.cardContent}>
-                          <div className={styles.cardMeta}>
-                            <span>{article.type}</span>
-                            <span className={styles.dot}>•</span>
-                            <span>{article.date}</span>
-                          </div>
-
-                          <h3>
-                            <Link href={article.href}>
-                              {article.title}
-                            </Link>
-                          </h3>
-
-                          <p>{article.excerpt}</p>
-
                           <Link
                             href={article.href}
-                            className={styles.readMore}
+                            className={
+                              styles.imageLink
+                            }
                           >
-                            Read article
-                            <span>→</span>
+                            <div
+                              className={
+                                styles.imageWrap
+                              }
+                            >
+                              <img
+                                src={
+                                  article.image
+                                }
+                                alt={
+                                  article.title
+                                }
+                              />
+
+                              <span
+                                className={
+                                  styles.cardCategory
+                                }
+                              >
+                                {
+                                  article.category
+                                }
+                              </span>
+                            </div>
                           </Link>
-                        </div>
-                      </article>
-                    ))}
+
+                          <div
+                            className={
+                              styles.cardContent
+                            }
+                          >
+                            <div
+                              className={
+                                styles.cardMeta
+                              }
+                            >
+                              <span>
+                                {article.type}
+                              </span>
+
+                              <span
+                                className={
+                                  styles.dot
+                                }
+                              >
+                                •
+                              </span>
+
+                              <span>
+                                {article.date}
+                              </span>
+                            </div>
+
+                            <h3>
+                              <Link
+                                href={
+                                  article.href
+                                }
+                              >
+                                {article.title}
+                              </Link>
+                            </h3>
+
+                            <p>
+                              {
+                                article.excerpt
+                              }
+                            </p>
+
+                            <Link
+                              href={
+                                article.href
+                              }
+                              className={
+                                styles.readMore
+                              }
+                            >
+                              Read article
+
+                              <span>
+                                →
+                              </span>
+                            </Link>
+                          </div>
+                        </article>
+                      )
+                    )}
                   </div>
 
                   {/* SIDEBAR */}
-                  <aside className={styles.sidebar}>
-                    <div className={styles.sidebarCard}>
-                      <span className={styles.sidebarLabel}>
+
+                  <aside
+                    className={
+                      styles.sidebar
+                    }
+                  >
+                    <div
+                      className={
+                        styles.sidebarCard
+                      }
+                    >
+                      <span
+                        className={
+                          styles.sidebarLabel
+                        }
+                      >
                         NEED HELP?
                       </span>
 
                       <h3>
-                        Looking for a property service?
+                        Looking for a property
+                        service?
                       </h3>
 
                       <p>
-                        Our team provides reliable property
-                        maintenance, gardening and outdoor
-                        services.
+                        Our team provides
+                        reliable property
+                        maintenance, gardening
+                        and outdoor services.
                       </p>
 
                       <Link
                         href="/contact"
-                        className={styles.sidebarButton}
+                        className={
+                          styles.sidebarButton
+                        }
                       >
                         Contact us
-                        <span>→</span>
+
+                        <span>
+                          →
+                        </span>
                       </Link>
                     </div>
 
-                    <div className={styles.sidebarLinks}>
-                      <span>POPULAR TOPICS</span>
+                    <div
+                      className={
+                        styles.sidebarLinks
+                      }
+                    >
+                      <span>
+                        POPULAR TOPICS
+                      </span>
 
-                      <Link href="/advice?category=Home%20Care">
+                      <Link
+                        href="/advice?category=Home%20Care"
+                      >
                         Home Care
+
                         <b>→</b>
                       </Link>
 
-                      <Link href="/advice?category=Maintenance">
+                      <Link
+                        href="/advice?category=Maintenance"
+                      >
                         Property Maintenance
+
                         <b>→</b>
                       </Link>
 
-                      <Link href="/advice?category=Garden%20%26%20Outdoor">
+                      <Link
+                        href="/advice?category=Garden%20%26%20Outdoor"
+                      >
                         Garden & Outdoor
+
                         <b>→</b>
                       </Link>
 
-                      <Link href="/advice?category=Landlord%20Advice">
+                      <Link
+                        href="/advice?category=Landlord%20Advice"
+                      >
                         Landlord Advice
+
                         <b>→</b>
                       </Link>
                     </div>
@@ -707,29 +995,45 @@ export default function AdvicePage() {
                 </div>
 
                 {/* PAGINATION */}
+
                 {totalPages > 1 && (
-                  <div className={styles.pagination}>
+                  <div
+                    className={
+                      styles.pagination
+                    }
+                  >
                     <button
                       type="button"
                       onClick={() =>
-                        changePage(safePage - 1)
+                        changePage(
+                          safePage - 1
+                        )
                       }
-                      disabled={safePage === 1}
-                      className={styles.pageArrow}
+                      disabled={
+                        safePage === 1
+                      }
+                      className={
+                        styles.pageArrow
+                      }
                       aria-label="Previous page"
                     >
                       ←
                     </button>
 
                     {Array.from(
-                      { length: totalPages },
-                      (_, index) => index + 1
+                      {
+                        length: totalPages,
+                      },
+                      (_, index) =>
+                        index + 1
                     ).map((number) => (
                       <button
                         type="button"
                         key={number}
                         onClick={() =>
-                          changePage(number)
+                          changePage(
+                            number
+                          )
                         }
                         className={`${styles.pageNumber} ${
                           number === safePage
@@ -744,12 +1048,17 @@ export default function AdvicePage() {
                     <button
                       type="button"
                       onClick={() =>
-                        changePage(safePage + 1)
+                        changePage(
+                          safePage + 1
+                        )
                       }
                       disabled={
-                        safePage === totalPages
+                        safePage ===
+                        totalPages
                       }
-                      className={styles.pageArrow}
+                      className={
+                        styles.pageArrow
+                      }
                       aria-label="Next page"
                     >
                       →
@@ -758,8 +1067,18 @@ export default function AdvicePage() {
                 )}
               </>
             ) : (
-              <div className={styles.noResults}>
-                <div className={styles.noResultsIcon}>
+              /* NO RESULTS */
+
+              <div
+                className={
+                  styles.noResults
+                }
+              >
+                <div
+                  className={
+                    styles.noResultsIcon
+                  }
+                >
                   <svg
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -774,18 +1093,24 @@ export default function AdvicePage() {
                   </svg>
                 </div>
 
-                <h3>No advice found</h3>
+                <h3>
+                  No advice found
+                </h3>
 
                 <p>
-                  We couldn't find any articles matching
-                  your search. Try another keyword or clear
-                  the filters.
+                  We couldn't find any
+                  articles matching your
+                  search. Try another
+                  keyword or clear the
+                  filters.
                 </p>
 
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className={styles.noResultsButton}
+                  className={
+                    styles.noResultsButton
+                  }
                 >
                   Clear filters
                 </button>
@@ -794,38 +1119,58 @@ export default function AdvicePage() {
           </div>
         </section>
 
-        {/* =========================================
+        {/* =================================================
             BOTTOM CTA
-        ========================================= */}
-        <section className={styles.bottomCta}>
-          <div className={styles.ctaInner}>
+        ================================================= */}
+
+        <section
+          className={styles.bottomCta}
+        >
+          <div
+            className={styles.ctaInner}
+          >
             <div>
-              <span>ALPHA PROPERTY & GARDENING SERVICES</span>
+              <span>
+                ALPHA PROPERTY &
+                GARDENING SERVICES
+              </span>
 
               <h2>
-                Need professional help with your
-                property?
+                Need professional help
+                with your property?
               </h2>
 
               <p>
-                From property maintenance and repairs to
-                regular garden care, our team is here to
-                help.
+                From property maintenance
+                and repairs to regular
+                garden care, our team is
+                here to help.
               </p>
             </div>
 
-            <div className={styles.ctaButtons}>
+            <div
+              className={
+                styles.ctaButtons
+              }
+            >
               <Link
                 href="/contact"
-                className={styles.ctaPrimary}
+                className={
+                  styles.ctaPrimary
+                }
               >
                 Get in touch
-                <span>→</span>
+
+                <span>
+                  →
+                </span>
               </Link>
 
               <Link
                 href="/our-services"
-                className={styles.ctaSecondary}
+                className={
+                  styles.ctaSecondary
+                }
               >
                 View our services
               </Link>
@@ -833,6 +1178,86 @@ export default function AdvicePage() {
           </div>
         </section>
       </main>
+    </>
+  );
+}
+
+/* =========================================================
+   PAGE WRAPPER
+
+   IMPORTANT:
+   useSearchParams() is used inside AdvicePageContent.
+   This Suspense boundary fixes the Next.js production
+   build / Vercel prerender error.
+========================================================= */
+
+export default function AdvicePage() {
+  return (
+    <>
+      <Header />
+
+      <Suspense
+        fallback={
+          <main
+            className={styles.page}
+          >
+            <section
+              className={styles.hero}
+            >
+              <div
+                className={
+                  styles.heroOverlay
+                }
+              />
+
+              <div
+                className={
+                  styles.heroContent
+                }
+              >
+                <div
+                  className={
+                    styles.breadcrumb
+                  }
+                >
+                  <Link href="/">
+                    Home
+                  </Link>
+
+                  <span>/</span>
+
+                  <span>
+                    Advice
+                  </span>
+                </div>
+
+                <span
+                  className={
+                    styles.heroLabel
+                  }
+                >
+                  ALPHA PROPERTY &
+                  GARDENING SERVICES
+                </span>
+
+                <h1>
+                  Advice Search Results
+                </h1>
+
+                <p>
+                  Helpful advice, practical
+                  guides and useful
+                  information for
+                  homeowners, landlords
+                  and gardens.
+                </p>
+              </div>
+            </section>
+          </main>
+        }
+      >
+        <AdvicePageContent />
+      </Suspense>
 
       <Footer />
     </>
