@@ -111,12 +111,18 @@
 ========================================================= */
 
 .logo {
+  width: 175px;
+  height: 59px;
+
+  flex-shrink: 0;
+
   display: flex;
   align-items: center;
-  flex-shrink: 0;
 
   color: #ffffff;
   text-decoration: none;
+
+  overflow: hidden;
 }
 
 .logo:hover {
@@ -124,52 +130,28 @@
   text-decoration: none;
 }
 
-.logoMark {
-  width: 34px;
-  height: 34px;
-  margin-right: 3px;
+.logoImageWrapper {
+  width: 165px;
+  height: 54px;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  color: #d5a928;
-  font-size: 29px;
-  line-height: 1;
+  overflow: hidden;
 }
 
-.logoText {
-  display: flex;
-  flex-direction: column;
-}
+.logoImage {
+  display: block;
 
-.logoText strong {
-  color: #ffffff;
-  font-size: 29px;
-  line-height: 0.8;
-  font-weight: 800;
-  letter-spacing: -1.7px;
-}
+  width: 100%;
+  height: 100%;
 
-.logoText small {
-  margin-top: 5px;
+  object-fit: contain;
+  object-position: left center;
 
-  color: rgba(255, 255, 255, 0.86);
-
-  font-size: 6px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-}
-
-.logoText em {
-  margin-top: 3px;
-
-  color: #d5a928;
-
-  font-family: Georgia, serif;
-  font-size: 5px;
-  font-style: italic;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* =========================================================
@@ -219,7 +201,8 @@
 .navLink:hover,
 .navLinkButton:hover,
 .navLink.active,
-.serviceActive .navLinkButton {
+.serviceActive .navLinkButton,
+.adviceActive .navLinkButton {
   color: #ffffff;
   text-decoration: none;
 }
@@ -245,7 +228,8 @@
 
 .navLink:hover::after,
 .navLink.active::after,
-.serviceActive .navLinkButton::after {
+.serviceActive .navLinkButton::after,
+.adviceActive .navLinkButton::after {
   transform: scaleX(1);
 }
 
@@ -269,7 +253,7 @@
 }
 
 /* =========================================================
-   DESKTOP SERVICES DROPDOWN
+   SERVICES NAV
 ========================================================= */
 
 .servicesNav {
@@ -278,6 +262,10 @@
   display: flex;
   align-items: stretch;
 }
+
+/* =========================================================
+   SERVICES DROPDOWN
+========================================================= */
 
 .dropdown {
   position: absolute;
@@ -472,6 +460,275 @@
 }
 
 /* =========================================================
+   ADVICE NAV
+========================================================= */
+
+.adviceNav {
+  position: relative;
+
+  display: flex;
+  align-items: stretch;
+}
+
+/* =========================================================
+   ADVICE DROPDOWN
+========================================================= */
+
+.adviceDropdown {
+  position: absolute;
+
+  top: calc(100% + 1px);
+  left: 50%;
+
+  width: min(920px, 80vw);
+
+  padding: 20px;
+
+  border: 1px solid rgba(213, 169, 40, 0.16);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.28),
+    0 5px 20px rgba(0, 0, 0, 0.12);
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform: translate(-50%, -8px) scale(0.98);
+
+  transform-origin: top center;
+
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.25s ease;
+}
+
+.adviceDropdownVisible {
+  opacity: 1;
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: translate(-50%, 0) scale(1);
+}
+
+.adviceDropdownHeader {
+  padding: 2px 4px 15px;
+
+  border-bottom: 1px solid #e7ece9;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.adviceDropdownHeader > div {
+  min-width: 0;
+}
+
+.adviceDropdownHeader span {
+  color: #b88d27;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+.adviceDropdownHeader p {
+  margin: 6px 0 0;
+
+  color: #68736d;
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.viewAllAdvice {
+  flex-shrink: 0;
+
+  padding: 9px 13px;
+
+  border: 1px solid rgba(184, 141, 39, 0.35);
+  border-radius: 4px;
+
+  color: #9d7720;
+  background: #faf7ed;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.viewAllAdvice:hover {
+  color: #ffffff;
+  background: #b88d27;
+
+  text-decoration: none;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ADVICE DROPDOWN GRID
+========================================================= */
+
+.adviceDropdownGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 8px;
+
+  padding: 14px 0;
+}
+
+.adviceDropdownItem {
+  min-height: 70px;
+
+  padding: 11px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  border: 1px solid #e8ece9;
+  border-radius: 7px;
+
+  color: #193128;
+  background: #fbfcfb;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.adviceDropdownItem:hover {
+  color: #193128;
+
+  text-decoration: none;
+
+  transform: translateY(-2px);
+
+  border-color: rgba(184, 141, 39, 0.5);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(15, 42, 31, 0.09);
+}
+
+.adviceNumber {
+  width: 27px;
+  height: 27px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: #b88d27;
+  background: #f4edda;
+
+  font-size: 7px;
+  font-weight: 800;
+}
+
+.adviceDropdownContent {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.adviceDropdownContent strong {
+  color: #183128;
+
+  font-size: 10px;
+  line-height: 1.25;
+
+  font-weight: 800;
+}
+
+.adviceDropdownContent small {
+  margin-top: 3px;
+
+  color: #7b847f;
+
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+.adviceArrow {
+  flex-shrink: 0;
+
+  color: #b88d27;
+
+  font-size: 13px;
+
+  transition: transform 0.2s ease;
+}
+
+.adviceDropdownItem:hover .adviceArrow {
+  transform: translateX(3px);
+}
+
+.adviceDropdownFooter {
+  padding-top: 12px;
+
+  border-top: 1px solid #e7ece9;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  font-size: 9px;
+}
+
+.adviceDropdownFooter span {
+  color: #8a938e;
+}
+
+.adviceDropdownFooter a {
+  flex-shrink: 0;
+
+  color: #9d7720;
+
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+.adviceDropdownFooter a:hover {
+  color: #b88d27;
+
+  text-decoration: none;
+}
+
+/* =========================================================
    DESKTOP ACTION BUTTONS
 ========================================================= */
 
@@ -644,6 +901,7 @@
   .navLink,
   .navLinkButton {
     padding: 0 7px;
+
     font-size: 11px;
   }
 
@@ -653,8 +911,15 @@
     right: 7px;
   }
 
-  .logoText strong {
-    font-size: 25px;
+  /* RESPONSIVE LOGO */
+
+  .logo {
+    width: 150px;
+  }
+
+  .logoImageWrapper {
+    width: 142px;
+    height: 52px;
   }
 
   .navActions {
@@ -664,7 +929,19 @@
   .loginButton,
   .quoteButton {
     padding: 0 10px;
+
     font-size: 9px;
+  }
+
+  /* ADVICE DROPDOWN */
+
+  .adviceDropdown {
+    width: min(850px, 78vw);
+  }
+
+  .adviceDropdownGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -702,6 +979,7 @@
 
   .navInner {
     width: calc(100% - 24px);
+
     min-height: 67px;
   }
 
@@ -712,21 +990,33 @@
     display: none;
   }
 
-  /* MOBILE LOGO */
+  /* =======================================================
+     MOBILE LOGO
+  ======================================================== */
 
-  .logoText strong {
-    font-size: 27px;
+  .logo {
+    width: auto;
+    max-width: calc(100% - 60px);
+
+    height: 67px;
   }
 
-  .logoText small {
-    font-size: 5.5px;
+  .logoImageWrapper {
+    width: 165px;
+    height: 58px;
   }
 
-  .logoText em {
-    font-size: 5px;
+  .logoImage {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: left center;
   }
 
-  /* SHOW HAMBURGER */
+  /* =======================================================
+     SHOW HAMBURGER
+  ======================================================== */
 
   .mobileToggle {
     display: block;
@@ -854,10 +1144,6 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* =======================================================
-     MOBILE SERVICES BUTTON
-  ======================================================== */
-
   .mobileServicesButton {
     position: relative;
 
@@ -885,7 +1171,6 @@
     font-weight: 600;
 
     text-align: left;
-    text-decoration: none;
 
     cursor: pointer;
 
@@ -917,36 +1202,6 @@
     color: #d5a928;
 
     background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* =======================================================
-     MOBILE SERVICES ARROW
-  ======================================================== */
-
-  .mobileChevron {
-    width: 26px;
-    height: 26px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    color: #d5a928;
-
-    font-size: 20px;
-    line-height: 1;
-
-    transform: rotate(0deg);
-
-    transition:
-      transform 0.25s ease,
-      color 0.25s ease;
-  }
-
-  .mobileChevronOpen {
-    transform: rotate(180deg);
   }
 
   /* =======================================================
@@ -1035,14 +1290,222 @@
     font-size: 15px;
   }
 
-  /* ALL SERVICES */
-
   .mobileAllServices {
     color: #d5a928 !important;
 
     font-weight: 700;
 
     background: rgba(213, 169, 40, 0.07);
+  }
+
+  /* =======================================================
+     MOBILE ADVICE WRAPPER
+  ======================================================== */
+
+  .mobileAdviceWrapper {
+    width: 100%;
+
+    display: block;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* =======================================================
+     MOBILE ADVICE BUTTON
+  ======================================================== */
+
+  .mobileAdviceButton {
+    position: relative;
+
+    width: 100%;
+    min-height: 55px;
+
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    border: 0;
+    border-radius: 0;
+
+    outline: none;
+
+    color: #ffffff;
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    box-shadow: none;
+  }
+
+  .mobileAdviceButton::before,
+  .mobileAdviceButton::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .mobileAdviceButton:hover,
+  .mobileAdviceButton:focus,
+  .mobileAdviceButton:active {
+    color: #d5a928;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 0;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .mobileAdviceButtonOpen {
+    color: #d5a928;
+
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* =======================================================
+     MOBILE ADVICE DROPDOWN
+  ======================================================== */
+
+  .mobileAdvice {
+    width: 100%;
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    background: #041f18;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      max-height 0.5s ease,
+      opacity 0.25s ease,
+      visibility 0.25s ease;
+  }
+
+  .mobileAdviceOpen {
+    max-height: 850px;
+
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* =======================================================
+     MOBILE ADVICE LINKS
+  ======================================================== */
+
+  .mobileAdviceLink {
+    width: 100%;
+    min-height: 52px;
+
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    color: rgba(255, 255, 255, 0.82);
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+
+    line-height: 1.3;
+
+    text-decoration: none !important;
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease,
+      padding-left 0.2s ease;
+  }
+
+  .mobileAdviceLink::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .mobileAdviceLink:hover,
+  .mobileAdviceLink:focus,
+  .mobileAdviceLink:active {
+    padding-left: 33px;
+
+    color: #d5a928;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    text-decoration: none !important;
+
+    outline: none;
+  }
+
+  .mobileAdviceLink span:first-child {
+    max-width: calc(100% - 30px);
+  }
+
+  .mobileAdviceLink span:last-child {
+    flex-shrink: 0;
+
+    color: #d5a928;
+
+    font-size: 15px;
+  }
+
+  .mobileAllAdvice {
+    color: #d5a928 !important;
+
+    font-weight: 700;
+
+    background: rgba(213, 169, 40, 0.07);
+  }
+
+  /* =======================================================
+     MOBILE CHEVRON
+  ======================================================== */
+
+  .mobileChevron {
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    color: #d5a928;
+
+    font-size: 20px;
+    line-height: 1;
+
+    transform: rotate(0deg);
+
+    transition:
+      transform 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .mobileChevronOpen {
+    transform: rotate(180deg);
   }
 
   /* =======================================================
@@ -1063,8 +1526,6 @@
 
     background: #06271d;
   }
-
-  /* LOGIN BUTTON */
 
   .mobileLogin {
     width: 100%;
@@ -1114,8 +1575,6 @@
 
     outline: none;
   }
-
-  /* QUOTE BUTTON */
 
   .mobileQuote {
     width: 100%;
@@ -1182,35 +1641,72 @@
 
   .topQuote {
     min-height: 24px;
+
     padding: 0 9px;
+
     font-size: 8px;
   }
 
-  .logoMark {
-    width: 29px;
-    font-size: 24px;
+  /* SMALL MOBILE LOGO */
+
+  .logo {
+    max-width: calc(100% - 58px);
+
+    height: 67px;
   }
 
-  .logoText strong {
-    font-size: 24px;
-  }
-
-  .logoText small {
-    font-size: 5px;
+  .logoImageWrapper {
+    width: 145px;
+    height: 55px;
   }
 
   .mobileNavLink,
-  .mobileServicesButton {
+  .mobileServicesButton,
+  .mobileAdviceButton {
     min-height: 53px;
+
     font-size: 14px;
   }
 
   .mobileServiceLink {
     min-height: 49px;
+
     font-size: 13px;
+  }
+
+  .mobileAdviceLink {
+    min-height: 51px;
+
+    font-size: 12px;
   }
 
   .mobileActions {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   EXTRA SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+  .logoImageWrapper {
+    width: 130px;
+    height: 52px;
+  }
+
+  .mobileToggle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobileAdviceLink {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .mobileServiceLink {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }

@@ -38,29 +38,126 @@ const services = [
   },
 ];
 
+const advicePages = [
+  {
+    title: "Homecare Advice",
+    href: "/advice/homecare-advice",
+    description:
+      "Practical advice for looking after your home.",
+  },
+  {
+    title: "Seasonal Advice",
+    href: "/advice/seasonal-advice",
+    description:
+      "Prepare your home and garden throughout the year.",
+  },
+  {
+    title: "Landlord Advice",
+    href: "/advice/landlord-advice",
+    description:
+      "Useful property advice for landlords and agents.",
+  },
+  {
+    title: "Fencing & Decking Advice",
+    href: "/advice/fencing-decking-advice",
+    description:
+      "Planning, maintaining and improving outdoor spaces.",
+  },
+  {
+    title: "Painting & Decorating Advice",
+    href: "/advice/painting-decorating-advice",
+    description:
+      "Helpful tips for painting and decorating your property.",
+  },
+  {
+    title: "Roofing & Gutter Advice",
+    href: "/advice/roofing-gutter-advice",
+    description:
+      "Look after your roof, gutters and exterior of your home.",
+  },
+  {
+    title: "Kitchens Advice",
+    href: "/advice/kitchens-advice",
+    description:
+      "Planning, maintaining and improving your kitchen.",
+  },
+  {
+    title: "Bathroom Advice",
+    href: "/advice/bathroom-advice",
+    description:
+      "Useful bathroom maintenance and improvement tips.",
+  },
+  {
+    title: "Plumbing Advice",
+    href: "/advice/plumbing-advice",
+    description:
+      "Helpful guidance for common plumbing problems.",
+  },
+  {
+    title: "Property Maintenance Advice",
+    href: "/advice/property-maintenance-advice",
+    description:
+      "Practical maintenance advice for your property.",
+  },
+  {
+    title: "Cut Your Lawn Advice",
+    href: "/advice/cut-your-lawn-advice",
+    description:
+      "Simple lawn cutting and lawn care guidance.",
+  },
+  {
+    title: "Garden Maintenance Advice",
+    href: "/advice/garden-maintenance-advice",
+    description:
+      "Keep your garden healthy, tidy and looking its best.",
+  },
+  {
+    title: "Helpful Advice for Your Home & Garden",
+    href: "/advice/helpful-advice-home-garden",
+    description:
+      "Useful tips for your home, garden and property.",
+  },
+];
+
 export default function Header() {
   const pathname = usePathname();
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] =
+    useState(false);
+  const [mobileAdviceOpen, setMobileAdviceOpen] =
+    useState(false);
+
+  const [desktopServicesOpen, setDesktopServicesOpen] =
+    useState(false);
+  const [desktopAdviceOpen, setDesktopAdviceOpen] =
+    useState(false);
 
   const isServicesPage =
     pathname === "/services" ||
-    services.some((service) => pathname.startsWith(service.href));
+    services.some((service) =>
+      pathname.startsWith(service.href)
+    );
 
-  /* =========================================
+  const isAdvicePage =
+    pathname === "/advice" ||
+    advicePages.some((advice) =>
+      pathname.startsWith(advice.href)
+    );
+
+  /* =====================================================
      CLOSE MOBILE MENU
-  ========================================= */
+  ====================================================== */
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
     setMobileServicesOpen(false);
+    setMobileAdviceOpen(false);
   };
 
-  /* =========================================
+  /* =====================================================
      MOBILE MENU TOGGLE
-  ========================================= */
+  ====================================================== */
 
   const handleMobileToggle = () => {
     setMobileOpen((current) => {
@@ -68,18 +165,35 @@ export default function Header() {
 
       if (!next) {
         setMobileServicesOpen(false);
+        setMobileAdviceOpen(false);
       }
 
       return next;
     });
   };
 
-  /* =========================================
+  /* =====================================================
      MOBILE SERVICES TOGGLE
-  ========================================= */
+  ====================================================== */
 
   const handleMobileServicesToggle = () => {
     setMobileServicesOpen((current) => !current);
+
+    if (!mobileServicesOpen) {
+      setMobileAdviceOpen(false);
+    }
+  };
+
+  /* =====================================================
+     MOBILE ADVICE TOGGLE
+  ====================================================== */
+
+  const handleMobileAdviceToggle = () => {
+    setMobileAdviceOpen((current) => !current);
+
+    if (!mobileAdviceOpen) {
+      setMobileServicesOpen(false);
+    }
   };
 
   return (
@@ -100,7 +214,10 @@ export default function Header() {
           </span>
 
           <div className={styles.topRight}>
-            <span className={styles.followText}>Follow Us</span>
+            <span className={styles.followText}>
+              Follow Us
+            </span>
+
             <span>f</span>
             <span>◎</span>
             <span>♪</span>
@@ -123,28 +240,22 @@ export default function Header() {
 
       <div className={styles.navBar}>
         <div className={styles.navInner}>
-          {/* LOGO */}
+          {/* =================================================
+              REAL LOGO
+          ================================================== */}
 
           <Link href="/" className={styles.logo}>
-            <div className={styles.logoMark}>
-              <span>▲</span>
-            </div>
-
-            <div className={styles.logoText}>
-              <strong>ALPHA</strong>
-
-              <small>
-                PROPERTY &amp; GARDENING SERVICES
-              </small>
-
-              <em>
-                One Team. Complete Property Care.
-              </em>
+            <div className={styles.logoImageWrapper}>
+              <img
+                src="/images/logo/logo.png"
+                alt="Alpha Property & Gardening Services"
+                className={styles.logoImage}
+              />
             </div>
           </Link>
 
           {/* =================================================
-              DESKTOP NAV
+              DESKTOP NAVIGATION
           ================================================== */}
 
           <nav className={styles.desktopNav}>
@@ -159,7 +270,9 @@ export default function Header() {
               Home
             </Link>
 
-            {/* OUR SERVICES */}
+            {/* =================================================
+                OUR SERVICES
+            ================================================== */}
 
             <div
               className={`${styles.servicesNav} ${
@@ -194,7 +307,7 @@ export default function Header() {
                 </span>
               </Link>
 
-              {/* DESKTOP DROPDOWN */}
+              {/* DESKTOP SERVICES DROPDOWN */}
 
               <div
                 className={`${styles.dropdown} ${
@@ -213,7 +326,9 @@ export default function Header() {
                 </div>
 
                 <div
-                  className={styles.serviceDropdownGrid}
+                  className={
+                    styles.serviceDropdownGrid
+                  }
                 >
                   {services.map((service, index) => (
                     <Link
@@ -227,7 +342,9 @@ export default function Header() {
                       }
                     >
                       <span
-                        className={styles.serviceNumber}
+                        className={
+                          styles.serviceNumber
+                        }
                       >
                         0{index + 1}
                       </span>
@@ -314,18 +431,149 @@ export default function Header() {
               Areas We Cover
             </Link>
 
-            {/* ADVICE */}
+            {/* =================================================
+                ADVICE
+            ================================================== */}
 
-            <Link
-              href="/advice"
-              className={`${styles.navLink} ${
-                pathname === "/advice"
-                  ? styles.active
+            <div
+              className={`${styles.adviceNav} ${
+                isAdvicePage
+                  ? styles.adviceActive
                   : ""
               }`}
+              onMouseEnter={() =>
+                setDesktopAdviceOpen(true)
+              }
+              onMouseLeave={() =>
+                setDesktopAdviceOpen(false)
+              }
             >
-              Advice
-            </Link>
+              <Link
+                href="/advice"
+                className={styles.navLinkButton}
+                onClick={() =>
+                  setDesktopAdviceOpen(false)
+                }
+              >
+                <span>Advice</span>
+
+                <span
+                  className={`${styles.desktopChevron} ${
+                    desktopAdviceOpen
+                      ? styles.desktopChevronOpen
+                      : ""
+                  }`}
+                >
+                  ⌄
+                </span>
+              </Link>
+
+              {/* DESKTOP ADVICE DROPDOWN */}
+
+              <div
+                className={`${styles.adviceDropdown} ${
+                  desktopAdviceOpen
+                    ? styles.adviceDropdownVisible
+                    : ""
+                }`}
+              >
+                <div className={styles.adviceDropdownHeader}>
+                  <div>
+                    <span>PROPERTY &amp; GARDEN ADVICE</span>
+
+                    <p>
+                      Helpful advice and practical
+                      guidance for your home and garden.
+                    </p>
+                  </div>
+
+                  <Link
+                    href="/advice"
+                    className={styles.viewAllAdvice}
+                    onClick={() =>
+                      setDesktopAdviceOpen(false)
+                    }
+                  >
+                    View All Advice →
+                  </Link>
+                </div>
+
+                <div
+                  className={
+                    styles.adviceDropdownGrid
+                  }
+                >
+                  {advicePages.map(
+                    (advice, index) => (
+                      <Link
+                        key={advice.href}
+                        href={advice.href}
+                        className={
+                          styles.adviceDropdownItem
+                        }
+                        onClick={() =>
+                          setDesktopAdviceOpen(false)
+                        }
+                      >
+                        <span
+                          className={
+                            styles.adviceNumber
+                          }
+                        >
+                          {String(index + 1).padStart(
+                            2,
+                            "0"
+                          )}
+                        </span>
+
+                        <span
+                          className={
+                            styles.adviceDropdownContent
+                          }
+                        >
+                          <strong>
+                            {advice.title}
+                          </strong>
+
+                          <small>
+                            {advice.description}
+                          </small>
+                        </span>
+
+                        <span
+                          className={
+                            styles.adviceArrow
+                          }
+                        >
+                          →
+                        </span>
+                      </Link>
+                    )
+                  )}
+                </div>
+
+                <div
+                  className={
+                    styles.adviceDropdownFooter
+                  }
+                >
+                  <span>
+                    Practical property advice from
+                    Alpha Property &amp; Gardening
+                    Services.
+                  </span>
+
+                  <Link
+                    href="/advice"
+                    onClick={() =>
+                      setDesktopAdviceOpen(false)
+                    }
+                  >
+                    Advice Home →
+                  </Link>
+                </div>
+              </div>
+            </div>
 
             {/* ABOUT */}
 
@@ -455,8 +703,6 @@ export default function Header() {
             </span>
           </button>
 
-          {/* MOBILE SERVICES DROPDOWN */}
-
           <div
             id="mobile-services-dropdown"
             className={`${styles.mobileServices} ${
@@ -465,8 +711,6 @@ export default function Header() {
                 : ""
             }`}
           >
-            {/* ALL SERVICES */}
-
             <Link
               href="/services"
               className={`${styles.mobileServiceLink} ${styles.mobileAllServices}`}
@@ -475,8 +719,6 @@ export default function Header() {
               <span>All Services</span>
               <span>→</span>
             </Link>
-
-            {/* INDIVIDUAL SERVICES */}
 
             {services.map((service) => (
               <Link
@@ -522,15 +764,69 @@ export default function Header() {
           <span>Areas We Cover</span>
         </Link>
 
-        {/* ADVICE */}
+        {/* =================================================
+            MOBILE ADVICE
+        ================================================== */}
 
-        <Link
-          href="/advice"
-          className={styles.mobileNavLink}
-          onClick={closeMobileMenu}
-        >
-          <span>Advice</span>
-        </Link>
+        <div className={styles.mobileAdviceWrapper}>
+          <button
+            type="button"
+            className={`${styles.mobileAdviceButton} ${
+              mobileAdviceOpen
+                ? styles.mobileAdviceButtonOpen
+                : ""
+            }`}
+            aria-expanded={mobileAdviceOpen}
+            aria-controls="mobile-advice-dropdown"
+            onClick={handleMobileAdviceToggle}
+          >
+            <span>Advice</span>
+
+            <span
+              className={`${styles.mobileChevron} ${
+                mobileAdviceOpen
+                  ? styles.mobileChevronOpen
+                  : ""
+              }`}
+            >
+              ⌄
+            </span>
+          </button>
+
+          <div
+            id="mobile-advice-dropdown"
+            className={`${styles.mobileAdvice} ${
+              mobileAdviceOpen
+                ? styles.mobileAdviceOpen
+                : ""
+            }`}
+          >
+            {/* ALL ADVICE */}
+
+            <Link
+              href="/advice"
+              className={`${styles.mobileAdviceLink} ${styles.mobileAllAdvice}`}
+              onClick={closeMobileMenu}
+            >
+              <span>All Advice</span>
+              <span>→</span>
+            </Link>
+
+            {/* ADVICE PAGES */}
+
+            {advicePages.map((advice) => (
+              <Link
+                key={advice.href}
+                href={advice.href}
+                className={styles.mobileAdviceLink}
+                onClick={closeMobileMenu}
+              >
+                <span>{advice.title}</span>
+                <span>→</span>
+              </Link>
+            ))}
+          </div>
+        </div>
 
         {/* ABOUT */}
 

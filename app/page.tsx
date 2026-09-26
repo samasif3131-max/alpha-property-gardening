@@ -223,7 +223,7 @@ export default function HomePage() {
                 <Arrow />
               </Link>
 
-              <Link href="#services" className="alphaOutlineButton">
+              <Link href="/services" className="alphaOutlineButton">
                 View Our Services
               </Link>
             </div>
@@ -369,7 +369,7 @@ export default function HomePage() {
                 Request a Free Quote <Arrow />
               </Link>
 
-              <Link href="/about" className="alphaOutlineButton">
+              <Link href="/about-us" className="alphaOutlineButton">
                 Learn More About Us
               </Link>
             </div>
