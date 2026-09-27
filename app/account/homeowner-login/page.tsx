@@ -1,10 +1,108 @@
 "use client";
 
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./HomeownerLogin.module.css";
+import { supabase } from "@/app/lib/supabase";
 
 export default function HomeownerLogin() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setError("");
+
+    if (!email.trim()) {
+      setError("Please enter your email address.");
+      return;
+    }
+
+    if (!password) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const { data, error: loginError } =
+        await supabase.auth.signInWithPassword({
+          email: email.trim(),
+          password,
+        });
+
+      if (loginError) {
+        setError("Incorrect email address or password.");
+        return;
+      }
+
+      if (!data.user) {
+        setError("Login could not be completed. Please try again.");
+        return;
+      }
+
+      /*
+       * Get the user's profile so we know their role.
+       */
+      const { data: profile, error: profileError } =
+        await supabase
+          .from("profiles")
+          .select("id, full_name, email, role")
+          .eq("id", data.user.id)
+          .single();
+
+      if (profileError) {
+        console.error(profileError);
+
+        await supabase.auth.signOut();
+
+        setError(
+          "Your account was found, but your profile could not be loaded. Please contact us."
+        );
+
+        return;
+      }
+
+      /*
+       * For now this login page is specifically for homeowners/clients.
+       */
+      if (profile.role !== "client") {
+        await supabase.auth.signOut();
+
+        setError(
+          "This login is for homeowner accounts. Please use the correct portal for your account."
+        );
+
+        return;
+      }
+
+      /*
+       * Successful client login.
+       *
+       * We will build the actual dashboard next.
+       */
+      router.push("/account/my-alpha");
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main className={styles.loginPage}>
       <Header />
@@ -129,16 +227,35 @@ export default function HomeownerLogin() {
               Enter your details below to access your homeowner portal.
             </p>
 
+            {/* ERROR */}
+            {error && (
+              <div
+                style={{
+                  marginBottom: "18px",
+                  padding: "12px 14px",
+                  borderRadius: "8px",
+                  background: "#fff1f1",
+                  border: "1px solid #f0b8b8",
+                  color: "#b42318",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  textAlign: "left",
+                }}
+              >
+                {error}
+              </div>
+            )}
+
             {/* FORM */}
             <form
               className={styles.loginForm}
-              onSubmit={(event) => {
-                event.preventDefault();
-              }}
+              onSubmit={handleLogin}
             >
               {/* EMAIL */}
               <div className={styles.loginFormField}>
-                <label htmlFor="homeowner-email">Email Address</label>
+                <label htmlFor="homeowner-email">
+                  Email Address
+                </label>
 
                 <div className={styles.loginInputWrapper}>
                   <span className={styles.loginInputIcon}>✉</span>
@@ -149,13 +266,20 @@ export default function HomeownerLogin() {
                     type="email"
                     placeholder="Enter your email address"
                     autoComplete="email"
+                    value={email}
+                    onChange={(event) =>
+                      setEmail(event.target.value)
+                    }
+                    disabled={loading}
                   />
                 </div>
               </div>
 
               {/* PASSWORD */}
               <div className={styles.loginFormField}>
-                <label htmlFor="homeowner-password">Password</label>
+                <label htmlFor="homeowner-password">
+                  Password
+                </label>
 
                 <div className={styles.loginInputWrapper}>
                   <span className={styles.loginInputIcon}>♢</span>
@@ -163,17 +287,29 @@ export default function HomeownerLogin() {
                   <input
                     id="homeowner-password"
                     name="password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={(event) =>
+                      setPassword(event.target.value)
+                    }
+                    disabled={loading}
                   />
 
                   <button
                     type="button"
                     className={styles.passwordButton}
-                    aria-label="Show password"
+                    aria-label={
+                      showPassword
+                        ? "Hide password"
+                        : "Show password"
+                    }
+                    onClick={() =>
+                      setShowPassword((current) => !current)
+                    }
                   >
-                    ◉
+                    {showPassword ? "◉" : "◌"}
                   </button>
                 </div>
               </div>
@@ -181,19 +317,42 @@ export default function HomeownerLogin() {
               {/* OPTIONS */}
               <div className={styles.loginOptions}>
                 <label className={styles.rememberMe}>
-                  <input type="checkbox" name="remember" />
+                  <input
+                    type="checkbox"
+                    name="remember"
+                    checked={rememberMe}
+                    onChange={(event) =>
+                      setRememberMe(event.target.checked)
+                    }
+                    disabled={loading}
+                  />
+
                   <span>Remember me</span>
                 </label>
 
-                <a href="/account/forgot-password">Forgot password?</a>
+                <a href="/account/forgot-password">
+                  Forgot password?
+                </a>
               </div>
 
               {/* LOGIN BUTTON */}
               <button
                 type="submit"
                 className={styles.loginSubmitButton}
+                disabled={loading}
+                style={{
+                  opacity: loading ? 0.7 : 1,
+                  cursor: loading
+                    ? "not-allowed"
+                    : "pointer",
+                }}
               >
-                <span>Login to My Alpha</span>
+                <span>
+                  {loading
+                    ? "Logging in..."
+                    : "Login to My Alpha"}
+                </span>
+
                 <span>→</span>
               </button>
             </form>

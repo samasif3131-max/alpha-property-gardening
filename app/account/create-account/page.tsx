@@ -1,10 +1,101 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./CreateAccount.module.css";
+import { supabase } from "@/app/lib/supabase";
 
 export default function CreateAccount() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [terms, setTerms] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setError("");
+    setSuccess("");
+
+    if (!fullName.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
+
+    if (!email.trim()) {
+      setError("Please enter your email address.");
+      return;
+    }
+
+    if (!phone.trim()) {
+      setError("Please enter your phone number.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    if (!terms) {
+      setError("Please accept the Terms & Conditions and Privacy Policy.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: {
+          data: {
+            full_name: fullName.trim(),
+            phone: phone.trim(),
+          },
+        },
+      });
+
+      if (signUpError) {
+        setError(signUpError.message);
+        return;
+      }
+
+      if (!data.user) {
+        setError("Account could not be created. Please try again.");
+        return;
+      }
+
+      setSuccess(
+        "Your account has been created successfully. You can now login to My Alpha."
+      );
+
+      setFullName("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setConfirmPassword("");
+      setTerms(false);
+    } catch (error) {
+      console.error(error);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main className={styles.createAccountPage}>
       <Header />
@@ -131,11 +222,43 @@ export default function CreateAccount() {
               homeowner account.
             </p>
 
+            {error && (
+              <div
+                style={{
+                  marginBottom: "18px",
+                  padding: "12px 14px",
+                  borderRadius: "8px",
+                  background: "#fff1f1",
+                  color: "#b42318",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  textAlign: "left",
+                }}
+              >
+                {error}
+              </div>
+            )}
+
+            {success && (
+              <div
+                style={{
+                  marginBottom: "18px",
+                  padding: "12px 14px",
+                  borderRadius: "8px",
+                  background: "#edf9f1",
+                  color: "#087f45",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  textAlign: "left",
+                }}
+              >
+                {success}
+              </div>
+            )}
+
             <form
               className={styles.createAccountForm}
-              onSubmit={(event) => {
-                event.preventDefault();
-              }}
+              onSubmit={handleSubmit}
             >
               {/* NAME */}
               <div className={styles.createAccountFormField}>
@@ -152,6 +275,9 @@ export default function CreateAccount() {
                     type="text"
                     placeholder="Enter your full name"
                     autoComplete="name"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -171,6 +297,9 @@ export default function CreateAccount() {
                     type="email"
                     placeholder="Enter your email address"
                     autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -190,6 +319,9 @@ export default function CreateAccount() {
                     type="tel"
                     placeholder="Enter your phone number"
                     autoComplete="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -209,6 +341,9 @@ export default function CreateAccount() {
                     type="password"
                     placeholder="Create a password"
                     autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -228,6 +363,11 @@ export default function CreateAccount() {
                     type="password"
                     placeholder="Confirm your password"
                     autoComplete="new-password"
+                    value={confirmPassword}
+                    onChange={(e) =>
+                      setConfirmPassword(e.target.value)
+                    }
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -237,6 +377,9 @@ export default function CreateAccount() {
                 <input
                   type="checkbox"
                   name="terms"
+                  checked={terms}
+                  onChange={(e) => setTerms(e.target.checked)}
+                  disabled={loading}
                 />
 
                 <span>
@@ -256,8 +399,18 @@ export default function CreateAccount() {
               <button
                 type="submit"
                 className={styles.createAccountSubmit}
+                disabled={loading}
+                style={{
+                  opacity: loading ? 0.7 : 1,
+                  cursor: loading ? "not-allowed" : "pointer",
+                }}
               >
-                <span>Create My Alpha Account</span>
+                <span>
+                  {loading
+                    ? "Creating Account..."
+                    : "Create My Alpha Account"}
+                </span>
+
                 <span>→</span>
               </button>
             </form>
