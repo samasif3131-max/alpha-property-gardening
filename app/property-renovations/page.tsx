@@ -334,9 +334,9 @@ export default function PropertyRenovationsPage() {
               </div>
 
               <p>
-                Some properties need more than a few repairs. Alpha can
-                undertake multiple rooms, services and finishes as part of the
-                same renovation project.
+                Some properties need more than a few repairs. When several
+                areas need updating, Alpha can bring the work together as one
+                coordinated renovation.
               </p>
             </div>
 
@@ -361,6 +361,7 @@ export default function PropertyRenovationsPage() {
 
               <div className={styles.featuredList}>
                 <strong>A renovation project can include:</strong>
+
                 <ul>
                   {renovationServices[0].items.map((item) => (
                     <li key={item}>{item}</li>
@@ -376,8 +377,9 @@ export default function PropertyRenovationsPage() {
           <div className={styles.container}>
             <div className={styles.wholeHouseGrid}>
               <div className={styles.imagePanel}>
-                <span>WHOLE-HOUSE RENOVATIONS</span>
-                <h3>One overall renovation, rather than disconnected jobs.</h3>
+                <h3>
+                  One overall renovation, rather than disconnected jobs.
+                </h3>
               </div>
 
               <div className={styles.wholeHouseContent}>
@@ -473,7 +475,9 @@ export default function PropertyRenovationsPage() {
           <div className={styles.container}>
             <div className={styles.dualGrid}>
               <article className={styles.dualCard}>
-                <p className={styles.sectionEyebrow}>BATHROOM RENOVATIONS</p>
+                <p className={styles.sectionEyebrow}>
+                  BATHROOM RENOVATIONS
+                </p>
 
                 <h2>
                   Bathroom Renovations
@@ -498,7 +502,9 @@ export default function PropertyRenovationsPage() {
               </article>
 
               <article className={styles.dualCard}>
-                <p className={styles.sectionEyebrow}>KITCHEN RENOVATIONS</p>
+                <p className={styles.sectionEyebrow}>
+                  KITCHEN RENOVATIONS
+                </p>
 
                 <h2>
                   Kitchen Renovations
@@ -552,7 +558,9 @@ export default function PropertyRenovationsPage() {
                   className={styles.serviceCard}
                   key={service.number}
                 >
-                  <div className={styles.serviceNumber}>{service.number}</div>
+                  <div className={styles.serviceNumber}>
+                    {service.number}
+                  </div>
 
                   <div className={styles.serviceCardContent}>
                     <h3>{service.title}</h3>
@@ -659,9 +667,13 @@ export default function PropertyRenovationsPage() {
               </div>
 
               <div className={styles.landlordPanel}>
-                <span className={styles.panelTag}>COMMERCIAL PROPERTY JOURNEY</span>
+                <span className={styles.panelTag}>
+                  COMMERCIAL PROPERTY JOURNEY
+                </span>
 
-                <h3>Renovation → tenant → recurring Alpha maintenance</h3>
+                <h3>
+                  Renovation → tenant → recurring Alpha maintenance
+                </h3>
 
                 <p>
                   Bring renovation, refurbishment and future property care
@@ -670,17 +682,23 @@ export default function PropertyRenovationsPage() {
 
                 <div className={styles.landlordStat}>
                   <strong>Renovation</strong>
-                  <span>Improve, modernise and prepare the property.</span>
+                  <span>
+                    Improve, modernise and prepare the property.
+                  </span>
                 </div>
 
                 <div className={styles.landlordStat}>
                   <strong>Rental</strong>
-                  <span>Prepare the property for its next stage.</span>
+                  <span>
+                    Prepare the property for its next stage.
+                  </span>
                 </div>
 
                 <div className={styles.landlordStat}>
                   <strong>Ongoing care</strong>
-                  <span>Use Alpha for future property maintenance.</span>
+                  <span>
+                    Use Alpha for future property maintenance.
+                  </span>
                 </div>
               </div>
             </div>
@@ -693,7 +711,10 @@ export default function PropertyRenovationsPage() {
             <div className={styles.purchasedGrid}>
               <div className={styles.purchasedPanel}>
                 <span>NEWLY PURCHASED PROPERTY</span>
-                <h3>Assess the whole property before arranging every job separately.</h3>
+                <h3>
+                  Assess the whole property before arranging every job
+                  separately.
+                </h3>
               </div>
 
               <div className={styles.purchasedContent}>
@@ -712,9 +733,9 @@ export default function PropertyRenovationsPage() {
                 </p>
 
                 <p>
-                  Rather than organising each part separately, Alpha can assess
-                  the property as a complete renovation project and help bring
-                  the different stages together.
+                  Rather than organising each part separately, Alpha can
+                  assess the property as a complete renovation project and
+                  help bring the different stages together.
                 </p>
 
                 <p>
@@ -722,7 +743,10 @@ export default function PropertyRenovationsPage() {
                   work required to get the property there.
                 </p>
 
-                <Link href="/request-a-quote" className={styles.goldButton}>
+                <Link
+                  href="/request-a-quote"
+                  className={styles.goldButton}
+                >
                   Request a Renovation Quote <Arrow />
                 </Link>
               </div>
@@ -734,7 +758,9 @@ export default function PropertyRenovationsPage() {
         <section className={styles.processSection}>
           <div className={styles.container}>
             <div className={styles.centerHeading}>
-              <p className={styles.sectionEyebrow}>THE RENOVATION PROCESS</p>
+              <p className={styles.sectionEyebrow}>
+                THE RENOVATION PROCESS
+              </p>
 
               <h2>
                 How Your Property Renovation Works
@@ -805,9 +831,9 @@ export default function PropertyRenovationsPage() {
                 </p>
 
                 <p>
-                  Alpha prefers to provide clear quotations based on the agreed
-                  scope of the project rather than presenting customers with an
-                  unexplained hourly rate.
+                  Alpha prefers to provide clear quotations based on the
+                  agreed scope of the project rather than presenting customers
+                  with an unexplained hourly rate.
                 </p>
 
                 <p>
@@ -824,7 +850,9 @@ export default function PropertyRenovationsPage() {
         <section className={styles.comparisonSection}>
           <div className={styles.container}>
             <div className={styles.centerHeading}>
-              <p className={styles.sectionEyebrow}>WHICH SERVICE DO YOU NEED?</p>
+              <p className={styles.sectionEyebrow}>
+                WHICH SERVICE DO YOU NEED?
+              </p>
 
               <h2>
                 Does Your Property Need Maintenance or Renovation?
@@ -841,27 +869,36 @@ export default function PropertyRenovationsPage() {
             <div className={styles.comparisonGrid}>
               <article className={styles.comparisonCard}>
                 <span>01</span>
+
                 <h3>Maintenance &amp; Repairs</h3>
+
                 <p>
                   Best for individual faults, damaged items, ongoing upkeep
                   and smaller jobs required to keep a property functioning
                   correctly.
                 </p>
 
-                <Link href="/property-maintenance" className={styles.inlineLink}>
+                <Link
+                  href="/property-maintenance"
+                  className={styles.inlineLink}
+                >
                   View Property Maintenance <Arrow />
                 </Link>
               </article>
 
               <article className={styles.comparisonCard}>
                 <span>02</span>
+
                 <h3>Property Renovation</h3>
+
                 <p>
                   Best where you want to improve, modernise or substantially
                   transform a room or larger part of the property.
                 </p>
 
-                <span className={styles.currentService}>You are here</span>
+                <span className={styles.currentService}>
+                  You are here
+                </span>
               </article>
             </div>
 
@@ -883,7 +920,9 @@ export default function PropertyRenovationsPage() {
           <div className={styles.container}>
             <div className={styles.outsideGrid}>
               <div className={styles.outsideContent}>
-                <p className={styles.sectionEyebrow}>PROPERTY &amp; OUTSIDE SPACE</p>
+                <p className={styles.sectionEyebrow}>
+                  PROPERTY &amp; OUTSIDE SPACE
+                </p>
 
                 <h2>
                   Property &amp; Outside Space
@@ -907,14 +946,19 @@ export default function PropertyRenovationsPage() {
                   building and outside space need attention.
                 </p>
 
-                <Link href="/garden-services" className={styles.inlineLink}>
+                <Link
+                  href="/garden-services"
+                  className={styles.inlineLink}
+                >
                   View Garden Services <Arrow />
                 </Link>
               </div>
 
               <div className={styles.outsidePanel}>
                 <span>PROPERTY FIRST</span>
-                <strong>Renovate the building. Improve the outside space.</strong>
+                <strong>
+                  Renovate the building. Improve the outside space.
+                </strong>
               </div>
             </div>
           </div>
@@ -925,7 +969,9 @@ export default function PropertyRenovationsPage() {
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <div>
-                <p className={styles.sectionEyebrow}>RELATED PROPERTY SERVICES</p>
+                <p className={styles.sectionEyebrow}>
+                  RELATED PROPERTY SERVICES
+                </p>
 
                 <h2>
                   One Team for More of Your Property
@@ -941,19 +987,67 @@ export default function PropertyRenovationsPage() {
 
             <div className={styles.relatedGrid}>
               {[
-                ["/property-maintenance", "Property Maintenance", "Repairs, upkeep and everyday property care"],
-                ["/plumbing-services", "Plumbing Services", "General plumbing work within renovation projects"],
-                ["/bathroom-services", "Bathroom Services", "Bathroom renovation and installation"],
-                ["/kitchen-services", "Kitchen Services", "Kitchen renovation and improvement work"],
-                ["/tiling-flooring", "Tiling & Flooring", "Wall, floor and suitable flooring finishes"],
-                ["/painting-decorating", "Painting & Decorating", "Preparation, decorating and finishing"],
-                ["/roofing-gutters", "Roofing & Gutters", "Suitable exterior property requirements"],
-                ["/garden-services", "Garden Services", "Garden maintenance and clearance"],
-                ["/landlords-letting-agents", "Landlords & Letting Agents", "Rental property renovation and ongoing care"],
-                ["/areas-we-cover", "Areas We Cover", "Our regional property service area"],
-                ["/request-a-quote", "Request a Quote", "Tell Alpha about your renovation project"],
+                [
+                  "/property-maintenance",
+                  "Property Maintenance",
+                  "Repairs, upkeep and everyday property care",
+                ],
+                [
+                  "/plumbing-services",
+                  "Plumbing Services",
+                  "General plumbing work within renovation projects",
+                ],
+                [
+                  "/bathroom-services",
+                  "Bathroom Services",
+                  "Bathroom renovation and installation",
+                ],
+                [
+                  "/kitchen-services",
+                  "Kitchen Services",
+                  "Kitchen renovation and improvement work",
+                ],
+                [
+                  "/tiling-flooring",
+                  "Tiling & Flooring",
+                  "Wall, floor and suitable flooring finishes",
+                ],
+                [
+                  "/painting-decorating",
+                  "Painting & Decorating",
+                  "Preparation, decorating and finishing",
+                ],
+                [
+                  "/roofing-gutters",
+                  "Roofing & Gutters",
+                  "Suitable exterior property requirements",
+                ],
+                [
+                  "/garden-services",
+                  "Garden Services",
+                  "Garden maintenance and clearance",
+                ],
+                [
+                  "/landlords-letting-agents",
+                  "Landlords & Letting Agents",
+                  "Rental property renovation and ongoing care",
+                ],
+                [
+                  "/areas-we-cover",
+                  "Areas We Cover",
+                  "Our regional property service area",
+                ],
+                [
+                  "/request-a-quote",
+                  "Request a Quote",
+                  "Tell Alpha about your renovation project",
+                ],
               ].map(([href, title, description], index) => (
-                <Link href={href} className={styles.relatedCard} key={href}>
+                <Link
+                  href={href}
+                  className={styles.relatedCard}
+                  key={href}
+                >
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <strong>{title}</strong>
                   <small>{description}</small>
@@ -984,7 +1078,10 @@ export default function PropertyRenovationsPage() {
                 </p>
               </div>
 
-              <Link href="/areas-we-cover" className={styles.outlineDarkButton}>
+              <Link
+                href="/areas-we-cover"
+                className={styles.outlineDarkButton}
+              >
                 View Areas We Cover <Arrow />
               </Link>
             </div>
@@ -996,7 +1093,9 @@ export default function PropertyRenovationsPage() {
           <div className={styles.container}>
             <div className={styles.faqLayout}>
               <div className={styles.faqMain}>
-                <p className={styles.sectionEyebrow}>HELP &amp; ADVICE</p>
+                <p className={styles.sectionEyebrow}>
+                  HELP &amp; ADVICE
+                </p>
 
                 <h2>
                   Property Renovation FAQs
@@ -1005,7 +1104,10 @@ export default function PropertyRenovationsPage() {
 
                 <div className={styles.faqGrid}>
                   {faqs.map((faq) => (
-                    <details className={styles.faqItem} key={faq.question}>
+                    <details
+                      className={styles.faqItem}
+                      key={faq.question}
+                    >
                       <summary>
                         <span>{faq.question}</span>
                         <b>+</b>
@@ -1016,29 +1118,6 @@ export default function PropertyRenovationsPage() {
                   ))}
                 </div>
               </div>
-
-              <aside className={styles.faqCta}>
-                <div className={styles.faqCtaIcon}>⌂</div>
-
-                <p className={styles.sectionEyebrow}>
-                  PROPERTY RENOVATIONS
-                </p>
-
-                <h3>Ready to Discuss Your Project?</h3>
-
-                <p>
-                  Tell us about the property, what you want to change and any
-                  photographs, measurements or plans you already have.
-                </p>
-
-                <Link href="/request-a-quote" className={styles.goldButton}>
-                  Request a Renovation Quote <Arrow />
-                </Link>
-
-                <a href={PHONE_TEL} className={styles.faqPhone}>
-                  Or call {PHONE_DISPLAY}
-                </a>
-              </aside>
             </div>
           </div>
         </section>
@@ -1069,7 +1148,10 @@ export default function PropertyRenovationsPage() {
               </div>
 
               <div className={styles.finalButtons}>
-                <Link href="/request-a-quote" className={styles.goldButton}>
+                <Link
+                  href="/request-a-quote"
+                  className={styles.goldButton}
+                >
                   Request a Renovation Quote <Arrow />
                 </Link>
 

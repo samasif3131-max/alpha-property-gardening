@@ -23,6 +23,8 @@
   transform: translateX(4px);
 }
 
+/* HERO */
+
 .hero {
   position: relative;
   overflow: hidden;
@@ -48,7 +50,11 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(196, 154, 69, 0.1), transparent 42%);
+  background: linear-gradient(
+    135deg,
+    rgba(196, 154, 69, 0.1),
+    transparent 42%
+  );
 }
 
 .breadcrumb {
@@ -288,6 +294,7 @@
 }
 
 /* INTRO */
+
 .introSection {
   padding: 90px 0;
   background: #ffffff;
@@ -346,6 +353,7 @@
 }
 
 /* COMPLETE RENOVATIONS */
+
 .servicesSection {
   padding: 90px 0;
   background: #f5f5f1;
@@ -422,6 +430,7 @@
 }
 
 /* WHOLE HOUSE */
+
 .wholeHouseSection {
   padding: 90px 0;
   background: #ffffff;
@@ -475,6 +484,7 @@
 }
 
 /* ROOMS */
+
 .roomSection {
   padding: 90px 0;
   background: #f5f5f1;
@@ -531,6 +541,7 @@
 }
 
 /* BATHROOM + KITCHEN */
+
 .dualSection {
   padding: 90px 0;
   background: #ffffff;
@@ -560,6 +571,7 @@
 }
 
 /* SERVICE STAGES */
+
 .serviceStagesSection {
   padding: 90px 0;
   background: #f5f5f1;
@@ -646,6 +658,7 @@
 }
 
 /* LANDLORDS */
+
 .landlordSection {
   padding: 90px 0;
   background: #ffffff;
@@ -750,6 +763,7 @@
 }
 
 /* PURCHASED */
+
 .purchasedSection {
   padding: 90px 0;
   background: #f5f5f1;
@@ -778,6 +792,7 @@
 }
 
 /* PROCESS */
+
 .processSection {
   padding: 90px 0;
   background: #ffffff;
@@ -834,6 +849,7 @@
 }
 
 /* QUOTES */
+
 .quoteSection {
   padding: 80px 0;
   background: #173f2a;
@@ -862,6 +878,7 @@
 }
 
 /* COMPARISON */
+
 .comparisonSection {
   padding: 90px 0;
   background: #f5f5f1;
@@ -932,6 +949,7 @@
 }
 
 /* OUTSIDE */
+
 .outsideSection {
   padding: 90px 0;
   background: #ffffff;
@@ -964,6 +982,7 @@
 }
 
 /* RELATED */
+
 .relatedSection {
   padding: 90px 0;
   background: #f5f5f1;
@@ -1030,6 +1049,7 @@
 }
 
 /* AREAS */
+
 .areasSection {
   padding: 75px 0;
   background: #ffffff;
@@ -1054,6 +1074,7 @@
 }
 
 /* FAQ */
+
 .faqSection {
   padding: 90px 0;
   background: #f5f5f1;
@@ -1061,7 +1082,7 @@
 
 .faqLayout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 65px;
   align-items: start;
 }
@@ -1111,51 +1132,8 @@
   line-height: 1.8;
 }
 
-.faqCta {
-  padding: 32px;
-  background: #173f2a;
-  color: #ffffff;
-}
-
-.faqCtaIcon {
-  width: 43px;
-  height: 43px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  border: 1px solid rgba(216, 185, 109, 0.55);
-  color: #d8b96d;
-}
-
-.faqCta h3 {
-  margin: 0 0 13px;
-  color: #ffffff;
-  font-size: 22px;
-}
-
-.faqCta > p:not(.sectionEyebrow) {
-  margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 10px;
-  line-height: 1.7;
-}
-
-.faqCta .goldButton {
-  width: 100%;
-}
-
-.faqPhone {
-  display: block;
-  margin-top: 16px;
-  color: #d8b96d;
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: 900;
-  text-align: center;
-}
-
 /* FINAL CTA */
+
 .finalCta {
   padding: 75px 0;
   background: #10251a;
@@ -1205,6 +1183,7 @@
 }
 
 /* ACCESSIBILITY */
+
 .page a:focus-visible,
 .page button:focus-visible,
 .page summary:focus-visible {
@@ -1213,6 +1192,7 @@
 }
 
 /* RESPONSIVE 1050 */
+
 @media (max-width: 1050px) {
   .heroGrid {
     gap: 45px;
@@ -1234,14 +1214,10 @@
   .relatedGrid {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .faqLayout {
-    grid-template-columns: minmax(0, 1fr) 290px;
-    gap: 40px;
-  }
 }
 
 /* RESPONSIVE 800 */
+
 @media (max-width: 800px) {
   .heroGrid,
   .introGrid,
@@ -1322,10 +1298,6 @@
     grid-template-columns: 1fr;
   }
 
-  .faqCta {
-    max-width: 450px;
-  }
-
   .finalButtons {
     width: 100%;
     max-width: 420px;
@@ -1333,6 +1305,7 @@
 }
 
 /* RESPONSIVE 600 */
+
 @media (max-width: 600px) {
   .container {
     width: calc(100% - 30px);
@@ -1420,8 +1393,7 @@
   .landlordPanel,
   .imagePanel,
   .purchasedPanel,
-  .outsidePanel,
-  .faqCta {
+  .outsidePanel {
     padding: 28px;
   }
 
