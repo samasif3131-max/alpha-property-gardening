@@ -4,7 +4,6 @@ import { FormEvent, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./CreateAccount.module.css";
-import { supabase } from "@/app/lib/supabase";
 
 export default function CreateAccount() {
   const [fullName, setFullName] = useState("");
@@ -56,6 +55,9 @@ export default function CreateAccount() {
 
     try {
       setLoading(true);
+
+      // Supabase ko sirf form submit hone par load karein
+      const { supabase } = await import("@/app/lib/supabase");
 
       const { data, error: signUpError } = await supabase.auth.signUp({
         email: email.trim(),
@@ -222,6 +224,7 @@ export default function CreateAccount() {
               homeowner account.
             </p>
 
+            {/* ERROR MESSAGE */}
             {error && (
               <div
                 style={{
@@ -239,6 +242,7 @@ export default function CreateAccount() {
               </div>
             )}
 
+            {/* SUCCESS MESSAGE */}
             {success && (
               <div
                 style={{
@@ -415,6 +419,7 @@ export default function CreateAccount() {
               </button>
             </form>
 
+            {/* LOGIN DIVIDER */}
             <div className={styles.createAccountDivider}>
               <span></span>
               <strong>ALREADY REGISTERED?</strong>
