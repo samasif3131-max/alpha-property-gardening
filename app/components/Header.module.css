@@ -1,850 +1,474 @@
+/* =========================================
+   ALPHA PROPERTY & GARDENING SERVICES
+   HEADER
+========================================= */
+
 .header {
-  position: relative;
-  z-index: 9999;
   width: 100%;
-  color: #ffffff;
-  background: #06271d;
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  z-index: 1000;
+  background: #ffffff;
 }
 
-/* =========================================================
+/* =========================================
    TOP BAR
-========================================================= */
+========================================= */
 
 .topBar {
-  height: 28px;
-  background: #041f18;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  background: #173f2a;
+  color: #ffffff;
 }
 
 .topInner {
-  position: relative;
-  width: min(1440px, calc(100% - 70px));
-  height: 100%;
+  max-width: 1400px;
   margin: 0 auto;
+  min-height: 42px;
+  padding: 0 32px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 9px;
+  gap: 24px;
 }
 
-.coverage {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.coverageDot {
-  color: #d5a928;
-  font-size: 8px;
+.topMessage {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .topRight {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  font-size: 12px;
 }
 
-.topRight > span {
+.followText {
   opacity: 0.85;
 }
 
-.topQuote {
-  min-height: 26px;
-  margin-left: 7px;
-  padding: 0 13px;
+.topRight > span:not(.followText) {
+  font-weight: 700;
+}
 
+.topQuote {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
 
-  border-radius: 4px;
+  margin-left: 8px;
+  padding: 7px 13px;
 
+  background: #c49a45;
   color: #ffffff;
-  background: #b88d27;
 
-  font-size: 9px;
-  font-weight: 700;
   text-decoration: none;
 
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+
   transition:
-    background 0.25s ease,
-    transform 0.25s ease;
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .topQuote:hover {
-  color: #ffffff;
-  background: #d0a63c;
+  background: #ad8334;
   transform: translateY(-1px);
 }
 
-/* =========================================================
-   MAIN NAVIGATION
-========================================================= */
+/* =========================================
+   MAIN HEADER
+========================================= */
 
-.navBar {
-  position: relative;
-  min-height: 59px;
-
-  background: #06271d;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.mainHeader {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e8e3;
 }
 
-.navInner {
-  width: min(1440px, calc(100% - 70px));
-  min-height: 59px;
+.headerInner {
+  max-width: 1400px;
+  min-height: 88px;
   margin: 0 auto;
+  padding: 0 32px;
 
   display: flex;
   align-items: center;
+  gap: 25px;
 }
 
-/* =========================================================
+/* =========================================
    LOGO
-========================================================= */
+========================================= */
 
 .logo {
-  width: 175px;
-  height: 59px;
-
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
 
-  display: flex;
-  align-items: center;
-
-  color: #ffffff;
-  text-decoration: none;
-
-  overflow: hidden;
-}
-
-.logo:hover {
-  color: #ffffff;
   text-decoration: none;
 }
 
-.logoImageWrapper {
-  width: 165px;
-  height: 54px;
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  overflow: hidden;
-}
+/*
+   Logo size reduced
+   Previous: 220px
+   Now: 165px
+*/
 
 .logoImage {
   display: block;
-
-  width: 100%;
-  height: 100%;
-
+  width: 165px;
+  height: auto;
   object-fit: contain;
-  object-position: left center;
-
-  max-width: 100%;
-  max-height: 100%;
 }
 
-/* =========================================================
-   DESKTOP NAV
-========================================================= */
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
 
 .desktopNav {
-  height: 100%;
-  margin-left: auto;
-  margin-right: 18px;
+  flex: 1;
 
   display: flex;
-  align-items: stretch;
-  gap: 2px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 21px;
 }
 
-.navLink,
-.navLinkButton {
+.desktopNav > a,
+.navDropdown > button {
   position: relative;
-
-  height: 59px;
-  padding: 0 10px;
 
   display: inline-flex;
   align-items: center;
+  gap: 5px;
 
-  border: 0;
-  outline: none;
+  height: 88px;
+  padding: 0;
 
-  color: rgba(255, 255, 255, 0.9);
   background: transparent;
+  border: 0;
+
+  color: #25352d;
+  text-decoration: none;
 
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-
-  white-space: nowrap;
-  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
 
   cursor: pointer;
+  white-space: nowrap;
 
-  transition:
-    color 0.25s ease,
-    background 0.25s ease;
+  transition: color 0.2s ease;
 }
 
-.navLink:hover,
-.navLinkButton:hover,
-.navLink.active,
-.serviceActive .navLinkButton,
-.adviceActive .navLinkButton {
-  color: #ffffff;
-  text-decoration: none;
+.desktopNav > a:hover,
+.navDropdown > button:hover {
+  color: #2d6946;
 }
 
-.navLink::after,
-.navLinkButton::after {
+/* =========================================
+   NAV ACTIVE / HOVER LINE
+========================================= */
+
+.desktopNav > a::after,
+.navDropdown > button::after {
   content: "";
 
   position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 21px;
 
   height: 2px;
 
-  background: #d5a928;
+  background: #c49a45;
 
   transform: scaleX(0);
   transform-origin: center;
 
-  transition: transform 0.25s ease;
+  transition: transform 0.2s ease;
 }
 
-.navLink:hover::after,
-.navLink.active::after,
-.serviceActive .navLinkButton::after,
-.adviceActive .navLinkButton::after {
+.desktopNav > a:hover::after,
+.navDropdown > button:hover::after,
+.desktopNav > a.active::after,
+.navDropdown > button.active::after {
   transform: scaleX(1);
 }
 
-.navLinkButton {
-  gap: 6px;
+.desktopNav > a.active,
+.navDropdown > button.active {
+  color: #2d6946;
 }
 
-.desktopChevron {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 13px;
+.dropdownArrow {
+  font-size: 10px;
   line-height: 1;
-
-  transition: transform 0.25s ease;
 }
 
-.desktopChevronOpen {
-  transform: rotate(180deg);
-}
+/* =========================================
+   DROPDOWN CONTAINER
+========================================= */
 
-/* =========================================================
-   SERVICES NAV
-========================================================= */
-
-.servicesNav {
+.navDropdown {
   position: relative;
 
+  height: 88px;
+
   display: flex;
-  align-items: stretch;
+  align-items: center;
 }
 
-/* =========================================================
-   SERVICES DROPDOWN
-========================================================= */
+/* =========================================
+   DESKTOP DROPDOWN
+========================================= */
 
-.dropdown {
+.dropdownMenu {
   position: absolute;
-  top: calc(100% + 1px);
-  left: 50%;
 
-  width: 650px;
+  top: 100%;
+  right: -25px;
 
-  padding: 20px;
+  width: 325px;
 
-  border: 1px solid rgba(213, 169, 40, 0.16);
+  padding: 10px;
 
   background: #ffffff;
 
+  border: 1px solid #e5e8e3;
+  border-top: 3px solid #2d6946;
+
+  border-radius: 0 0 8px 8px;
+
   box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.28),
-    0 5px 20px rgba(0, 0, 0, 0.12);
+    0 15px 35px rgba(0, 0, 0, 0.12);
+
+  /*
+     IMPORTANT:
+     Hidden by default.
+     Hovering the Services / Advice parent
+     opens the dropdown.
+  */
 
   opacity: 0;
   visibility: hidden;
-
   pointer-events: none;
 
-  transform: translate(-50%, -8px) scale(0.98);
-
-  transform-origin: top center;
+  transform: translateY(8px);
 
   transition:
-    opacity 0.2s ease,
-    visibility 0.2s ease,
-    transform 0.25s ease;
+    opacity 0.18s ease,
+    visibility 0.18s ease,
+    transform 0.18s ease;
 }
 
-.dropdownVisible {
+/* =========================================
+   HOVER DROPDOWN
+========================================= */
+
+/*
+   Services dropdown opens when user
+   hovers over Services.
+*/
+
+.navDropdown:hover > .dropdownMenu,
+.navDropdown:focus-within > .dropdownMenu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-
-  transform: translate(-50%, 0) scale(1);
+  transform: translateY(0);
 }
 
-.dropdownHeader {
-  padding: 2px 4px 15px;
+/*
+   Keep dropdown open while cursor
+   moves from menu button into dropdown.
+*/
 
-  border-bottom: 1px solid #e7ece9;
+.navDropdown:hover > button,
+.navDropdown:focus-within > button {
+  color: #2d6946;
 }
 
-.dropdownHeader span {
-  color: #b88d27;
+/* =========================================
+   DROPDOWN LINKS
+========================================= */
 
-  font-size: 9px;
+.dropdownMenu > a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 13px 14px;
+
+  color: #25352d;
+  text-decoration: none;
+
+  border-radius: 5px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.dropdownMenu > a:hover {
+  background: #f2f6f1;
+  color: #2d6946;
+}
+
+.dropdownMenu strong {
+  font-size: 13px;
   font-weight: 800;
-
-  letter-spacing: 0.15em;
 }
 
-.dropdownHeader p {
-  margin: 6px 0 0;
-
-  color: #68736d;
-
-  font-size: 12px;
+.dropdownMenu span {
+  font-size: 11px;
+  line-height: 1.45;
+  color: #69746d;
 }
 
-.serviceDropdownGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-  gap: 8px;
-
-  padding: 14px 0;
+.dropdownMenu > a:hover span {
+  color: #536059;
 }
 
-.serviceDropdownItem {
-  min-height: 78px;
-  padding: 13px;
+/* =========================================
+   VIEW ALL SERVICES / ADVICE
+========================================= */
 
+.dropdownMenu .dropdownViewAll {
+  display: block;
+
+  margin-top: 5px;
+  padding: 12px 14px;
+
+  background: #173f2a;
+  color: #ffffff;
+
+  text-align: center;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.dropdownMenu .dropdownViewAll:hover {
+  background: #2d6946;
+  color: #ffffff;
+}
+
+/* =========================================
+   ADVICE DROPDOWN
+========================================= */
+
+.adviceDropdown {
+  width: 320px;
+}
+
+/* =========================================
+   HEADER ACTIONS
+========================================= */
+
+.headerActions {
   display: flex;
   align-items: center;
   gap: 10px;
 
-  border: 1px solid #e8ece9;
-  border-radius: 7px;
-
-  color: #193128;
-  background: #fbfcfb;
-
-  text-decoration: none;
-
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
+  flex-shrink: 0;
 }
 
-.serviceDropdownItem:hover {
-  color: #193128;
-  text-decoration: none;
+.clientLogin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  transform: translateY(-3px);
+  min-height: 40px;
+  padding: 0 12px;
 
-  border-color: rgba(184, 141, 39, 0.5);
+  border: 1px solid #d9ddd8;
 
   background: #ffffff;
+  color: #25352d;
 
-  box-shadow:
-    0 10px 25px rgba(15, 42, 31, 0.09);
-}
-
-.serviceNumber {
-  width: 29px;
-  height: 29px;
-
-  flex-shrink: 0;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 50%;
-
-  color: #b88d27;
-  background: #f4edda;
-
-  font-size: 8px;
-  font-weight: 800;
-}
-
-.serviceDropdownContent {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.serviceDropdownContent strong {
-  color: #183128;
-
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.serviceDropdownContent small {
-  margin-top: 4px;
-
-  color: #7b847f;
-
-  font-size: 9px;
-  line-height: 1.45;
-}
-
-.serviceArrow {
-  margin-left: auto;
-
-  color: #b88d27;
-
-  font-size: 14px;
-
-  transition: transform 0.25s ease;
-}
-
-.serviceDropdownItem:hover .serviceArrow {
-  transform: translateX(4px);
-}
-
-.dropdownFooter {
-  padding-top: 13px;
-
-  border-top: 1px solid #e7ece9;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  font-size: 10px;
-}
-
-.dropdownFooter span {
-  color: #8a938e;
-}
-
-.dropdownFooter a {
-  color: #9d7720;
-
-  font-weight: 800;
   text-decoration: none;
-}
-
-.dropdownFooter a:hover {
-  color: #b88d27;
-  text-decoration: none;
-}
-
-/* =========================================================
-   ADVICE NAV
-========================================================= */
-
-.adviceNav {
-  position: relative;
-
-  display: flex;
-  align-items: stretch;
-}
-
-/* =========================================================
-   ADVICE DROPDOWN
-========================================================= */
-
-.adviceDropdown {
-  position: absolute;
-
-  top: calc(100% + 1px);
-  left: 50%;
-
-  width: min(920px, 80vw);
-
-  padding: 20px;
-
-  border: 1px solid rgba(213, 169, 40, 0.16);
-
-  background: #ffffff;
-
-  box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.28),
-    0 5px 20px rgba(0, 0, 0, 0.12);
-
-  opacity: 0;
-  visibility: hidden;
-
-  pointer-events: none;
-
-  transform: translate(-50%, -8px) scale(0.98);
-
-  transform-origin: top center;
-
-  transition:
-    opacity 0.2s ease,
-    visibility 0.2s ease,
-    transform 0.25s ease;
-}
-
-.adviceDropdownVisible {
-  opacity: 1;
-  visibility: visible;
-
-  pointer-events: auto;
-
-  transform: translate(-50%, 0) scale(1);
-}
-
-.adviceDropdownHeader {
-  padding: 2px 4px 15px;
-
-  border-bottom: 1px solid #e7ece9;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.adviceDropdownHeader > div {
-  min-width: 0;
-}
-
-.adviceDropdownHeader span {
-  color: #b88d27;
-
-  font-size: 9px;
-  font-weight: 800;
-
-  letter-spacing: 0.15em;
-}
-
-.adviceDropdownHeader p {
-  margin: 6px 0 0;
-
-  color: #68736d;
-
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.viewAllAdvice {
-  flex-shrink: 0;
-
-  padding: 9px 13px;
-
-  border: 1px solid rgba(184, 141, 39, 0.35);
-  border-radius: 4px;
-
-  color: #9d7720;
-  background: #faf7ed;
 
   font-size: 10px;
   font-weight: 800;
+  letter-spacing: 0.4px;
 
-  text-decoration: none;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.viewAllAdvice:hover {
-  color: #ffffff;
-  background: #b88d27;
-
-  text-decoration: none;
-
-  transform: translateY(-1px);
-}
-
-/* =========================================================
-   ADVICE DROPDOWN GRID
-========================================================= */
-
-.adviceDropdownGrid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 8px;
-
-  padding: 14px 0;
-}
-
-.adviceDropdownItem {
-  min-height: 70px;
-
-  padding: 11px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 9px;
-
-  border: 1px solid #e8ece9;
-  border-radius: 7px;
-
-  color: #193128;
-  background: #fbfcfb;
-
-  text-decoration: none;
+  white-space: nowrap;
 
   transition:
-    transform 0.2s ease,
     border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
-.adviceDropdownItem:hover {
-  color: #193128;
-
-  text-decoration: none;
-
-  transform: translateY(-2px);
-
-  border-color: rgba(184, 141, 39, 0.5);
-
-  background: #ffffff;
-
-  box-shadow:
-    0 8px 20px rgba(15, 42, 31, 0.09);
+.clientLogin:hover {
+  border-color: #2d6946;
+  background: #f4f7f3;
+  color: #2d6946;
 }
 
-.adviceNumber {
-  width: 27px;
-  height: 27px;
-
-  flex-shrink: 0;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 50%;
-
-  color: #b88d27;
-  background: #f4edda;
-
-  font-size: 7px;
-  font-weight: 800;
-}
-
-.adviceDropdownContent {
-  min-width: 0;
-
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.adviceDropdownContent strong {
-  color: #183128;
-
-  font-size: 10px;
-  line-height: 1.25;
-
-  font-weight: 800;
-}
-
-.adviceDropdownContent small {
-  margin-top: 3px;
-
-  color: #7b847f;
-
-  font-size: 8px;
-  line-height: 1.35;
-}
-
-.adviceArrow {
-  flex-shrink: 0;
-
-  color: #b88d27;
-
-  font-size: 13px;
-
-  transition: transform 0.2s ease;
-}
-
-.adviceDropdownItem:hover .adviceArrow {
-  transform: translateX(3px);
-}
-
-.adviceDropdownFooter {
-  padding-top: 12px;
-
-  border-top: 1px solid #e7ece9;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 20px;
-
-  font-size: 9px;
-}
-
-.adviceDropdownFooter span {
-  color: #8a938e;
-}
-
-.adviceDropdownFooter a {
-  flex-shrink: 0;
-
-  color: #9d7720;
-
-  font-weight: 800;
-
-  text-decoration: none;
-}
-
-.adviceDropdownFooter a:hover {
-  color: #b88d27;
-
-  text-decoration: none;
-}
-
-/* =========================================================
-   DESKTOP ACTION BUTTONS
-========================================================= */
-
-.navActions {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-
-  flex-shrink: 0;
-}
-
-.loginButton,
-.quoteButton {
-  min-height: 35px;
-  padding: 0 13px;
-
+.headerQuote {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
 
-  border-radius: 4px;
+  min-height: 40px;
+  padding: 0 15px;
 
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 700;
+  background: #c49a45;
+  color: #ffffff;
 
   text-decoration: none;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
 
   transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease;
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
-.loginButton {
-  border: 1px solid rgba(255, 255, 255, 0.45);
-
-  color: #ffffff;
-  background: transparent;
+.headerQuote:hover {
+  background: #ad8334;
+  transform: translateY(-1px);
 }
 
-.loginButton:hover {
-  color: #ffffff;
-  text-decoration: none;
-
-  border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-
-  transform: translateY(-2px);
-}
-
-.personIcon {
+.headerQuote span {
   font-size: 14px;
 }
 
-.quoteButton {
-  border: 1px solid #b88d27;
-
-  color: #ffffff;
-  background: #b88d27;
-}
-
-.quoteButton:hover {
-  color: #ffffff;
-  text-decoration: none;
-
-  background: #d0a63c;
-  border-color: #d0a63c;
-
-  transform: translateY(-2px);
-}
-
-.quoteButton span:last-child {
-  font-size: 13px;
-}
-
-/* =========================================================
+/* =========================================
    MOBILE TOGGLE
-========================================================= */
+========================================= */
 
 .mobileToggle {
   display: none;
 
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 40px;
 
-  margin-left: auto;
-  padding: 9px;
+  padding: 8px;
 
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 6px;
-
-  outline: none;
-
-  color: #ffffff;
-  background: transparent;
+  border: 1px solid #dce1dc;
+  background: #ffffff;
 
   cursor: pointer;
 
-  appearance: none;
-  -webkit-appearance: none;
-
-  box-shadow: none;
-}
-
-.mobileToggle:hover,
-.mobileToggle:focus,
-.mobileToggle:active {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
-
-  border-color: rgba(255, 255, 255, 0.4);
-
-  outline: none;
-  box-shadow: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
 }
 
 .mobileToggle span {
@@ -853,860 +477,383 @@
   width: 100%;
   height: 2px;
 
-  margin: 5px 0;
-
-  border-radius: 2px;
-
-  background: #ffffff;
-
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
+  background: #173f2a;
 }
 
-.mobileToggleOpen span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.mobileToggleOpen span:nth-child(2) {
-  opacity: 0;
-}
-
-.mobileToggleOpen span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* =========================================================
+/* =========================================
    MOBILE MENU
-========================================================= */
+========================================= */
 
 .mobileMenu {
   display: none;
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
+/* =========================================
+   1250px
+========================================= */
 
-@media (max-width: 1180px) {
-  .topInner,
-  .navInner {
-    width: calc(100% - 38px);
-  }
-
-  .desktopNav {
-    gap: 0;
-  }
-
-  .navLink,
-  .navLinkButton {
-    padding: 0 7px;
-
-    font-size: 11px;
-  }
-
-  .navLink::after,
-  .navLinkButton::after {
-    left: 7px;
-    right: 7px;
-  }
-
-  /* RESPONSIVE LOGO */
-
-  .logo {
-    width: 150px;
-  }
-
-  .logoImageWrapper {
-    width: 142px;
-    height: 52px;
-  }
-
-  .navActions {
-    gap: 5px;
-  }
-
-  .loginButton,
-  .quoteButton {
-    padding: 0 10px;
-
-    font-size: 9px;
-  }
-
-  /* ADVICE DROPDOWN */
-
-  .adviceDropdown {
-    width: min(850px, 78vw);
-  }
-
-  .adviceDropdownGrid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 900px) {
-  .topBar {
-    height: 25px;
-  }
-
-  .topInner {
-    width: calc(100% - 24px);
-  }
-
-  .topMessage,
-  .coverage {
-    display: none;
-  }
-
-  .topRight {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    gap: 9px;
-  }
-
-  .navBar {
-    min-height: 67px;
-  }
-
-  .navInner {
-    width: calc(100% - 24px);
-
-    min-height: 67px;
-  }
-
-  /* HIDE DESKTOP ELEMENTS */
-
-  .desktopNav,
-  .navActions {
-    display: none;
-  }
-
-  /* =======================================================
-     MOBILE LOGO
-  ======================================================== */
-
-  .logo {
-    width: auto;
-    max-width: calc(100% - 60px);
-
-    height: 67px;
-  }
-
-  .logoImageWrapper {
-    width: 165px;
-    height: 58px;
+@media (max-width: 1250px) {
+  .headerInner {
+    padding: 0 24px;
+    gap: 18px;
   }
 
   .logoImage {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-    object-position: left center;
+    width: 155px;
   }
 
-  /* =======================================================
-     SHOW HAMBURGER
-  ======================================================== */
-
-  .mobileToggle {
-    display: block;
+  .desktopNav {
+    gap: 15px;
   }
 
-  /* =======================================================
-     MOBILE MENU CONTAINER
-  ======================================================== */
-
-  .mobileMenu {
-    position: absolute;
-
-    top: 92px;
-    left: 0;
-    right: 0;
-
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    max-height: 0;
-
-    overflow: hidden;
-
-    background: #06271d;
-
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-    opacity: 0;
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transform: translateY(-8px);
-
-    box-shadow:
-      0 15px 35px rgba(0, 0, 0, 0.3);
-
-    transition:
-      max-height 0.4s ease,
-      opacity 0.25s ease,
-      visibility 0.25s ease,
-      transform 0.25s ease;
-  }
-
-  .mobileMenuOpen {
-    max-height: calc(100vh - 92px);
-
-    opacity: 1;
-    visibility: visible;
-
-    pointer-events: auto;
-
-    transform: translateY(0);
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* =======================================================
-     MOBILE NORMAL LINKS
-  ======================================================== */
-
-  .mobileNavLink {
-    position: relative;
-
-    width: 100%;
-    min-height: 55px;
-
-    padding: 0 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    box-sizing: border-box;
-
-    border: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-    outline: none;
-
-    color: #ffffff;
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-
-    text-align: left;
-    text-decoration: none !important;
-
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .mobileNavLink::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  .mobileNavLink:hover,
-  .mobileNavLink:focus,
-  .mobileNavLink:active {
-    color: #d5a928;
-    background: rgba(255, 255, 255, 0.05);
-
-    text-decoration: none !important;
-
-    outline: none;
-  }
-
-  /* =======================================================
-     MOBILE SERVICES WRAPPER
-  ======================================================== */
-
-  .mobileServicesWrapper {
-    width: 100%;
-
-    display: block;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .mobileServicesButton {
-    position: relative;
-
-    width: 100%;
-    min-height: 55px;
-
-    padding: 0 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    box-sizing: border-box;
-
-    border: 0;
-    border-radius: 0;
-
-    outline: none;
-
-    color: #ffffff;
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-
-    text-align: left;
-
-    cursor: pointer;
-
-    appearance: none;
-    -webkit-appearance: none;
-
-    box-shadow: none;
-  }
-
-  .mobileServicesButton::before,
-  .mobileServicesButton::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  .mobileServicesButton:hover,
-  .mobileServicesButton:focus,
-  .mobileServicesButton:active {
-    color: #d5a928;
-
-    background: rgba(255, 255, 255, 0.05);
-
-    border: 0;
-    outline: none;
-    box-shadow: none;
-  }
-
-  .mobileServicesButtonOpen {
-    color: #d5a928;
-
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* =======================================================
-     MOBILE SERVICES DROPDOWN
-  ======================================================== */
-
-  .mobileServices {
-    width: 100%;
-
-    max-height: 0;
-
-    overflow: hidden;
-
-    background: #041f18;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-      max-height 0.4s ease,
-      opacity 0.25s ease,
-      visibility 0.25s ease;
-  }
-
-  .mobileServicesOpen {
-    max-height: 500px;
-
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* =======================================================
-     MOBILE SERVICE LINKS
-  ======================================================== */
-
-  .mobileServiceLink {
-    width: 100%;
-    min-height: 50px;
-
-    padding: 0 28px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    box-sizing: border-box;
-
-    border: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    color: rgba(255, 255, 255, 0.82);
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-
-    text-decoration: none !important;
-
-    transition:
-      color 0.2s ease,
-      background 0.2s ease,
-      padding-left 0.2s ease;
-  }
-
-  .mobileServiceLink::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  .mobileServiceLink:hover,
-  .mobileServiceLink:focus,
-  .mobileServiceLink:active {
-    padding-left: 33px;
-
-    color: #d5a928;
-    background: rgba(255, 255, 255, 0.04);
-
-    text-decoration: none !important;
-
-    outline: none;
-  }
-
-  .mobileServiceLink span:last-child {
-    color: #d5a928;
-    font-size: 15px;
-  }
-
-  .mobileAllServices {
-    color: #d5a928 !important;
-
-    font-weight: 700;
-
-    background: rgba(213, 169, 40, 0.07);
-  }
-
-  /* =======================================================
-     MOBILE ADVICE WRAPPER
-  ======================================================== */
-
-  .mobileAdviceWrapper {
-    width: 100%;
-
-    display: block;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  /* =======================================================
-     MOBILE ADVICE BUTTON
-  ======================================================== */
-
-  .mobileAdviceButton {
-    position: relative;
-
-    width: 100%;
-    min-height: 55px;
-
-    padding: 0 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    box-sizing: border-box;
-
-    border: 0;
-    border-radius: 0;
-
-    outline: none;
-
-    color: #ffffff;
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-
-    text-align: left;
-
-    cursor: pointer;
-
-    appearance: none;
-    -webkit-appearance: none;
-
-    box-shadow: none;
-  }
-
-  .mobileAdviceButton::before,
-  .mobileAdviceButton::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  .mobileAdviceButton:hover,
-  .mobileAdviceButton:focus,
-  .mobileAdviceButton:active {
-    color: #d5a928;
-
-    background: rgba(255, 255, 255, 0.05);
-
-    border: 0;
-    outline: none;
-    box-shadow: none;
-  }
-
-  .mobileAdviceButtonOpen {
-    color: #d5a928;
-
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* =======================================================
-     MOBILE ADVICE DROPDOWN
-  ======================================================== */
-
-  .mobileAdvice {
-    width: 100%;
-
-    max-height: 0;
-
-    overflow: hidden;
-
-    background: #041f18;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-      max-height 0.5s ease,
-      opacity 0.25s ease,
-      visibility 0.25s ease;
-  }
-
-  .mobileAdviceOpen {
-    max-height: 850px;
-
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* =======================================================
-     MOBILE ADVICE LINKS
-  ======================================================== */
-
-  .mobileAdviceLink {
-    width: 100%;
-    min-height: 52px;
-
-    padding: 0 28px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    box-sizing: border-box;
-
-    border: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    color: rgba(255, 255, 255, 0.82);
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 12.5px;
-    font-weight: 500;
-
-    line-height: 1.3;
-
-    text-decoration: none !important;
-
-    transition:
-      color 0.2s ease,
-      background 0.2s ease,
-      padding-left 0.2s ease;
-  }
-
-  .mobileAdviceLink::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  .mobileAdviceLink:hover,
-  .mobileAdviceLink:focus,
-  .mobileAdviceLink:active {
-    padding-left: 33px;
-
-    color: #d5a928;
-
-    background: rgba(255, 255, 255, 0.04);
-
-    text-decoration: none !important;
-
-    outline: none;
-  }
-
-  .mobileAdviceLink span:first-child {
-    max-width: calc(100% - 30px);
-  }
-
-  .mobileAdviceLink span:last-child {
-    flex-shrink: 0;
-
-    color: #d5a928;
-
-    font-size: 15px;
-  }
-
-  .mobileAllAdvice {
-    color: #d5a928 !important;
-
-    font-weight: 700;
-
-    background: rgba(213, 169, 40, 0.07);
-  }
-
-  /* =======================================================
-     MOBILE CHEVRON
-  ======================================================== */
-
-  .mobileChevron {
-    width: 26px;
-    height: 26px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    color: #d5a928;
-
-    font-size: 20px;
-    line-height: 1;
-
-    transform: rotate(0deg);
-
-    transition:
-      transform 0.25s ease,
-      color 0.25s ease;
-  }
-
-  .mobileChevronOpen {
-    transform: rotate(180deg);
-  }
-
-  /* =======================================================
-     MOBILE ACTION BUTTONS
-  ======================================================== */
-
-  .mobileActions {
-    width: 100%;
-
-    padding: 18px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    gap: 10px;
-
-    box-sizing: border-box;
-
-    background: #06271d;
-  }
-
-  .mobileLogin {
-    width: 100%;
-    min-height: 48px;
-
-    padding: 0 !important;
-
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 5px;
-
-    color: #ffffff !important;
-    background: transparent !important;
-
-    font-family: inherit;
-    font-size: 12px !important;
-    font-weight: 700;
-
-    text-decoration: none !important;
-
-    outline: none;
-
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .mobileLogin::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  .mobileLogin:hover,
-  .mobileLogin:focus,
-  .mobileLogin:active {
-    color: #ffffff !important;
-
-    background: rgba(255, 255, 255, 0.08) !important;
-
-    border-color: #ffffff !important;
-
-    text-decoration: none !important;
-
-    outline: none;
-  }
-
-  .mobileQuote {
-    width: 100%;
-    min-height: 48px;
-
-    padding: 0 !important;
-
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-
-    border: 1px solid #b88d27 !important;
-    border-radius: 5px;
-
-    color: #ffffff !important;
-    background: #b88d27 !important;
-
-    font-family: inherit;
-    font-size: 12px !important;
-    font-weight: 700;
-
-    text-decoration: none !important;
-
-    outline: none;
-
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .mobileQuote::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  .mobileQuote:hover,
-  .mobileQuote:focus,
-  .mobileQuote:active {
-    color: #ffffff !important;
-
-    background: #d0a63c !important;
-
-    border-color: #d0a63c !important;
-
-    text-decoration: none !important;
-
-    outline: none;
-  }
-}
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 500px) {
-  .topRight > span {
-    font-size: 8px;
-  }
-
-  .topRight > span:nth-child(n + 3) {
-    display: none;
-  }
-
-  .topQuote {
-    min-height: 24px;
-
-    padding: 0 9px;
-
-    font-size: 8px;
-  }
-
-  /* SMALL MOBILE LOGO */
-
-  .logo {
-    max-width: calc(100% - 58px);
-
-    height: 67px;
-  }
-
-  .logoImageWrapper {
-    width: 145px;
-    height: 55px;
-  }
-
-  .mobileNavLink,
-  .mobileServicesButton,
-  .mobileAdviceButton {
-    min-height: 53px;
-
-    font-size: 14px;
-  }
-
-  .mobileServiceLink {
-    min-height: 49px;
-
-    font-size: 13px;
-  }
-
-  .mobileAdviceLink {
-    min-height: 51px;
-
+  .desktopNav > a,
+  .navDropdown > button {
     font-size: 12px;
   }
 
-  .mobileActions {
-    grid-template-columns: 1fr;
+  .clientLogin {
+    padding: 0 10px;
+  }
+
+  .headerQuote {
+    padding: 0 12px;
   }
 }
 
-/* =========================================================
-   EXTRA SMALL PHONES
-========================================================= */
+/* =========================================
+   1100px
+========================================= */
 
-@media (max-width: 380px) {
-  .logoImageWrapper {
-    width: 130px;
-    height: 52px;
+@media (max-width: 1100px) {
+  .topInner {
+    padding: 0 22px;
+  }
+
+  .followText {
+    display: none;
+  }
+
+  .headerInner {
+    min-height: 82px;
+  }
+
+  .navDropdown {
+    height: 82px;
+  }
+
+  .desktopNav > a,
+  .navDropdown > button {
+    height: 82px;
+    font-size: 11px;
+  }
+
+  .logoImage {
+    width: 145px;
+  }
+
+  .desktopNav {
+    gap: 11px;
+  }
+
+  .clientLogin {
+    display: none;
+  }
+}
+
+/* =========================================
+   MOBILE / TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .topInner {
+    min-height: 40px;
+    padding: 0 18px;
+  }
+
+  .topMessage {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .topRight {
+    display: none;
+  }
+
+  .headerInner {
+    min-height: 72px;
+    padding: 0 18px;
+
+    justify-content: space-between;
+  }
+
+  .logoImage {
+    width: 150px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .headerActions {
+    gap: 8px;
+  }
+
+  .clientLogin {
+    display: none;
+  }
+
+  .headerQuote {
+    min-height: 40px;
+    padding: 0 12px;
+
+    font-size: 10px;
+  }
+
+  .mobileToggle {
+    display: flex;
+  }
+
+  /* =====================================
+     MOBILE MENU
+  ===================================== */
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    padding: 8px 18px 20px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e8e8e3;
+
+    box-shadow:
+      0 12px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  .mobileMenu > a,
+  .mobileDropdown > button {
+    width: 100%;
+    min-height: 50px;
+
+    padding: 0 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 0;
+    border-bottom: 1px solid #eceeea;
+
+    background: transparent;
+
+    color: #25352d;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    text-align: left;
+  }
+
+  .mobileMenu > a:hover,
+  .mobileDropdown > button:hover {
+    color: #2d6946;
+  }
+
+  .mobileMenu > a.mobileActive,
+  .mobileDropdown > button.mobileActive {
+    color: #2d6946;
+  }
+
+  /* =====================================
+     MOBILE DROPDOWN
+  ===================================== */
+
+  .mobileDropdown {
+    width: 100%;
+  }
+
+  .mobileDropdown > button {
+    cursor: pointer;
+  }
+
+  .mobileSubmenu {
+    display: flex;
+    flex-direction: column;
+
+    padding: 6px 0 8px 12px;
+
+    background: #f7f9f6;
+  }
+
+  .mobileSubmenu > a {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    padding: 12px 10px;
+
+    border-bottom: 1px solid #e5e9e4;
+
+    color: #314139;
+
+    text-decoration: none;
+  }
+
+  .mobileSubmenu > a:last-child {
+    border-bottom: 0;
+  }
+
+  .mobileSubmenu > a:hover {
+    background: #eef3ed;
+  }
+
+  .mobileSubmenu strong {
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .mobileSubmenu span {
+    color: #69756e;
+
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .mobileSubmenu > a:last-child {
+    margin-top: 4px;
+
+    background: #173f2a;
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    text-align: center;
+  }
+
+  .mobileSubmenu > a:last-child:hover {
+    background: #2d6946;
+    color: #ffffff;
+  }
+
+  /* =====================================
+     MOBILE QUOTE
+  ===================================== */
+
+  .mobileQuote {
+    justify-content: center !important;
+    gap: 8px;
+
+    margin-top: 14px;
+
+    min-height: 48px !important;
+
+    border: 0 !important;
+
+    background: #c49a45 !important;
+    color: #ffffff !important;
+
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.4px;
+  }
+
+  .mobileQuote:hover {
+    background: #ad8334 !important;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .topInner {
+    padding: 0 14px;
+  }
+
+  .topMessage {
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .headerInner {
+    min-height: 68px;
+    padding: 0 14px;
+  }
+
+  .logoImage {
+    width: 140px;
+  }
+
+  .headerQuote {
+    display: none;
   }
 
   .mobileToggle {
     width: 42px;
-    height: 42px;
+    height: 40px;
   }
 
-  .mobileAdviceLink {
-    padding-left: 24px;
-    padding-right: 24px;
+  .mobileMenu {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .logoImage {
+    width: 130px;
   }
 
-  .mobileServiceLink {
-    padding-left: 24px;
-    padding-right: 24px;
+  .headerInner {
+    gap: 8px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.desktopNav > a:focus-visible,
+.navDropdown > button:focus-visible,
+.clientLogin:focus-visible,
+.headerQuote:focus-visible,
+.topQuote:focus-visible,
+.mobileToggle:focus-visible,
+.mobileMenu a:focus-visible,
+.mobileDropdown button:focus-visible {
+  outline: 3px solid rgba(196, 154, 69, 0.45);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .desktopNav > a,
+  .navDropdown > button,
+  .desktopNav > a::after,
+  .navDropdown > button::after,
+  .dropdownMenu,
+  .topQuote,
+  .headerQuote,
+  .clientLogin {
+    transition: none;
   }
 }

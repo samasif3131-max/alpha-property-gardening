@@ -2,33 +2,17 @@ import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const coverageText =
-  "Peterborough to Skegness; Long Sutton to Lincoln, plus surrounding areas within the coverage region.";
-
 const services = [
-  {
-    title: "Garden Services",
-    image:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1000&q=85",
-    description: "Lawn mowing",
-    items: [
-      "Hedge cutting",
-      "Garden clearances",
-      "Fencing & decking",
-      "Regular maintenance",
-    ],
-    href: "/garden-services",
-    icon: "✦",
-  },
   {
     title: "Property Maintenance",
     image:
       "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1000&q=85",
-    description: "Repairs & fault finding",
+    description: "Repairs & general property maintenance",
     items: [
       "Painting & decorating",
       "Carpentry & joinery",
-      "Tiling & general maintenance",
+      "Tiling & general repairs",
+      "Ongoing property maintenance",
     ],
     href: "/property-maintenance",
     icon: "⌁",
@@ -37,17 +21,18 @@ const services = [
     title: "Plumbing Services",
     image:
       "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1000&q=85",
-    description: "Leak detection & repairs",
+    description: "Plumbing repairs & fault finding",
     items: [
-      "Taps, showers & radiators",
-      "Pipework & drainage",
-      "Hot water systems",
+      "Leaks, taps & showers",
+      "Radiators & pipework",
+      "Drainage & hot water systems",
+      "24/7 emergency call-outs",
     ],
     href: "/plumbing-services",
     icon: "⌁",
   },
   {
-    title: "Bathroom Installation",
+    title: "Bathroom Services",
     image:
       "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1000&q=85",
     description: "Complete bathroom fitting",
@@ -55,13 +40,13 @@ const services = [
       "Walk-in showers",
       "Wall & floor tiling",
       "Plumbing & specialist trades managed",
-      "Design & installation",
+      "Complete installation",
     ],
     href: "/bathroom-services",
     icon: "▣",
   },
   {
-    title: "Kitchen Installation",
+    title: "Kitchen Services",
     image:
       "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=1000&q=85",
     description: "Full kitchen fitting",
@@ -74,26 +59,57 @@ const services = [
     href: "/kitchen-services",
     icon: "□",
   },
+  {
+    title: "Garden Maintenance",
+    image:
+      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1000&q=85",
+    description: "Professional garden maintenance",
+    items: [
+      "Lawn care & hedge cutting",
+      "Garden clearances",
+      "Fencing & decking",
+      "Regular garden maintenance",
+    ],
+    href: "/garden-services",
+    icon: "✦",
+  },
 ];
 
-const articles = [
+const advicePages = [
   {
-    title: "Top 5 Garden Maintenance Tips for Autumn",
-    text: "Keep your garden in great condition this season.",
-    image:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=500&q=80",
+    title: "Property Care",
+    text: "Practical advice for maintaining and protecting your property.",
+    href: "/advice/property-maintenance-advice",
   },
   {
-    title: "How to Spot a Water Leak in Your Home",
-    text: "Early signs and what to do.",
-    image:
-      "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=500&q=80",
+    title: "Plumbing",
+    text: "Helpful guidance for common plumbing problems and maintenance.",
+    href: "/advice/plumbing-advice",
   },
   {
-    title: "A Landlord's Guide to Property Maintenance",
-    text: "Essential checks to keep tenants happy.",
-    image:
-      "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=500&q=80",
+    title: "Bathrooms",
+    text: "Useful advice for bathroom maintenance and improvements.",
+    href: "/advice/bathroom-advice",
+  },
+  {
+    title: "Kitchens",
+    text: "Planning, maintaining and improving your kitchen.",
+    href: "/advice/kitchens-advice",
+  },
+  {
+    title: "Garden Care",
+    text: "Keep your garden healthy, tidy and well maintained.",
+    href: "/advice/garden-maintenance-advice",
+  },
+  {
+    title: "Seasonal Advice",
+    text: "Practical property and garden advice throughout the year.",
+    href: "/advice/seasonal-advice",
+  },
+  {
+    title: "Landlord Advice",
+    text: "Useful maintenance advice for landlords and letting agents.",
+    href: "/advice/landlord-advice",
   },
 ];
 
@@ -119,31 +135,38 @@ export default function HomePage() {
           <div className="alphaHeroCopy">
             <div className="alphaEyebrow">
               <span />
-              RELIABLE. PROFESSIONAL. LOCAL.
+              PROPERTY &amp; GARDEN MAINTENANCE
             </div>
 
             <h1>
-              One Team.
+              Property &amp; Garden
               <br />
-              <span>Complete</span>
+              <span>Maintenance Services</span>
               <br />
-              Property Care.
+              You Can Rely On
             </h1>
 
+            <h2
+              style={{
+                margin: "0 0 18px",
+                color: "#ffffff",
+                fontSize: "24px",
+                lineHeight: "1.25",
+                fontWeight: 700,
+              }}
+            >
+              One Team. Complete Property Care.
+            </h2>
+
             <p>
-              Garden maintenance, property repairs, plumbing, bathrooms,
-              kitchens and more — all from one trusted local team.
+              Alpha Property &amp; Gardening Services provides reliable
+              property maintenance, repairs, plumbing, bathroom and kitchen
+              services alongside professional garden maintenance for
+              homeowners, landlords and letting agents across our service
+              region.
             </p>
 
             <div className="alphaTrustPills">
-              <div>
-                <b>◈</b>
-                <span>
-                  <strong>Reliable</strong>
-                  & Professional
-                </span>
-              </div>
-
               <div>
                 <b>✓</b>
                 <span>
@@ -153,28 +176,32 @@ export default function HomePage() {
               </div>
 
               <div>
-                <b>⌁</b>
+                <b>£</b>
                 <span>
-                  <strong>Quality</strong>
-                  Workmanship
+                  <strong>Fixed Quotations</strong>
+                  Clear pricing
                 </span>
               </div>
 
               <div>
-                <b>⌖</b>
+                <b>◆</b>
                 <span>
-                  <strong>Local & Trusted</strong>
-                  Wide service coverage
+                  <strong>One Trusted Team</strong>
+                  Multiple services
+                </span>
+              </div>
+
+              <div>
+                <b>24</b>
+                <span>
+                  <strong>24/7 Emergency</strong>
+                  Call-outs available
                 </span>
               </div>
             </div>
 
-            <p className="alphaEmergencyHero">
-              24/7 emergency call-outs available
-            </p>
-
             <div className="alphaHeroButtons">
-              <Link href="/contact" className="alphaGoldButton">
+              <Link href="/request-a-quote" className="alphaGoldButton">
                 Request a Free Quote
                 <Arrow />
               </Link>
@@ -199,23 +226,23 @@ export default function HomePage() {
           </div>
 
           <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">➤</div>
+            <div className="alphaTrustIcon">£</div>
             <div>
-              <strong>Wide Coverage</strong>
-              <span>Peterborough to Skegness</span>
+              <strong>Fixed Quotations</strong>
+              <span>Clear pricing</span>
             </div>
           </div>
 
           <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">⌖</div>
+            <div className="alphaTrustIcon">◆</div>
             <div>
-              <strong>Service Area</strong>
-              <span>Long Sutton to Lincoln</span>
+              <strong>One Trusted Team</strong>
+              <span>Multiple services</span>
             </div>
           </div>
 
           <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">◈</div>
+            <div className="alphaTrustIcon">24</div>
             <div>
               <strong>24/7 Emergency</strong>
               <span>Call-outs available</span>
@@ -235,12 +262,12 @@ export default function HomePage() {
               </div>
 
               <h2>
-                Our Services <i />
+                Property &amp; Garden Services <i />
               </h2>
 
               <p>
-                Everything you need to keep your property and garden in top
-                condition.
+                Reliable property maintenance, repairs and specialist
+                services, alongside professional garden maintenance.
               </p>
             </div>
 
@@ -284,65 +311,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* LANDLORDS & LETTING AGENTS */}
-      <section className="alphaLandlordSection">
-        <div className="alphaContainer">
-          <div className="alphaLandlordCard">
-            <div className="alphaLandlordContent">
-              <div className="alphaSmallHeading">
-                <span />
-                LANDLORDS & LETTING AGENTS
-              </div>
-
-              <h2>
-                One contractor. Multiple services.
-                <br />
-                <strong>Complete property oversight.</strong>
-              </h2>
-
-              <p>
-                One trusted point of contact for property maintenance,
-                plumbing, gardens, bathrooms, kitchens, voids and ongoing
-                property support.
-              </p>
-
-              <div className="alphaLandlordServices">
-                <span>Property maintenance</span>
-                <span>Plumbing</span>
-                <span>Gardens</span>
-                <span>Bathrooms</span>
-                <span>Kitchens</span>
-                <span>Voids</span>
-                <span>Tenant liaison</span>
-                <span>Before/after photos</span>
-                <span>Fixed quotations</span>
-              </div>
-
-              <div className="alphaLandlordButtons">
-                <Link
-                  href="/contact"
-                  className="alphaGoldButton"
-                >
-                  LANDLORD & AGENT SERVICES
-                  <Arrow />
-                </Link>
-              </div>
-
-              <p className="alphaMyAlphaMessage">
-                Coming to My Alpha: manage properties, jobs, quotes,
-                appointments, photos and invoices from one account.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TRUSTED BY HOMEOWNERS */}
+      {/* LANDLORDS */}
       <section className="alphaTrusted">
         <div className="alphaTrustedImage">
           <img
             src="/images/hero/trusted-homeowners.jpg"
-            alt="Professional property maintenance"
+            alt="Property maintenance for homeowners and landlords"
           />
         </div>
 
@@ -350,35 +324,38 @@ export default function HomePage() {
           <div className="alphaTrustedInner">
             <div className="alphaSmallHeading alphaLightHeading">
               <span />
-              ONE TEAM. ONE CONTACT.
+              PROPERTY CARE FOR LANDLORDS
             </div>
 
             <h2>
-              Trusted by Homeowners,
+              Property Maintenance for
               <br />
-              <strong>Landlords & Letting Agents</strong>
+              <strong>Landlords &amp; Letting Agents</strong>
             </h2>
 
             <p>
-              From one-off jobs to regular maintenance, Alpha provides
-              reliable, high-quality property and garden services across our
-              wider service area.
+              One reliable point of contact for property repairs, plumbing,
+              bathrooms, kitchens, void-property work, garden maintenance and
+              ongoing property care.
             </p>
 
             <div className="alphaTrustedButtons">
-              <Link href="/contact" className="alphaGoldButton">
-                Request a Free Quote <Arrow />
+              <Link
+                href="/landlords-letting-agents"
+                className="alphaGoldButton"
+              >
+                Landlord Services <Arrow />
               </Link>
 
-              <Link href="/about-us" className="alphaOutlineButton">
-                Learn More About Us
+              <Link href="/contact" className="alphaOutlineButton">
+                Request a Quote
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
+      {/* WHY CHOOSE ALPHA */}
       <section className="alphaWhy">
         <div className="alphaContainer">
           <div className="alphaWhyGrid">
@@ -394,8 +371,8 @@ export default function HomePage() {
               </h2>
 
               <p>
-                One trusted team for your property, garden and home
-                improvement needs.
+                One trusted team for property maintenance, repairs and
+                professional garden care.
               </p>
             </div>
 
@@ -405,7 +382,7 @@ export default function HomePage() {
                 <section>
                   <strong>One Team, Complete Care</strong>
                   <small>
-                    All your property and garden needs in one place
+                    Property and garden services managed by one trusted team
                   </small>
                 </section>
               </div>
@@ -421,8 +398,11 @@ export default function HomePage() {
               <div>
                 <span>♙</span>
                 <section>
-                  <strong>Experienced & Reliable</strong>
-                  <small>Skilled team with a proven track record</small>
+                  <strong>Experienced &amp; Reliable</strong>
+                  <small>
+                    Practical experience across property and garden
+                    maintenance.
+                  </small>
                 </section>
               </div>
 
@@ -455,9 +435,9 @@ export default function HomePage() {
               <div>
                 <span>⌖</span>
                 <section>
-                  <strong>Wide Service Coverage</strong>
+                  <strong>Local &amp; Trusted</strong>
                   <small>
-                    Peterborough to Skegness; Long Sutton to Lincoln
+                    Serving our local property and garden maintenance region
                   </small>
                 </section>
               </div>
@@ -474,27 +454,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 24/7 EMERGENCY CTA */}
-      <section className="alphaEmergencySection">
+      {/* EMERGENCY */}
+      <section className="alphaEmergency">
         <div className="alphaContainer">
-          <div className="alphaEmergencyCard">
+          <div className="alphaEmergencyInner">
             <div>
               <div className="alphaSmallHeading alphaLightHeading">
                 <span />
-                24/7 EMERGENCY SUPPORT
+                EMERGENCY PROPERTY SERVICES
               </div>
 
-              <h2>24/7 Emergency Call-Outs Available</h2>
+              <h2>
+                24/7 Emergency Call-Outs
+              </h2>
 
               <p>
-                For urgent property and plumbing issues, Alpha can provide
-                emergency call-out support across the service area.
+                Urgent property and plumbing problems can happen at any
+                time. Contact Alpha for emergency call-outs and practical
+                support.
               </p>
             </div>
 
             <Link href="/contact" className="alphaGoldButton">
-              GET EMERGENCY HELP
-              <Arrow />
+              Get Emergency Help <Arrow />
             </Link>
           </div>
         </div>
@@ -503,23 +485,18 @@ export default function HomePage() {
       {/* QUOTE CTA */}
       <section className="alphaQuoteSection">
         <div className="alphaContainer">
-          <div className="alphaQuoteWideCard">
-            <div>
-              <div className="alphaSmallHeading">
-                <span />
-                FREE QUOTATIONS
-              </div>
+          <div className="alphaQuoteCard">
+            <div className="alphaQuoteIcon">▣</div>
 
-              <h2>Need a Quote?</h2>
+            <h3>Need Property or Garden Maintenance?</h3>
 
-              <p>
-                Tell us what you need and we’ll get back to you with a clear,
-                no-obligation quotation.
-              </p>
-            </div>
+            <p>
+              Tell us what you need and request a clear, no-obligation
+              quotation from Alpha Property &amp; Gardening Services.
+            </p>
 
-            <Link href="/contact" className="alphaGoldButton">
-              Request a Free Quote <Arrow />
+            <Link href="/request-a-quote" className="alphaQuoteButton">
+              Request a Quote <Arrow />
             </Link>
           </div>
         </div>
@@ -535,30 +512,27 @@ export default function HomePage() {
                 AREAS WE COVER
               </div>
 
-              <h2>Areas We Cover</h2>
+              <h2>Property &amp; Garden Services Across Our Region</h2>
 
-              <p>{coverageText}</p>
+              <p>
+                Peterborough to Skegness; Long Sutton to Lincoln, plus
+                surrounding areas within the coverage region.
+              </p>
 
               <Link
                 href="/areas-we-cover"
                 className="alphaGoldSmallButton"
               >
-                View All Areas <Arrow />
+                View Areas We Cover <Arrow />
               </Link>
             </div>
 
-            {/* WIDER SERVICE AREA MAP */}
             <div className="alphaMap">
               <iframe
-                title="Map showing Alpha Property & Gardening Services coverage area"
+                title="Map showing Alpha Property & Gardening Services coverage region"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=-0.75%2C52.45%2C0.65%2C53.25&layer=mapnik"
                 loading="lazy"
               />
-
-              <div className="alphaMapLabel">
-                <span>●</span>
-                Alpha Service Area
-              </div>
             </div>
 
             <div className="alphaAdvice">
@@ -566,17 +540,33 @@ export default function HomePage() {
                 <h3>Latest from Our Advice Hub</h3>
 
                 <Link href="/advice">
-                  View All Articles <Arrow />
+                  View All Advice <Arrow />
                 </Link>
               </div>
 
-              {articles.map((article) => (
+              {advicePages.map((article) => (
                 <Link
-                  href="/advice"
+                  href={article.href}
                   className="alphaArticle"
                   key={article.title}
                 >
-                  <img src={article.image} alt={article.title} />
+                  <div
+                    style={{
+                      width: "88px",
+                      height: "62px",
+                      display: "grid",
+                      placeItems: "center",
+                      borderRadius: "5px",
+                      background: "#063b2c",
+                      color: "#ffffff",
+                      fontSize: "11px",
+                      fontWeight: 800,
+                      textAlign: "center",
+                      padding: "8px",
+                    }}
+                  >
+                    {article.title}
+                  </div>
 
                   <div>
                     <strong>{article.title}</strong>
@@ -591,15 +581,6 @@ export default function HomePage() {
       </section>
 
       <Footer />
-
-      {/* MOBILE EMERGENCY BAR */}
-      <div className="alphaMobileEmergencyBar">
-        <Link href="/contact">CALL</Link>
-
-        <span>24/7 EMERGENCY</span>
-
-        <Link href="/contact">GET A QUOTE</Link>
-      </div>
     </main>
   );
 }

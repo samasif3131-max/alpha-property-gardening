@@ -19,21 +19,24 @@ export default function Footer() {
                 <span className={styles.logoMark}>A</span>
 
                 <span className={styles.logoText}>
-                  <span className={styles.logoMain}>ALPHA</span>
+                  <span className={styles.logoMain}>
+                    ALPHA
+                  </span>
+
                   <span className={styles.logoSub}>
-                    PROPERTY CARE
+                    PROPERTY &amp; GARDENING SERVICES
                   </span>
                 </span>
               </Link>
 
               <p className={styles.tagline}>
-                Complete Property Care. One Trusted Team.
+                One Team. Complete Property Care.
               </p>
 
               <p className={styles.brandDescription}>
-                Complete property care for homes, landlords and letting
-                agents. One trusted team for gardens, maintenance,
-                plumbing, bathrooms and kitchens.
+                Complete property care for homes, landlords and
+                letting agents. One trusted team for gardens,
+                maintenance, plumbing, bathrooms and kitchens.
               </p>
 
               <div className={styles.socialLinks}>
@@ -111,7 +114,7 @@ export default function Footer() {
                 Home
               </Link>
 
-              <Link href="/about">
+              <Link href="/about-us">
                 About Us
               </Link>
 
@@ -119,7 +122,7 @@ export default function Footer() {
                 Landlords &amp; Letting Agents
               </Link>
 
-              <Link href="/client-login">
+              <Link href="/account/homeowner-login">
                 Client Login
               </Link>
 
@@ -130,28 +133,17 @@ export default function Footer() {
 
             {/* =========================================
                 CONTACT
+                PHONE INTENTIONALLY HIDDEN UNTIL
+                THE REAL LANDLINE IS CONFIRMED
             ========================================== */}
             <div className={styles.contactColumn}>
               <h3>Get In Touch</h3>
 
               <div className={styles.goldLine}></div>
 
+              {/* Email */}
               <a
-                href="tel:+440000000000"
-                className={styles.contactItem}
-              >
-                <span className={styles.contactIcon}>
-                  ☎
-                </span>
-
-                <span className={styles.contactText}>
-                  <strong>Call Us</strong>
-                  <small>+44 0000 000 000</small>
-                </span>
-              </a>
-
-              <a
-                href="mailto:info@alphapropertycare.co.uk"
+                href="mailto:info@alphapropertyandgardening.co.uk"
                 className={styles.contactItem}
               >
                 <span className={styles.contactIcon}>
@@ -160,31 +152,40 @@ export default function Footer() {
 
                 <span className={styles.contactText}>
                   <strong>Email Us</strong>
+
                   <small>
-                    info@alphapropertycare.co.uk
+                    info@alphapropertyandgardening.co.uk
                   </small>
                 </span>
               </a>
 
-              <div className={styles.contactItem}>
+              {/* Service Area */}
+              <Link
+                href="/areas-we-cover"
+                className={styles.contactItem}
+              >
                 <span className={styles.contactIcon}>
                   ⌖
                 </span>
 
                 <span className={styles.contactText}>
                   <strong>Service Area</strong>
+
                   <small>
-                    Local &amp; surrounding areas
+                    View Areas We Cover →
                   </small>
                 </span>
-              </div>
+              </Link>
 
               <Link
-                href="/contact"
+                href="/request-a-quote"
                 className={styles.quoteButton}
               >
                 <span>Request a Quote</span>
-                <span className={styles.arrow}>→</span>
+
+                <span className={styles.arrow}>
+                  →
+                </span>
               </Link>
             </div>
 
@@ -197,8 +198,8 @@ export default function Footer() {
               <div className={styles.goldLine}></div>
 
               <p className={styles.socialDescription}>
-                Follow Alpha Property Care for updates,
-                property tips and recent projects.
+                Follow Alpha Property &amp; Gardening Services
+                for updates, property tips and recent projects.
               </p>
 
               <div className={styles.socialLinks}>
@@ -228,10 +229,15 @@ export default function Footer() {
               </div>
 
               <div className={styles.trustBadge}>
-                <span className={styles.trustIcon}>✓</span>
+                <span className={styles.trustIcon}>
+                  ✓
+                </span>
 
                 <span>
-                  <strong>Trusted Property Care</strong>
+                  <strong>
+                    Trusted Property Care
+                  </strong>
+
                   <small>
                     Professional &amp; reliable service
                   </small>
@@ -249,8 +255,8 @@ export default function Footer() {
       <div className={styles.footerBottom}>
         <div className={styles.bottomContainer}>
           <p>
-            © {new Date().getFullYear()} Alpha Property Care.
-            All rights reserved.
+            © {new Date().getFullYear()} Alpha Property &amp;
+            Gardening Services. All rights reserved.
           </p>
 
           <div className={styles.legalLinks}>
@@ -266,7 +272,7 @@ export default function Footer() {
           </div>
 
           <span className={styles.bottomBrand}>
-            Professional Property Care
+            One Team. Complete Property Care.
           </span>
         </div>
       </div>
