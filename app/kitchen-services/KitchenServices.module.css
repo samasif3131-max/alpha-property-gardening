@@ -14,13 +14,13 @@
   text-decoration: none;
 }
 
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
   position: relative;
-  min-height: 590px;
+  min-height: 650px;
   background: #00251d;
   color: #ffffff;
   overflow: hidden;
@@ -33,9 +33,9 @@
     linear-gradient(
       90deg,
       rgba(0, 38, 29, 0.98) 0%,
-      rgba(0, 38, 29, 0.9) 35%,
-      rgba(0, 38, 29, 0.25) 70%,
-      rgba(0, 38, 29, 0.55) 100%
+      rgba(0, 38, 29, 0.92) 32%,
+      rgba(0, 38, 29, 0.5) 62%,
+      rgba(0, 38, 29, 0.78) 100%
     );
   z-index: 1;
 }
@@ -45,65 +45,83 @@
   z-index: 2;
   width: min(1450px, 94%);
   margin: auto;
-  padding: 25px 0 45px;
+  padding: 25px 0 50px;
 }
 
 .breadcrumb {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 25px;
-  font-size: 16px;
+  margin-bottom: 28px;
+  font-size: 15px;
 }
 
 .breadcrumb a {
   color: #ffffff;
+  opacity: 0.9;
+}
+
+.breadcrumb a:hover {
+  color: #e9b93e;
 }
 
 .breadcrumb span:last-child {
-  color: #e8b83c;
+  color: #e9b93e;
   font-weight: 700;
 }
 
 .heroGrid {
   display: grid;
-  grid-template-columns: 1.1fr 1.2fr 0.7fr;
-  min-height: 465px;
+  grid-template-columns: 1.15fr 1.1fr 0.7fr;
+  min-height: 500px;
   align-items: stretch;
 }
 
 .heroText {
-  padding: 25px 30px 20px 0;
+  padding: 28px 30px 25px 0;
+}
+
+.eyebrow {
+  margin-bottom: 16px;
+  color: #e8b83c;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
 }
 
 .heroText h1 {
   margin: 0;
-  font-size: clamp(42px, 4vw, 68px);
-  line-height: 0.98;
+  font-size: clamp(40px, 4vw, 66px);
+  line-height: 0.99;
   font-weight: 900;
   letter-spacing: -2px;
 }
 
-.heroText h2 {
-  margin: 15px 0;
-  color: #e9b93e;
-  font-size: clamp(27px, 2.3vw, 40px);
-  line-height: 1.05;
-  font-weight: 800;
-}
-
 .heroText p {
   max-width: 680px;
-  margin: 18px 0 28px;
-  font-size: 19px;
-  line-height: 1.5;
-  color: #f3f3f3;
+  margin: 19px 0 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #f2f2f2;
+}
+
+.heroMessage {
+  margin: 25px 0;
+  padding-left: 16px;
+  border-left: 4px solid #e9b93e;
+  color: #ffffff;
+  font-size: 21px;
+}
+
+.heroMessage strong {
+  color: #e9b93e;
 }
 
 .heroButtons {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 11px;
 }
 
 .primaryButton,
@@ -111,16 +129,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 58px;
-  padding: 0 25px;
-  border-radius: 4px;
-  font-size: 17px;
-  font-weight: 800;
+  min-height: 56px;
+  padding: 0 21px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .primaryButton {
   background: #dcae42;
   color: #ffffff;
+}
+
+.primaryButton span {
+  margin-left: 8px;
+  font-size: 18px;
 }
 
 .primaryButton:hover {
@@ -130,7 +158,7 @@
 .phoneButton {
   border: 2px solid #ffffff;
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .phoneButton:hover {
@@ -138,22 +166,43 @@
   color: #00251d;
 }
 
+.supportingLink {
+  display: inline-block;
+  margin-top: 18px;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.supportingLink:hover {
+  color: #e9b93e;
+  border-color: #e9b93e;
+}
+
 .heroImage {
-  min-height: 465px;
+  min-height: 500px;
   overflow: hidden;
 }
 
 .heroImage img {
   width: 100%;
   height: 100%;
-  min-height: 465px;
-  object-fit: cover;
+  min-height: 500px;
   display: block;
+  object-fit: cover;
 }
 
 .heroList {
-  padding: 25px 20px 15px 28px;
-  background: rgba(0, 39, 30, 0.92);
+  padding: 28px 20px 20px 27px;
+  background: rgba(0, 39, 30, 0.94);
+}
+
+.heroList h3 {
+  margin: 0 0 20px;
+  color: #e9b93e;
+  font-size: 20px;
+  font-weight: 900;
 }
 
 .heroList ul {
@@ -164,87 +213,224 @@
 
 .heroList li {
   position: relative;
-  margin-bottom: 12px;
-  padding-left: 30px;
-  font-size: 17px;
-  line-height: 1.25;
+  margin-bottom: 11px;
+  padding-left: 27px;
+  font-size: 15px;
+  line-height: 1.35;
 }
 
 .heroList li::before {
   content: "✓";
   position: absolute;
   left: 0;
-  top: -2px;
+  top: -1px;
   color: #e5b533;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 900;
 }
 
 .heroSignature {
-  margin-top: 25px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
   text-align: center;
-  font-size: 23px;
+  font-size: 20px;
   font-style: italic;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 .heroSignature strong {
   color: #e9b93e;
+  font-style: normal;
 }
 
-/* =========================
-   BENEFITS
-========================= */
+/* =========================================================
+   SUMMARY STRIP
+========================================================= */
 
-.benefits {
+.summaryStrip {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  border-bottom: 1px solid #ddd;
   background: #ffffff;
+  border-bottom: 1px solid #dedede;
 }
 
-.benefit {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  min-height: 90px;
-  padding: 15px 25px;
-  border-right: 1px solid #ddd;
+.summaryStrip > div {
+  min-height: 95px;
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-content: center;
+  border-right: 1px solid #dedede;
 }
 
-.benefit > span {
-  font-size: 35px;
-  font-weight: 700;
-  flex-shrink: 0;
+.summaryStrip > div:last-child {
+  border-right: 0;
 }
 
-.benefit strong {
-  display: block;
-  font-size: 17px;
+.summaryStrip span {
+  grid-row: 1 / 3;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #d0a13b;
+  border-radius: 50%;
+  color: #a97816;
+  font-size: 12px;
+  font-weight: 900;
 }
 
-.benefit small {
-  display: block;
-  margin-top: 4px;
-  color: #666;
-  font-size: 14px;
+.summaryStrip strong {
+  font-size: 15px;
+  font-weight: 900;
 }
 
-/* =========================
-   GENERAL
-========================= */
+.summaryStrip small {
+  margin-top: 3px;
+  color: #666666;
+  font-size: 12px;
+}
 
+/* =========================================================
+   GENERAL SECTION STYLES
+========================================================= */
+
+.introSection,
 .servicesSection,
-.projectsSection,
+.twoColumnSection,
+.featureSection,
+.featureSectionReverse,
+.threeColumnSection,
+.twoFeatureSection,
+.partialSection,
+.propertySection,
 .processSection,
-.bottomSection,
+.productsSection,
+.quoteInfoSection,
+.damageSection,
+.areaSection,
+.relatedSection,
 .faqSection {
-  width: min(1450px, 94%);
+  width: min(1400px, 92%);
   margin: auto;
 }
 
+.sectionKicker {
+  margin-bottom: 10px;
+  color: #b27c13;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.sectionKickerLight {
+  margin-bottom: 10px;
+  color: #e8b83c;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.introSection h2,
+.servicesSection h2,
+.twoColumnSection h2,
+.featureSection h2,
+.featureSectionReverse h2,
+.threeColumnSection h2,
+.twoFeatureSection h2,
+.partialSection h2,
+.propertySection h2,
+.processSection h2,
+.productsSection h2,
+.quoteInfoSection h2,
+.damageSection h2,
+.areaSection h2,
+.relatedSection h2,
+.faqSection h2 {
+  margin: 0;
+  color: #111111;
+  font-size: clamp(29px, 3vw, 44px);
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.introSection p,
+.featureContent p,
+.propertyContent p,
+.infoPanel p,
+.infoPanelAlt p,
+.contentCard p,
+.contentCardDark p,
+.softFeature p,
+.softFeatureGreen p,
+.processItem p,
+.productsContent p,
+.retailerBox p,
+.damageSection p,
+.areaContent p {
+  color: #555555;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.introSection {
+  padding: 80px 0;
+}
+
+.introContent {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 35px;
+}
+
+.introGrid p {
+  margin: 0 0 20px;
+}
+
+.introCallout {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 25px;
+  padding: 20px;
+  background: #f3f0e8;
+  border-left: 4px solid #dcae42;
+  color: #18372f;
+}
+
+.introCallout span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: #003b2d;
+  border-radius: 50%;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
 .servicesSection {
-  padding: 55px 0;
+  padding-bottom: 80px;
 }
 
 .sectionHeader {
@@ -252,71 +438,65 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 30px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
-.sectionHeader h2,
-.sectionTitle h2,
-.faqContent h2 {
-  margin: 0;
-  font-size: clamp(30px, 3vw, 43px);
-  font-weight: 900;
-  line-height: 1;
-}
-
-.sectionHeader h2 span,
-.faqContent h2 span {
-  display: inline-block;
-  width: 42px;
-  height: 4px;
-  margin-left: 10px;
-  vertical-align: middle;
-  background: #dcae42;
+.sectionHeader > div {
+  max-width: 800px;
 }
 
 .sectionHeader p {
-  margin: 10px 0 0;
-  font-size: 17px;
-  color: #555;
+  margin: 12px 0 0;
+  color: #666666;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .viewLink {
-  color: #c18b1e;
-  font-weight: 800;
-  font-size: 16px;
   white-space: nowrap;
+  color: #a97514;
+  font-size: 14px;
+  font-weight: 900;
 }
 
-.servicesLayout {
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(320px, 1.05fr);
-  gap: 25px;
+.viewLink:hover,
+.textButton:hover {
+  color: #d29f2f;
 }
 
 .serviceGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 18px;
 }
 
 .serviceCard {
+  overflow: hidden;
   background: #ffffff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+  border: 1px solid #dddddd;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 }
 
 .serviceImage {
   position: relative;
-  height: 175px;
+  height: 210px;
   overflow: hidden;
 }
 
 .serviceImage img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
-  transition: transform 0.35s ease;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
 .serviceCard:hover .serviceImage img {
@@ -325,405 +505,930 @@
 
 .serviceIcon {
   position: absolute;
-  left: 15px;
-  bottom: -1px;
-  width: 50px;
-  height: 50px;
+  left: 16px;
+  bottom: 0;
+  width: 52px;
+  height: 52px;
   display: grid;
   place-items: center;
   background: #003b2d;
   color: #ffffff;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 900;
 }
 
 .serviceBody {
-  padding: 15px;
+  padding: 22px;
 }
 
 .serviceBody h3 {
-  margin: 0 0 7px;
+  margin: 0 0 9px;
+  color: #111111;
   font-size: 21px;
+  line-height: 1.2;
   font-weight: 900;
 }
 
 .serviceBody p {
-  min-height: 62px;
-  margin: 0 0 12px;
-  color: #555;
-  font-size: 16px;
-  line-height: 1.35;
+  min-height: 82px;
+  margin: 0 0 15px;
+  color: #555555;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .serviceBody a {
-  color: #c18b1e;
-  font-size: 16px;
-  font-weight: 800;
-}
-
-/* =========================
-   QUOTE
-========================= */
-
-.quoteCard {
-  align-self: start;
-  padding: 24px;
-  background: #f3f6f8;
-  border: 1px solid #e1e5e8;
-}
-
-.quoteCard h2 {
-  margin: 0 0 20px;
-  font-size: 26px;
+  color: #b17d18;
+  font-size: 14px;
   font-weight: 900;
 }
 
-.quoteCard form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+/* =========================================================
+   DARK COMPLETE RENOVATION
+========================================================= */
 
-.quoteCard input,
-.quoteCard select,
-.quoteCard textarea {
+.darkSection {
   width: 100%;
-  border: 1px solid #d4d8dc;
-  background: #ffffff;
-  padding: 14px;
-  font-family: inherit;
-  font-size: 15px;
-  color: #333;
-  outline: none;
-}
-
-.quoteCard input:focus,
-.quoteCard select:focus,
-.quoteCard textarea:focus {
-  border-color: #c49a37;
-}
-
-.quoteCard textarea {
-  resize: vertical;
-}
-
-.quoteCard button {
-  min-height: 55px;
-  border: 0;
-  background: #c99a37;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.quoteCard button:hover {
-  background: #b48628;
-}
-
-.quoteFeatures {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 20px;
-  text-align: center;
-}
-
-.quoteFeatures div {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.quoteFeatures strong {
-  font-size: 25px;
-}
-
-.quoteFeatures span {
-  color: #555;
-  font-size: 13px;
-}
-
-/* =========================
-   BEFORE AFTER
-========================= */
-
-.beforeAfterSection {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 0.8fr;
-  width: 100%;
-  background: #f2f6f7;
-}
-
-.beforeAfter {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.beforeAfter > div {
-  position: relative;
-  height: 400px;
-}
-
-.beforeAfter img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.photoLabel {
-  position: absolute;
-  z-index: 2;
-  top: 14px;
-  left: 14px;
-  padding: 8px 15px;
+  padding: 75px 4%;
   background: #003b2d;
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 800;
 }
 
-.chooseUs {
-  padding: 35px;
+.darkInner {
+  width: min(1350px, 100%);
+  margin: auto;
 }
 
-.chooseUs h2,
-.landlordBox h2 {
-  margin: 0 0 20px;
-  font-size: 27px;
+.darkSection h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(30px, 3vw, 45px);
+  line-height: 1.05;
   font-weight: 900;
 }
 
-.chooseUs ul,
-.landlordBox ul {
+.darkHeading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 38px;
+}
+
+.darkHeading p {
+  margin: 0;
+  color: #e5e5e5;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.checkGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 35px;
+}
+
+.checkGrid > div,
+.checkGridSmall > div {
+  position: relative;
+  padding: 13px 14px 13px 38px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.045);
+  color: #eeeeee;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.checkGrid > div span,
+.checkGridSmall > div span {
+  position: absolute;
+  left: 13px;
+  color: #e8b83c;
+  font-weight: 900;
+}
+
+.goldButton,
+.lightButton,
+.textButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.goldButton {
+  min-height: 54px;
+  padding: 0 24px;
+  background: #d5a43b;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.goldButton:hover {
+  background: #e6ba54;
+}
+
+/* =========================================================
+   TWO COLUMN INFORMATION
+========================================================= */
+
+.twoColumnSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 75px 0;
+}
+
+.infoPanel,
+.infoPanelAlt {
+  position: relative;
+  padding: 42px;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+}
+
+.infoPanelAlt {
+  background: #f3f6f4;
+}
+
+.numberBadge {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+  background: #003b2d;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.infoPanel h3,
+.infoPanelAlt h3 {
+  margin: 25px 0 15px;
+  font-size: 17px;
+}
+
+.simpleList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px 25px;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.chooseUs li,
-.landlordBox li {
+.simpleList li {
   position: relative;
-  margin-bottom: 13px;
-  padding-left: 28px;
-  font-size: 16px;
-  line-height: 1.3;
+  padding-left: 21px;
+  color: #444444;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
-.chooseUs li::before,
-.landlordBox li::before {
+.simpleList li::before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: #00815d;
+  color: #b17d18;
   font-weight: 900;
-  font-size: 19px;
 }
 
-.landlordBox {
+.noteText {
+  margin-top: 25px !important;
+  padding: 15px;
+  background: #f6f4ef;
+  font-size: 14px !important;
+}
+
+/* =========================================================
+   FEATURE
+========================================================= */
+
+.featureSection,
+.featureSectionReverse {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 540px;
+  margin-bottom: 75px;
+}
+
+.featureSectionReverse {
+  margin-top: 75px;
+}
+
+.featureImage {
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.featureImage img {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  display: block;
+  object-fit: cover;
+}
+
+.featureContent {
+  padding: 55px;
+  background: #f5f2eb;
+}
+
+.featureSectionReverse .featureContent {
+  background: #f5f2eb;
+}
+
+.featureContent h2 {
+  margin-bottom: 22px;
+}
+
+.miniGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.miniGrid > div {
+  position: relative;
+  padding: 12px 12px 12px 32px;
+  background: #ffffff;
+  color: #444444;
+  font-size: 14px;
+}
+
+.miniGrid span,
+.finishPoints span {
+  position: absolute;
+  left: 12px;
+  color: #b17d18;
+  font-weight: 900;
+}
+
+.warningBox {
+  margin-top: 25px;
+  padding: 18px;
+  border-left: 4px solid #c5942c;
+  background: #ffffff;
+}
+
+.warningBox strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.warningBox p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* =========================================================
+   PLUMBING
+========================================================= */
+
+.plumbingSection {
+  width: 100%;
+  padding: 75px 4%;
+  background: #002d23;
+  color: #ffffff;
+}
+
+.plumbingContent {
+  width: min(1250px, 100%);
+  margin: auto;
+}
+
+.plumbingSection h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(30px, 3vw, 45px);
+  font-weight: 900;
+}
+
+.plumbingSection p {
+  max-width: 900px;
+  color: #e4e4e4;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.checkGridSmall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.gasNotice {
+  margin: 25px 0;
+  padding: 18px 20px;
+  border-left: 4px solid #e4b536;
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.lightButton {
+  min-height: 52px;
+  padding: 0 23px;
+  background: #e0b148;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.lightButton:hover {
+  background: #efc35f;
+}
+
+/* =========================================================
+   THREE COLUMN
+========================================================= */
+
+.threeColumnSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 75px 0;
+}
+
+.contentCard,
+.contentCardDark {
   padding: 35px;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+}
+
+.contentCardDark {
+  background: #003b2d;
+  color: #ffffff;
+  border-color: #003b2d;
+}
+
+.cardNumber {
+  margin-bottom: 18px;
+  color: #b27c13;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.contentCard h2,
+.contentCardDark h2 {
+  margin: 0 0 17px;
+  font-size: 26px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.contentCardDark h2 {
+  color: #ffffff;
+}
+
+.contentCardDark p {
+  color: #dddddd;
+}
+
+.contentCard .simpleList {
+  grid-template-columns: 1fr;
+  margin: 20px 0;
+}
+
+.contentCardDark .simpleList {
+  grid-template-columns: 1fr;
+}
+
+.warningBoxDark {
+  margin-top: 22px;
+  padding: 17px;
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #e3b23d;
+}
+
+.warningBoxDark strong {
+  color: #e7b83f;
+}
+
+.warningBoxDark p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.textButton {
+  margin-top: 22px;
+  color: #aa7613;
+  font-size: 13px;
+}
+
+.contentCardDark .textButton {
+  color: #e3b33e;
+}
+
+/* =========================================================
+   TWO FEATURE
+========================================================= */
+
+.twoFeatureSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding-bottom: 75px;
+}
+
+.softFeature,
+.softFeatureGreen {
+  padding: 45px;
+  background: #f5f3ee;
+}
+
+.softFeatureGreen {
   background: #003b2d;
   color: #ffffff;
 }
 
-.landlordBox li::before {
-  color: #e4b536;
-}
-
-.landlordBox p {
-  font-size: 16px;
-  line-height: 1.45;
-}
-
-.landlordBox a {
-  display: block;
-  margin-top: 20px;
-  padding: 14px;
-  text-align: center;
-  background: #d4a63b;
+.softFeatureGreen h2 {
   color: #ffffff;
-  font-weight: 800;
 }
 
-/* =========================
+.lightList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0;
+  margin: 25px 0 0;
+  list-style: none;
+}
+
+.lightList li {
+  position: relative;
+  padding-left: 21px;
+  color: #eeeeee;
+  font-size: 14px;
+}
+
+.lightList li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #e5b53e;
+  font-weight: 900;
+}
+
+/* =========================================================
+   FINISH POINTS
+========================================================= */
+
+.finishPoints {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.finishPoints > div {
+  position: relative;
+  padding: 13px 13px 13px 32px;
+  background: #ffffff;
+  color: #444444;
+  font-size: 14px;
+}
+
+/* =========================================================
+   PARTIAL KITCHEN
+========================================================= */
+
+.partialSection {
+  width: 100%;
+  max-width: none;
+  padding: 75px 4%;
+  background: #f2f5f3;
+}
+
+.partialInner {
+  width: min(1250px, 100%);
+  margin: auto;
+}
+
+.partialSection h2 {
+  max-width: 850px;
+}
+
+.leadText {
+  max-width: 850px;
+  margin: 18px 0 30px;
+  color: #555555;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.partialGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.partialGrid > div {
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid #dfe3e0;
+  color: #444444;
+  font-size: 14px;
+}
+
+.partialGrid span {
+  margin-right: 8px;
+  color: #a97816;
+  font-weight: 900;
+}
+
+.bigStatement {
+  margin-top: 35px;
+  color: #003b2d;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+/* =========================================================
+   PROPERTY
+========================================================= */
+
+.propertySection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+  margin-top: 75px;
+  margin-bottom: 75px;
+}
+
+.propertyImage {
+  min-height: 580px;
+}
+
+.propertyImage img {
+  width: 100%;
+  height: 100%;
+  min-height: 580px;
+  display: block;
+  object-fit: cover;
+}
+
+.propertyContent {
+  padding: 55px;
+  background: #003b2d;
+  color: #ffffff;
+}
+
+.propertyContent h2 {
+  color: #ffffff;
+}
+
+.propertyContent p {
+  color: #e2e2e2;
+}
+
+.propertyContent h3 {
+  margin: 25px 0 15px;
+  color: #ffffff;
+  font-size: 17px;
+}
+
+.propertyList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.propertyList span {
+  padding: 11px 13px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #eeeeee;
+  font-size: 13px;
+}
+
+/* =========================================================
+   LANDLORD
+========================================================= */
+
+.landlordSection {
+  width: 100%;
+  padding: 75px 4%;
+  background: #002d23;
+  color: #ffffff;
+}
+
+.landlordContent {
+  width: min(1250px, 100%);
+  margin: auto;
+}
+
+.landlordSection h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1.05;
+}
+
+.landlordSection p {
+  max-width: 950px;
+  color: #e3e3e3;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* =========================================================
    PROCESS
-========================= */
+========================================================= */
 
 .processSection {
-  padding: 50px 0;
+  padding: 80px 0;
 }
 
-.sectionTitle {
+.sectionHeaderCenter {
+  max-width: 850px;
+  margin: 0 auto 35px;
   text-align: center;
-  margin-bottom: 30px;
+}
+
+.sectionHeaderCenter h2 {
+  margin-bottom: 12px;
+}
+
+.sectionHeaderCenter p {
+  margin: 0;
+  color: #666666;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .processGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
 .processItem {
-  display: flex;
-  gap: 14px;
-  padding: 15px;
-  border-right: 1px solid #ddd;
+  min-height: 205px;
+  padding: 23px;
+  border: 1px solid #dddddd;
+  background: #ffffff;
 }
 
 .processItem > span {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
-  flex-shrink: 0;
+  margin-bottom: 20px;
   border: 2px solid #c99a37;
   border-radius: 50%;
-  color: #b27c13;
+  color: #a67515;
+  font-size: 12px;
   font-weight: 900;
 }
 
 .processItem h3 {
-  margin: 0 0 7px;
+  margin: 0 0 9px;
+  color: #111111;
   font-size: 18px;
+  line-height: 1.2;
 }
 
 .processItem p {
   margin: 0;
-  color: #666;
   font-size: 14px;
-  line-height: 1.35;
 }
 
-/* =========================
-   PROJECTS
-========================= */
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
-.projectsSection {
-  padding-bottom: 55px;
-}
-
-.projectsGrid {
+.productsSection {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  grid-template-columns: 1.25fr 0.75fr;
+  margin-bottom: 75px;
 }
 
-.projectCard {
-  overflow: hidden;
-  border: 1px solid #ddd;
-  background: #ffffff;
+.productsContent {
+  padding: 55px;
+  background: #f5f2eb;
 }
 
-.projectCard img {
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  display: block;
-}
-
-.projectCard div {
-  padding: 15px;
-}
-
-.projectCard h3 {
-  margin: 0 0 5px;
-  font-size: 18px;
-}
-
-.projectCard p {
-  margin: 0;
-  color: #666;
-  font-size: 14px;
-}
-
-/* =========================
-   TESTIMONIAL / AREAS
-========================= */
-
-.bottomSection {
+.productsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  padding-bottom: 50px;
+  gap: 10px;
+  margin-top: 25px;
 }
 
-.testimonial,
-.areas {
-  padding: 30px;
-  border: 1px solid #ddd;
+.productsGrid > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #dedede;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-.testimonial h2,
-.areas h2 {
-  margin: 0 0 15px;
-  font-size: 28px;
+.productsGrid span {
+  color: #b17d18;
+  font-size: 12px;
   font-weight: 900;
 }
 
-.stars {
+.productNote {
+  margin-top: 22px;
+  padding: 17px;
+  background: #ffffff;
+  color: #555555;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.retailerBox {
+  padding: 55px;
+  background: #003b2d;
+  color: #ffffff;
+}
+
+.retailerBox h2 {
+  color: #ffffff;
+}
+
+.retailerBox p {
+  color: #e2e2e2;
+}
+
+.noAffiliation {
+  margin-top: 25px;
+  padding: 17px;
+  border-left: 4px solid #e4b63d;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.noAffiliation strong {
+  color: #e7b93f;
+}
+
+.noAffiliation p {
+  margin: 7px 0 0;
+  font-size: 13px;
+}
+
+/* =========================================================
+   CLEAR QUOTES
+========================================================= */
+
+.quoteInfoSection {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 70px;
+  padding: 70px 0;
+  border-top: 1px solid #dddddd;
+}
+
+.quoteInfoSection > div:last-child p {
+  margin: 0 0 17px;
+}
+
+.quoteInfoSection > div:last-child p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   DAMAGE
+========================================================= */
+
+.damageSection {
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  gap: 25px;
+  align-items: start;
+  margin-bottom: 75px;
+  padding: 40px;
+  background: #f3f5f3;
+  border-left: 5px solid #003b2d;
+}
+
+.damageIcon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #003b2d;
+  color: #e8b83c;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.damageSection h2 {
+  margin-bottom: 15px;
+}
+
+.damageSection p {
+  margin: 0 0 12px;
+}
+
+/* =========================================================
+   AREA
+========================================================= */
+
+.areaSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  padding-bottom: 75px;
+}
+
+.areaContent {
+  padding: 40px;
+  background: #f5f2eb;
+}
+
+.areaContent h2 {
   margin-bottom: 18px;
-  color: #e0a51c;
-  font-size: 24px;
-  letter-spacing: 3px;
 }
 
-.testimonial blockquote {
-  margin: 0 0 18px;
-  color: #444;
-  font-size: 17px;
-  line-height: 1.5;
-}
-
-.areas p {
-  color: #555;
-  font-size: 16px;
-  line-height: 1.45;
+.areaContent p {
+  margin: 0;
 }
 
 .mapBox {
-  width: 100%;
-  height: 230px;
-  margin: 20px 0;
+  min-height: 380px;
   overflow: hidden;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
 }
 
 .mapBox iframe {
   width: 100%;
   height: 100%;
+  min-height: 380px;
   border: 0;
 }
 
-.mapButton {
-  display: inline-block;
-  padding: 13px 25px;
-  background: #c99a37;
-  color: #ffffff;
-  font-weight: 800;
+/* =========================================================
+   RELATED
+========================================================= */
+
+.relatedSection {
+  padding-bottom: 75px;
 }
 
-/* =========================
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.relatedGrid a {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  padding: 15px 18px;
+  border: 1px solid #dcdcdc;
+  background: #ffffff;
+  color: #18372f;
+  font-size: 14px;
+  font-weight: 800;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.relatedGrid a:hover {
+  background: #003b2d;
+  color: #ffffff;
+}
+
+/* =========================================================
    FAQ
-========================= */
+========================================================= */
 
 .faqSection {
-  padding-bottom: 55px;
+  padding-bottom: 80px;
 }
 
-.faqContent h2 {
-  margin-bottom: 25px;
+.faqContent {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.faqContent > h2 {
+  margin-bottom: 30px;
 }
 
 .faqGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 18px;
+  gap: 11px 18px;
 }
 
 .faqItem {
-  border: 1px solid #d9dfe2;
+  border: 1px solid #d8ddda;
   background: #ffffff;
 }
 
@@ -732,10 +1437,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  padding: 17px 20px;
+  padding: 19px 20px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 700;
+  color: #111111;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.4;
   list-style: none;
 }
 
@@ -744,57 +1451,102 @@
 }
 
 .faqItem summary span {
-  font-size: 23px;
+  flex-shrink: 0;
+  color: #a97816;
+  font-size: 24px;
   font-weight: 400;
+}
+
+.faqItem[open] summary {
+  color: #003b2d;
 }
 
 .faqItem p {
   margin: 0;
-  padding: 0 20px 18px;
-  color: #666;
-  line-height: 1.5;
+  padding: 0 20px 20px;
+  color: #5b5b5b;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-/* =========================
+/* =========================================================
    FINAL CTA
-========================= */
+========================================================= */
 
 .finalCta {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
   align-items: center;
-  justify-content: space-between;
-  gap: 25px;
-  padding: 45px 5%;
+  padding: 65px 5%;
   background: #003b2d;
   color: #ffffff;
 }
 
 .finalCta h2 {
-  margin: 0 0 8px;
-  font-size: 32px;
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: clamp(31px, 3vw, 46px);
+  line-height: 1.05;
+  font-weight: 900;
 }
 
 .finalCta p {
-  margin: 0;
-  font-size: 17px;
+  max-width: 850px;
+  margin: 0 0 10px;
   color: #e5e5e5;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
-.finalCta a {
-  display: inline-flex;
+.finalStatement {
+  margin-top: 22px;
+  color: #e8b83c;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.finalButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  min-width: 260px;
+}
+
+.finalGoldButton,
+.finalPhoneButton {
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 55px;
-  padding: 0 25px;
-  background: #d6a83b;
-  color: #ffffff;
+  min-height: 56px;
+  padding: 0 22px;
+  font-size: 14px;
   font-weight: 900;
-  white-space: nowrap;
+  text-align: center;
 }
 
-/* =========================
-   RESPONSIVE TABLET
-========================= */
+.finalGoldButton {
+  background: #d7a83e;
+  color: #ffffff;
+}
+
+.finalGoldButton:hover {
+  background: #e9bd59;
+}
+
+.finalPhoneButton {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+.finalPhoneButton:hover {
+  background: #ffffff;
+  color: #003b2d;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 1200px) {
   .heroGrid {
@@ -805,38 +1557,54 @@
     grid-column: 1 / -1;
   }
 
-  .benefits {
+  .summaryStrip {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .servicesLayout {
-    grid-template-columns: 1fr;
+  .summaryStrip > div:nth-child(3) {
+    border-right: 0;
   }
 
-  .beforeAfterSection {
-    grid-template-columns: 1fr 1fr;
+  .summaryStrip > div:nth-child(n + 4) {
+    border-top: 1px solid #dedede;
   }
 
-  .beforeAfter {
-    grid-column: 1 / -1;
+  .serviceGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .landlordBox {
-    grid-column: 2;
+  .checkGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .checkGridSmall {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .processGrid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .projectsGrid {
+  .partialGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .threeColumnSection {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contentCardDark {
+    grid-column: 1 / -1;
   }
 }
 
-/* =========================
-   RESPONSIVE MOBILE
-========================= */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 768px) {
   .hero {
@@ -846,12 +1614,12 @@
   .heroContent {
     width: 92%;
     padding-top: 18px;
+    padding-bottom: 30px;
   }
 
   .breadcrumb {
-    font-size: 13px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 12px;
   }
 
   .heroGrid {
@@ -860,38 +1628,26 @@
   }
 
   .heroText {
-    padding: 20px 0 25px;
+    padding: 22px 0 30px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
   }
 
   .heroText h1 {
     font-size: 39px;
-    letter-spacing: -1px;
-  }
-
-  .heroText h2 {
-    font-size: 27px;
+    letter-spacing: -1.2px;
+    line-height: 1;
   }
 
   .heroText p {
-    font-size: 16px;
-  }
-
-  .heroImage {
-    min-height: 260px;
-    order: 2;
-  }
-
-  .heroImage img {
-    min-height: 260px;
-  }
-
-  .heroList {
-    order: 3;
-    padding: 25px 20px;
-  }
-
-  .heroList li {
     font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .heroMessage {
+    font-size: 19px;
   }
 
   .heroButtons {
@@ -903,35 +1659,98 @@
     width: 100%;
   }
 
-  .benefits {
-    grid-template-columns: 1fr 1fr;
+  .supportingLink {
+    font-size: 13px;
   }
 
-  .benefit {
-    min-height: 80px;
-    padding: 12px;
+  .heroImage {
+    order: 2;
+    min-height: 280px;
   }
 
-  .benefit > span {
-    font-size: 26px;
+  .heroImage img {
+    min-height: 280px;
   }
 
-  .benefit strong {
+  .heroList {
+    order: 3;
+    padding: 28px 20px;
+  }
+
+  .heroList li {
     font-size: 14px;
   }
 
-  .benefit small {
-    font-size: 12px;
+  .summaryStrip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .summaryStrip > div {
+    min-height: 82px;
+    padding: 13px;
+  }
+
+  .summaryStrip > div:nth-child(3) {
+    border-right: 1px solid #dedede;
+  }
+
+  .summaryStrip > div:nth-child(even) {
+    border-right: 0;
+  }
+
+  .summaryStrip > div:nth-child(n + 3) {
+    border-top: 1px solid #dedede;
+  }
+
+  .summaryStrip span {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+  }
+
+  .summaryStrip strong {
+    font-size: 13px;
+  }
+
+  .summaryStrip small {
+    font-size: 10px;
+  }
+
+  .introSection,
+  .servicesSection,
+  .twoColumnSection,
+  .featureSection,
+  .featureSectionReverse,
+  .threeColumnSection,
+  .twoFeatureSection,
+  .processSection,
+  .productsSection,
+  .quoteInfoSection,
+  .damageSection,
+  .areaSection,
+  .relatedSection,
+  .faqSection {
+    width: 92%;
+  }
+
+  .introSection {
+    padding: 55px 0;
+  }
+
+  .introGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 25px;
   }
 
   .sectionHeader {
-    align-items: flex-start;
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 13px;
   }
 
   .servicesSection {
-    padding: 40px 0;
+    padding-bottom: 55px;
   }
 
   .serviceGrid {
@@ -939,33 +1758,127 @@
   }
 
   .serviceImage {
-    height: 230px;
+    height: 240px;
   }
 
   .serviceBody p {
     min-height: auto;
   }
 
-  .quoteCard {
-    padding: 20px;
+  .darkSection,
+  .plumbingSection,
+  .landlordSection,
+  .partialSection {
+    padding: 55px 4%;
   }
 
-  .beforeAfterSection {
-    display: flex;
-    flex-direction: column;
+  .darkHeading {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
   }
 
-  .beforeAfter {
-    display: grid;
+  .checkGrid,
+  .checkGridSmall {
+    grid-template-columns: 1fr;
   }
 
-  .beforeAfter > div {
-    height: 280px;
+  .twoColumnSection {
+    grid-template-columns: 1fr;
+    padding: 55px 0;
   }
 
-  .chooseUs,
-  .landlordBox {
-    padding: 30px 22px;
+  .infoPanel,
+  .infoPanelAlt {
+    padding: 30px 23px;
+  }
+
+  .simpleList {
+    grid-template-columns: 1fr;
+  }
+
+  .featureSection,
+  .featureSectionReverse {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    margin-bottom: 55px;
+  }
+
+  .featureSectionReverse {
+    margin-top: 55px;
+  }
+
+  .featureImage {
+    min-height: 300px;
+  }
+
+  .featureImage img {
+    min-height: 300px;
+  }
+
+  .featureContent {
+    padding: 35px 23px;
+  }
+
+  .miniGrid,
+  .finishPoints {
+    grid-template-columns: 1fr;
+  }
+
+  .threeColumnSection {
+    grid-template-columns: 1fr;
+    padding: 55px 0;
+  }
+
+  .contentCardDark {
+    grid-column: auto;
+  }
+
+  .contentCard,
+  .contentCardDark {
+    padding: 28px 22px;
+  }
+
+  .twoFeatureSection {
+    grid-template-columns: 1fr;
+    padding-bottom: 55px;
+  }
+
+  .softFeature,
+  .softFeatureGreen {
+    padding: 35px 23px;
+  }
+
+  .lightList {
+    grid-template-columns: 1fr;
+  }
+
+  .partialGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .propertySection {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    margin-top: 55px;
+    margin-bottom: 55px;
+  }
+
+  .propertyImage,
+  .propertyImage img {
+    min-height: 300px;
+  }
+
+  .propertyContent {
+    padding: 35px 23px;
+  }
+
+  .propertyList {
+    grid-template-columns: 1fr;
+  }
+
+  .processSection {
+    padding: 55px 0;
   }
 
   .processGrid {
@@ -973,21 +1886,60 @@
   }
 
   .processItem {
-    border-right: 0;
-    border-bottom: 1px solid #ddd;
-    padding: 18px 0;
+    min-height: auto;
   }
 
-  .projectsGrid {
+  .productsSection {
+    grid-template-columns: 1fr;
+    margin-bottom: 55px;
+  }
+
+  .productsContent,
+  .retailerBox {
+    padding: 35px 23px;
+  }
+
+  .productsGrid {
     grid-template-columns: 1fr;
   }
 
-  .projectCard img {
-    height: 250px;
+  .quoteInfoSection {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 55px 0;
   }
 
-  .bottomSection {
+  .damageSection {
     grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 55px;
+    padding: 28px 22px;
+  }
+
+  .areaSection {
+    grid-template-columns: 1fr;
+    padding-bottom: 55px;
+  }
+
+  .areaContent {
+    padding: 30px 22px;
+  }
+
+  .mapBox,
+  .mapBox iframe {
+    min-height: 280px;
+  }
+
+  .relatedSection {
+    padding-bottom: 55px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .faqSection {
+    padding-bottom: 55px;
   }
 
   .faqGrid {
@@ -995,58 +1947,134 @@
   }
 
   .finalCta {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 35px 5%;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 50px 6%;
   }
 
-  .finalCta a {
+  .finalButtons {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .finalGoldButton,
+  .finalPhoneButton {
     width: 100%;
   }
 }
 
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
 @media (max-width: 480px) {
-  .benefits {
-    grid-template-columns: 1fr;
-  }
-
-  .benefit {
-    border-right: 0;
-    border-bottom: 1px solid #ddd;
-  }
-
   .heroText h1 {
-    font-size: 34px;
+    font-size: 33px;
   }
 
-  .heroText h2 {
-    font-size: 24px;
+  .heroText p {
+    font-size: 14px;
   }
 
   .heroImage {
-    min-height: 220px;
+    min-height: 230px;
   }
 
   .heroImage img {
-    min-height: 220px;
+    min-height: 230px;
   }
 
-  .beforeAfter {
+  .heroList {
+    padding: 25px 17px;
+  }
+
+  .summaryStrip {
     grid-template-columns: 1fr;
   }
 
-  .beforeAfter > div {
-    height: 240px;
+  .summaryStrip > div,
+  .summaryStrip > div:nth-child(3),
+  .summaryStrip > div:nth-child(even) {
+    border-right: 0;
+    border-bottom: 1px solid #dedede;
   }
 
-  .quoteFeatures {
-    grid-template-columns: 1fr;
-    gap: 15px;
+  .summaryStrip > div:first-child {
+    border-top: 0;
   }
 
-  .sectionHeader h2,
-  .sectionTitle h2,
-  .faqContent h2 {
+  .summaryStrip > div:nth-child(n + 2) {
+    border-top: 0;
+  }
+
+  .summaryStrip > div:last-child {
+    border-bottom: 0;
+  }
+
+  .introSection h2,
+  .servicesSection h2,
+  .twoColumnSection h2,
+  .featureSection h2,
+  .featureSectionReverse h2,
+  .threeColumnSection h2,
+  .twoFeatureSection h2,
+  .partialSection h2,
+  .propertySection h2,
+  .processSection h2,
+  .productsSection h2,
+  .quoteInfoSection h2,
+  .damageSection h2,
+  .areaSection h2,
+  .relatedSection h2,
+  .faqSection h2 {
     font-size: 29px;
+  }
+
+  .darkSection h2,
+  .plumbingSection h2,
+  .landlordSection h2,
+  .finalCta h2 {
+    font-size: 30px;
+  }
+
+  .serviceImage {
+    height: 215px;
+  }
+
+  .serviceBody {
+    padding: 18px;
+  }
+
+  .featureContent,
+  .productsContent,
+  .retailerBox,
+  .propertyContent {
+    padding: 30px 19px;
+  }
+
+  .partialSection {
+    padding: 50px 4%;
+  }
+
+  .bigStatement {
+    font-size: 20px;
+  }
+
+  .faqItem summary {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .faqItem p {
+    padding: 0 16px 17px;
+    font-size: 13px;
+  }
+
+  .finalCta {
+    padding: 45px 6%;
+  }
+
+  .finalStatement {
+    font-size: 18px;
   }
 }
