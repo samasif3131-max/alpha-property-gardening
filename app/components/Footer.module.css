@@ -1,918 +1,581 @@
-/* =========================================================
-   ALPHA PROPERTY CARE
-   FOOTER MODULE CSS
-
-   File:
-   app/components/Footer.module.css
-   ========================================================= */
-
-
-/* =========================================================
-   FOOTER ROOT
-   ========================================================= */
+/* =========================================
+   ALPHA FOOTER
+========================================= */
 
 .footer {
   width: 100%;
-  margin: 0;
-  padding: 0;
+  background: #10251a;
   color: #ffffff;
-  background: #031e17;
-  border-top: 4px solid #c99b3b;
 }
 
-
-/* =========================================================
+/* =========================================
    MAIN FOOTER
-   ========================================================= */
+========================================= */
 
 .footerMain {
-  width: 100%;
-  padding: 65px 0 45px;
+  padding: 65px 0 55px;
+
+  background: #10251a;
 }
 
 .footerContainer {
-  width: min(1280px, calc(100% - 60px));
+  width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
 }
 
 .footerGrid {
   display: grid;
-  grid-template-columns:
-    1.5fr
-    1fr
-    1fr
-    1.35fr
-    0.9fr;
-
-  gap: 42px;
-  align-items: start;
+  grid-template-columns: 1.45fr 0.9fr 0.9fr 1fr;
+  gap: 50px;
 }
 
-
-/* =========================================================
+/* =========================================
    BRAND COLUMN
-   ========================================================= */
+========================================= */
 
 .brandColumn {
-  min-width: 0;
+  max-width: 400px;
 }
 
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 13px;
+
+  text-decoration: none;
+}
+
+.logoImage {
+  display: block;
+
+  width: 190px;
+  height: auto;
+
+  object-fit: contain;
+}
+
+.tagline {
+  margin: 15px 0 13px;
+
+  color: #d8b96d;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.description {
+  max-width: 390px;
+  margin: 0 0 22px;
+
+  color: rgba(255, 255, 255, 0.67);
+
+  font-size: 11px;
+  line-height: 1.75;
+}
+
+/* =========================================
+   CONTACT DETAILS
+========================================= */
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 11px;
 
   color: #ffffff;
   text-decoration: none;
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
 }
 
-.logo:hover {
-  opacity: 0.95;
-  transform: translateY(-1px);
+.contactItem:hover {
+  color: #d8b96d;
 }
 
-
-/* Logo symbol */
-
-.logoMark {
-  width: 52px;
-  height: 52px;
-
-  flex: 0 0 52px;
+.contactIcon {
+  width: 34px;
+  height: 34px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: #e1b85b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 
-  border: 2px solid #c99b3b;
+  color: #d8b96d;
 
-  background: rgba(201, 155, 59, 0.04);
-
-  clip-path: polygon(
-    50% 0%,
-    100% 100%,
-    0% 100%
-  );
-
-  font-size: 23px;
-  font-weight: 900;
-  line-height: 1;
+  font-size: 13px;
 }
 
-
-/* Logo text */
-
-.logoText {
-  display: block;
-}
-
-.logoMain {
-  display: block;
-
-  color: #ffffff;
-
-  font-size: 29px;
-  line-height: 1;
-
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.logoSub {
-  display: block;
-
-  margin-top: 6px;
-
-  color: rgba(255, 255, 255, 0.65);
-
-  font-size: 9px;
-  line-height: 1.2;
-
-  font-weight: 500;
-  letter-spacing: 1.3px;
-}
-
-
-/* Brand tagline */
-
-.tagline {
-  max-width: 330px;
-
-  margin: 21px 0 11px;
-
-  color: #e1b85b;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 15px;
-  line-height: 1.5;
-
-  font-weight: 700;
-  font-style: italic;
-}
-
-
-/* Brand description */
-
-.brandDescription {
-  max-width: 330px;
-
-  margin: 0;
-
-  color: rgba(255, 255, 255, 0.55);
-
-  font-size: 12px;
-  line-height: 1.75;
-}
-
-
-/* =========================================================
-   FOOTER COLUMNS
-   ========================================================= */
-
-.footerColumn {
-  min-width: 0;
-
+.contactItem > span:last-child {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
-.footerColumn h3,
-.contactColumn h3,
-.socialColumn h3 {
-  margin: 0 0 11px;
+.contactItem small {
+  color: rgba(255, 255, 255, 0.48);
+
+  font-size: 9px;
+  line-height: 1.3;
+}
+
+.contactItem strong {
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  line-height: 1.4;
+}
+
+.contactItem:hover strong {
+  color: #d8b96d;
+}
+
+/* =========================================
+   FOOTER COLUMNS
+========================================= */
+
+.footerColumn h3 {
+  position: relative;
+
+  margin: 4px 0 20px;
+  padding-bottom: 12px;
 
   color: #ffffff;
 
   font-size: 13px;
-  line-height: 1.3;
-
   font-weight: 800;
-
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
+.footerColumn h3::after {
+  content: "";
 
-/* Gold heading line */
+  position: absolute;
+  left: 0;
+  bottom: 0;
 
-.goldLine {
-  width: 30px;
+  width: 28px;
   height: 2px;
 
-  margin-bottom: 19px;
-
-  background: #c99b3b;
+  background: #c49a45;
 }
 
+.footerColumn ul {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 
-/* Footer links */
+  margin: 0;
+  padding: 0;
 
-.footerColumn a {
-  display: block;
+  list-style: none;
+}
 
-  margin: 0 0 10px;
+.footerColumn li {
+  margin: 0;
+}
 
-  color: rgba(255, 255, 255, 0.57);
+.footerColumn li a {
+  color: rgba(255, 255, 255, 0.62);
 
   text-decoration: none;
 
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.5;
 
-  font-weight: 500;
-
   transition:
     color 0.2s ease,
-    transform 0.2s ease;
+    padding-left 0.2s ease;
 }
 
-.footerColumn a:hover {
-  color: #e1b85b;
-  transform: translateX(3px);
+.footerColumn li a:hover {
+  padding-left: 3px;
+  color: #d8b96d;
 }
 
-
-/* Gold footer link */
-
-.footerColumn .footerGoldLink {
-  margin-top: 5px;
-
-  color: #e1b85b;
-
-  font-weight: 700;
-}
-
-
-/* =========================================================
-   CONTACT COLUMN
-   ========================================================= */
-
-.contactColumn {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-
-/* Contact item */
-
-.contactItem {
-  width: 100%;
-
-  display: flex;
-  align-items: flex-start;
-
-  gap: 9px;
-
-  margin: 0 0 13px;
-
-  color: rgba(255, 255, 255, 0.58);
-
-  text-decoration: none;
-
-  font-size: 11px;
-  line-height: 1.45;
-
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-a.contactItem:hover {
-  color: #e1b85b;
-  transform: translateX(2px);
-}
-
-
-/* Contact icon */
-
-.contactIcon {
-  width: 19px;
-  min-width: 19px;
-
-  flex: 0 0 19px;
-
-  color: #e1b85b;
-
-  font-size: 14px;
-  line-height: 1.3;
-
-  text-align: center;
-}
-
-
-/* Contact text */
-
-.contactText {
-  min-width: 0;
-
-  display: block;
-}
-
-.contactText strong,
-.contactText small {
-  display: block;
-}
-
-.contactText strong {
-  margin-bottom: 2px;
-
-  color: #ffffff;
-
-  font-size: 11px;
-  line-height: 1.3;
-
-  font-weight: 700;
-}
-
-.contactText small {
-  color: rgba(255, 255, 255, 0.53);
-
-  font-size: 10px;
-  line-height: 1.45;
-
-  overflow-wrap: anywhere;
-}
-
-
-/* =========================================================
-   QUOTE BUTTON
-   ========================================================= */
-
-.quoteButton {
-  width: 100%;
-
-  min-height: 43px;
-
-  margin-top: 5px;
-
-  padding: 0 13px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
-  color: #ffffff;
-
-  background: #c99b3b;
-
-  border: 1px solid #c99b3b;
-  border-radius: 4px;
-
-  text-decoration: none;
-
-  font-size: 11px;
+.footerColumn .viewAllLink {
+  color: #d8b96d;
   font-weight: 800;
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
 }
 
-.quoteButton:hover {
-  color: #ffffff;
+/* =========================================
+   EMERGENCY COLUMN
+========================================= */
 
-  background: #a97d25;
-  border-color: #a97d25;
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.22);
-}
-
-.arrow {
-  display: inline-block;
-
-  font-size: 16px;
-  line-height: 1;
-
-  transition: transform 0.25s ease;
-}
-
-.quoteButton:hover .arrow {
-  transform: translateX(4px);
-}
-
-
-/* =========================================================
-   SOCIAL COLUMN
-   ========================================================= */
-
-.socialColumn {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.socialDescription {
-  max-width: 180px;
-
+.emergencyText {
   margin: 0 0 17px;
 
-  color: rgba(255, 255, 255, 0.53);
+  color: rgba(255, 255, 255, 0.62);
 
   font-size: 10px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-
-/* =========================================================
-   SOCIAL LINKS
-   ========================================================= */
-
-.socialLinks {
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  flex-wrap: wrap;
-}
-
-.socialLink {
-  width: 35px;
-  height: 35px;
-
+.emergencyPhone {
   display: flex;
   align-items: center;
   justify-content: center;
 
+  width: 100%;
+  min-height: 43px;
+
+  margin-bottom: 9px;
+
+  background: #c49a45;
   color: #ffffff;
-
-  background: transparent;
-
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 50%;
 
   text-decoration: none;
 
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
 
   transition:
-    color 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease;
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
-.socialLink:hover {
-  color: #03291f;
-
-  background: #e1b85b;
-
-  border-color: #e1b85b;
-
-  transform: translateY(-3px);
+.emergencyPhone:hover {
+  background: #ad8334;
+  transform: translateY(-1px);
 }
 
+.emergencyLink {
+  display: block;
 
-/* =========================================================
-   TRUST BADGE
-   ========================================================= */
+  margin-bottom: 15px;
 
-.trustBadge {
-  display: flex;
-  align-items: flex-start;
+  color: #d8b96d;
 
-  gap: 9px;
+  text-decoration: none;
 
-  margin-top: 22px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.5;
 }
 
-.trustIcon {
-  width: 28px;
-  height: 28px;
+.emergencyLink:hover {
+  color: #ffffff;
+}
 
-  flex: 0 0 28px;
-
+.footerQuote {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: #e1b85b;
+  width: 100%;
+  min-height: 40px;
 
-  border: 1px solid rgba(201, 155, 59, 0.65);
-  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.trustBadge strong,
-.trustBadge small {
-  display: block;
-}
-
-.trustBadge strong {
   color: #ffffff;
 
+  text-decoration: none;
+
   font-size: 10px;
-  line-height: 1.4;
+  font-weight: 800;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.trustBadge small {
-  margin-top: 3px;
-
-  color: rgba(255, 255, 255, 0.48);
-
-  font-size: 9px;
-  line-height: 1.4;
+.footerQuote:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #d8b96d;
 }
 
+/* =========================================
+   SERVICE AREA
+========================================= */
 
-/* =========================================================
-   FOOTER BOTTOM
-   ========================================================= */
+.areaBar {
+  background: #173f2a;
 
-.footerBottom {
-  width: 100%;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.bottomContainer {
-  width: min(1280px, calc(100% - 60px));
-
-  min-height: 62px;
-
-  margin: 0 auto;
+.areaBarInner {
+  min-height: 75px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  gap: 20px;
+  gap: 25px;
 }
 
+.areaBarInner > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 
-/* Copyright */
+.areaBarInner strong {
+  color: #d8b96d;
 
-.bottomContainer p {
-  margin: 0;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
 
-  color: rgba(255, 255, 255, 0.38);
+.areaBarInner span {
+  color: rgba(255, 255, 255, 0.58);
 
   font-size: 10px;
   line-height: 1.5;
 }
 
+.areaBarInner > a {
+  flex-shrink: 0;
 
-/* Legal links */
-
-.legalLinks {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-
-  flex-wrap: wrap;
-}
-
-.legalLinks a {
-  color: rgba(255, 255, 255, 0.42);
+  color: #ffffff;
 
   text-decoration: none;
 
   font-size: 10px;
-  line-height: 1.5;
-
-  transition: color 0.2s ease;
+  font-weight: 800;
 }
 
-.legalLinks a:hover {
-  color: #e1b85b;
+.areaBarInner > a:hover {
+  color: #d8b96d;
 }
 
-.legalLinks span {
-  color: rgba(255, 255, 255, 0.22);
+/* =========================================
+   FOOTER BOTTOM
+========================================= */
+
+.footerBottom {
+  background: #0b1b12;
+}
+
+.footerBottomInner {
+  min-height: 88px;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.footerBottomInner > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.footerBottomInner p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.45);
 
   font-size: 9px;
 }
 
-
-/* Bottom brand */
-
-.bottomBrand {
-  color: rgba(255, 255, 255, 0.35);
-
-  font-size: 10px;
-  line-height: 1.5;
-
-  white-space: nowrap;
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
+.socialLinks a {
+  width: 27px;
+  height: 27px;
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-@media (max-width: 1100px) {
-  .footerContainer,
-  .bottomContainer {
-    width: min(100% - 48px, 960px);
-  }
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
 
-  .footerMain {
-    padding: 58px 0 40px;
-  }
+  color: rgba(255, 255, 255, 0.7);
 
+  text-decoration: none;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.socialLinks a:hover {
+  background: #c49a45;
+  border-color: #c49a45;
+  color: #ffffff;
+}
+
+.copyright {
+  text-align: center;
+}
+
+.bottomBrand {
+  text-align: right;
+
+  color: #d8b96d !important;
+
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}
+
+/* =========================================
+   RESPONSIVE 1050
+========================================= */
+
+@media (max-width: 1050px) {
   .footerGrid {
-    grid-template-columns:
-      1.4fr
-      1fr
-      1fr;
-
-    gap: 40px 35px;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 35px;
   }
 
   .brandColumn {
     grid-column: 1 / -1;
+
+    max-width: 650px;
   }
 
-  .socialColumn {
+  .footerBottomInner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .copyright {
+    text-align: right;
+  }
+
+  .bottomBrand {
     grid-column: 1 / -1;
-  }
 
-  .socialDescription {
-    max-width: 400px;
-  }
-
-  .bottomContainer {
-    min-height: auto;
-
-    padding: 20px 0;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 12px;
-  }
-
-  .legalLinks {
-    justify-content: flex-start;
+    text-align: left;
   }
 }
 
+/* =========================================
+   RESPONSIVE 750
+========================================= */
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
+@media (max-width: 750px) {
   .footerMain {
-    padding: 50px 0 35px;
+    padding: 50px 0 45px;
   }
 
-  .footerContainer,
-  .bottomContainer {
+  .footerContainer {
     width: calc(100% - 30px);
   }
 
   .footerGrid {
     grid-template-columns: 1fr 1fr;
-
-    gap: 35px 24px;
+    gap: 35px 25px;
   }
 
   .brandColumn {
     grid-column: 1 / -1;
   }
 
-  .socialColumn {
-    grid-column: 1 / -1;
-  }
-
-  .logoMark {
-    width: 50px;
-    height: 50px;
-
-    flex-basis: 50px;
-
-    font-size: 22px;
-  }
-
-  .logoMain {
-    font-size: 25px;
-  }
-
-  .logoSub {
-    font-size: 8px;
-  }
-
-  .tagline {
-    font-size: 15px;
-  }
-
-  .brandDescription {
+  .description {
     max-width: 100%;
-
-    font-size: 12px;
-
-    line-height: 1.75;
   }
 
-  .footerColumn h3,
-  .contactColumn h3,
-  .socialColumn h3 {
-    font-size: 12px;
-  }
-
-  .footerColumn a {
-    font-size: 11px;
-  }
-
-  .contactItem {
-    font-size: 11px;
-  }
-
-  .quoteButton {
-    max-width: 220px;
-  }
-
-  .socialDescription {
-    max-width: 100%;
-
-    font-size: 11px;
-  }
-
-  .bottomContainer {
-    padding: 18px 0;
-
+  .areaBarInner {
     align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
 
-    gap: 12px;
+    padding: 17px 0;
   }
 
-  .bottomContainer p,
-  .legalLinks a,
-  .bottomBrand {
-    font-size: 10px;
+  .areaBarInner > a {
+    color: #d8b96d;
+  }
+
+  .footerBottomInner {
+    grid-template-columns: 1fr;
+
+    padding: 20px 0;
+  }
+
+  .footerBottomInner > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .copyright {
+    text-align: left;
   }
 
   .bottomBrand {
-    white-space: normal;
+    grid-column: auto;
+
+    text-align: left;
   }
 }
 
+/* =========================================
+   RESPONSIVE 500
+========================================= */
 
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-  .footerMain {
-    padding: 45px 0 30px;
-  }
-
-  .footerContainer,
-  .bottomContainer {
-    width: calc(100% - 24px);
+@media (max-width: 500px) {
+  .footerContainer {
+    width: calc(100% - 28px);
   }
 
   .footerGrid {
     grid-template-columns: 1fr;
-
-    gap: 31px;
+    gap: 30px;
   }
 
-  .brandColumn,
-  .socialColumn {
+  .brandColumn {
     grid-column: auto;
   }
 
-  .logo {
-    gap: 11px;
-  }
-
-  .logoMark {
-    width: 48px;
-    height: 48px;
-
-    flex-basis: 48px;
-
-    font-size: 21px;
-  }
-
-  .logoMain {
-    font-size: 23px;
-
-    letter-spacing: 1.5px;
-  }
-
-  .logoSub {
-    font-size: 8px;
+  .logoImage {
+    width: 170px;
   }
 
   .tagline {
-    margin-top: 18px;
-
-    font-size: 14px;
+    font-size: 13px;
   }
 
-  .brandDescription {
-    font-size: 12px;
+  .description {
+    font-size: 10px;
   }
 
-  .footerColumn h3,
-  .contactColumn h3,
-  .socialColumn h3 {
-    font-size: 12px;
+  .footerColumn h3 {
+    margin-bottom: 16px;
   }
 
-  .footerColumn a,
-  .contactItem {
-    font-size: 11px;
-  }
-
-  .quoteButton {
-    max-width: 100%;
-  }
-
-  .socialLinks {
+  .footerColumn ul {
     gap: 8px;
   }
 
-  .socialLink {
-    width: 36px;
-    height: 36px;
+  .footerColumn li a {
+    font-size: 10px;
   }
 
-  .trustBadge {
-    margin-top: 20px;
+  .emergencyPhone {
+    max-width: 280px;
   }
 
-  .bottomContainer {
-    gap: 13px;
+  .footerQuote {
+    max-width: 280px;
   }
 
-  .legalLinks {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 7px;
-  }
-
-  .legalLinks span {
-    display: none;
-  }
-
-  .bottomBrand {
-    white-space: normal;
+  .footerBottomInner p {
+    font-size: 8px;
   }
 }
 
-
-/* =========================================================
+/* =========================================
    ACCESSIBILITY
-   ========================================================= */
+========================================= */
 
-.logo:focus-visible,
-.footerColumn a:focus-visible,
-.contactItem:focus-visible,
-.quoteButton:focus-visible,
-.socialLink:focus-visible,
-.legalLinks a:focus-visible {
-  outline: 2px solid #e1b85b;
-  outline-offset: 4px;
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .logo,
-  .footerColumn a,
-  .contactItem,
-  .quoteButton,
-  .socialLink,
-  .legalLinks a,
-  .arrow {
-    transition: none;
-  }
+.footer a:focus-visible {
+  outline: 3px solid rgba(216, 185, 109, 0.65);
+  outline-offset: 3px;
 }

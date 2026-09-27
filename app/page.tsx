@@ -2,6 +2,9 @@ import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+const PHONE_DISPLAY = "01775 518068";
+const PHONE_TEL = "tel:01775518068";
+
 const services = [
   {
     title: "Property Maintenance",
@@ -15,6 +18,7 @@ const services = [
       "Ongoing property maintenance",
     ],
     href: "/property-maintenance",
+    linkText: "View Property Maintenance Services",
     icon: "⌁",
   },
   {
@@ -29,6 +33,7 @@ const services = [
       "24/7 emergency call-outs",
     ],
     href: "/plumbing-services",
+    linkText: "View Plumbing Services",
     icon: "⌁",
   },
   {
@@ -43,6 +48,7 @@ const services = [
       "Complete installation",
     ],
     href: "/bathroom-services",
+    linkText: "View Bathroom Services",
     icon: "▣",
   },
   {
@@ -57,6 +63,7 @@ const services = [
       "Complete project management",
     ],
     href: "/kitchen-services",
+    linkText: "View Kitchen Services",
     icon: "□",
   },
   {
@@ -71,45 +78,80 @@ const services = [
       "Regular garden maintenance",
     ],
     href: "/garden-services",
+    linkText: "View Garden Services",
     icon: "✦",
   },
 ];
 
-const advicePages = [
+const recentWork = [
   {
-    title: "Property Care",
-    text: "Practical advice for maintaining and protecting your property.",
-    href: "/advice/property-maintenance-advice",
+    title: "Garden Transformation",
+    location: "Spalding, Lincolnshire",
+    image:
+      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1000&q=85",
   },
   {
-    title: "Plumbing",
-    text: "Helpful guidance for common plumbing problems and maintenance.",
-    href: "/advice/plumbing-advice",
+    title: "Bathroom Renovation",
+    location: "Donington, Lincolnshire",
+    image:
+      "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1000&q=85",
   },
   {
-    title: "Bathrooms",
-    text: "Useful advice for bathroom maintenance and improvements.",
-    href: "/advice/bathroom-advice",
+    title: "Kitchen Installation",
+    location: "Spalding, Lincolnshire",
+    image:
+      "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=1000&q=85",
   },
   {
-    title: "Kitchens",
-    text: "Planning, maintaining and improving your kitchen.",
-    href: "/advice/kitchens-advice",
+    title: "Patio & Landscaping",
+    location: "Surfleet, Lincolnshire",
+    image:
+      "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1000&q=85",
   },
   {
-    title: "Garden Care",
-    text: "Keep your garden healthy, tidy and well maintained.",
-    href: "/advice/garden-maintenance-advice",
+    title: "Property Maintenance",
+    location: "Pinchbeck, Lincolnshire",
+    image:
+      "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1000&q=85",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Sarah M.",
+    role: "Spalding",
+    text: "Excellent service from start to finish. The team transformed our garden and were professional, reliable and tidy. Highly recommended!",
   },
   {
-    title: "Seasonal Advice",
-    text: "Practical property and garden advice throughout the year.",
-    href: "/advice/seasonal-advice",
+    name: "James T.",
+    role: "Letting Agent, Spalding",
+    text: "We use Alpha for all our rental properties. Quick response, great communication and high quality work every time.",
   },
   {
-    title: "Landlord Advice",
-    text: "Useful maintenance advice for landlords and letting agents.",
-    href: "/advice/landlord-advice",
+    name: "Kelly R.",
+    role: "Donington",
+    text: "Our new bathroom looks amazing. Friendly team, great workmanship and completed on time.",
+  },
+];
+
+const articles = [
+  {
+    title: "Top 5 Garden Maintenance Tips for Autumn",
+    text: "Keep your garden in great condition this season.",
+    image:
+      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    title: "How to Spot a Water Leak in Your Home",
+    text: "Early signs and what to do.",
+    image:
+      "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    title: "A Landlord's Guide to Property Maintenance",
+    text: "Essential checks to keep tenants happy.",
+    image:
+      "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=500&q=80",
   },
 ];
 
@@ -126,7 +168,9 @@ export default function HomePage() {
     <main className="alphaHome">
       <Header />
 
-      {/* HERO */}
+      {/* =========================================
+          HERO
+      ========================================= */}
       <section className="alphaHero">
         <div className="alphaHeroImage" />
         <div className="alphaHeroOverlay" />
@@ -135,7 +179,7 @@ export default function HomePage() {
           <div className="alphaHeroCopy">
             <div className="alphaEyebrow">
               <span />
-              PROPERTY &amp; GARDEN MAINTENANCE
+              RELIABLE. PROFESSIONAL. LOCAL.
             </div>
 
             <h1>
@@ -146,15 +190,7 @@ export default function HomePage() {
               You Can Rely On
             </h1>
 
-            <h2
-              style={{
-                margin: "0 0 18px",
-                color: "#ffffff",
-                fontSize: "24px",
-                lineHeight: "1.25",
-                fontWeight: 700,
-              }}
-            >
+            <h2 className="alphaHeroProposition">
               One Team. Complete Property Care.
             </h2>
 
@@ -168,15 +204,7 @@ export default function HomePage() {
 
             <div className="alphaTrustPills">
               <div>
-                <b>✓</b>
-                <span>
-                  <strong>Fully Insured</strong>
-                  For peace of mind
-                </span>
-              </div>
-
-              <div>
-                <b>£</b>
+                <b>◈</b>
                 <span>
                   <strong>Fixed Quotations</strong>
                   Clear pricing
@@ -184,7 +212,7 @@ export default function HomePage() {
               </div>
 
               <div>
-                <b>◆</b>
+                <b>✓</b>
                 <span>
                   <strong>One Trusted Team</strong>
                   Multiple services
@@ -192,7 +220,15 @@ export default function HomePage() {
               </div>
 
               <div>
-                <b>24</b>
+                <b>⌁</b>
+                <span>
+                  <strong>Fully Insured</strong>
+                  For peace of mind
+                </span>
+              </div>
+
+              <div>
+                <b>◷</b>
                 <span>
                   <strong>24/7 Emergency</strong>
                   Call-outs available
@@ -214,9 +250,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TRUST BAR */}
+      {/* =========================================
+          TRUST BAR
+      ========================================= */}
       <section className="alphaTrustBar">
         <div className="alphaContainer alphaTrustGrid">
+          <div className="alphaTrustItem">
+            <div className="alphaTrustIcon">◈</div>
+            <div>
+              <strong>Fixed Quotations</strong>
+              <span>Clear pricing</span>
+            </div>
+          </div>
+
+          <div className="alphaTrustItem">
+            <div className="alphaTrustIcon">✓</div>
+            <div>
+              <strong>One Trusted Team</strong>
+              <span>Multiple services</span>
+            </div>
+          </div>
+
           <div className="alphaTrustItem">
             <div className="alphaTrustIcon">✓</div>
             <div>
@@ -226,32 +280,26 @@ export default function HomePage() {
           </div>
 
           <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">£</div>
-            <div>
-              <strong>Fixed Quotations</strong>
-              <span>Clear pricing</span>
-            </div>
-          </div>
-
-          <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">◆</div>
-            <div>
-              <strong>One Trusted Team</strong>
-              <span>Multiple services</span>
-            </div>
-          </div>
-
-          <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">24</div>
+            <div className="alphaTrustIcon">◷</div>
             <div>
               <strong>24/7 Emergency</strong>
               <span>Call-outs available</span>
             </div>
           </div>
+
+          <div className="alphaTrustItem alphaPhoneTrustItem">
+            <div className="alphaTrustIcon">⌕</div>
+            <div>
+              <a href={PHONE_TEL}>{PHONE_DISPLAY}</a>
+              <span>Get in touch today</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* =========================================
+          SERVICES
+      ========================================= */}
       <section className="alphaServices" id="services">
         <div className="alphaContainer">
           <div className="alphaSectionHeading">
@@ -266,8 +314,8 @@ export default function HomePage() {
               </h2>
 
               <p>
-                Reliable property maintenance, repairs and specialist
-                services, alongside professional garden maintenance.
+                Complete property care covering maintenance, plumbing,
+                bathrooms, kitchens and garden maintenance.
               </p>
             </div>
 
@@ -301,8 +349,11 @@ export default function HomePage() {
                     ))}
                   </ul>
 
-                  <Link href={service.href} className="alphaServiceLink">
-                    View Service <Arrow />
+                  <Link
+                    href={service.href}
+                    className="alphaServiceLink"
+                  >
+                    {service.linkText} <Arrow />
                   </Link>
                 </div>
               </article>
@@ -311,12 +362,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* LANDLORDS */}
+      {/* =========================================
+          LANDLORDS
+      ========================================= */}
       <section className="alphaTrusted">
         <div className="alphaTrustedImage">
           <img
             src="/images/hero/trusted-homeowners.jpg"
-            alt="Property maintenance for homeowners and landlords"
+            alt="Professional property maintenance"
           />
         </div>
 
@@ -324,7 +377,7 @@ export default function HomePage() {
           <div className="alphaTrustedInner">
             <div className="alphaSmallHeading alphaLightHeading">
               <span />
-              PROPERTY CARE FOR LANDLORDS
+              ONE TEAM. ONE CONTACT.
             </div>
 
             <h2>
@@ -344,18 +397,23 @@ export default function HomePage() {
                 href="/landlords-letting-agents"
                 className="alphaGoldButton"
               >
-                Landlord Services <Arrow />
+                Landlord &amp; Agent Services <Arrow />
               </Link>
 
-              <Link href="/contact" className="alphaOutlineButton">
-                Request a Quote
+              <Link
+                href="/contact"
+                className="alphaOutlineButton"
+              >
+                Request a Free Quote
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHY CHOOSE ALPHA */}
+      {/* =========================================
+          WHY CHOOSE ALPHA
+      ========================================= */}
       <section className="alphaWhy">
         <div className="alphaContainer">
           <div className="alphaWhyGrid">
@@ -371,8 +429,8 @@ export default function HomePage() {
               </h2>
 
               <p>
-                One trusted team for property maintenance, repairs and
-                professional garden care.
+                One trusted team for your property, garden and home
+                improvement needs.
               </p>
             </div>
 
@@ -382,7 +440,7 @@ export default function HomePage() {
                 <section>
                   <strong>One Team, Complete Care</strong>
                   <small>
-                    Property and garden services managed by one trusted team
+                    All your property and garden needs in one place
                   </small>
                 </section>
               </div>
@@ -398,7 +456,7 @@ export default function HomePage() {
               <div>
                 <span>♙</span>
                 <section>
-                  <strong>Experienced &amp; Reliable</strong>
+                  <strong>Practical Experience</strong>
                   <small>
                     Practical experience across property and garden
                     maintenance.
@@ -437,7 +495,7 @@ export default function HomePage() {
                 <section>
                   <strong>Local &amp; Trusted</strong>
                   <small>
-                    Serving our local property and garden maintenance region
+                    Based in Spalding, covering surrounding areas
                   </small>
                 </section>
               </div>
@@ -454,55 +512,165 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* EMERGENCY */}
+      {/* =========================================
+          EMERGENCY
+      ========================================= */}
       <section className="alphaEmergency">
         <div className="alphaContainer">
           <div className="alphaEmergencyInner">
+            <div className="alphaSmallHeading alphaLightHeading">
+              <span />
+              24/7 EMERGENCY CALL-OUTS
+            </div>
+
+            <h2>Need Emergency Help?</h2>
+
+            <p>
+              Plumbing emergencies can happen at any time. Alpha provides
+              24/7 emergency call-outs for urgent plumbing problems.
+            </p>
+
+            <div className="alphaEmergencyCallText">
+              Need Emergency Help? Call{" "}
+              <a href={PHONE_TEL}>{PHONE_DISPLAY}</a>
+            </div>
+
+            <div className="alphaEmergencyButtons">
+              <a
+                href={PHONE_TEL}
+                className="alphaEmergencyCallButton"
+              >
+                CALL {PHONE_DISPLAY}
+              </a>
+
+              <Link
+                href="/plumbing-services"
+                className="alphaEmergencyLink"
+              >
+                View Emergency Plumbing Services <Arrow />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================
+          RECENT WORK
+      ========================================= */}
+      <section className="alphaRecent">
+        <div className="alphaContainer">
+          <div className="alphaSectionHeading alphaRecentHeading">
             <div>
-              <div className="alphaSmallHeading alphaLightHeading">
+              <div className="alphaSmallHeading">
                 <span />
-                EMERGENCY PROPERTY SERVICES
+                OUR WORK
               </div>
 
               <h2>
-                24/7 Emergency Call-Outs
+                Recent Work <i />
               </h2>
 
-              <p>
-                Urgent property and plumbing problems can happen at any
-                time. Contact Alpha for emergency call-outs and practical
-                support.
-              </p>
+              <p>Real projects. Real results.</p>
             </div>
 
-            <Link href="/contact" className="alphaGoldButton">
-              Get Emergency Help <Arrow />
+            <Link href="/our-work" className="alphaTextLink">
+              View More Work <Arrow />
             </Link>
+          </div>
+
+          <div className="alphaRecentGrid">
+            {recentWork.map((work) => (
+              <Link
+                href="/our-work"
+                className="alphaRecentCard"
+                key={work.title}
+              >
+                <div className="alphaRecentImage">
+                  <img src={work.image} alt={work.title} />
+                  <span>View Project</span>
+                </div>
+
+                <h3>{work.title}</h3>
+                <p>{work.location}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* QUOTE CTA */}
-      <section className="alphaQuoteSection">
+      {/* =========================================
+          REVIEWS
+      ========================================= */}
+      <section className="alphaReviews">
         <div className="alphaContainer">
-          <div className="alphaQuoteCard">
-            <div className="alphaQuoteIcon">▣</div>
+          <div className="alphaSectionHeading">
+            <div>
+              <div className="alphaSmallHeading">
+                <span />
+                CUSTOMER REVIEWS
+              </div>
 
-            <h3>Need Property or Garden Maintenance?</h3>
+              <h2>
+                What Our Customers Say <i />
+              </h2>
+            </div>
 
-            <p>
-              Tell us what you need and request a clear, no-obligation
-              quotation from Alpha Property &amp; Gardening Services.
-            </p>
-
-            <Link href="/request-a-quote" className="alphaQuoteButton">
-              Request a Quote <Arrow />
+            <Link href="/reviews" className="alphaTextLink">
+              Read All Reviews <Arrow />
             </Link>
+          </div>
+
+          <div className="alphaReviewsGrid">
+            <div className="alphaReviewCards">
+              {testimonials.map((review) => (
+                <article
+                  className="alphaReviewCard"
+                  key={review.name}
+                >
+                  <div className="alphaStars">★★★★★</div>
+
+                  <p>“{review.text}”</p>
+
+                  <div className="alphaReviewer">
+                    <div>{review.name.charAt(0)}</div>
+
+                    <section>
+                      <strong>{review.name}</strong>
+                      <small>{review.role}</small>
+                    </section>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="alphaQuoteCard">
+              <div className="alphaQuoteIcon">▣</div>
+
+              <h3>Need a Quote?</h3>
+
+              <p>
+                Get a free, no-obligation quote today. Tell us what you need
+                and we’ll get back to you quickly.
+              </p>
+
+              <Link
+                href="/request-a-quote"
+                className="alphaQuoteButton"
+              >
+                Request a Quote <Arrow />
+              </Link>
+
+              <a href={PHONE_TEL}>
+                Or call {PHONE_DISPLAY}
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* AREAS + ADVICE */}
+      {/* =========================================
+          AREAS + ADVICE
+      ========================================= */}
       <section className="alphaAreas">
         <div className="alphaContainer">
           <div className="alphaAreasGrid">
@@ -523,16 +691,21 @@ export default function HomePage() {
                 href="/areas-we-cover"
                 className="alphaGoldSmallButton"
               >
-                View Areas We Cover <Arrow />
+                View All Areas <Arrow />
               </Link>
             </div>
 
             <div className="alphaMap">
               <iframe
-                title="Map showing Alpha Property & Gardening Services coverage region"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.75%2C52.45%2C0.65%2C53.25&layer=mapnik"
+                title="Map showing Spalding and surrounding areas"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.42%2C52.68%2C0.02%2C52.90&layer=mapnik&marker=52.787%2C-0.154"
                 loading="lazy"
               />
+
+              <div className="alphaMapLabel">
+                <span>●</span>
+                Spalding
+              </div>
             </div>
 
             <div className="alphaAdvice">
@@ -540,33 +713,17 @@ export default function HomePage() {
                 <h3>Latest from Our Advice Hub</h3>
 
                 <Link href="/advice">
-                  View All Advice <Arrow />
+                  View All Articles <Arrow />
                 </Link>
               </div>
 
-              {advicePages.map((article) => (
+              {articles.map((article) => (
                 <Link
-                  href={article.href}
+                  href="/advice"
                   className="alphaArticle"
                   key={article.title}
                 >
-                  <div
-                    style={{
-                      width: "88px",
-                      height: "62px",
-                      display: "grid",
-                      placeItems: "center",
-                      borderRadius: "5px",
-                      background: "#063b2c",
-                      color: "#ffffff",
-                      fontSize: "11px",
-                      fontWeight: 800,
-                      textAlign: "center",
-                      padding: "8px",
-                    }}
-                  >
-                    {article.title}
-                  </div>
+                  <img src={article.image} alt={article.title} />
 
                   <div>
                     <strong>{article.title}</strong>
@@ -579,6 +736,15 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* =========================================
+          MOBILE EMERGENCY BAR
+      ========================================= */}
+      <div className="alphaMobileEmergencyBar">
+        <a href={PHONE_TEL}>CALL</a>
+        <span>24/7 EMERGENCY</span>
+        <Link href="/request-a-quote">GET A QUOTE</Link>
+      </div>
 
       <Footer />
     </main>
