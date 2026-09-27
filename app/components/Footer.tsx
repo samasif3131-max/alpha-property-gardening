@@ -11,6 +11,10 @@ const footerServices = [
     href: "/property-maintenance",
   },
   {
+    title: "Property Renovations",
+    href: "/property-renovations",
+  },
+  {
     title: "Plumbing Services",
     href: "/plumbing-services",
   },
