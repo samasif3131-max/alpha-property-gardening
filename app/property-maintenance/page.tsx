@@ -27,7 +27,7 @@ const maintenanceServices = [
       "Internal property repairs",
       "External property maintenance",
       "Doors, handles and fittings",
-      "Minor carpentry and joinery",
+      "Carpentry and joinery",
       "Wall and ceiling repairs",
       "Damaged fixtures and fittings",
       "Sealant replacement",
@@ -47,7 +47,7 @@ const maintenanceServices = [
       "Skirting boards",
       "Architraves",
       "Shelving",
-      "Minor timber repairs",
+      "Timber repairs",
       "General property fittings",
     ],
   },
@@ -964,7 +964,7 @@ export default function PropertyMaintenancePage() {
             <div className={styles.finalCtaInner}>
               <div>
                 <p className={styles.sectionEyebrow}>
-                  ALPHA PROPERTY CARE
+                  PROPERTY MAINTENANCE &amp; REPAIRS
                 </p>
 
                 <h2>Need Something Fixed, Maintained or Improved?</h2>
