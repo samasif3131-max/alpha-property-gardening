@@ -83,57 +83,6 @@ const services = [
   },
 ];
 
-const recentWork = [
-  {
-    title: "Garden Transformation",
-    location: "Spalding, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Bathroom Renovation",
-    location: "Donington, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Kitchen Installation",
-    location: "Spalding, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Patio & Landscaping",
-    location: "Surfleet, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Property Maintenance",
-    location: "Pinchbeck, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1000&q=85",
-  },
-];
-
-const testimonials = [
-  {
-    name: "Sarah M.",
-    role: "Spalding",
-    text: "Excellent service from start to finish. The team transformed our garden and were professional, reliable and tidy. Highly recommended!",
-  },
-  {
-    name: "James T.",
-    role: "Letting Agent, Spalding",
-    text: "We use Alpha for all our rental properties. Quick response, great communication and high quality work every time.",
-  },
-  {
-    name: "Kelly R.",
-    role: "Donington",
-    text: "Our new bathroom looks amazing. Friendly team, great workmanship and completed on time.",
-  },
-];
-
 const articles = [
   {
     title: "Top 5 Garden Maintenance Tips for Autumn",
@@ -493,9 +442,10 @@ export default function HomePage() {
               <div>
                 <span>⌖</span>
                 <section>
-                  <strong>Local &amp; Trusted</strong>
+                  <strong>Regional Coverage</strong>
                   <small>
-                    Based in Spalding, covering surrounding areas
+                    Serving homeowners, landlords and agents across our
+                    service area.
                   </small>
                 </section>
               </div>
@@ -549,120 +499,6 @@ export default function HomePage() {
               >
                 View Emergency Plumbing Services <Arrow />
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================
-          RECENT WORK
-      ========================================= */}
-      <section className="alphaRecent">
-        <div className="alphaContainer">
-          <div className="alphaSectionHeading alphaRecentHeading">
-            <div>
-              <div className="alphaSmallHeading">
-                <span />
-                OUR WORK
-              </div>
-
-              <h2>
-                Recent Work <i />
-              </h2>
-
-              <p>Real projects. Real results.</p>
-            </div>
-
-            <Link href="/our-work" className="alphaTextLink">
-              View More Work <Arrow />
-            </Link>
-          </div>
-
-          <div className="alphaRecentGrid">
-            {recentWork.map((work) => (
-              <Link
-                href="/our-work"
-                className="alphaRecentCard"
-                key={work.title}
-              >
-                <div className="alphaRecentImage">
-                  <img src={work.image} alt={work.title} />
-                  <span>View Project</span>
-                </div>
-
-                <h3>{work.title}</h3>
-                <p>{work.location}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================
-          REVIEWS
-      ========================================= */}
-      <section className="alphaReviews">
-        <div className="alphaContainer">
-          <div className="alphaSectionHeading">
-            <div>
-              <div className="alphaSmallHeading">
-                <span />
-                CUSTOMER REVIEWS
-              </div>
-
-              <h2>
-                What Our Customers Say <i />
-              </h2>
-            </div>
-
-            <Link href="/reviews" className="alphaTextLink">
-              Read All Reviews <Arrow />
-            </Link>
-          </div>
-
-          <div className="alphaReviewsGrid">
-            <div className="alphaReviewCards">
-              {testimonials.map((review) => (
-                <article
-                  className="alphaReviewCard"
-                  key={review.name}
-                >
-                  <div className="alphaStars">★★★★★</div>
-
-                  <p>“{review.text}”</p>
-
-                  <div className="alphaReviewer">
-                    <div>{review.name.charAt(0)}</div>
-
-                    <section>
-                      <strong>{review.name}</strong>
-                      <small>{review.role}</small>
-                    </section>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="alphaQuoteCard">
-              <div className="alphaQuoteIcon">▣</div>
-
-              <h3>Need a Quote?</h3>
-
-              <p>
-                Get a free, no-obligation quote today. Tell us what you need
-                and we’ll get back to you quickly.
-              </p>
-
-              <Link
-                href="/request-a-quote"
-                className="alphaQuoteButton"
-              >
-                Request a Quote <Arrow />
-              </Link>
-
-              <a href={PHONE_TEL}>
-                Or call {PHONE_DISPLAY}
-              </a>
             </div>
           </div>
         </div>
