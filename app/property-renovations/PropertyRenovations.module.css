@@ -1,0 +1,1462 @@
+.page {
+  width: 100%;
+  background: #ffffff;
+  color: #17231b;
+}
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.arrow {
+  display: inline-block;
+  margin-left: 7px;
+  transition: transform 0.2s ease;
+}
+
+.goldButton:hover .arrow,
+.outlineButton:hover .arrow,
+.outlineDarkButton:hover .arrow,
+.inlineLink:hover .arrow,
+.relatedCard:hover .arrow {
+  transform: translateX(4px);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 700px;
+  background: #10251a;
+  color: #ffffff;
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(9, 25, 16, 0.97) 0%,
+      rgba(9, 25, 16, 0.9) 46%,
+      rgba(9, 25, 16, 0.62) 100%
+    ),
+    url("https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85")
+      center / cover no-repeat;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(196, 154, 69, 0.1), transparent 42%);
+}
+
+.breadcrumb {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding-top: 28px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 10px;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #d8b96d;
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  gap: 75px;
+  align-items: center;
+  min-height: 615px;
+  padding: 55px 0 75px;
+}
+
+.heroContent {
+  max-width: 760px;
+}
+
+.goldLine {
+  width: 48px;
+  height: 3px;
+  margin-bottom: 20px;
+  background: #c49a45;
+}
+
+.heroEyebrow,
+.sectionEyebrow {
+  margin: 0 0 12px;
+  color: #c49a45;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.heroContent h1 {
+  max-width: 780px;
+  margin: 0 0 19px;
+  color: #ffffff;
+  font-size: clamp(42px, 5vw, 67px);
+  line-height: 1.02;
+  letter-spacing: -1.8px;
+}
+
+.heroTagline {
+  max-width: 700px;
+  margin: 0 0 19px;
+  color: #d8b96d;
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 800;
+}
+
+.heroLead {
+  max-width: 710px;
+  margin: 0 0 17px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.heroText {
+  max-width: 700px;
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.heroStrong {
+  margin: 0 0 27px;
+  color: #d8b96d;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.goldButton,
+.outlineButton,
+.outlineDarkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 21px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.goldButton {
+  background: #c49a45;
+  color: #ffffff;
+}
+
+.goldButton:hover {
+  background: #ad8334;
+  transform: translateY(-1px);
+}
+
+.outlineButton {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.outlineButton:hover {
+  border-color: #d8b96d;
+  color: #d8b96d;
+}
+
+.outlineDarkButton {
+  flex-shrink: 0;
+  border: 1px solid #173f2a;
+  color: #173f2a;
+}
+
+.outlineDarkButton:hover {
+  background: #173f2a;
+  color: #ffffff;
+}
+
+.phoneIcon {
+  margin-right: 8px;
+}
+
+.heroSupporting {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 25px;
+  padding-left: 15px;
+  border-left: 2px solid rgba(196, 154, 69, 0.7);
+}
+
+.heroSupporting span {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.heroSupporting a {
+  color: #d8b96d;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.heroSupporting a:hover {
+  color: #ffffff;
+}
+
+.heroPanel {
+  padding: 34px;
+  background: rgba(16, 37, 26, 0.87);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.18);
+}
+
+.heroPanelLabel {
+  margin-bottom: 14px;
+  color: #d8b96d;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+}
+
+.heroPanel h2 {
+  margin: 0 0 13px;
+  color: #ffffff;
+  font-size: 25px;
+  line-height: 1.2;
+}
+
+.heroPanel p {
+  margin: 0 0 22px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.heroPanel ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.heroPanel li {
+  position: relative;
+  padding-left: 13px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.heroPanel li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  background: #c49a45;
+}
+
+/* INTRO */
+.introSection {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 80px;
+}
+
+.introGrid h2,
+.sectionHeader h2,
+.wholeHouseContent h2,
+.dualCard h2,
+.landlordContent h2,
+.purchasedContent h2,
+.quoteGrid h2,
+.outsideContent h2,
+.relatedSection h2,
+.areasInner h2,
+.faqMain h2 {
+  margin: 0;
+  color: #173f2a;
+  font-size: clamp(30px, 3.2vw, 43px);
+  line-height: 1.08;
+  letter-spacing: -0.8px;
+}
+
+.headingDash {
+  display: block;
+  width: 38px;
+  height: 3px;
+  margin-top: 17px;
+  background: #c49a45;
+}
+
+.introText p {
+  margin: 0 0 18px;
+  color: #536158;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.introText p:last-of-type {
+  margin-bottom: 0;
+}
+
+.statement {
+  margin-top: 25px;
+  padding-left: 17px;
+  border-left: 2px solid #c49a45;
+  color: #173f2a;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* COMPLETE RENOVATIONS */
+.servicesSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.sectionHeader {
+  display: grid;
+  grid-template-columns: 1fr 0.65fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 45px;
+}
+
+.sectionHeader > p {
+  margin: 0;
+  color: #69736d;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.featuredRenovation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px;
+  background: #173f2a;
+  color: #ffffff;
+}
+
+.featuredRenovation p {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.featuredList {
+  padding-left: 35px;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.featuredList strong {
+  display: block;
+  margin-bottom: 17px;
+  color: #d8b96d;
+  font-size: 11px;
+}
+
+.featuredList ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featuredList li {
+  position: relative;
+  padding-left: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.featuredList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 4px;
+  background: #c49a45;
+}
+
+/* WHOLE HOUSE */
+.wholeHouseSection {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.wholeHouseGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 75px;
+  align-items: center;
+}
+
+.imagePanel,
+.purchasedPanel,
+.outsidePanel {
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 45px;
+  background:
+    linear-gradient(rgba(23, 63, 42, 0.91), rgba(23, 63, 42, 0.91)),
+    url("https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=85")
+      center / cover no-repeat;
+}
+
+.imagePanel span,
+.purchasedPanel span,
+.outsidePanel span {
+  margin-bottom: 17px;
+  color: #d8b96d;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.imagePanel h3,
+.purchasedPanel h3,
+.outsidePanel strong {
+  margin: 0;
+  color: #ffffff;
+  font-size: 29px;
+  line-height: 1.2;
+}
+
+.wholeHouseContent p:not(.sectionEyebrow) {
+  margin: 18px 0 0;
+  color: #606a63;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* ROOMS */
+.roomSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.roomGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+}
+
+.roomCard {
+  min-height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e2e4de;
+}
+
+.roomCard span {
+  color: #c49a45;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.roomCard strong {
+  color: #173f2a;
+  font-size: 13px;
+}
+
+.specialistLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: 25px;
+  padding: 23px 25px;
+  background: #ffffff;
+  border-left: 3px solid #c49a45;
+}
+
+.specialistLinks p {
+  margin: 0;
+  color: #59645d;
+  font-size: 11px;
+}
+
+.specialistLinks > div {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+/* BATHROOM + KITCHEN */
+.dualSection {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.dualGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.dualCard {
+  padding: 36px;
+  background: #f5f5f1;
+  border: 1px solid #e2e4de;
+}
+
+.dualCard p:not(.sectionEyebrow) {
+  margin: 18px 0 0;
+  color: #606a63;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.dualCard .inlineLink {
+  margin-top: 23px;
+}
+
+/* SERVICE STAGES */
+.serviceStagesSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.serviceCard {
+  display: grid;
+  grid-template-columns: 55px 1fr;
+  gap: 22px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e4e5df;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(196, 154, 69, 0.55);
+  box-shadow: 0 14px 35px rgba(16, 37, 26, 0.07);
+}
+
+.serviceNumber {
+  color: #c49a45;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.serviceCard h3 {
+  margin: 0 0 11px;
+  color: #173f2a;
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.serviceCard p {
+  margin: 0 0 17px;
+  color: #68736c;
+  font-size: 11px;
+  line-height: 1.75;
+}
+
+.serviceCard ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 14px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.serviceCard li {
+  position: relative;
+  padding-left: 12px;
+  color: #536058;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.serviceCard li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 4px;
+  background: #c49a45;
+}
+
+.serviceNote {
+  padding: 11px 13px;
+  background: #f2f3ee;
+  border-left: 2px solid #c49a45;
+  color: #59645d !important;
+  font-size: 10px !important;
+}
+
+/* LANDLORDS */
+.landlordSection {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.landlordGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 70px;
+  align-items: stretch;
+}
+
+.landlordContent > p:not(.sectionEyebrow) {
+  margin: 18px 0 0;
+  color: #606b63;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.landlordList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 25px;
+  margin: 25px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landlordList li {
+  position: relative;
+  padding-left: 15px;
+  color: #536058;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.landlordList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  background: #c49a45;
+}
+
+.landlordContent .goldButton {
+  margin-top: 25px;
+}
+
+.landlordPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 45px;
+  background:
+    linear-gradient(rgba(16, 37, 26, 0.94), rgba(16, 37, 26, 0.94)),
+    url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1000&q=85")
+      center / cover no-repeat;
+  color: #ffffff;
+}
+
+.panelTag {
+  margin-bottom: 18px;
+  color: #d8b96d;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+}
+
+.landlordPanel h3 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.landlordPanel > p {
+  margin: 0 0 25px;
+  color: rgba(255, 255, 255, 0.63);
+  font-size: 11px;
+  line-height: 1.75;
+}
+
+.landlordStat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.landlordStat strong {
+  color: #ffffff;
+  font-size: 11px;
+}
+
+.landlordStat span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+/* PURCHASED */
+.purchasedSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.purchasedGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 75px;
+  align-items: center;
+}
+
+.purchasedPanel {
+  min-height: 320px;
+}
+
+.purchasedContent p:not(.sectionEyebrow) {
+  margin: 18px 0 0;
+  color: #606a63;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.purchasedContent .goldButton {
+  margin-top: 27px;
+}
+
+/* PROCESS */
+.processSection {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.centerHeading {
+  max-width: 780px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.centerHeading .headingDash {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centerHeading > p:last-child {
+  margin: 20px 0 0;
+  color: #68726b;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.processCard {
+  padding: 27px 22px;
+  background: #f5f5f1;
+  border: 1px solid #e2e4de;
+}
+
+.processCard > span {
+  color: #c49a45;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.processCard h3 {
+  margin: 19px 0 10px;
+  color: #173f2a;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.processCard p {
+  margin: 0;
+  color: #68726b;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+/* QUOTES */
+.quoteSection {
+  padding: 80px 0;
+  background: #173f2a;
+}
+
+.quoteGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 75px;
+  align-items: start;
+}
+
+.quoteGrid h2 {
+  color: #ffffff;
+}
+
+.quoteGrid p {
+  margin: 0 0 17px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.quoteGrid p:last-child {
+  margin-bottom: 0;
+}
+
+/* COMPARISON */
+.comparisonSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.comparisonCard {
+  padding: 34px;
+  background: #ffffff;
+  border: 1px solid #e3e5df;
+}
+
+.comparisonCard > span:first-child {
+  color: #c49a45;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.comparisonCard h3 {
+  margin: 22px 0 10px;
+  color: #173f2a;
+  font-size: 21px;
+}
+
+.comparisonCard p {
+  margin: 0;
+  color: #68726b;
+  font-size: 11px;
+  line-height: 1.75;
+}
+
+.comparisonCard .inlineLink {
+  margin-top: 18px;
+}
+
+.currentService {
+  display: inline-block;
+  margin-top: 18px;
+  color: #9b762d;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.comparisonCta {
+  max-width: 850px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 25px auto 0;
+  padding: 23px 25px;
+  background: #ffffff;
+  border-left: 3px solid #c49a45;
+}
+
+.comparisonCta p {
+  margin: 0;
+  color: #59645d;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+/* OUTSIDE */
+.outsideSection {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.outsideGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.outsideContent p:not(.sectionEyebrow) {
+  margin: 18px 0 0;
+  color: #606a63;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.outsideContent .inlineLink {
+  margin-top: 23px;
+}
+
+.outsidePanel {
+  min-height: 300px;
+  background:
+    linear-gradient(rgba(23, 63, 42, 0.91), rgba(23, 63, 42, 0.91)),
+    url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1000&q=85")
+      center / cover no-repeat;
+}
+
+/* RELATED */
+.relatedSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-top: 40px;
+}
+
+.relatedCard {
+  position: relative;
+  min-height: 165px;
+  display: flex;
+  flex-direction: column;
+  padding: 23px;
+  background: #ffffff;
+  border: 1px solid #e2e4de;
+  color: #173f2a;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.relatedCard:hover {
+  transform: translateY(-2px);
+  background: #173f2a;
+  border-color: #173f2a;
+  color: #ffffff;
+}
+
+.relatedCard > span {
+  margin-bottom: auto;
+  color: #c49a45;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.relatedCard strong {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.relatedCard small {
+  max-width: 90%;
+  color: #717a74;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.relatedCard:hover small {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.relatedCard .arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: #c49a45;
+}
+
+/* AREAS */
+.areasSection {
+  padding: 75px 0;
+  background: #ffffff;
+}
+
+.areasInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.areasInner > div {
+  max-width: 800px;
+}
+
+.areasInner p:not(.sectionEyebrow) {
+  margin: 18px 0 0;
+  color: #657068;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* FAQ */
+.faqSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.faqLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 65px;
+  align-items: start;
+}
+
+.faqGrid {
+  margin-top: 35px;
+  border-top: 1px solid #dfe2db;
+}
+
+.faqItem {
+  border-bottom: 1px solid #dfe2db;
+}
+
+.faqItem summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 19px 0;
+  color: #173f2a;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem summary b {
+  flex-shrink: 0;
+  color: #c49a45;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.faqItem[open] summary b {
+  transform: rotate(45deg);
+}
+
+.faqItem p {
+  max-width: 850px;
+  margin: -2px 0 20px;
+  color: #68726b;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.faqCta {
+  padding: 32px;
+  background: #173f2a;
+  color: #ffffff;
+}
+
+.faqCtaIcon {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(216, 185, 109, 0.55);
+  color: #d8b96d;
+}
+
+.faqCta h3 {
+  margin: 0 0 13px;
+  color: #ffffff;
+  font-size: 22px;
+}
+
+.faqCta > p:not(.sectionEyebrow) {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.faqCta .goldButton {
+  width: 100%;
+}
+
+.faqPhone {
+  display: block;
+  margin-top: 16px;
+  color: #d8b96d;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 900;
+  text-align: center;
+}
+
+/* FINAL CTA */
+.finalCta {
+  padding: 75px 0;
+  background: #10251a;
+}
+
+.finalCtaInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.finalCtaInner h2 {
+  max-width: 760px;
+  margin: 0 0 17px;
+  color: #ffffff;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.08;
+}
+
+.finalCtaInner p:not(.sectionEyebrow) {
+  max-width: 680px;
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.finalCtaInner strong {
+  display: inline-block;
+  margin-top: 4px;
+  color: #d8b96d;
+  font-size: 12px;
+}
+
+.finalButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  min-width: 250px;
+}
+
+.finalButtons .goldButton,
+.finalButtons .outlineButton {
+  width: 100%;
+}
+
+/* ACCESSIBILITY */
+.page a:focus-visible,
+.page button:focus-visible,
+.page summary:focus-visible {
+  outline: 3px solid rgba(196, 154, 69, 0.7);
+  outline-offset: 3px;
+}
+
+/* RESPONSIVE 1050 */
+@media (max-width: 1050px) {
+  .heroGrid {
+    gap: 45px;
+  }
+
+  .introGrid,
+  .wholeHouseGrid,
+  .landlordGrid,
+  .purchasedGrid,
+  .quoteGrid,
+  .outsideGrid {
+    gap: 45px;
+  }
+
+  .processGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .faqLayout {
+    grid-template-columns: minmax(0, 1fr) 290px;
+    gap: 40px;
+  }
+}
+
+/* RESPONSIVE 800 */
+@media (max-width: 800px) {
+  .heroGrid,
+  .introGrid,
+  .wholeHouseGrid,
+  .landlordGrid,
+  .purchasedGrid,
+  .quoteGrid,
+  .outsideGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .heroGrid {
+    min-height: auto;
+    padding: 45px 0 65px;
+  }
+
+  .heroPanel {
+    max-width: 650px;
+  }
+
+  .introGrid {
+    gap: 30px;
+  }
+
+  .sectionHeader {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .featuredRenovation {
+    grid-template-columns: 1fr;
+  }
+
+  .featuredList {
+    padding-left: 0;
+    padding-top: 25px;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .roomGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dualGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .specialistLinks,
+  .comparisonCta,
+  .areasInner,
+  .finalCtaInner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .faqLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .faqCta {
+    max-width: 450px;
+  }
+
+  .finalButtons {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+/* RESPONSIVE 600 */
+@media (max-width: 600px) {
+  .container {
+    width: calc(100% - 30px);
+  }
+
+  .breadcrumb {
+    padding-top: 20px;
+    font-size: 9px;
+  }
+
+  .heroGrid {
+    padding: 40px 0 55px;
+  }
+
+  .heroContent h1 {
+    font-size: 39px;
+    letter-spacing: -1px;
+  }
+
+  .heroTagline {
+    font-size: 16px;
+  }
+
+  .heroLead {
+    font-size: 13px;
+  }
+
+  .heroText {
+    font-size: 12px;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goldButton,
+  .outlineButton,
+  .outlineDarkButton {
+    width: 100%;
+  }
+
+  .heroPanel {
+    padding: 27px;
+  }
+
+  .heroPanel ul {
+    grid-template-columns: 1fr;
+  }
+
+  .introSection,
+  .servicesSection,
+  .wholeHouseSection,
+  .roomSection,
+  .dualSection,
+  .serviceStagesSection,
+  .landlordSection,
+  .purchasedSection,
+  .processSection,
+  .quoteSection,
+  .comparisonSection,
+  .outsideSection,
+  .relatedSection,
+  .faqSection {
+    padding: 65px 0;
+  }
+
+  .introGrid h2,
+  .sectionHeader h2,
+  .wholeHouseContent h2,
+  .dualCard h2,
+  .landlordContent h2,
+  .purchasedContent h2,
+  .quoteGrid h2,
+  .outsideContent h2,
+  .relatedSection h2,
+  .areasInner h2,
+  .faqMain h2 {
+    font-size: 31px;
+  }
+
+  .featuredRenovation,
+  .dualCard,
+  .serviceCard,
+  .landlordPanel,
+  .imagePanel,
+  .purchasedPanel,
+  .outsidePanel,
+  .faqCta {
+    padding: 28px;
+  }
+
+  .featuredList ul,
+  .serviceCard ul,
+  .landlordList {
+    grid-template-columns: 1fr;
+  }
+
+  .roomGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .relatedCard {
+    min-height: 145px;
+  }
+
+  .finalCta {
+    padding: 65px 0;
+  }
+
+  .finalCtaInner h2 {
+    font-size: 34px;
+  }
+
+  .specialistLinks > div {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
