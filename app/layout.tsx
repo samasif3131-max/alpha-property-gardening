@@ -13,8 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alpha Property And Gardening Services",
-  description: "One Team. Complete Property Care.",
+  title: "Alpha Property & Gardening Services",
+  description:
+    "One Team. Complete Property Care. Property maintenance, garden services, plumbing, bathrooms and kitchens across our service area.",
+  keywords: [
+    "Alpha Property & Gardening Services",
+    "property maintenance",
+    "garden services",
+    "plumbing services",
+    "bathroom installation",
+    "kitchen installation",
+    "property services",
+    "Lincolnshire",
+  ],
+  icons: {
+    icon: "/images/logo/logo.png",
+  },
 };
 
 export default function RootLayout({

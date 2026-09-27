@@ -2,6 +2,9 @@ import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+const coverageText =
+  "Peterborough to Skegness; Long Sutton to Lincoln, plus surrounding areas within the coverage region.";
+
 const services = [
   {
     title: "Garden Services",
@@ -51,7 +54,7 @@ const services = [
     items: [
       "Walk-in showers",
       "Wall & floor tiling",
-      "Plumbing & electrics",
+      "Plumbing & specialist trades managed",
       "Design & installation",
     ],
     href: "/bathroom-services",
@@ -64,63 +67,12 @@ const services = [
     description: "Full kitchen fitting",
     items: [
       "Worktops & units",
-      "Plumbing & electrics",
+      "Plumbing & specialist trades managed",
       "Tiling & flooring",
       "Complete project management",
     ],
     href: "/kitchen-services",
     icon: "□",
-  },
-];
-
-const recentWork = [
-  {
-    title: "Garden Transformation",
-    location: "Spalding, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Bathroom Renovation",
-    location: "Donington, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Kitchen Installation",
-    location: "Spalding, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Patio & Landscaping",
-    location: "Surfleet, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    title: "Property Maintenance",
-    location: "Pinchbeck, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1000&q=85",
-  },
-];
-
-const testimonials = [
-  {
-    name: "Sarah M.",
-    role: "Spalding",
-    text: "Excellent service from start to finish. The team transformed our garden and were professional, reliable and tidy. Highly recommended!",
-  },
-  {
-    name: "James T.",
-    role: "Letting Agent, Spalding",
-    text: "We use Alpha for all our rental properties. Quick response, great communication and high quality work every time.",
-  },
-  {
-    name: "Kelly R.",
-    role: "Donington",
-    text: "Our new bathroom looks amazing. Friendly team, great workmanship and completed on time.",
   },
 ];
 
@@ -212,10 +164,14 @@ export default function HomePage() {
                 <b>⌖</b>
                 <span>
                   <strong>Local & Trusted</strong>
-                  Spalding & surrounding
+                  Wide service coverage
                 </span>
               </div>
             </div>
+
+            <p className="alphaEmergencyHero">
+              24/7 emergency call-outs available
+            </p>
 
             <div className="alphaHeroButtons">
               <Link href="/contact" className="alphaGoldButton">
@@ -235,22 +191,6 @@ export default function HomePage() {
       <section className="alphaTrustBar">
         <div className="alphaContainer alphaTrustGrid">
           <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">♧</div>
-            <div>
-              <strong>100+</strong>
-              <span>Happy Customers</span>
-            </div>
-          </div>
-
-          <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">★</div>
-            <div>
-              <strong>5★</strong>
-              <span>Rated Service</span>
-            </div>
-          </div>
-
-          <div className="alphaTrustItem">
             <div className="alphaTrustIcon">✓</div>
             <div>
               <strong>Fully Insured</strong>
@@ -262,15 +202,23 @@ export default function HomePage() {
             <div className="alphaTrustIcon">➤</div>
             <div>
               <strong>Wide Coverage</strong>
-              <span>Spalding & surrounding areas</span>
+              <span>Peterborough to Skegness</span>
             </div>
           </div>
 
           <div className="alphaTrustItem">
-            <div className="alphaTrustIcon">⌕</div>
+            <div className="alphaTrustIcon">⌖</div>
             <div>
-              <strong>01234 567890</strong>
-              <span>Get in touch today</span>
+              <strong>Service Area</strong>
+              <span>Long Sutton to Lincoln</span>
+            </div>
+          </div>
+
+          <div className="alphaTrustItem">
+            <div className="alphaTrustIcon">◈</div>
+            <div>
+              <strong>24/7 Emergency</strong>
+              <span>Call-outs available</span>
             </div>
           </div>
         </div>
@@ -336,6 +284,59 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* LANDLORDS & LETTING AGENTS */}
+      <section className="alphaLandlordSection">
+        <div className="alphaContainer">
+          <div className="alphaLandlordCard">
+            <div className="alphaLandlordContent">
+              <div className="alphaSmallHeading">
+                <span />
+                LANDLORDS & LETTING AGENTS
+              </div>
+
+              <h2>
+                One contractor. Multiple services.
+                <br />
+                <strong>Complete property oversight.</strong>
+              </h2>
+
+              <p>
+                One trusted point of contact for property maintenance,
+                plumbing, gardens, bathrooms, kitchens, voids and ongoing
+                property support.
+              </p>
+
+              <div className="alphaLandlordServices">
+                <span>Property maintenance</span>
+                <span>Plumbing</span>
+                <span>Gardens</span>
+                <span>Bathrooms</span>
+                <span>Kitchens</span>
+                <span>Voids</span>
+                <span>Tenant liaison</span>
+                <span>Before/after photos</span>
+                <span>Fixed quotations</span>
+              </div>
+
+              <div className="alphaLandlordButtons">
+                <Link
+                  href="/contact"
+                  className="alphaGoldButton"
+                >
+                  LANDLORD & AGENT SERVICES
+                  <Arrow />
+                </Link>
+              </div>
+
+              <p className="alphaMyAlphaMessage">
+                Coming to My Alpha: manage properties, jobs, quotes,
+                appointments, photos and invoices from one account.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* TRUSTED BY HOMEOWNERS */}
       <section className="alphaTrusted">
         <div className="alphaTrustedImage">
@@ -359,9 +360,9 @@ export default function HomePage() {
             </h2>
 
             <p>
-              From one-off jobs to regular maintenance, we provide reliable,
-              high-quality property and garden services across Spalding and
-              the surrounding areas.
+              From one-off jobs to regular maintenance, Alpha provides
+              reliable, high-quality property and garden services across our
+              wider service area.
             </p>
 
             <div className="alphaTrustedButtons">
@@ -454,9 +455,9 @@ export default function HomePage() {
               <div>
                 <span>⌖</span>
                 <section>
-                  <strong>Local & Trusted</strong>
+                  <strong>Wide Service Coverage</strong>
                   <small>
-                    Based in Spalding, covering surrounding areas
+                    Peterborough to Skegness; Long Sutton to Lincoln
                   </small>
                 </section>
               </div>
@@ -473,104 +474,53 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* RECENT WORK */}
-      <section className="alphaRecent">
+      {/* 24/7 EMERGENCY CTA */}
+      <section className="alphaEmergencySection">
         <div className="alphaContainer">
-          <div className="alphaSectionHeading alphaRecentHeading">
+          <div className="alphaEmergencyCard">
             <div>
-              <div className="alphaSmallHeading">
+              <div className="alphaSmallHeading alphaLightHeading">
                 <span />
-                OUR WORK
+                24/7 EMERGENCY SUPPORT
               </div>
 
-              <h2>
-                Recent Work <i />
-              </h2>
+              <h2>24/7 Emergency Call-Outs Available</h2>
 
-              <p>Real projects. Real results.</p>
+              <p>
+                For urgent property and plumbing issues, Alpha can provide
+                emergency call-out support across the service area.
+              </p>
             </div>
 
-            <Link href="/our-work" className="alphaTextLink">
-              View More Work <Arrow />
+            <Link href="/contact" className="alphaGoldButton">
+              GET EMERGENCY HELP
+              <Arrow />
             </Link>
-          </div>
-
-          <div className="alphaRecentGrid">
-            {recentWork.map((work) => (
-              <Link
-                href="/our-work"
-                className="alphaRecentCard"
-                key={work.title}
-              >
-                <div className="alphaRecentImage">
-                  <img src={work.image} alt={work.title} />
-                  <span>View Project</span>
-                </div>
-
-                <h3>{work.title}</h3>
-                <p>{work.location}</p>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* REVIEWS */}
-      <section className="alphaReviews">
+      {/* QUOTE CTA */}
+      <section className="alphaQuoteSection">
         <div className="alphaContainer">
-          <div className="alphaSectionHeading">
+          <div className="alphaQuoteWideCard">
             <div>
               <div className="alphaSmallHeading">
                 <span />
-                CUSTOMER REVIEWS
+                FREE QUOTATIONS
               </div>
 
-              <h2>
-                What Our Customers Say <i />
-              </h2>
-            </div>
-
-            <Link href="/reviews" className="alphaTextLink">
-              Read All Reviews <Arrow />
-            </Link>
-          </div>
-
-          <div className="alphaReviewsGrid">
-            <div className="alphaReviewCards">
-              {testimonials.map((review) => (
-                <article className="alphaReviewCard" key={review.name}>
-                  <div className="alphaStars">★★★★★</div>
-
-                  <p>“{review.text}”</p>
-
-                  <div className="alphaReviewer">
-                    <div>{review.name.charAt(0)}</div>
-
-                    <section>
-                      <strong>{review.name}</strong>
-                      <small>{review.role}</small>
-                    </section>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="alphaQuoteCard">
-              <div className="alphaQuoteIcon">▣</div>
-
-              <h3>Need a Quote?</h3>
+              <h2>Need a Quote?</h2>
 
               <p>
-                Get a free, no-obligation quote today. Tell us what you need
-                and we’ll get back to you quickly.
+                Tell us what you need and we’ll get back to you with a clear,
+                no-obligation quotation.
               </p>
-
-              <Link href="/contact" className="alphaQuoteButton">
-                Request a Quote <Arrow />
-              </Link>
-
-              <a href="tel:01234567890">Or call 01234 567890</a>
             </div>
+
+            <Link href="/contact" className="alphaGoldButton">
+              Request a Free Quote <Arrow />
+            </Link>
           </div>
         </div>
       </section>
@@ -587,11 +537,7 @@ export default function HomePage() {
 
               <h2>Areas We Cover</h2>
 
-              <p>
-                We provide our services across Spalding and the surrounding
-                areas including Donington, Pinchbeck, Surfleet, Holbeach, Long
-                Sutton, Crowland and many more.
-              </p>
+              <p>{coverageText}</p>
 
               <Link
                 href="/areas-we-cover"
@@ -601,17 +547,17 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* REAL OPENSTREETMAP */}
+            {/* WIDER SERVICE AREA MAP */}
             <div className="alphaMap">
               <iframe
-                title="Map showing Spalding and surrounding areas"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.42%2C52.68%2C0.02%2C52.90&layer=mapnik&marker=52.787%2C-0.154"
+                title="Map showing Alpha Property & Gardening Services coverage area"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.75%2C52.45%2C0.65%2C53.25&layer=mapnik"
                 loading="lazy"
               />
 
               <div className="alphaMapLabel">
                 <span>●</span>
-                Spalding
+                Alpha Service Area
               </div>
             </div>
 
@@ -644,8 +590,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SEPARATE FOOTER COMPONENT */}
       <Footer />
+
+      {/* MOBILE EMERGENCY BAR */}
+      <div className="alphaMobileEmergencyBar">
+        <Link href="/contact">CALL</Link>
+
+        <span>24/7 EMERGENCY</span>
+
+        <Link href="/contact">GET A QUOTE</Link>
+      </div>
     </main>
   );
 }
