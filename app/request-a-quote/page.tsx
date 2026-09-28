@@ -1,10 +1,78 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./request-a-quote.module.css";
+
+type CustomerType =
+  | "homeowner"
+  | "landlord"
+  | "letting-agent"
+  | "tenant"
+  | "business"
+  | "other";
+
+type ContactMethod = "phone" | "email";
+
+type QuoteForm = {
+  enquiryId: string;
+  enquiryStatus: "Draft Quote Request";
+  emergency: boolean | null;
+  customerType: CustomerType | "";
+  tenantAuthorisation: "yes" | "no" | "";
+  firstName: string;
+  lastName: string;
+  organisation: string;
+  email: string;
+  phone: string;
+  preferredContactMethod: ContactMethod | "";
+  postcode: string;
+  marketingConsent: boolean;
+
+  service: string;
+  message: string;
+
+  propertyType: string;
+  propertyPostcode: string;
+  propertyAddress: string;
+  propertyMessage: string;
+
+  startedAt: string;
+};
+
+const STORAGE_KEY = "alpha-quote-request";
+
+const customerTypes: {
+  id: CustomerType;
+  title: string;
+}[] = [
+  {
+    id: "homeowner",
+    title: "Homeowner",
+  },
+  {
+    id: "landlord",
+    title: "Landlord",
+  },
+  {
+    id: "letting-agent",
+    title: "Letting Agent / Property Manager",
+  },
+  {
+    id: "tenant",
+    title: "Tenant",
+  },
+  {
+    id: "business",
+    title: "Business / Commercial Customer",
+  },
+  {
+    id: "other",
+    title: "Other",
+  },
+];
 
 const services = [
   {
@@ -45,70 +113,360 @@ const services = [
   },
 ];
 
+const initialForm: QuoteForm = {
+  enquiryId: "",
+  enquiryStatus: "Draft Quote Request",
+  emergency: null,
+  customerType: "",
+  tenantAuthorisation: "",
+  firstName: "",
+  lastName: "",
+  organisation: "",
+  email: "",
+  phone: "",
+  preferredContactMethod: "",
+  postcode: "",
+  marketingConsent: false,
+
+  service: "",
+  message: "",
+
+  propertyType: "",
+  propertyPostcode: "",
+  propertyAddress: "",
+  propertyMessage: "",
+
+  startedAt: "",
+};
+
+function createEnquiryId() {
+  return `ALPHA-${Date.now()}-${Math.random()
+    .toString(36)
+    .slice(2, 8)
+    .toUpperCase()}`;
+}
+
 export default function RequestAQuotePage() {
   const [step, setStep] = useState(1);
-
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    services: [] as string[],
-    other: "",
-    propertyType: "",
-    postcode: "",
-    message: "",
-  });
-
+  const [form, setForm] = useState<QuoteForm>(initialForm);
   const [submitted, setSubmitted] = useState(false);
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    document.title = "Request a Quote | Alpha Property & Gardening Services";
+
+    const description =
+      "Request a quote from Alpha Property & Gardening Services for property maintenance, repairs, renovations, plumbing, garden services and more.";
+
+    let meta = document.querySelector(
+      'meta[name="description"]'
+    ) as HTMLMetaElement | null;
+
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+
+    meta.content = description;
+
+    const saved = window.sessionStorage.getItem(STORAGE_KEY);
+
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+
+        if (parsed?.form) {
+          setForm(parsed.form);
+        }
+
+        if (
+          typeof parsed?.step === "number" &&
+          parsed.step >= 1 &&
+          parsed.step <= 4
+        ) {
+          setStep(parsed.step);
+        }
+      } catch {
+        window.sessionStorage.removeItem(STORAGE_KEY);
+      }
+    } else {
+      const startedAt = new Date().toISOString();
+
+      const newForm = {
+        ...initialForm,
+        enquiryId: createEnquiryId(),
+        startedAt,
+      };
+
+      setForm(newForm);
+
+      window.sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          step: 1,
+          form: newForm,
+        })
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!form.enquiryId) {
+      return;
+    }
+
+    window.sessionStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        step,
+        form,
+      })
+    );
+  }, [form, step]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const stored = window.sessionStorage.getItem(STORAGE_KEY);
+
+      if (!stored) {
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(stored);
+
+        if (
+          typeof parsed?.step === "number" &&
+          parsed.step >= 1 &&
+          parsed.step <= 4
+        ) {
+          setStep(parsed.step);
+        }
+
+        if (parsed?.form) {
+          setForm(parsed.form);
+        }
+      } catch {
+        // Ignore invalid session data.
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
   const handleInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+
+    const nextValue =
+      type === "checkbox" && e.target instanceof HTMLInputElement
+        ? e.target.checked
+        : value;
 
     setForm((current) => ({
       ...current,
-      [name]: value,
+      [name]: nextValue,
+    }));
+
+    setErrors((current) => ({
+      ...current,
+      [name]: "",
     }));
   };
 
-  const toggleService = (serviceId: string) => {
-    setForm((current) => {
-      const alreadySelected = current.services.includes(serviceId);
+  const selectCustomerType = (customerType: CustomerType) => {
+    setForm((current) => ({
+      ...current,
+      customerType,
+      tenantAuthorisation:
+        customerType === "tenant" ? current.tenantAuthorisation : "",
+      organisation:
+        customerType === "letting-agent" ||
+        customerType === "business" ||
+        customerType === "landlord"
+          ? current.organisation
+          : "",
+    }));
 
-      return {
-        ...current,
-        services: alreadySelected
-          ? current.services.filter((item) => item !== serviceId)
-          : [...current.services, serviceId],
-      };
+    setErrors((current) => ({
+      ...current,
+      customerType: "",
+    }));
+  };
+
+  const setEmergency = (emergency: boolean) => {
+    setForm((current) => ({
+      ...current,
+      emergency,
+    }));
+
+    setErrors((current) => ({
+      ...current,
+      emergency: "",
+    }));
+  };
+
+  const validateStepOne = () => {
+    const nextErrors: Record<string, string> = {};
+
+    if (form.emergency === null) {
+      nextErrors.emergency = "Please tell us whether this is planned or urgent work.";
+    }
+
+    if (!form.customerType) {
+      nextErrors.customerType = "Please select who you are requesting a quote as.";
+    }
+
+    if (form.customerType === "tenant" && !form.tenantAuthorisation) {
+      nextErrors.tenantAuthorisation =
+        "Please tell us whether you are responsible for authorising the work.";
+    }
+
+    if (!form.firstName.trim()) {
+      nextErrors.firstName = "Please enter your first name.";
+    }
+
+    if (!form.lastName.trim()) {
+      nextErrors.lastName = "Please enter your last name.";
+    }
+
+    if (!form.email.trim()) {
+      nextErrors.email = "Please enter your email address.";
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())
+    ) {
+      nextErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!form.phone.trim()) {
+      nextErrors.phone = "Please enter a phone number.";
+    } else if (form.phone.trim().replace(/\D/g, "").length < 7) {
+      nextErrors.phone = "Please enter a valid phone number.";
+    }
+
+    if (!form.preferredContactMethod) {
+      nextErrors.preferredContactMethod =
+        "Please select your preferred contact method.";
+    }
+
+    if (!form.postcode.trim()) {
+      nextErrors.postcode = "Please enter your postcode.";
+    }
+
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      window.setTimeout(() => {
+        const firstError = document.querySelector(
+          '[aria-invalid="true"]'
+        ) as HTMLElement | null;
+
+        firstError?.focus();
+      }, 0);
+
+      return false;
+    }
+
+    return true;
+  };
+
+  const validateStepTwo = () => {
+    const nextErrors: Record<string, string> = {};
+
+    if (!form.service) {
+      nextErrors.service = "Please select the service you need.";
+    }
+
+    setErrors(nextErrors);
+
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const validateStepThree = () => {
+    const nextErrors: Record<string, string> = {};
+
+    if (!form.propertyType) {
+      nextErrors.propertyType = "Please select a property type.";
+    }
+
+    if (!form.propertyPostcode.trim()) {
+      nextErrors.propertyPostcode = "Please enter the property postcode.";
+    }
+
+    setErrors(nextErrors);
+
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const goToStep = (nextStep: number) => {
+    setStep(nextStep);
+
+    window.history.pushState(
+      {
+        quoteStep: nextStep,
+      },
+      "",
+      window.location.pathname
+    );
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
     });
   };
 
   const nextStep = () => {
+    if (step === 1 && !validateStepOne()) {
+      return;
+    }
+
+    if (step === 2 && !validateStepTwo()) {
+      return;
+    }
+
+    if (step === 3 && !validateStepThree()) {
+      return;
+    }
+
     if (step < 4) {
-      setStep((current) => current + 1);
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      goToStep(step + 1);
     }
   };
 
   const previousStep = () => {
     if (step > 1) {
-      setStep((current) => current - 1);
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      goToStep(step - 1);
     }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validateStepOne() || !validateStepTwo() || !validateStepThree()) {
+      return;
+    }
+
+    setForm((current) => ({
+      ...current,
+      enquiryStatus: "Draft Quote Request",
+    }));
+
     setSubmitted(true);
   };
+
+  const showOrganisation =
+    form.customerType === "letting-agent" ||
+    form.customerType === "business" ||
+    form.customerType === "landlord";
 
   return (
     <>
@@ -127,43 +485,23 @@ export default function RequestAQuotePage() {
               </span>
 
               <h1>
-                Get Your <span>Free Quote</span>
+                Request a <span>Quote</span>
               </h1>
 
-              <h2>Quick. Easy. No Obligation.</h2>
+              <h2>Tell us a little about yourself.</h2>
 
               <p>
-                Tell us about your project and our friendly team will get back
-                to you with a free, no obligation quote. We provide
-                professional property and garden services across South and
-                East Lincolnshire, covering Peterborough to Skegness and from
-                Long Sutton to Lincoln.
+                Tell us a little about yourself and we&apos;ll collect the
+                information needed to understand your job.
               </p>
 
-              <div className={styles.heroFeatures}>
-                <div className={styles.heroFeature}>
-                  <span className={styles.featureIcon}>✓</span>
-                  <strong>100% Free Quotes</strong>
-                  <small>No obligation</small>
-                </div>
+              <p>
+                Whether you need one repair, several maintenance jobs or a
+                larger property project, the process starts here.
+              </p>
 
-                <div className={styles.heroFeature}>
-                  <span className={styles.featureIcon}>◷</span>
-                  <strong>Quick Response</strong>
-                  <small>Usually within 24 hours</small>
-                </div>
-
-                <div className={styles.heroFeature}>
-                  <span className={styles.featureIcon}>▣</span>
-                  <strong>Flexible Appointments</strong>
-                  <small>To suit you</small>
-                </div>
-
-                <div className={styles.heroFeature}>
-                  <span className={styles.featureIcon}>✓</span>
-                  <strong>Trusted & Local</strong>
-                  <small>Based in Spalding</small>
-                </div>
+              <div className={styles.ctaSlogan}>
+                One Team. Complete Property Care.
               </div>
             </div>
 
@@ -176,13 +514,13 @@ export default function RequestAQuotePage() {
           <div className={styles.quoteGrid}>
             {/* FORM */}
             <div className={styles.formCard}>
-              {/* STEPS */}
-              <div className={styles.steps}>
+              {/* PROGRESS */}
+              <div className={styles.steps} aria-label="Quote progress">
                 {[1, 2, 3, 4].map((number) => (
                   <div
                     key={number}
                     className={`${styles.stepItem} ${
-                      step >= number ? styles.stepActive : ""
+                      step === number ? styles.stepActive : ""
                     }`}
                   >
                     <div className={styles.stepCircle}>{number}</div>
@@ -197,62 +535,467 @@ export default function RequestAQuotePage() {
                 ))}
               </div>
 
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} noValidate>
                 {/* STEP 1 */}
-                {step === 1 && (
+                {step === 1 && !submitted && (
                   <div className={styles.formStep}>
+                    <p className={styles.eyebrow}>STEP 1 OF 4</p>
+
                     <h2>Your Details</h2>
 
                     <p className={styles.formIntro}>
-                      Let&apos;s start with your contact information so we can
-                      get back to you.
+                      First, tell us who we&apos;re speaking to and how we can
+                      contact you about the quotation.
                     </p>
+
+                    {/* EMERGENCY */}
+                    <div className={styles.formDivider}></div>
+
+                    <h2>Is This an Emergency?</h2>
+
+                    <p className={styles.formIntro}>
+                      Choose the option that best describes your request.
+                    </p>
+
+                    <div className={styles.serviceGrid}>
+                      <button
+                        type="button"
+                        className={`${styles.serviceOption} ${
+                          form.emergency === false
+                            ? styles.serviceSelected
+                            : ""
+                        }`}
+                        onClick={() => setEmergency(false)}
+                        aria-pressed={form.emergency === false}
+                      >
+                        <span className={styles.checkbox}>
+                          {form.emergency === false ? "✓" : ""}
+                        </span>
+
+                        <span className={styles.serviceIcon}>✓</span>
+
+                        <span className={styles.serviceText}>
+                          <strong>No — This is planned work</strong>
+                        </span>
+                      </button>
+
+                      <button
+                        type="button"
+                        className={`${styles.serviceOption} ${
+                          form.emergency === true
+                            ? styles.serviceSelected
+                            : ""
+                        }`}
+                        onClick={() => setEmergency(true)}
+                        aria-pressed={form.emergency === true}
+                      >
+                        <span className={styles.checkbox}>
+                          {form.emergency === true ? "✓" : ""}
+                        </span>
+
+                        <span className={styles.serviceIcon}>!</span>
+
+                        <span className={styles.serviceText}>
+                          <strong>Yes — I need urgent help</strong>
+                        </span>
+                      </button>
+                    </div>
+
+                    {errors.emergency && (
+                      <p role="alert" className={styles.formIntro}>
+                        {errors.emergency}
+                      </p>
+                    )}
+
+                    {form.emergency === true && (
+                      <div className={styles.successBox}>
+                        <p className={styles.eyebrow}>URGENT SUPPORT</p>
+
+                        <h2>Need Urgent Help?</h2>
+
+                        <p>
+                          For an active property or plumbing emergency,
+                          calling Alpha is the fastest way to contact us.
+                        </p>
+
+                        <strong>24/7 EMERGENCY CALL</strong>
+
+                        <a
+                          href="tel:01775518068"
+                          className={styles.nextButton}
+                        >
+                          01775 518068
+                        </a>
+
+                        <p>
+                          You can still continue with the form if you want to
+                          provide additional details, but please call us
+                          directly for urgent assistance.
+                        </p>
+
+                        <small>
+                          24/7 emergency property &amp; plumbing call-out
+                          support.
+                        </small>
+                      </div>
+                    )}
+
+                    {/* CUSTOMER TYPE */}
+                    <div className={styles.formDivider}></div>
+
+                    <h2>I&apos;m Requesting a Quote As:</h2>
+
+                    <div className={styles.serviceGrid}>
+                      {customerTypes.map((customer) => (
+                        <button
+                          type="button"
+                          key={customer.id}
+                          className={`${styles.serviceOption} ${
+                            form.customerType === customer.id
+                              ? styles.serviceSelected
+                              : ""
+                          }`}
+                          onClick={() => selectCustomerType(customer.id)}
+                          aria-pressed={form.customerType === customer.id}
+                        >
+                          <span className={styles.checkbox}>
+                            {form.customerType === customer.id ? "✓" : ""}
+                          </span>
+
+                          <span className={styles.serviceIcon}>◆</span>
+
+                          <span className={styles.serviceText}>
+                            <strong>{customer.title}</strong>
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+
+                    {errors.customerType && (
+                      <p role="alert" className={styles.formIntro}>
+                        {errors.customerType}
+                      </p>
+                    )}
+
+                    {/* TENANT AUTHORISATION */}
+                    {form.customerType === "tenant" && (
+                      <div className={styles.formDivider}>
+                        <h2>Are You Responsible for Authorising the Work?</h2>
+
+                        <div className={styles.serviceGrid}>
+                          <button
+                            type="button"
+                            className={`${styles.serviceOption} ${
+                              form.tenantAuthorisation === "yes"
+                                ? styles.serviceSelected
+                                : ""
+                            }`}
+                            onClick={() =>
+                              setForm((current) => ({
+                                ...current,
+                                tenantAuthorisation: "yes",
+                              }))
+                            }
+                            aria-pressed={
+                              form.tenantAuthorisation === "yes"
+                            }
+                          >
+                            <span className={styles.checkbox}>
+                              {form.tenantAuthorisation === "yes" ? "✓" : ""}
+                            </span>
+
+                            <span className={styles.serviceText}>
+                              <strong>Yes</strong>
+                            </span>
+                          </button>
+
+                          <button
+                            type="button"
+                            className={`${styles.serviceOption} ${
+                              form.tenantAuthorisation === "no"
+                                ? styles.serviceSelected
+                                : ""
+                            }`}
+                            onClick={() =>
+                              setForm((current) => ({
+                                ...current,
+                                tenantAuthorisation: "no",
+                              }))
+                            }
+                            aria-pressed={
+                              form.tenantAuthorisation === "no"
+                            }
+                          >
+                            <span className={styles.checkbox}>
+                              {form.tenantAuthorisation === "no" ? "✓" : ""}
+                            </span>
+
+                            <span className={styles.serviceText}>
+                              <strong>
+                                No / I&apos;m Reporting This for My Landlord or
+                                Agent
+                              </strong>
+                            </span>
+                          </button>
+                        </div>
+
+                        {errors.tenantAuthorisation && (
+                          <p role="alert" className={styles.formIntro}>
+                            {errors.tenantAuthorisation}
+                          </p>
+                        )}
+
+                        {form.tenantAuthorisation === "no" && (
+                          <p className={styles.formIntro}>
+                            If your landlord or letting agent is responsible
+                            for approving the work, please make sure they are
+                            aware of the request. We may need their
+                            authorisation before planned work can proceed.
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    {/* NAME */}
+                    <div className={styles.formDivider}></div>
 
                     <div className={styles.formRow}>
                       <label>
-                        Full Name <span>*</span>
+                        First Name <span>*</span>
                         <input
                           type="text"
-                          name="name"
-                          value={form.name}
+                          name="firstName"
+                          value={form.firstName}
                           onChange={handleInput}
-                          placeholder="Enter your full name"
+                          placeholder="First name"
+                          autoComplete="given-name"
                           required
+                          aria-invalid={Boolean(errors.firstName)}
+                          aria-describedby={
+                            errors.firstName ? "first-name-error" : undefined
+                          }
                         />
+                        {errors.firstName && (
+                          <small id="first-name-error">
+                            {errors.firstName}
+                          </small>
+                        )}
                       </label>
 
                       <label>
-                        Phone Number <span>*</span>
+                        Last Name <span>*</span>
                         <input
-                          type="tel"
-                          name="phone"
-                          value={form.phone}
+                          type="text"
+                          name="lastName"
+                          value={form.lastName}
                           onChange={handleInput}
-                          placeholder="e.g. 07xxx xxxxxx"
+                          placeholder="Last name"
+                          autoComplete="family-name"
                           required
+                          aria-invalid={Boolean(errors.lastName)}
+                          aria-describedby={
+                            errors.lastName ? "last-name-error" : undefined
+                          }
                         />
+                        {errors.lastName && (
+                          <small id="last-name-error">
+                            {errors.lastName}
+                          </small>
+                        )}
                       </label>
                     </div>
 
+                    {/* ORGANISATION */}
+                    {showOrganisation && (
+                      <label>
+                        Company / Organisation Name{" "}
+                        {form.customerType === "landlord" && (
+                          <small>(optional)</small>
+                        )}
+                        <input
+                          type="text"
+                          name="organisation"
+                          value={form.organisation}
+                          onChange={handleInput}
+                          placeholder="Company or organisation name"
+                          autoComplete="organization"
+                        />
+                      </label>
+                    )}
+
+                    {/* EMAIL */}
                     <label>
                       Email Address <span>*</span>
+
                       <input
                         type="email"
                         name="email"
                         value={form.email}
                         onChange={handleInput}
-                        placeholder="you@example.com"
+                        placeholder="name@example.com"
+                        autoComplete="email"
+                        inputMode="email"
                         required
+                        aria-invalid={Boolean(errors.email)}
                       />
+
+                      <small>
+                        We&apos;ll use this for your quote and enquiry
+                        updates.
+                      </small>
+
+                      {errors.email && (
+                        <small role="alert">{errors.email}</small>
+                      )}
                     </label>
 
+                    {/* PHONE */}
+                    <label>
+                      Phone Number <span>*</span>
+
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={form.phone}
+                        onChange={handleInput}
+                        placeholder="07... or 01..."
+                        autoComplete="tel"
+                        inputMode="tel"
+                        required
+                        aria-invalid={Boolean(errors.phone)}
+                      />
+
+                      <small>
+                        Useful if we need to clarify something about the work
+                        or arrange an assessment.
+                      </small>
+
+                      {errors.phone && (
+                        <small role="alert">{errors.phone}</small>
+                      )}
+                    </label>
+
+                    {/* CONTACT METHOD */}
+                    <label>
+                      How Would You Prefer Us to Contact You? <span>*</span>
+
+                      <select
+                        name="preferredContactMethod"
+                        value={form.preferredContactMethod}
+                        onChange={handleInput}
+                        required
+                        aria-invalid={Boolean(
+                          errors.preferredContactMethod
+                        )}
+                      >
+                        <option value="">Please select</option>
+                        <option value="phone">Phone</option>
+                        <option value="email">Email</option>
+                      </select>
+
+                      {errors.preferredContactMethod && (
+                        <small role="alert">
+                          {errors.preferredContactMethod}
+                        </small>
+                      )}
+                    </label>
+
+                    {/* POSTCODE */}
+                    <label>
+                      Your Postcode <span>*</span>
+
+                      <input
+                        type="text"
+                        name="postcode"
+                        value={form.postcode}
+                        onChange={handleInput}
+                        placeholder="e.g. PE11 1AA"
+                        autoComplete="postal-code"
+                        required
+                        aria-invalid={Boolean(errors.postcode)}
+                      />
+
+                      <small>
+                        We&apos;ll ask for the property address in Step 3 if
+                        the work is at a different location.
+                      </small>
+
+                      {errors.postcode && (
+                        <small role="alert">{errors.postcode}</small>
+                      )}
+                    </label>
+
+                    {/* SERVICE AREA */}
+                    <div className={styles.formIntro}>
+                      <p>
+                        Alpha covers a wide regional area from Peterborough to
+                        Skegness and from Long Sutton to Lincoln, including many
+                        surrounding communities.
+                      </p>
+
+                      <Link href="/areas-we-cover" className={styles.textLink}>
+                        VIEW AREAS WE COVER →
+                      </Link>
+                    </div>
+
+                    {/* MARKETING */}
                     <div className={styles.formDivider}></div>
 
-                    <h2>How Can We Help?</h2>
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="marketingConsent"
+                        checked={form.marketingConsent}
+                        onChange={handleInput}
+                      />
+
+                      <span>
+                        I&apos;d like to receive occasional updates, offers or
+                        property-care advice from Alpha.
+                      </span>
+                    </label>
+
+                    {/* PRIVACY */}
+                    <p className={styles.formIntro}>
+                      We&apos;ll use the information you provide to respond to
+                      your enquiry and manage your quotation. See our{" "}
+                      <Link href="/privacy-policy">Privacy Policy</Link> for
+                      more information.
+                    </p>
+
+                    <button
+                      type="button"
+                      className={styles.nextButton}
+                      onClick={nextStep}
+                    >
+                      CONTINUE TO SERVICE DETAILS <span>→</span>
+                    </button>
+
+                    <div className={styles.contactStrip}>
+                      <div className={styles.contactItem}>
+                        <span>☎</span>
+
+                        <div>
+                          <strong>Need to speak to us?</strong>
+
+                          <p>
+                            <a href="tel:01775518068">01775 518068</a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 2 */}
+                {step === 2 && !submitted && (
+                  <div className={styles.formStep}>
+                    <p className={styles.eyebrow}>STEP 2 OF 4</p>
+
+                    <h2>Service Details</h2>
 
                     <p className={styles.formIntro}>
-                      Select the services you&apos;re interested in. You can
-                      choose more than one.
+                      Tell us a little more about the work you need.
                     </p>
 
                     <div className={styles.serviceGrid}>
@@ -261,14 +1004,20 @@ export default function RequestAQuotePage() {
                           type="button"
                           key={service.id}
                           className={`${styles.serviceOption} ${
-                            form.services.includes(service.id)
+                            form.service === service.id
                               ? styles.serviceSelected
                               : ""
                           }`}
-                          onClick={() => toggleService(service.id)}
+                          onClick={() =>
+                            setForm((current) => ({
+                              ...current,
+                              service: service.id,
+                            }))
+                          }
+                          aria-pressed={form.service === service.id}
                         >
                           <span className={styles.checkbox}>
-                            {form.services.includes(service.id) ? "✓" : ""}
+                            {form.service === service.id ? "✓" : ""}
                           </span>
 
                           <span className={styles.serviceIcon}>
@@ -283,45 +1032,11 @@ export default function RequestAQuotePage() {
                       ))}
                     </div>
 
-                    <button
-                      type="button"
-                      className={styles.nextButton}
-                      onClick={nextStep}
-                    >
-                      Next Step <span>→</span>
-                    </button>
-                  </div>
-                )}
-
-                {/* STEP 2 */}
-                {step === 2 && (
-                  <div className={styles.formStep}>
-                    <h2>Service Details</h2>
-
-                    <p className={styles.formIntro}>
-                      Tell us a little more about the work you need.
-                    </p>
-
-                    <label>
-                      Service Required
-                      <select
-                        name="propertyType"
-                        value={form.propertyType}
-                        onChange={handleInput}
-                      >
-                        <option value="">Please select a service</option>
-                        <option value="garden">Garden Maintenance</option>
-                        <option value="property">
-                          Property Maintenance
-                        </option>
-                        <option value="plumbing">Plumbing</option>
-                        <option value="bathrooms">
-                          Kitchens & Bathrooms
-                        </option>
-                        <option value="tiling">Tiling & Flooring</option>
-                        <option value="roofing">Roofing & Gutters</option>
-                      </select>
-                    </label>
+                    {errors.service && (
+                      <p role="alert" className={styles.formIntro}>
+                        {errors.service}
+                      </p>
+                    )}
 
                     <label>
                       Tell us about your project
@@ -340,7 +1055,7 @@ export default function RequestAQuotePage() {
                         className={styles.backButton}
                         onClick={previousStep}
                       >
-                        ← Back
+                        ← BACK
                       </button>
 
                       <button
@@ -348,28 +1063,32 @@ export default function RequestAQuotePage() {
                         className={styles.nextButton}
                         onClick={nextStep}
                       >
-                        Next Step →
+                        CONTINUE TO PROPERTY DETAILS →
                       </button>
                     </div>
                   </div>
                 )}
 
                 {/* STEP 3 */}
-                {step === 3 && (
+                {step === 3 && !submitted && (
                   <div className={styles.formStep}>
+                    <p className={styles.eyebrow}>STEP 3 OF 4</p>
+
                     <h2>Property Details</h2>
 
                     <p className={styles.formIntro}>
-                      These details help us understand your project and
-                      location.
+                      Tell us about the property where the work is required.
                     </p>
 
                     <label>
-                      Property Type
+                      Property Type <span>*</span>
+
                       <select
                         name="propertyType"
                         value={form.propertyType}
                         onChange={handleInput}
+                        required
+                        aria-invalid={Boolean(errors.propertyType)}
                       >
                         <option value="">Select property type</option>
                         <option value="house">House</option>
@@ -383,26 +1102,52 @@ export default function RequestAQuotePage() {
                         </option>
                         <option value="other">Other</option>
                       </select>
+
+                      {errors.propertyType && (
+                        <small role="alert">{errors.propertyType}</small>
+                      )}
                     </label>
 
                     <label>
-                      Postcode
+                      Property Address
                       <input
                         type="text"
-                        name="postcode"
-                        value={form.postcode}
+                        name="propertyAddress"
+                        value={form.propertyAddress}
+                        onChange={handleInput}
+                        placeholder="Property address"
+                        autoComplete="street-address"
+                      />
+                    </label>
+
+                    <label>
+                      Property Postcode <span>*</span>
+
+                      <input
+                        type="text"
+                        name="propertyPostcode"
+                        value={form.propertyPostcode}
                         onChange={handleInput}
                         placeholder="e.g. PE11 1AA"
+                        autoComplete="postal-code"
+                        required
+                        aria-invalid={Boolean(errors.propertyPostcode)}
                       />
+
+                      {errors.propertyPostcode && (
+                        <small role="alert">
+                          {errors.propertyPostcode}
+                        </small>
+                      )}
                     </label>
 
                     <label>
                       Additional Information
                       <textarea
-                        name="message"
-                        value={form.message}
+                        name="propertyMessage"
+                        value={form.propertyMessage}
                         onChange={handleInput}
-                        placeholder="Anything else we should know?"
+                        placeholder="Anything else we should know about the property?"
                         rows={6}
                       />
                     </label>
@@ -413,7 +1158,7 @@ export default function RequestAQuotePage() {
                         className={styles.backButton}
                         onClick={previousStep}
                       >
-                        ← Back
+                        ← BACK
                       </button>
 
                       <button
@@ -421,7 +1166,7 @@ export default function RequestAQuotePage() {
                         className={styles.nextButton}
                         onClick={nextStep}
                       >
-                        Review Quote →
+                        CONTINUE TO REVIEW →
                       </button>
                     </div>
                   </div>
@@ -430,7 +1175,9 @@ export default function RequestAQuotePage() {
                 {/* STEP 4 */}
                 {step === 4 && !submitted && (
                   <div className={styles.formStep}>
-                    <h2>Review & Send</h2>
+                    <p className={styles.eyebrow}>STEP 4 OF 4</p>
+
+                    <h2>Review &amp; Send</h2>
 
                     <p className={styles.formIntro}>
                       Please check your details before sending your quote
@@ -439,49 +1186,95 @@ export default function RequestAQuotePage() {
 
                     <div className={styles.reviewBox}>
                       <div>
-                        <strong>Name</strong>
-                        <span>{form.name || "Not provided"}</span>
+                        <strong>Emergency</strong>
+                        <span>
+                          {form.emergency === true
+                            ? "Yes — urgent help"
+                            : "No — planned work"}
+                        </span>
                       </div>
 
                       <div>
+                        <strong>Customer Type</strong>
+                        <span>
+                          {customerTypes.find(
+                            (item) => item.id === form.customerType
+                          )?.title || "Not provided"}
+                        </span>
+                      </div>
+
+                      <div>
+                        <strong>Name</strong>
+                        <span>
+                          {form.firstName} {form.lastName}
+                        </span>
+                      </div>
+
+                      {form.organisation && (
+                        <div>
+                          <strong>Organisation</strong>
+                          <span>{form.organisation}</span>
+                        </div>
+                      )}
+
+                      <div>
                         <strong>Phone</strong>
-                        <span>{form.phone || "Not provided"}</span>
+                        <span>{form.phone}</span>
                       </div>
 
                       <div>
                         <strong>Email</strong>
-                        <span>{form.email || "Not provided"}</span>
+                        <span>{form.email}</span>
                       </div>
 
                       <div>
-                        <strong>Postcode</strong>
-                        <span>{form.postcode || "Not provided"}</span>
-                      </div>
-
-                      <div>
-                        <strong>Services</strong>
+                        <strong>Preferred Contact</strong>
                         <span>
-                          {form.services.length > 0
-                            ? form.services
-                                .map(
-                                  (id) =>
-                                    services.find(
-                                      (service) => service.id === id
-                                    )?.title
-                                )
-                                .filter(Boolean)
-                                .join(", ")
-                            : "No service selected"}
+                          {form.preferredContactMethod === "phone"
+                            ? "Phone"
+                            : "Email"}
                         </span>
                       </div>
 
                       <div>
-                        <strong>Project details</strong>
+                        <strong>Customer Postcode</strong>
+                        <span>{form.postcode}</span>
+                      </div>
+
+                      <div>
+                        <strong>Service</strong>
+                        <span>
+                          {services.find(
+                            (service) => service.id === form.service
+                          )?.title || "Not provided"}
+                        </span>
+                      </div>
+
+                      <div>
+                        <strong>Project Details</strong>
                         <span>
                           {form.message || "No additional details provided"}
                         </span>
                       </div>
+
+                      <div>
+                        <strong>Property</strong>
+                        <span>
+                          {form.propertyType || "Not provided"}
+                          {form.propertyAddress
+                            ? ` — ${form.propertyAddress}`
+                            : ""}
+                          {form.propertyPostcode
+                            ? `, ${form.propertyPostcode}`
+                            : ""}
+                        </span>
+                      </div>
                     </div>
+
+                    <p className={styles.formIntro}>
+                      We&apos;ll review the information you send and contact
+                      you about the next step.
+                    </p>
 
                     <div className={styles.buttonRow}>
                       <button
@@ -489,11 +1282,11 @@ export default function RequestAQuotePage() {
                         className={styles.backButton}
                         onClick={previousStep}
                       >
-                        ← Back
+                        ← BACK
                       </button>
 
                       <button type="submit" className={styles.nextButton}>
-                        Send Quote Request →
+                        SEND QUOTE REQUEST →
                       </button>
                     </div>
                   </div>
@@ -504,17 +1297,29 @@ export default function RequestAQuotePage() {
                   <div className={styles.successBox}>
                     <div className={styles.successIcon}>✓</div>
 
+                    <p className={styles.eyebrow}>QUOTE REQUEST RECEIVED</p>
+
                     <h2>Thank You!</h2>
 
                     <p>
                       Your quote request has been prepared successfully.
-                      Our team will get back to you as soon as possible.
+                      We&apos;ll review the information you send and contact
+                      you about the next step.
                     </p>
 
+                    {form.emergency === true && (
+                      <p>
+                        If this is an active property or plumbing emergency,
+                        please call Alpha directly on{" "}
+                        <strong>01775 518068</strong>.
+                      </p>
+                    )}
+
                     <div className={styles.successLinks}>
-                      <a href="tel:01234567890">Call 01234 567890</a>
-                      <a href="mailto:info@alphapropertyandgarden.co.uk">
-                        Email Us
+                      <a href="tel:01775518068">Call 01775 518068</a>
+
+                      <a href="mailto:info@alphapropertyandgardening.co.uk">
+                        Email info@alphapropertyandgardening.co.uk
                       </a>
                     </div>
 
@@ -528,80 +1333,75 @@ export default function RequestAQuotePage() {
 
             {/* RIGHT SIDEBAR */}
             <aside className={styles.sidebar}>
-              <div className={styles.sidebarImage}>
-                <div>
-                  <span>From small jobs</span>
-                  <strong>to big projects...</strong>
-                  <em>we&apos;ve got you covered.</em>
-                </div>
-              </div>
-
               <div className={styles.whyBox}>
-                <h2>Why Choose Alpha?</h2>
+                <h2>What Happens Next?</h2>
 
                 <div className={styles.whyItem}>
-                  <span>♟</span>
+                  <span>1</span>
+
                   <div>
-                    <strong>Local & Reliable</strong>
-                    <p>A trusted local team based in Spalding</p>
+                    <strong>Tell us about yourself.</strong>
                   </div>
                 </div>
 
                 <div className={styles.whyItem}>
-                  <span>✓</span>
+                  <span>2</span>
+
                   <div>
-                    <strong>Wide Range of Services</strong>
-                    <p>One team for all your property and garden needs</p>
+                    <strong>Tell us what work you need.</strong>
                   </div>
                 </div>
 
                 <div className={styles.whyItem}>
-                  <span>★</span>
+                  <span>3</span>
+
                   <div>
-                    <strong>Professional & Friendly</strong>
-                    <p>High quality workmanship and great customer service</p>
+                    <strong>Tell us about the property.</strong>
                   </div>
                 </div>
 
                 <div className={styles.whyItem}>
-                  <span>🍃</span>
+                  <span>4</span>
+
                   <div>
-                    <strong>A Cleaner Greener Brighter Tomorrow</strong>
-                    <p>Caring for your home and our local environment</p>
+                    <strong>Review and send your request.</strong>
                   </div>
                 </div>
+
+                <p>
+                  Once submitted, Alpha will review the information and
+                  contact you regarding the next step.
+                </p>
               </div>
 
-              {/* MAP */}
+              <div className={styles.coverageBox}>
+                <h2>Emergency?</h2>
+
+                <p>
+                  For an active property or plumbing emergency, calling Alpha
+                  is the fastest way to contact us.
+                </p>
+
+                <a
+                  href="tel:01775518068"
+                  className={styles.nextButton}
+                >
+                  CALL 01775 518068
+                </a>
+              </div>
+
               <div className={styles.coverageBox}>
                 <h2>Our Coverage Area</h2>
 
                 <p>
-                  We cover a wide area across South and East Lincolnshire,
-                  including Peterborough, Spalding, Skegness, Long Sutton,
-                  Lincoln and the surrounding towns and villages.
+                  Alpha covers a wide regional area from Peterborough to
+                  Skegness and from Long Sutton to Lincoln, including many
+                  surrounding communities.
                 </p>
 
-                <div className={styles.mapWrapper}>
-                  <iframe
-                    title="Alpha Property and Gardening Services coverage area"
-                    src="https://www.google.com/maps?q=Spalding%2C%20Lincolnshire%2C%20UK&z=9&output=embed"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-
-                  <div className={styles.mapLabel}>
-                    <span></span>
-                    <div>
-                      <strong>Our Coverage Area</strong>
-                      <small>
-                        Peterborough to Skegness
-                        <br />
-                        and Long Sutton to Lincoln
-                      </small>
-                    </div>
-                  </div>
-                </div>
+                <Link href="/areas-we-cover" className={styles.textLink}>
+                  VIEW AREAS WE COVER →
+                </Link>
               </div>
             </aside>
           </div>
@@ -610,23 +1410,27 @@ export default function RequestAQuotePage() {
         {/* CONTACT STRIP */}
         <section className={styles.contactStrip}>
           <div className={styles.contactItem}>
-            <span>♧</span>
+            <span>☎</span>
+
             <div>
               <strong>Prefer to speak to us directly?</strong>
+
               <p>
                 Call us on{" "}
-                <a href="tel:01234567890">01234 567890</a>
+                <a href="tel:01775518068">01775 518068</a>
               </p>
             </div>
           </div>
 
           <div className={styles.contactItem}>
             <span>✉</span>
+
             <div>
               <strong>Or email us</strong>
+
               <p>
-                <a href="mailto:info@alphapropertyandgarden.co.uk">
-                  info@alphapropertyandgarden.co.uk
+                <a href="mailto:info@alphapropertyandgardening.co.uk">
+                  info@alphapropertyandgardening.co.uk
                 </a>
               </p>
             </div>
@@ -637,7 +1441,7 @@ export default function RequestAQuotePage() {
         <section className={styles.trustBar}>
           <div>
             <span>♢</span>
-            <strong>Trusted Local Team</strong>
+            <strong>Property Maintenance</strong>
           </div>
 
           <div>
@@ -647,12 +1451,12 @@ export default function RequestAQuotePage() {
 
           <div>
             <span>🍃</span>
-            <strong>Local Communities</strong>
+            <strong>Garden Services</strong>
           </div>
 
           <div>
             <span>♧</span>
-            <strong>Homes & Businesses</strong>
+            <strong>Homes &amp; Businesses</strong>
           </div>
 
           <div>

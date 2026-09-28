@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 
 import Header from "../components/Header";
@@ -319,6 +319,11 @@ function ContentSection({
 export default function LandlordsLettingAgentsPage() {
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    document.title =
+      "Property Maintenance for Landlords & Letting Agents | Alpha";
+  }, []);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
@@ -535,8 +540,8 @@ export default function LandlordsLettingAgentsPage() {
         <ServiceList items={tenantRepairItems} />
 
         <p>
-          The exact authorisation process should be agreed with the landlord or
-          agent before work proceeds.
+          We&apos;ll agree the appropriate authorisation process with the
+          landlord or managing agent before planned work proceeds.
         </p>
       </ContentSection>
 
@@ -627,9 +632,11 @@ export default function LandlordsLettingAgentsPage() {
               </p>
 
               <p>
-                Alpha provides <strong>24/7 emergency property and plumbing
-                call-out support</strong> for suitable urgent problems across
-                our service area.
+                Alpha provides{" "}
+                <strong>
+                  24/7 emergency property and plumbing call-out support
+                </strong>{" "}
+                for suitable urgent problems across our service area.
               </p>
             </div>
 
@@ -967,8 +974,8 @@ export default function LandlordsLettingAgentsPage() {
         <ServiceList items={recurringItems} />
 
         <p>
-          The exact service and visit frequency should be agreed according to
-          the client and property requirements.
+          The service and visit frequency can be agreed around the property or
+          portfolio requirements.
         </p>
       </ContentSection>
 
@@ -1024,8 +1031,9 @@ export default function LandlordsLettingAgentsPage() {
               <h2>My Alpha — Property Maintenance in One Place</h2>
 
               <p>
-                The landlord and letting-agent experience should ultimately
-                connect to <strong>My Alpha</strong>, our client portal.
+                My Alpha is being developed to give landlords and letting
+                agents one place to manage their Alpha property records and
+                maintenance activity.
               </p>
 
               <div className={styles.comingSoon}>
@@ -1283,35 +1291,6 @@ export default function LandlordsLettingAgentsPage() {
       <section className={styles.quoteSection} id="quote">
         <div className={styles.container}>
           <div className={styles.quoteLayout}>
-            <div className={styles.quoteIntro}>
-              <p className={styles.eyebrow}>REQUEST SUPPORT</p>
-
-              <h2>Need a Reliable Property Maintenance Team?</h2>
-
-              <p>
-                Whether you manage one rental property or a wider portfolio,
-                Alpha can help reduce the number of different contractors you
-                need to organise.
-              </p>
-
-              <p>
-                From everyday repairs and recurring maintenance to
-                void-property work and complete renovations, start with one
-                enquiry.
-              </p>
-
-              <div className={styles.finalProposition}>
-                One enquiry. One team. One point of contact.
-              </div>
-
-              <a
-                href="tel:01775518068"
-                className={styles.phoneLink}
-              >
-                01775 518068
-              </a>
-            </div>
-
             <div className={styles.quoteBox}>
               {submitted ? (
                 <div className={styles.successBox}>
@@ -1334,7 +1313,9 @@ export default function LandlordsLettingAgentsPage() {
                 </div>
               ) : (
                 <>
-                  <span className={styles.formLabel}>LANDLORD / AGENT QUOTE</span>
+                  <span className={styles.formLabel}>
+                    LANDLORD / AGENT QUOTE
+                  </span>
 
                   <h3>Request Landlord / Agent Support</h3>
 
@@ -1481,14 +1462,16 @@ export default function LandlordsLettingAgentsPage() {
         <div className={styles.container}>
           <div className={styles.finalCtaInner}>
             <div>
-              <p className={styles.eyebrow}>ONE TEAM. COMPLETE PROPERTY CARE.</p>
+              <p className={styles.eyebrow}>
+                ONE TEAM. COMPLETE PROPERTY CARE.
+              </p>
 
               <h2>Start With One Enquiry</h2>
 
               <p>
                 From everyday repairs and recurring maintenance to
-                void-property work and complete renovations, Alpha can provide
-                one place to start.
+                void-property work and complete renovations, Alpha provides one
+                place to start.
               </p>
 
               <div className={styles.finalProposition}>
@@ -1497,15 +1480,8 @@ export default function LandlordsLettingAgentsPage() {
             </div>
 
             <div className={styles.finalButtons}>
-              <a href="#quote" className={styles.goldButton}>
-                Request Landlord / Agent Support →
-              </a>
-
-              <a
-                href="tel:01775518068"
-                className={styles.outlineButton}
-              >
-                Call 01775 518068
+              <a href="tel:01775518068" className={styles.outlineButton}>
+                CALL 01775 518068
               </a>
             </div>
           </div>

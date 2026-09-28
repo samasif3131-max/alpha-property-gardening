@@ -859,7 +859,10 @@ export default function GardenServicesPage() {
                 including surrounding towns, villages and rural communities.
               </p>
 
-              <Link href="/areas-we-cover" className={styles.lightButton}>
+              <Link
+                href="/areas-we-cover"
+                className={styles.lightButton}
+              >
                 VIEW AREAS WE COVER →
               </Link>
             </div>
@@ -927,6 +930,7 @@ export default function GardenServicesPage() {
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label htmlFor="name">Your Name</label>
+
                     <input
                       id="name"
                       name="name"
@@ -937,6 +941,7 @@ export default function GardenServicesPage() {
 
                   <div className={styles.formGroup}>
                     <label htmlFor="phone">Phone</label>
+
                     <input
                       id="phone"
                       name="phone"
@@ -949,6 +954,7 @@ export default function GardenServicesPage() {
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label htmlFor="email">Email</label>
+
                     <input
                       id="email"
                       name="email"
@@ -960,7 +966,11 @@ export default function GardenServicesPage() {
                   <div className={styles.formGroup}>
                     <label htmlFor="service">Garden Service</label>
 
-                    <select id="service" name="service" defaultValue="">
+                    <select
+                      id="service"
+                      name="service"
+                      defaultValue=""
+                    >
                       <option value="" disabled>
                         Select a service
                       </option>
@@ -1026,7 +1036,9 @@ export default function GardenServicesPage() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label htmlFor="message">Tell Us About The Garden</label>
+                  <label htmlFor="message">
+                    Tell Us About The Garden
+                  </label>
 
                   <textarea
                     id="message"
@@ -1036,7 +1048,10 @@ export default function GardenServicesPage() {
                   ></textarea>
                 </div>
 
-                <button type="submit" className={styles.submitButton}>
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                >
                   REQUEST A GARDEN QUOTE
                 </button>
               </form>

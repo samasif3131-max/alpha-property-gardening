@@ -39,9 +39,9 @@ type Project = {
   When genuine projects become available, add them in this format:
 
   {
-    slug: "bathroom-renovation-spalding",
-    title: "Complete Bathroom Renovation in Spalding",
-    location: "Spalding",
+    slug: "genuine-project-slug",
+    title: "Genuine Alpha Project",
+    location: "Genuine Location",
     customerType: "Homeowner",
     description:
       "Genuine description of the work completed by Alpha.",
@@ -51,10 +51,10 @@ type Project = {
       "Plumbing Services",
       "Tiling & Flooring",
     ],
-    image: "/images/projects/bathroom-spalding-after.webp",
-    alt: "Completed bathroom renovation by Alpha in Spalding",
-    completed: "September 2026",
-  },
+    image: "/images/projects/genuine-project-after.webp",
+    alt: "Completed project by Alpha",
+    completed: "Month 2026",
+  }
 
   Only use genuine Alpha work and genuine photographs.
 */
@@ -99,6 +99,7 @@ function ProjectCard({ project }: { project: Project }) {
       >
         <div className={styles.projectImage}>
           <img src={project.image} alt={project.alt} loading="lazy" />
+
           <span className={styles.projectCategory}>
             {project.category}
           </span>
@@ -205,11 +206,15 @@ export default function OurWorkPage() {
 
             <div className={styles.heroGrid}>
               <div className={styles.heroContent}>
-                <p className={styles.eyebrow}>SEE THE WORK BEHIND ALPHA</p>
+                <p className={styles.eyebrow}>
+                  SEE THE WORK BEHIND ALPHA
+                </p>
 
                 <h1>
                   Our Work
-                  <span>Real projects. Real properties. Real results.</span>
+                  <span>
+                    Real projects. Real properties. Real results.
+                  </span>
                 </h1>
 
                 <div className={styles.goldLine} />
@@ -223,14 +228,13 @@ export default function OurWorkPage() {
 
                 <p className={styles.heroDescription}>
                   This is where we show genuine examples of that work as
-                  our portfolio grows. Every project presented as Alpha
-                  work should be based on a real job completed by our
-                  team.
+                  our portfolio grows. Only genuine work completed by
+                  Alpha will be presented here as an Alpha project.
                 </p>
 
                 <div className={styles.heroButtons}>
                   <Link
-                    href="/contact"
+                    href="/request-a-quote"
                     className={styles.primaryButton}
                   >
                     Request a Quote
@@ -295,7 +299,9 @@ export default function OurWorkPage() {
           <div className={styles.container}>
             <div className={styles.introGrid}>
               <div className={styles.introHeading}>
-                <p className={styles.sectionEyebrow}>OUR PORTFOLIO</p>
+                <p className={styles.sectionEyebrow}>
+                  OUR PORTFOLIO
+                </p>
 
                 <h2>See the work behind Alpha.</h2>
 
@@ -324,6 +330,7 @@ export default function OurWorkPage() {
                   </strong>
 
                   <span>
+                    {" "}
                     Real projects. Real properties. Real results.
                   </span>
                 </div>
@@ -366,7 +373,7 @@ export default function OurWorkPage() {
         )}
 
         {/* =====================================================
-            PROJECT FILTERS
+            PROJECT FILTERS / EMPTY STATE
         ====================================================== */}
         <section
           className={`${styles.projectsSection} ${
@@ -413,9 +420,6 @@ export default function OurWorkPage() {
               </>
             )}
 
-            {/* =================================================
-                EMPTY STATE
-            ================================================== */}
             {!hasProjects ? (
               <div className={styles.emptyState}>
                 <div className={styles.emptyIcon}>◆</div>
@@ -464,11 +468,20 @@ export default function OurWorkPage() {
                     <span>03</span>
                     <strong>Useful Project Details</strong>
                     <p>
-                      Future case studies will explain the work,
+                      Future project details will explain the work,
                       scope and result clearly.
                     </p>
                   </div>
                 </div>
+
+                <h3>What You’ll See Here</h3>
+
+                <p>
+                  As our portfolio grows, we’ll share genuine before,
+                  during and after photographs from suitable Alpha
+                  projects, together with clear details about the work
+                  completed and services involved.
+                </p>
 
                 <div className={styles.emptyButtons}>
                   <Link
@@ -480,7 +493,7 @@ export default function OurWorkPage() {
                   </Link>
 
                   <Link
-                    href="/contact"
+                    href="/request-a-quote"
                     className={styles.secondaryButtonDark}
                   >
                     Request a Quote
@@ -524,8 +537,8 @@ export default function OurWorkPage() {
                     <h3>No projects in this category yet.</h3>
 
                     <p>
-                      As genuine Alpha projects are completed, relevant
-                      examples will be added here.
+                      As genuine Alpha projects are completed,
+                      relevant examples will be added here.
                     </p>
 
                     <Link
@@ -538,65 +551,6 @@ export default function OurWorkPage() {
                 )}
               </>
             )}
-          </div>
-        </section>
-
-        {/* =====================================================
-            HOW PORTFOLIO WILL GROW
-        ====================================================== */}
-        <section className={styles.processSection}>
-          <div className={styles.container}>
-            <div className={styles.processHeading}>
-              <p className={styles.sectionEyebrow}>
-                BUILT FROM REAL WORK
-              </p>
-
-              <h2>How the Alpha Portfolio Will Grow</h2>
-
-              <p>
-                Every suitable project can become an opportunity to
-                document genuine workmanship and show future customers
-                what Alpha can do.
-              </p>
-            </div>
-
-            <div className={styles.processGrid}>
-              <div className={styles.processCard}>
-                <span>01</span>
-                <h3>Before</h3>
-                <p>
-                  Genuine photographs showing the starting condition
-                  and relevant areas requiring attention.
-                </p>
-              </div>
-
-              <div className={styles.processCard}>
-                <span>02</span>
-                <h3>During</h3>
-                <p>
-                  Useful progress photographs showing preparation and
-                  key stages of the agreed work.
-                </p>
-              </div>
-
-              <div className={styles.processCard}>
-                <span>03</span>
-                <h3>After</h3>
-                <p>
-                  Clear finished photographs showing the completed
-                  Alpha work.
-                </p>
-              </div>
-
-              <div className={styles.processCard}>
-                <span>04</span>
-                <h3>Project Story</h3>
-                <p>
-                  A factual summary covering the brief, scope, location
-                  and relevant services.
-                </p>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -649,54 +603,12 @@ export default function OurWorkPage() {
                   <div>
                     <span>✓</span>
                     <p>
-                      Customer permission where required for portfolio
-                      use.
+                      Customer permission where required for
+                      portfolio use.
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =====================================================
-            FUTURE CASE STUDIES
-        ====================================================== */}
-        <section className={styles.caseStudySection}>
-          <div className={styles.container}>
-            <div className={styles.caseStudyInner}>
-              <div className={styles.caseStudyBadge}>
-                FUTURE CASE STUDIES
-              </div>
-
-              <h2>
-                Strong projects can have their own detailed project
-                page.
-              </h2>
-
-              <p>
-                Larger genuine projects can eventually be presented as
-                detailed case studies covering the brief, problem,
-                scope of work, before photographs, progress photographs,
-                completed work and relevant Alpha services.
-              </p>
-
-              <div className={styles.caseStudyFeatures}>
-                <span>Project Brief</span>
-                <span>Scope of Work</span>
-                <span>Before Photos</span>
-                <span>During Photos</span>
-                <span>After Photos</span>
-                <span>Project Outcome</span>
-              </div>
-
-              <p className={styles.caseStudyNote}>
-                Example future structure:
-                <strong>
-                  {" "}
-                  /our-work/bathroom-renovation-spalding
-                </strong>
-              </p>
             </div>
           </div>
         </section>
@@ -708,7 +620,9 @@ export default function OurWorkPage() {
           <div className={styles.container}>
             <div className={styles.ctaInner}>
               <div className={styles.ctaContent}>
-                <p className={styles.ctaEyebrow}>START YOUR PROJECT</p>
+                <p className={styles.ctaEyebrow}>
+                  START YOUR PROJECT
+                </p>
 
                 <h2>Have a Property Project of Your Own?</h2>
 
@@ -726,7 +640,7 @@ export default function OurWorkPage() {
 
               <div className={styles.ctaActions}>
                 <Link
-                  href="/contact"
+                  href="/request-a-quote"
                   className={styles.ctaPrimary}
                 >
                   Request a Quote

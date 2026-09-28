@@ -166,7 +166,7 @@ const faqs = [
   {
     question: "Do you replace entire roofs?",
     answer:
-      "Our current website focuses on suitable roof maintenance and localised repairs. Larger or specialist roofing requirements will need to be assessed individually before we confirm whether they fall within our service scope.",
+      "Alpha’s current roofing service focuses on suitable roof maintenance and localised repairs. Larger or specialist roofing projects will need to be assessed individually before we confirm whether they fall within our service scope.",
   },
   {
     question: "Do you clean gutters?",
@@ -201,7 +201,7 @@ const faqs = [
   {
     question: "Do you offer emergency roof repairs?",
     answer:
-      "If you have an urgent roof or gutter problem, call 01775 518068. We can discuss the issue and confirm whether Alpha can assist based on the type of problem, location, access and current conditions.",
+      "For urgent weather-related problems, call 01775 518068. We’ll discuss the issue and confirm whether Alpha can assist based on the type of damage, access and current conditions.",
   },
   {
     question: "How do I request a quote?",
@@ -369,9 +369,11 @@ export default function RoofingGuttersPage() {
           </p>
 
           <div className={styles.scopeNote}>
-            Do not advertise complete re-roofing, structural roofing or
-            specialist roofing systems unless Alpha specifically confirms
-            those services.
+            Our current roofing service focuses on suitable maintenance and
+            localised repairs. Larger re-roofing, structural roofing or
+            specialist roofing requirements will need to be assessed
+            separately before we confirm whether they fall within our service
+            scope.
           </div>
         </Section>
 
@@ -572,8 +574,9 @@ export default function RoofingGuttersPage() {
           </p>
 
           <div className={styles.scopeNote}>
-            Do not automatically advertise complete roofline replacement or
-            specialist uPVC systems unless Alpha confirms that service.
+            Our current service focuses on suitable fascia and soffit
+            maintenance and repairs. Larger roofline replacement projects will
+            need to be assessed separately before the scope is confirmed.
           </div>
         </Section>
 
@@ -656,28 +659,25 @@ export default function RoofingGuttersPage() {
           <ServiceList items={stormDamage} />
 
           <div className={styles.scopeNote}>
-            Do not make guaranteed emergency-response promises or claim storm
-            repairs beyond Alpha&apos;s confirmed capability.
+            For urgent weather-related problems, call 01775 518068. We’ll
+            discuss the issue and confirm whether Alpha can assist based on the
+            type of damage, access and current conditions.
           </div>
         </Section>
 
         {/* ACCESS & SAFETY */}
         <Section eyebrow="ACCESS & SAFETY" title="Safe Access Comes First">
-          <p>Roofline work depends heavily on safe access.</p>
-
-          <p>Before work is agreed, Alpha should assess:</p>
-
-          <ServiceList items={accessSafety} />
-
           <p>
-            Where scaffolding, specialist access equipment or specialist
-            roofing expertise is required, this should be identified before
-            the work proceeds.
+            Roof and roofline work is always subject to safe and practical
+            access. Before confirming the job, we’ll consider the building
+            height, ground conditions, working area, roof condition, access
+            equipment required and any surrounding hazards.
           </p>
 
-          <p className={styles.safetyNote}>
-            This is a customer-facing safety statement, not an internal
-            instruction.
+          <p>
+            If scaffolding, specialist access equipment or specialist roofing
+            expertise is required, we’ll identify this during assessment and
+            explain how it affects the proposed work before proceeding.
           </p>
         </Section>
 
@@ -715,7 +715,10 @@ export default function RoofingGuttersPage() {
         </Section>
 
         {/* VOID PROPERTIES */}
-        <Section eyebrow="VOID PROPERTIES" title="Roof & Gutter Checks for Vacant Properties">
+        <Section
+          eyebrow="VOID PROPERTIES"
+          title="Roof & Gutter Checks for Vacant Properties"
+        >
           <p>
             Vacant properties can sometimes hide developing maintenance issues
             because there is nobody living there to spot them early.
@@ -804,7 +807,7 @@ export default function RoofingGuttersPage() {
           <ServiceList items={materialFactors} />
 
           <p>
-            Your quotation should clearly state the work and materials included
+            Your quotation will clearly confirm the work and materials included
             within the agreed scope.
           </p>
 

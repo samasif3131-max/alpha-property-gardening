@@ -1,111 +1,166 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import styles from "./about-us.module.css";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import styles from "./about-us.module.css";
+
+export const metadata: Metadata = {
+  title: "About Alpha Property & Gardening Services",
+  description:
+    "Learn more about Alpha Property & Gardening Services, our property maintenance, repairs, renovations and garden services.",
+};
+
+const propertyServices = [
+  "Property maintenance and repairs",
+  "Property renovations",
+  "Plumbing",
+  "Bathroom installations and renovations",
+  "Kitchen installations and renovations",
+  "Tiling and flooring",
+  "Painting and decorating",
+  "Roofing and gutter maintenance",
+  "Garden maintenance",
+  "Garden clearances",
+  "Landlord and letting-agent maintenance",
+  "Void-property work",
+  "Recurring property and garden maintenance",
+  "24/7 emergency property and plumbing call-outs",
+];
+
+const homeownerServices = [
+  "Repairs",
+  "Plumbing",
+  "Decorating",
+  "Bathrooms",
+  "Kitchens",
+  "Flooring",
+  "Renovations",
+  "Garden maintenance",
+];
+
+const landlordServices = [
+  "Tenant-reported repairs",
+  "Plumbing",
+  "Decorating",
+  "Flooring",
+  "Bathroom work",
+  "Kitchen work",
+  "Garden maintenance",
+  "Void-property preparation",
+  "Renovation",
+  "Emergency call-outs",
+];
+
+const quotationPoints = [
+  "What work is included",
+  "What materials are included",
+  "What the customer is supplying",
+  "What is excluded",
+  "What happens if additional work is discovered",
+];
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Understand the Job",
+    text: "We start by finding out what the customer actually needs.",
+  },
+  {
+    number: "02",
+    title: "Assess the Property",
+    text: "Where necessary, the relevant area is assessed before work is quoted.",
+  },
+  {
+    number: "03",
+    title: "Agree the Scope",
+    text: "The customer should understand what is included in the job.",
+  },
+  {
+    number: "04",
+    title: "Clear Quotation",
+    text: "Alpha prefers fixed quotations based on the agreed work rather than unexplained hourly pricing.",
+  },
+  {
+    number: "05",
+    title: "Complete the Work",
+    text: "The agreed work is carried out according to the agreed scope.",
+  },
+  {
+    number: "06",
+    title: "Keep the Relationship",
+    text: "For customers with recurring property needs, Alpha can continue supporting the property over time.",
+  },
+];
 
 const values = [
   {
-    icon: "✓",
-    title: "Reliability",
-    text: "We turn up, do the job and do it right.",
+    number: "01",
+    title: "Clear Communication",
+    text: "Customers should understand what work has been agreed.",
   },
   {
-    icon: "♙",
-    title: "Honesty",
-    text: "Clear communication and no hidden costs.",
+    number: "02",
+    title: "Practical Solutions",
+    text: "We focus on what the property actually needs rather than unnecessarily complicating the job.",
   },
   {
-    icon: "◉",
-    title: "Quality",
-    text: "High standards in everything we do.",
+    number: "03",
+    title: "Reliable Property Care",
+    text: "From a small repair to a larger project, the work should be approached properly.",
   },
   {
-    icon: "🤝",
-    title: "Respect",
-    text: "For our customers, our community and each other.",
-  },
-  {
-    icon: "⌂",
-    title: "Local Focus",
-    text: "Proud to serve Spalding and surrounding areas.",
-  },
-  {
-    icon: "♧",
-    title: "Sustainability",
-    text: "Working towards a cleaner, greener tomorrow.",
+    number: "04",
+    title: "Long-Term Relationships",
+    text: "For homeowners, landlords and agents with ongoing maintenance requirements, Alpha aims to become the team they contact again.",
   },
 ];
 
-const reasons = [
+const faqs = [
   {
-    icon: "⌂",
-    title: "Local & Trusted",
-    text: "Based in Spalding, serving local homes, landlords and businesses.",
+    question: "What does Alpha Property & Gardening Services do?",
+    answer:
+      "Alpha provides property maintenance, repairs, renovations and garden services including plumbing, bathrooms, kitchens, tiling, flooring, decorating, roofing, gutter maintenance and garden work.",
   },
   {
-    icon: "✓",
-    title: "Fully Insured",
-    text: "For your peace of mind on every project.",
+    question: "Do you take on small jobs?",
+    answer:
+      "Yes. Alpha works on smaller individual repairs as well as multi-service maintenance and larger renovation projects.",
   },
   {
-    icon: "♙",
-    title: "Experienced Team",
-    text: "Skilled, reliable and professional tradespeople.",
+    question: "Do you undertake complete property renovations?",
+    answer:
+      "Yes. Alpha can undertake wider property renovations involving several rooms and services.",
   },
   {
-    icon: "♧",
-    title: "High Quality Workmanship",
-    text: "We take pride in every detail, big or small.",
+    question: "Do you work with landlords and letting agents?",
+    answer:
+      "Yes. Alpha works with landlords, letting agents and property managers for repairs, void-property work, recurring maintenance and renovations.",
   },
   {
-    icon: "◉",
-    title: "Competitive Pricing",
-    text: "Great value without compromising on quality.",
+    question: "Do you provide emergency call-outs?",
+    answer:
+      "Yes. Alpha provides 24/7 emergency property and plumbing call-out support for suitable urgent problems. Call 01775 518068.",
   },
   {
-    icon: "🤝",
-    title: "Committed to Our Community",
-    text: "Proud to support local people and local businesses.",
-  },
-];
-
-const teamServices = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85",
-    title: "Garden & Property Maintenance",
-    text: "Keeping your outdoor spaces and properties in top condition.",
-    icon: "♧",
+    question: "Do you undertake gas work?",
+    answer:
+      "Alpha does not currently undertake work that legally requires Gas Safe registration.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=900&q=85",
-    title: "Plumbing & Installations",
-    text: "Expert plumbing, kitchen and bathroom installations and repairs.",
-    icon: "🔧",
+    question: "What areas do you cover?",
+    answer:
+      "Alpha's wider service area extends from Peterborough to Skegness and from Long Sutton to Lincoln, including many surrounding towns and villages.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=900&q=85",
-    title: "Bathrooms, Kitchens & Renovations",
-    text: "Transforming spaces with quality and care.",
-    icon: "▦",
-  },
-];
-
-const testimonials = [
-  {
-    text: "Fantastic service from start to finish. The team were reliable, professional and did an amazing job on our garden and property repairs. Highly recommend!",
-    name: "Homeowner, Spalding",
+    question: "What is My Alpha?",
+    answer:
+      "My Alpha is the client platform being developed to help customers and property professionals manage properties, jobs, quotes, appointments, photographs, documents, invoices and other Alpha records in one place.",
   },
   {
-    text: "We use Alpha for all our property maintenance. Great communication, fair pricing and consistently high standards of work.",
-    name: "Landlord, Holbeach",
-  },
-  {
-    text: "Professional, friendly and trustworthy. Our new kitchen looks amazing — we couldn't be happier.",
-    name: "Homeowner, Long Sutton",
+    question: "How do I request a quote?",
+    answer:
+      "Use the online quote request process and provide details of the work you need. Photographs are helpful where available.",
   },
 ];
 
@@ -118,14 +173,13 @@ export default function AboutUsPage() {
         {/* HERO */}
         <section className={styles.hero}>
           <div className={styles.heroImage} />
-
           <div className={styles.heroOverlay} />
 
           <div className={styles.heroContent}>
             <div className={styles.breadcrumb}>
               <Link href="/">Home</Link>
               <span>›</span>
-              <span>About Us</span>
+              <span>About Alpha</span>
             </div>
 
             <p className={styles.eyebrow}>ABOUT ALPHA</p>
@@ -140,125 +194,609 @@ export default function AboutUsPage() {
             </h1>
 
             <p className={styles.heroText}>
-              We&apos;re a local, reliable and professional team providing
-              high-quality property and garden services across Spalding and
-              surrounding areas. From everyday maintenance to full
-              renovations, we make it easy to keep your property in top
-              condition.
+              Alpha Property &amp; Gardening Services provides property
+              maintenance, repairs, renovations and garden services for
+              homeowners, landlords, letting agents and property managers.
+            </p>
+
+            <p className={styles.heroText}>
+              The business was built around a straightforward idea:
+            </p>
+
+            <h2 className={styles.heroStatementText}>
+              Property care should not require a different contractor for
+              every job.
+            </h2>
+
+            <p className={styles.heroText}>
+              From everyday repairs and plumbing problems to bathrooms,
+              kitchens, decorating, flooring, gardens and complete
+              renovations, Alpha brings a broad range of practical property
+              services together through one team.
             </p>
 
             <div className={styles.heroButtons}>
-              <Link href="/contact" className={styles.goldButton}>
-                Request a Free Quote <span>→</span>
+              <Link href="/services" className={styles.goldButton}>
+                VIEW OUR SERVICES <span>→</span>
               </Link>
 
-              <a href="tel:01234567890" className={styles.outlineButton}>
-                <span className={styles.phoneIcon}>⌕</span>
-                Call 01234 567890
+              <Link
+                href="/request-a-quote"
+                className={styles.outlineButton}
+              >
+                REQUEST A QUOTE
+              </Link>
+
+              <a
+                href="tel:01775518068"
+                className={styles.outlineButton}
+              >
+                CALL 01775 518068
               </a>
             </div>
-          </div>
-
-          <div className={styles.heroStatement}>
-            <span>Local People.</span>
-            <span>Quality Work.</span>
-            <span>Stronger Communities.</span>
-            <i />
           </div>
         </section>
 
         {/* STORY */}
         <section className={styles.storySection}>
           <div className={styles.storyContent}>
-            <p className={styles.sectionLabel}>OUR STORY</p>
+            <p className={styles.sectionLabel}>WHY ALPHA EXISTS</p>
 
-            <h2>
-              Built on Experience.
-              <br />
-              Driven by Quality
-            </h2>
+            <h2>Why We Built Alpha</h2>
 
             <p>
-              Alpha Property &amp; Gardening Services was founded with a
-              simple vision — to provide a reliable, honest and professional
-              service that homeowners, landlords and businesses can trust.
+              Property maintenance can become unnecessarily complicated.
             </p>
 
-            <p>
-              With years of hands-on experience across property maintenance,
-              plumbing, kitchen and bathroom installations, and garden
-              services, we saw a need for a local company that could do it all
-              — properly.
-            </p>
+            <p>A customer might have:</p>
+
+            <ul className={styles.simpleList}>
+              <li>A plumbing problem</li>
+              <li>A damaged wall</li>
+              <li>A bathroom requiring repair</li>
+              <li>Decorating that needs finishing</li>
+              <li>Flooring to replace</li>
+              <li>A garden that needs clearing</li>
+            </ul>
 
             <p>
-              Today, Alpha is a growing, trusted name in Spalding and
-              surrounding areas, known for quality workmanship, clear
-              communication and a genuine commitment to our customers.
+              Traditionally, that can mean contacting several different
+              companies and coordinating several different visits.
+            </p>
+
+            <p>Alpha was built to provide a simpler option.</p>
+
+            <p>
+              Where the work falls within our services, customers can bring
+              the complete list to one team.
             </p>
 
             <div className={styles.storyQuote}>
-              <span>&quot;More than a service,</span>
-              <strong>it&apos;s our commitment to the community.&quot;</strong>
+              <span>One enquiry. One team.</span>
+              <strong>One point of contact.</strong>
               <i />
             </div>
           </div>
 
-          <div className={styles.reasonsGrid}>
-            {reasons.map((item) => (
-              <div className={styles.reasonCard} key={item.title}>
-                <div className={styles.reasonIcon}>{item.icon}</div>
+          <div className={styles.storyVisual}>
+            <div className={styles.visualCard}>
+              <span className={styles.visualNumber}>01</span>
+              <h3>One Enquiry</h3>
+              <p>
+                Bring the property requirements together rather than starting
+                with several different contractors.
+              </p>
+            </div>
 
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </div>
+            <div className={styles.visualCard}>
+              <span className={styles.visualNumber}>02</span>
+              <h3>One Team</h3>
+              <p>
+                A broad range of practical property services coordinated
+                through Alpha.
+              </p>
+            </div>
+
+            <div className={styles.visualCard}>
+              <span className={styles.visualNumber}>03</span>
+              <h3>One Point of Contact</h3>
+              <p>
+                Keep communication simpler across maintenance, repairs and
+                improvement work.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SERVICES */}
+        <section className={styles.servicesSection}>
+          <div className={styles.servicesIntro}>
+            <p className={styles.sectionLabel}>WHAT WE DO</p>
+
+            <h2>Complete Property Care</h2>
+
+            <p>
+              Alpha provides a broad range of property and garden services.
+            </p>
+
+            <p>
+              Property remains the lead theme. Alpha is a property
+              maintenance, repair and renovation business with garden
+              services.
+            </p>
+
+            <Link href="/services" className={styles.goldButton}>
+              VIEW ALL SERVICES <span>→</span>
+            </Link>
+          </div>
+
+          <div className={styles.servicesGrid}>
+            {propertyServices.map((service) => (
+              <div className={styles.serviceItem} key={service}>
+                <span>✓</span>
+                <p>{service}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* TEAM */}
-        <section className={styles.teamSection}>
-          <div className={styles.teamIntro}>
-            <p className={styles.sectionLabel}>MEET OUR TEAM</p>
-
-            <h2>
-              Skilled.
-              <br />
-              Reliable.
-              <br />
-              Local.
-            </h2>
-
-            <p>
-              Our team combines a range of skills and experience to cover all
-              aspects of property and garden services. From groundwork to
-              plumbing, from kitchens to landscaping — we work together to
-              deliver a complete service you can rely on.
+        {/* SCALE */}
+        <section className={styles.scaleSection}>
+          <div className={styles.scaleHeader}>
+            <p className={styles.sectionLabel}>
+              FROM SMALL JOBS TO RENOVATIONS
             </p>
 
-            <Link href="/contact" className={styles.goldButton}>
-              Get in Touch <span>→</span>
+            <h2>No Job Is Too Big or Too Small</h2>
+
+            <p>
+              Alpha is designed to support customers across very different
+              types of work.
+            </p>
+          </div>
+
+          <div className={styles.scaleGrid}>
+            <article>
+              <span>01</span>
+              <h3>Small Repair</h3>
+              <p>
+                A leaking tap, damaged fitting or minor property repair.
+              </p>
+            </article>
+
+            <article>
+              <span>02</span>
+              <h3>Multiple Maintenance Jobs</h3>
+              <p>
+                Several repairs completed through one enquiry.
+              </p>
+            </article>
+
+            <article>
+              <span>03</span>
+              <h3>Room Improvement</h3>
+              <p>
+                Decorating, flooring, plumbing or general improvement work.
+              </p>
+            </article>
+
+            <article>
+              <span>04</span>
+              <h3>Bathroom or Kitchen Renovation</h3>
+              <p>
+                A complete room transformation involving several services.
+              </p>
+            </article>
+
+            <article>
+              <span>05</span>
+              <h3>Complete Property Renovation</h3>
+              <p>
+                Multiple rooms and services brought together as one larger
+                project.
+              </p>
+            </article>
+          </div>
+
+          <div className={styles.centerStatement}>
+            <strong>One Team. Complete Property Care.</strong>
+          </div>
+        </section>
+
+        {/* HOMEOWNERS */}
+        <section className={styles.audienceSection}>
+          <div
+            className={`${styles.audienceImage} ${styles.homeownersImage}`}
+          />
+
+          <div className={styles.audienceContent}>
+            <p className={styles.sectionLabel}>WHO WE WORK WITH</p>
+
+            <h2>Homeowners</h2>
+
+            <p>
+              For homeowners, Alpha can help with everyday maintenance as well
+              as larger improvement projects.
+            </p>
+
+            <ul className={styles.serviceList}>
+              {homeownerServices.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            <p>
+              Rather than starting again with a new company every time
+              another job appears, customers can build an ongoing
+              relationship with Alpha.
+            </p>
+          </div>
+        </section>
+
+        {/* LANDLORDS */}
+        <section className={styles.audienceSectionReverse}>
+          <div className={styles.audienceContent}>
+            <p className={styles.sectionLabel}>
+              LANDLORDS &amp; AGENTS
+            </p>
+
+            <h2>Landlords &amp; Letting Agents</h2>
+
+            <p>
+              Alpha is also being built around the needs of landlords,
+              letting agents and property managers.
+            </p>
+
+            <p>
+              Rental properties often require multiple types of work over
+              time.
+            </p>
+
+            <ul className={styles.serviceList}>
+              {landlordServices.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            <p>
+              The goal is to reduce the number of separate contractors the
+              landlord or agent needs to coordinate.
+            </p>
+
+            <Link
+              href="/landlords-letting-agents"
+              className={styles.goldButton}
+            >
+              VIEW LANDLORD &amp; LETTING AGENT SERVICES <span>→</span>
             </Link>
           </div>
 
+          <div
+            className={`${styles.audienceImage} ${styles.landlordImage}`}
+          />
+        </section>
+
+        {/* TEAM */}
+        <section className={styles.teamSection}>
+          <div className={styles.teamIntro}>
+            <p className={styles.sectionLabel}>THE TEAM</p>
+
+            <h2>The Alpha Team</h2>
+
+            <p>
+              Alpha currently operates with a small practical team focused on
+              property maintenance, garden work, plumbing and property
+              improvement.
+            </p>
+
+            <p>The team structure currently includes:</p>
+          </div>
+
           <div className={styles.teamCards}>
-            {teamServices.map((item) => (
-              <article className={styles.teamCard} key={item.title}>
-                <div className={styles.teamImageWrap}>
-                  <img src={item.image} alt={item.title} />
-                </div>
+            <article className={styles.teamCard}>
+              <div className={styles.teamIcon}>⌂</div>
 
-                <div className={styles.teamCardContent}>
-                  <div className={styles.teamIcon}>{item.icon}</div>
+              <h3>Property &amp; Garden Maintenance</h3>
 
-                  <h3>{item.title}</h3>
+              <p>
+                Team members handling general property maintenance, repairs,
+                garden maintenance and practical property work.
+              </p>
+            </article>
 
-                  <p>{item.text}</p>
-                </div>
+            <article className={styles.teamCard}>
+              <div className={styles.teamIcon}>🔧</div>
+
+              <h3>Plumbing, Bathrooms &amp; Kitchens</h3>
+
+              <p>
+                Dedicated capability covering plumbing work, bathroom fitting,
+                kitchen installation and associated property work.
+              </p>
+            </article>
+
+            <article className={styles.teamCard}>
+              <div className={styles.teamIcon}>+</div>
+
+              <h3>Simple Communication</h3>
+
+              <p>
+                The advantage of a small team is straightforward communication
+                and the ability to coordinate multiple services around the
+                same property.
+              </p>
+            </article>
+          </div>
+
+          <p className={styles.teamNote}>
+            Team photographs and individual profiles can be added when genuine
+            Alpha team imagery and confirmed information are available.
+          </p>
+        </section>
+
+        {/* PROCESS */}
+        <section className={styles.processSection}>
+          <div className={styles.processHeader}>
+            <p className={styles.sectionLabel}>HOW WE WORK</p>
+
+            <h2>A Practical Approach to Property Work</h2>
+
+            <p>
+              Alpha&apos;s approach is based around understanding the job,
+              agreeing the scope clearly and completing the work properly.
+            </p>
+          </div>
+
+          <div className={styles.processGrid}>
+            {processSteps.map((step) => (
+              <article
+                className={styles.processCard}
+                key={step.number}
+              >
+                <span>{step.number}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        {/* PRICING */}
+        <section className={styles.pricingSection}>
+          <div className={styles.pricingContent}>
+            <p className={styles.sectionLabel}>FIXED QUOTATIONS</p>
+
+            <h2>Clear Pricing</h2>
+
+            <p>
+              Where practical, Alpha prefers fixed quotations based on the
+              agreed scope of work.
+            </p>
+
+            <p>The aim is to make it clear:</p>
+
+            <ul className={styles.serviceList}>
+              {quotationPoints.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            <p>
+              If hidden problems or previously inaccessible issues are found
+              during a project, any additional work should be discussed before
+              proceeding wherever reasonably possible.
+            </p>
+          </div>
+        </section>
+
+        {/* HONEST SCOPE */}
+        <section className={styles.gasSection}>
+          <div className={styles.gasInner}>
+            <p className={styles.sectionLabel}>HONEST SCOPE</p>
+
+            <h2>Clear About What We Do</h2>
+
+            <p>
+              Being a multi-service property company does not mean claiming to
+              provide every possible trade.
+            </p>
+
+            <p>
+              Alpha should be clear about the services it currently offers
+              and where specialist regulated work falls outside that scope.
+            </p>
+
+            <div className={styles.gasNotice}>
+              <h3>Gas Work</h3>
+
+              <p>
+                <strong>
+                  Alpha does not currently undertake work that legally
+                  requires Gas Safe registration.
+                </strong>
+              </p>
+
+              <p>
+                That means regulated gas work is not currently advertised as a
+                direct Alpha service.
+              </p>
+
+              <p>
+                As the business expands and obtains the appropriate
+                capability, the website can be updated accordingly.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* EMERGENCY */}
+        <section className={styles.emergencySection}>
+          <div className={styles.emergencyContent}>
+            <p className={styles.sectionLabel}>
+              24/7 EMERGENCY SUPPORT
+            </p>
+
+            <h2>When Property Problems Cannot Wait</h2>
+
+            <p>
+              Alpha provides{" "}
+              <strong>
+                24/7 emergency property and plumbing call-out support
+              </strong>{" "}
+              for suitable urgent issues across the service area.
+            </p>
+
+            <p>
+              This may include appropriate urgent plumbing and property
+              problems where immediate assessment is needed.
+            </p>
+
+            <div className={styles.emergencyCall}>
+              <span>FOR AN EMERGENCY:</span>
+              <a href="tel:01775518068">CALL 01775 518068</a>
+            </div>
+          </div>
+        </section>
+
+        {/* SERVICE AREA */}
+        <section className={styles.areaSection}>
+          <div className={styles.areaContent}>
+            <p className={styles.sectionLabel}>SERVICE AREA</p>
+
+            <h2>Serving a Wide Regional Area</h2>
+
+            <p>
+              Alpha operates across a broad regional service area covering:
+            </p>
+
+            <div className={styles.areaRange}>
+              <strong>Peterborough through to Skegness</strong>
+              <span>and</span>
+              <strong>Long Sutton through to Lincoln</strong>
+            </div>
+
+            <p>
+              with many surrounding towns, villages and rural communities in
+              between.
+            </p>
+
+            <div className={styles.areaLocations}>
+              <span>Peterborough</span>
+              <span>Market Deeping</span>
+              <span>Bourne</span>
+              <span>Spalding</span>
+              <span>Holbeach</span>
+              <span>Long Sutton</span>
+              <span>Boston</span>
+              <span>Sleaford</span>
+              <span>Lincoln</span>
+              <span>Horncastle</span>
+              <span>Spilsby</span>
+              <span>Skegness</span>
+            </div>
+
+            <Link
+              href="/areas-we-cover"
+              className={styles.goldButton}
+            >
+              VIEW ALL AREAS WE COVER <span>→</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* MY ALPHA */}
+        <section className={styles.myAlphaSection}>
+          <div className={styles.myAlphaContent}>
+            <p className={styles.sectionLabel}>THE FUTURE OF ALPHA</p>
+
+            <h2>Building More Than a Maintenance Company</h2>
+
+            <p>
+              Alpha&apos;s long-term direction goes beyond individual jobs.
+            </p>
+
+            <p>
+              The business is being developed around a proper client
+              relationship and property-management system.
+            </p>
+
+            <div className={styles.myAlphaBox}>
+              <span className={styles.myAlphaLogo}>MY ALPHA</span>
+
+              <h3>My Alpha is currently being developed.</h3>
+
+              <p>
+                The aim is to give customers and landlords better visibility
+                over:
+              </p>
+
+              <div className={styles.myAlphaGrid}>
+                <span>Properties</span>
+                <span>Jobs</span>
+                <span>Quotes</span>
+                <span>Appointments</span>
+                <span>Photos</span>
+                <span>Documents</span>
+                <span>Invoices</span>
+                <span>Payments</span>
+                <span>Maintenance history</span>
+                <span>Recurring work</span>
+              </div>
+
+              <p>
+                For landlords and agents, this will also support multiple
+                properties under one account.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ONE TEAM */}
+        <section className={styles.oneTeamSection}>
+          <div className={styles.oneTeamContent}>
+            <p className={styles.sectionLabel}>
+              WHY ONE TEAM MATTERS
+            </p>
+
+            <h2>Fewer Contractors. Simpler Property Care.</h2>
+
+            <p>
+              The strongest reason to choose Alpha is the breadth of practical
+              property services available through one relationship.
+            </p>
+
+            <div className={styles.workflowExample}>
+              <div>
+                <span>PROPERTY REPAIR</span>
+                <b>→</b>
+                <span>PLUMBING</span>
+                <b>→</b>
+                <span>DECORATING</span>
+                <b>→</b>
+                <span>FLOORING</span>
+                <b>→</b>
+                <span>GARDEN MAINTENANCE</span>
+              </div>
+
+              <div>
+                <span>STRIP-OUT</span>
+                <b>→</b>
+                <span>PLUMBING</span>
+                <b>→</b>
+                <span>BATHROOM</span>
+                <b>→</b>
+                <span>TILING</span>
+                <b>→</b>
+                <span>DECORATING</span>
+              </div>
+            </div>
+
+            <p>
+              Instead of rebuilding the contractor list at every stage, Alpha
+              aims to keep those requirements together.
+            </p>
+
+            <h3>One enquiry. One team. One point of contact.</h3>
           </div>
         </section>
 
@@ -266,104 +804,135 @@ export default function AboutUsPage() {
         <section className={styles.valuesSection}>
           <div className={styles.valuesHeading}>
             <p className={styles.sectionLabel}>OUR VALUES</p>
+
+            <h2>What Matters to Us</h2>
+
+            <p>
+              Simple principles that reflect how Alpha aims to work with
+              customers and their properties.
+            </p>
           </div>
 
           <div className={styles.valuesGrid}>
             {values.map((item) => (
-              <div className={styles.valueItem} key={item.title}>
-                <div className={styles.valueIcon}>{item.icon}</div>
+              <article
+                className={styles.valueItem}
+                key={item.title}
+              >
+                <div className={styles.valueNumber}>
+                  {item.number}
+                </div>
 
                 <h3>{item.title}</h3>
 
                 <p>{item.text}</p>
-              </div>
+              </article>
             ))}
           </div>
         </section>
 
-        {/* STATS */}
-        <section className={styles.statsSection}>
-          <div className={styles.stat}>
-            <span className={styles.statIcon}>⌂</span>
-            <div>
-              <strong>500+</strong>
-              <span>Projects Completed</span>
-            </div>
-          </div>
+        {/* TRUST */}
+        <section className={styles.trustSection}>
+          <div className={styles.trustContent}>
+            <p className={styles.sectionLabel}>TRUST SECTION</p>
 
-          <div className={styles.stat}>
-            <span className={styles.statIcon}>♙</span>
-            <div>
-              <strong>300+</strong>
-              <span>Happy Customers</span>
-            </div>
-          </div>
+            <h2>Building Trust Through the Work</h2>
 
-          <div className={styles.stat}>
-            <span className={styles.statIcon}>▣</span>
-            <div>
-              <strong>5+</strong>
-              <span>Years&apos; Experience</span>
-            </div>
-          </div>
+            <p>
+              As Alpha grows, trust should come from genuine evidence rather
+              than invented numerical claims.
+            </p>
 
-          <div className={styles.stat}>
-            <span className={styles.statIcon}>⌖</span>
-            <div>
-              <strong>Spalding &amp;</strong>
-              <span>Surrounding Areas</span>
+            <div className={styles.trustGrid}>
+              <span>Real project photographs</span>
+              <span>Genuine customer reviews</span>
+              <span>Clear quotations</span>
+              <span>Professional communication</span>
+              <span>Before-and-after work</span>
+              <span>Consistent branding</span>
+              <span>Reliable job records</span>
+              <span>
+                Repeat landlord and homeowner relationships
+              </span>
             </div>
-          </div>
 
-          <div className={styles.greenStat}>
-            <span>♧</span>
-            <div>
-              <strong>A Cleaner Greener</strong>
-              <small>Brighter Tomorrow</small>
-            </div>
+            <Link href="/our-work" className={styles.goldButton}>
+              VIEW OUR WORK <span>→</span>
+            </Link>
           </div>
         </section>
 
-        {/* TESTIMONIALS */}
-        <section className={styles.testimonialsSection}>
-          <div className={styles.testimonialsHeading}>
-            <p className={styles.sectionLabel}>WHAT OUR CLIENTS SAY</p>
+        {/* FAQ */}
+        <section className={styles.faqSection}>
+          <div className={styles.faqHeader}>
+            <p className={styles.sectionLabel}>
+              FREQUENTLY ASKED QUESTIONS
+            </p>
+
+            <h2>About Alpha FAQs</h2>
           </div>
 
-          <div className={styles.testimonialLayout}>
-            <div className={styles.testimonialCards}>
-              {testimonials.map((item) => (
-                <article
-                  className={styles.testimonialCard}
-                  key={item.name}
-                >
-                  <div className={styles.stars}>★★★★★</div>
+          <div className={styles.faqGrid}>
+            {faqs.map((faq) => (
+              <article
+                className={styles.faqCard}
+                key={faq.question}
+              >
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-                  <p>&quot;{item.text}&quot;</p>
+        {/* FINAL CTA */}
+        <section className={styles.finalCta}>
+          <div className={styles.finalCtaInner}>
+            <p className={styles.sectionLabel}>GET IN TOUCH</p>
 
-                  <strong>{item.name}</strong>
-                </article>
-              ))}
-            </div>
+            <h2>Need Help With Your Property?</h2>
 
-            <div className={styles.workTogether}>
-              <div className={styles.workIcon}>↗</div>
+            <p>
+              Whether you have one repair, several maintenance jobs or a
+              larger renovation planned, tell Alpha what needs doing.
+            </p>
 
-              <h2>Let&apos;s Work Together</h2>
+            <p>
+              We&apos;ll assess the requirements and help you determine the
+              next step.
+            </p>
 
-              <p>
-                Whether it&apos;s a small repair, garden maintenance or a
-                full renovation, we&apos;re here to help.
-              </p>
+            <h3>One Team. Complete Property Care.</h3>
 
-              <Link href="/contact" className={styles.goldButton}>
-                Request a Free Quote <span>→</span>
+            <div className={styles.finalButtons}>
+              <Link
+                href="/request-a-quote"
+                className={styles.goldButton}
+              >
+                REQUEST A QUOTE <span>→</span>
               </Link>
 
-              <a href="tel:01234567890" className={styles.workPhone}>
-                ☎ &nbsp; Call 01234 567890
+              <Link
+                href="/services"
+                className={styles.outlineButton}
+              >
+                VIEW OUR SERVICES
+              </Link>
+
+              <a
+                href="tel:01775518068"
+                className={styles.outlineButton}
+              >
+                CALL 01775 518068
               </a>
             </div>
+
+            <a
+              href="mailto:info@alphapropertyandgardening.co.uk"
+              className={styles.emailLink}
+            >
+              info@alphapropertyandgardening.co.uk
+            </a>
           </div>
         </section>
       </main>

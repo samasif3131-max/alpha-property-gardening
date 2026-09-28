@@ -1,11 +1,12 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./contact.module.css";
 
-const areasLeft = [
+const areas = [
   "Peterborough",
   "Spalding",
   "Long Sutton",
@@ -15,9 +16,6 @@ const areasLeft = [
   "Holbeach",
   "Sleaford",
   "Donington",
-];
-
-const areasRight = [
   "Pinchbeck",
   "Surfleet",
   "Crowland",
@@ -30,122 +28,515 @@ const areasRight = [
   "Swineshead",
 ];
 
+const serviceLinks = [
+  {
+    title: "Property Maintenance",
+    description:
+      "Repairs, ongoing maintenance and multiple-job visits.",
+    href: "/services/property-maintenance",
+  },
+  {
+    title: "Property Renovations",
+    description:
+      "Individual rooms through to complete property transformations.",
+    href: "/services/property-renovations",
+  },
+  {
+    title: "Plumbing",
+    description:
+      "Repairs, installations and 24/7 emergency plumbing support.",
+    href: "/services/plumbing",
+  },
+  {
+    title: "Bathrooms",
+    description:
+      "Installation, fitting and complete renovations.",
+    href: "/services/bathrooms",
+  },
+  {
+    title: "Kitchens",
+    description:
+      "Installation and complete kitchen renovations.",
+    href: "/services/kitchens",
+  },
+  {
+    title: "Garden Services",
+    description:
+      "Regular maintenance and garden clearances.",
+    href: "/services/garden-services",
+  },
+];
+
+const faqs = [
+  {
+    question: "What is Alpha’s phone number?",
+    answer: "Call Alpha on 01775 518068.",
+  },
+  {
+    question: "What is Alpha’s email address?",
+    answer:
+      "Email info@alphapropertyandgardening.co.uk.",
+  },
+  {
+    question: "Do you provide emergency call-outs?",
+    answer:
+      "Yes. Alpha provides 24/7 emergency property and plumbing call-out support for suitable urgent problems.",
+  },
+  {
+    question: "Should I use the contact form for an emergency?",
+    answer:
+      "No. For an active urgent property or plumbing problem, call 01775 518068 directly.",
+  },
+  {
+    question: "How do I request a quote?",
+    answer:
+      "Use our dedicated online quote request process and provide details of the property and work required.",
+  },
+  {
+    question: "Can I send photographs?",
+    answer:
+      "Photographs can help us understand the work required. They can be included through the appropriate online process where upload is available or sent through an agreed contact method.",
+  },
+  {
+    question: "Do you work with landlords and letting agents?",
+    answer:
+      "Yes. Alpha supports landlords, letting agents and property managers with repairs, recurring maintenance, void-property work and renovations.",
+  },
+  {
+    question: "What areas do you cover?",
+    answer:
+      "Our main regional service area extends from Peterborough to Skegness and from Long Sutton to Lincoln, including many surrounding towns and villages.",
+  },
+];
+
 export default function ContactPage() {
+  const [formState, setFormState] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    /*
+     * Honeypot spam protection.
+     * Genuine users never see or complete this field.
+     */
+    const honeypot = String(data.get("website") ?? "").trim();
+
+    if (honeypot) {
+      setFormState("success");
+      form.reset();
+      return;
+    }
+
+    try {
+      const name = String(data.get("name") ?? "").trim();
+      const email = String(data.get("email") ?? "").trim();
+      const phone = String(data.get("phone") ?? "").trim();
+      const postcode = String(data.get("postcode") ?? "").trim();
+      const enquiryType = String(
+        data.get("enquiryType") ?? ""
+      ).trim();
+      const message = String(data.get("message") ?? "").trim();
+
+      const subject = encodeURIComponent(
+        `Website enquiry - ${
+          enquiryType || "General Enquiry"
+        }`
+      );
+
+      const body = encodeURIComponent(
+        [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Phone: ${phone}`,
+          `Postcode: ${postcode || "Not provided"}`,
+          `Enquiry type: ${
+            enquiryType || "Not selected"
+          }`,
+          "",
+          "Message:",
+          message,
+        ].join("\n")
+      );
+
+      /*
+       * No backend/API was supplied with the existing files.
+       * This uses the customer's email application as a
+       * no-backend fallback.
+       */
+      window.location.href =
+        `mailto:info@alphapropertyandgardening.co.uk` +
+        `?subject=${subject}&body=${body}`;
+
+      setFormState("success");
+      form.reset();
+    } catch {
+      setFormState("error");
+    }
+  }
+
   return (
     <>
       <Header />
 
       <main className={styles.page}>
-        {/* HERO */}
+        {/* =====================================================
+            HERO
+        ====================================================== */}
         <section className={styles.hero}>
-          <div className={styles.heroOverlay}></div>
+          <div className={styles.heroOverlay} />
 
           <div className={styles.heroContent}>
-            <div className={styles.heroText}>
-              <div className={styles.smallTitle}>
-                CONTACT US <span></span>
-              </div>
+            <div className={styles.heroCopy}>
+              <p className={styles.eyebrow}>CONTACT ALPHA</p>
 
-              <h1>
-                Get in <span>Touch</span>
-              </h1>
+              <h1>Contact Alpha</h1>
 
-              <h2>We’re here to help</h2>
-
-              <p>
-                Whether you need a quote, have a question, or want to discuss
-                a project, our friendly team is ready to help. We provide
-                professional property and garden services across south and
-                East Lincolnshire, covering Peterborough to Skegness and from
-                Long Sutton to Lincoln.
+              <p className={styles.heroLead}>
+                Need property maintenance, repairs, renovation
+                work or help with your garden?
               </p>
 
-              <div className={styles.heroActions}>
-                <a href="tel:01234567890" className={styles.heroAction}>
-                  <div className={styles.actionIcon}>⌕</div>
-                  <strong>Call Us</strong>
-                  <span>Speak to our team directly</span>
-                </a>
+              <p className={styles.heroText}>
+                Tell us what you need and we’ll point you towards
+                the right next step. For planned work, request a
+                quotation online. For an urgent property or
+                plumbing problem, call us directly.
+              </p>
 
-                <a
-                  href="mailto:info@alphapropertyandgarden.co.uk"
-                  className={styles.heroAction}
+              <div className={styles.heroButtons}>
+                <Link
+                  href="/quote"
+                  className={styles.primaryButton}
                 >
-                  <div className={styles.actionIcon}>✉</div>
-                  <strong>Email Us</strong>
-                  <span>We’ll get back to you promptly</span>
-                </a>
-
-                <a
-                  href="https://wa.me/441234567890"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.heroAction}
-                >
-                  <div className={styles.actionIcon}>▣</div>
-                  <strong>Message Us</strong>
-                  <span>Send us a message any time</span>
-                </a>
-
-                <Link href="/contact#quote" className={styles.heroAction}>
-                  <div className={styles.actionIcon}>▦</div>
-                  <strong>Request a Quote</strong>
-                  <span>Quick, easy and no obligation</span>
+                  REQUEST A QUOTE
                 </Link>
+
+                <a
+                  href="tel:01775518068"
+                  className={styles.secondaryButton}
+                >
+                  CALL 01775 518068
+                </a>
               </div>
+
+              <p className={styles.tagline}>
+                One Team. Complete Property Care.
+              </p>
             </div>
 
-            <div className={styles.heroImage}>
+            <div className={styles.heroImageWrap}>
               <img
                 src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
-                alt="Beautiful property and garden"
+                alt="Well-maintained property and garden"
               />
 
-              <div className={styles.vanBadge}>
+              <div className={styles.imageBadge}>
                 <strong>ALPHA</strong>
-                <span>Property & Gardening Services</span>
-              </div>
-
-              <div className={styles.heroTagline}>
-                Local People.
-                <br />
-                Local Service.
+                <span>
+                  Property &amp; Gardening Services
+                </span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CONTACT FORM + DETAILS */}
-        <section className={styles.contactSection} id="quote">
-          <div className={styles.contactGrid}>
-            {/* FORM */}
-            <div className={styles.formCard}>
-              <h2>Send Us a Message</h2>
+        {/* =====================================================
+            EMERGENCY
+        ====================================================== */}
+        <section
+          className={styles.emergencySection}
+          aria-labelledby="emergency-title"
+        >
+          <div className={styles.emergencyCopy}>
+            <p className={styles.sectionEyebrow}>
+              24/7 EMERGENCY SUPPORT
+            </p>
 
-              <p className={styles.formIntro}>
-                Fill in the form below and we’ll get back to you as soon as
-                possible.
+            <h2 id="emergency-title">
+              Need Urgent Help?
+            </h2>
+
+            <p>
+              If water is escaping, a plumbing fault is causing
+              active damage or another urgent property issue
+              requires immediate assessment, calling us is
+              quicker than completing the online enquiry form.
+            </p>
+          </div>
+
+          <div className={styles.emergencyAction}>
+            <span>
+              24/7 Emergency Property &amp; Plumbing Call-Outs
+            </span>
+
+            <a href="tel:01775518068">
+              01775 518068
+            </a>
+
+            <a
+              href="tel:01775518068"
+              className={styles.emergencyButton}
+            >
+              CALL NOW
+            </a>
+          </div>
+        </section>
+
+        {/* =====================================================
+            CONTACT OPTIONS
+        ====================================================== */}
+        <section
+          className={styles.optionsSection}
+          aria-labelledby="contact-options-title"
+        >
+          <div className={styles.sectionHeading}>
+            <p className={styles.sectionEyebrow}>
+              CONTACT OPTIONS
+            </p>
+
+            <h2 id="contact-options-title">
+              Choose How You’d Like to Contact Us
+            </h2>
+          </div>
+
+          <div className={styles.optionsGrid}>
+            <a
+              href="tel:01775518068"
+              className={styles.optionCard}
+            >
+              <span className={styles.optionIcon}>☎</span>
+
+              <h3>Phone</h3>
+
+              <strong>01775 518068</strong>
+
+              <p>
+                Best for emergency call-outs, urgent plumbing
+                problems, quick initial enquiries and discussing
+                an existing job.
+              </p>
+            </a>
+
+            <a
+              href="mailto:info@alphapropertyandgardening.co.uk"
+              className={styles.optionCard}
+            >
+              <span className={styles.optionIcon}>✉</span>
+
+              <h3>Email</h3>
+
+              <strong>
+                info@alphapropertyandgardening.co.uk
+              </strong>
+
+              <p>
+                Best for general enquiries, sending information
+                or documents, non-urgent questions, landlords
+                and business enquiries.
+              </p>
+            </a>
+
+            <Link
+              href="/quote"
+              className={styles.optionCard}
+            >
+              <span className={styles.optionIcon}>✓</span>
+
+              <h3>Request a Quote</h3>
+
+              <strong>START A QUOTE REQUEST →</strong>
+
+              <p>
+                Use the dedicated quotation journey for planned
+                work and projects that need a price.
+              </p>
+            </Link>
+          </div>
+
+          <div className={styles.whatsappNotice}>
+            <strong>WhatsApp</strong>
+
+            <span>
+              WhatsApp will be displayed once Alpha’s correct
+              WhatsApp Business number and link are fully
+              operational.
+            </span>
+          </div>
+        </section>
+
+        {/* =====================================================
+            GENERAL ENQUIRY FORM
+        ====================================================== */}
+        <section
+          className={styles.formSection}
+          id="message"
+          aria-labelledby="message-title"
+        >
+          <div className={styles.formIntroColumn}>
+            <p className={styles.sectionEyebrow}>
+              GENERAL ENQUIRIES
+            </p>
+
+            <h2 id="message-title">
+              Send Alpha a Message
+            </h2>
+
+            <p>
+              Use this short form for general enquiries,
+              existing jobs, landlord enquiries and other
+              non-urgent questions. For planned work where you
+              need a price, use the dedicated quote process
+              instead.
+            </p>
+
+            <div className={styles.warningBox}>
+              <strong>Is this urgent?</strong>
+
+              <p>
+                Do not use this form for an active plumbing or
+                property emergency.
               </p>
 
+              <a href="tel:01775518068">
+                Call 01775 518068
+              </a>{" "}
+              for 24/7 emergency support.
+            </div>
+          </div>
+
+          <div className={styles.formCard}>
+            {formState === "success" ? (
+              <div
+                className={styles.formState}
+                role="status"
+              >
+                <span className={styles.successIcon}>
+                  ✓
+                </span>
+
+                <h3>
+                  Thanks — Your Message Has Been Sent
+                </h3>
+
+                <p>
+                  We’ve received your enquiry. If your email
+                  application opened, please complete the send
+                  step there. For urgent property or plumbing
+                  problems, call 01775 518068 rather than
+                  waiting for an email response.
+                </p>
+
+                <div className={styles.stateActions}>
+                  <Link
+                    href="/quote"
+                    className={styles.primaryButton}
+                  >
+                    REQUEST A QUOTE
+                  </Link>
+
+                  <Link
+                    href="/services"
+                    className={styles.lightButton}
+                  >
+                    VIEW OUR SERVICES
+                  </Link>
+                </div>
+              </div>
+            ) : formState === "error" ? (
+              <div
+                className={styles.formState}
+                role="alert"
+              >
+                <span className={styles.errorIcon}>
+                  !
+                </span>
+
+                <h3>
+                  We Couldn’t Send Your Message
+                </h3>
+
+                <p>
+                  Please try again or contact Alpha directly.
+                </p>
+
+                <div className={styles.stateActions}>
+                  <a
+                    href="tel:01775518068"
+                    className={styles.primaryButton}
+                  >
+                    CALL 01775 518068
+                  </a>
+
+                  <a
+                    href="mailto:info@alphapropertyandgardening.co.uk"
+                    className={styles.lightButton}
+                  >
+                    EMAIL ALPHA
+                  </a>
+                </div>
+              </div>
+            ) : (
               <form
                 className={styles.contactForm}
-                onSubmit={(event) => event.preventDefault()}
+                onSubmit={handleSubmit}
               >
-                <div className={styles.formRow}>
+                {/* Invisible honeypot */}
+                <div
+                  className={styles.honeypot}
+                  aria-hidden="true"
+                >
+                  <label htmlFor="website">
+                    Website
+                  </label>
+
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <div className={styles.formGrid}>
+                  {/* NAME */}
                   <div className={styles.formGroup}>
                     <label htmlFor="name">
-                      Your Name <span>*</span>
+                      Name <span>*</span>
                     </label>
 
                     <input
                       id="name"
                       name="name"
                       type="text"
+                      autoComplete="name"
                       placeholder="Full name"
                       required
                     />
                   </div>
 
+                  {/* EMAIL */}
+                  <div className={styles.formGroup}>
+                    <label htmlFor="email">
+                      Email <span>*</span>
+                    </label>
+
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@example.com"
+                      required
+                    />
+                  </div>
+
+                  {/* PHONE */}
                   <div className={styles.formGroup}>
                     <label htmlFor="phone">
                       Phone Number <span>*</span>
@@ -155,312 +546,511 @@ export default function ContactPage() {
                       id="phone"
                       name="phone"
                       type="tel"
-                      placeholder="e.g. 07xxx xxxxxx"
+                      autoComplete="tel"
+                      placeholder="07xxx xxxxxx"
                       required
                     />
                   </div>
-                </div>
 
-                <div className={styles.formRow}>
+                  {/* POSTCODE */}
                   <div className={styles.formGroup}>
-                    <label htmlFor="email">
-                      Email Address <span>*</span>
+                    <label htmlFor="postcode">
+                      Postcode
                     </label>
 
                     <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="you@example.com"
+                      id="postcode"
+                      name="postcode"
+                      type="text"
+                      autoComplete="postal-code"
+                      placeholder="e.g. PE11 1AA"
+                    />
+                  </div>
+
+                  {/* ENQUIRY TYPE */}
+                  <div
+                    className={`${styles.formGroup} ${styles.fullWidth}`}
+                  >
+                    <label htmlFor="enquiryType">
+                      Enquiry Type <span>*</span>
+                    </label>
+
+                    <select
+                      id="enquiryType"
+                      name="enquiryType"
+                      defaultValue=""
+                      required
+                    >
+                      <option
+                        value=""
+                        disabled
+                      >
+                        Select an enquiry type
+                      </option>
+
+                      <option value="General Enquiry">
+                        General Enquiry
+                      </option>
+
+                      <option value="Existing Quote">
+                        Existing Quote
+                      </option>
+
+                      <option value="Existing Job">
+                        Existing Job
+                      </option>
+
+                      <option value="Landlord / Letting Agent">
+                        Landlord / Letting Agent
+                      </option>
+
+                      <option value="Recurring Maintenance">
+                        Recurring Maintenance
+                      </option>
+
+                      <option value="Other">
+                        Other
+                      </option>
+                    </select>
+                  </div>
+
+                  {/* MESSAGE */}
+                  <div
+                    className={`${styles.formGroup} ${styles.fullWidth}`}
+                  >
+                    <label htmlFor="message-text">
+                      Message <span>*</span>
+                    </label>
+
+                    <textarea
+                      id="message-text"
+                      name="message"
+                      rows={7}
+                      placeholder="Tell us what you need help with..."
                       required
                     />
                   </div>
 
-                  <div className={styles.formGroup}>
-                    <label htmlFor="service">Service Required</label>
+                  {/* FILE */}
+                  <div
+                    className={`${styles.formGroup} ${styles.fullWidth}`}
+                  >
+                    <label htmlFor="file">
+                      Optional File / Photo
+                    </label>
 
-                    <select id="service" name="service" defaultValue="">
-                      <option value="" disabled>
-                        Select a service
-                      </option>
-                      <option>Garden Services</option>
-                      <option>Property Maintenance</option>
-                      <option>Plumbing</option>
-                      <option>Bathrooms</option>
-                      <option>Kitchens</option>
-                      <option>Tiling & Flooring</option>
-                      <option>Roofing & Gutters</option>
-                      <option>Other</option>
-                    </select>
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      accept="image/*,.pdf,.doc,.docx"
+                    />
+
+                    <small>
+                      Useful for photos or documents.
+                      Attachments require a server-side form
+                      handler and are not included in the
+                      mailto fallback.
+                    </small>
                   </div>
                 </div>
 
-                <div className={styles.formGroup}>
-                  <label htmlFor="message">
-                    Your Message <span>*</span>
-                  </label>
-
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={7}
-                    placeholder="Tell us about your project, enquiry or any questions..."
-                    required
-                  ></textarea>
-                </div>
-
-                <button type="submit" className={styles.submitButton}>
-                  Send Message <span>→</span>
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                >
+                  SEND ENQUIRY
                 </button>
 
-                <p className={styles.formNote}>
-                  By submitting this form, you agree to be contacted about your
-                  enquiry.
+                <p className={styles.privacyText}>
+                  By submitting this form, you agree that Alpha
+                  can use the information provided to respond
+                  to your enquiry.{" "}
+                  <Link href="/privacy-policy">
+                    PRIVACY POLICY
+                  </Link>
                 </p>
               </form>
-            </div>
-
-            {/* CONTACT DETAILS */}
-            <div className={styles.detailsColumn}>
-              <h2>Our Contact Details</h2>
-
-              <div className={styles.detailItem}>
-                <div className={styles.detailIcon}>☎</div>
-
-                <div>
-                  <strong>01234 567890</strong>
-                  <span>Call us today</span>
-                </div>
-              </div>
-
-              <div className={styles.detailItem}>
-                <div className={styles.detailIcon}>✉</div>
-
-                <div>
-                  <strong>info@alphapropertyandgarden.co.uk</strong>
-                  <span>Email us</span>
-                </div>
-              </div>
-
-              <div className={styles.detailItem}>
-                <div className={styles.detailIcon}>⌖</div>
-
-                <div>
-                  <strong>Spalding, Lincolnshire</strong>
-                  <span>Our base location</span>
-                </div>
-              </div>
-
-              <div className={styles.detailItem}>
-                <div className={styles.detailIcon}>◷</div>
-
-                <div>
-                  <strong>Mon - Sat: 8:00am - 6:00pm</strong>
-                  <span>We’re open and ready to help</span>
-                </div>
-              </div>
-
-              {/* SOCIAL LINKS */}
-              <div className={styles.socialArea}>
-                <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                >
-                  f
-                </a>
-
-                <a
-                  href="https://www.instagram.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                >
-                  ◎
-                </a>
-
-                <a
-                  href="https://www.tiktok.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="TikTok"
-                >
-                  ♪
-                </a>
-
-                <a
-                  href="https://www.youtube.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="YouTube"
-                >
-                  ▶
-                </a>
-              </div>
-
-              <p className={styles.socialText}>
-                Follow us for updates, tips and recent work
-              </p>
-
-              <div className={styles.detailsImage}>
-                <img
-                  src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1000&q=85"
-                  alt="Beautiful maintained garden"
-                />
-
-                <div>
-                  “One Team.
-                  <br />
-                  Complete Property Care.”
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </section>
 
-        {/* MAP + AREAS */}
-        <section className={styles.locationSection}>
-          <div className={styles.mapColumn}>
-            <h2>Find Us</h2>
-
-            <div className={styles.mapWrapper}>
-              <iframe
-                title="Alpha Property and Gardening Services location"
-                src="https://www.google.com/maps?q=Spalding%2C%20Lincolnshire%2C%20UK&output=embed"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-
-              <div className={styles.mapLabels}>
-                <span className={styles.mapPointLincoln}>
-                  ● <b>Lincoln</b>
-                </span>
-
-                <span className={styles.mapPointSpalding}>
-                  ● <b>Spalding</b>
-                </span>
-
-                <span className={styles.mapPointSkegness}>
-                  ● <b>Skegness</b>
-                </span>
-
-                <span className={styles.mapPointLongSutton}>
-                  ● <b>Long Sutton</b>
-                </span>
-              </div>
-
-              <div className={styles.coverageBadge}>
-                <span></span>
-
-                <div>
-                  <strong>Our Coverage Area</strong>
-                  <small>
-                    Peterborough to Skegness
-                    <br />
-                    and Long Sutton to Lincoln
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.areasColumn}>
-            <h2>Areas We Cover</h2>
-
-            <p>
-              We provide our services across South and East Lincolnshire,
-              including Peterborough, Spalding, Skegness, Long Sutton, Lincoln
-              and the surrounding towns and villages.
+        {/* =====================================================
+            QUOTE VS CONTACT
+        ====================================================== */}
+        <section
+          className={styles.quoteSection}
+          aria-labelledby="quote-title"
+        >
+          <div>
+            <p className={styles.sectionEyebrow}>
+              QUOTE OR CONTACT?
             </p>
 
-            <div className={styles.areaLists}>
-              <ul>
-                {areasLeft.map((area) => (
-                  <li key={area}>✓ {area}</li>
-                ))}
-              </ul>
+            <h2 id="quote-title">
+              Need a Price for Work?
+            </h2>
 
-              <ul>
-                {areasRight.map((area) => (
-                  <li key={area}>✓ {area}</li>
-                ))}
-              </ul>
+            <p>
+              If you’re asking how much work will cost, need
+              several jobs priced, or need a bathroom,
+              renovation, kitchen or garden project quoted, use
+              our dedicated quotation journey.
+            </p>
+          </div>
+
+          <Link
+            href="/quote"
+            className={styles.primaryButton}
+          >
+            START A QUOTE REQUEST →
+          </Link>
+        </section>
+
+        {/* =====================================================
+            LANDLORDS + EXISTING CUSTOMERS
+        ====================================================== */}
+        <section className={styles.splitSection}>
+          <div className={styles.infoPanel}>
+            <p className={styles.sectionEyebrow}>
+              LANDLORDS &amp; AGENTS
+            </p>
+
+            <h2>Landlord or Letting Agent?</h2>
+
+            <p>
+              Alpha can support landlords, letting agents and
+              property managers with:
+            </p>
+
+            <ul>
+              <li>
+                One-off repairs and tenant-reported maintenance
+              </li>
+              <li>
+                Emergency plumbing and urgent property issues
+              </li>
+              <li>
+                Void-property work and recurring maintenance
+              </li>
+              <li>
+                Garden maintenance and complete refurbishment
+              </li>
+              <li>
+                Support across multiple properties
+              </li>
+            </ul>
+
+            <div className={styles.inlineActions}>
+              <a href="mailto:info@alphapropertyandgardening.co.uk">
+                EMAIL INFO@ALPHAPROPERTYANDGARDENING.CO.UK
+              </a>
+
+              <Link href="/landlords">
+                REQUEST LANDLORD SUPPORT →
+              </Link>
             </div>
 
-            <p className={styles.moreAreas}>And many more...</p>
+            <Link
+              href="/landlords"
+              className={styles.textLink}
+            >
+              VIEW LANDLORD &amp; LETTING AGENT SERVICES →
+            </Link>
+          </div>
+
+          <div className={styles.infoPanelDark}>
+            <p className={styles.sectionEyebrow}>
+              EXISTING CUSTOMERS
+            </p>
+
+            <h2>
+              Already Have a Job or Quote With Alpha?
+            </h2>
+
+            <p>
+              Please have your name, property address or
+              postcode, quote/job reference if available and a
+              brief description ready.
+            </p>
+
+            <div className={styles.existingContact}>
+              <a href="tel:01775518068">
+                01775 518068
+              </a>
+
+              <a href="mailto:info@alphapropertyandgardening.co.uk">
+                info@alphapropertyandgardening.co.uk
+              </a>
+            </div>
+
+            <div className={styles.portalBox}>
+              <strong>
+                My Alpha Client Portal
+              </strong>
+
+              <p>
+                My Alpha is currently being developed. The
+                future client portal will allow customers and
+                property professionals to manage jobs, quotes,
+                appointments, photographs, documents, invoices
+                and other Alpha records online.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* FAQ + QUOTE */}
-        <section className={styles.bottomSection}>
-          <div className={styles.faq}>
-            <h2>Frequently Asked Questions</h2>
+        {/* =====================================================
+            SERVICE AREA
+        ====================================================== */}
+        <section
+          className={styles.serviceAreaSection}
+          aria-labelledby="area-title"
+        >
+          <div>
+            <p className={styles.sectionEyebrow}>
+              SERVICE AREA
+            </p>
 
-            <details>
-              <summary>
-                How quickly can you provide a quote?
-                <span>+</span>
-              </summary>
+            <h2 id="area-title">
+              Not Sure If We Cover Your Area?
+            </h2>
 
-              <p>
-                We aim to respond to enquiries as quickly as possible. Contact
-                our team with details of your project and we can arrange the
-                next steps.
-              </p>
-            </details>
+            <p>
+              Alpha operates across a broad regional service
+              area covering{" "}
+              <strong>
+                Peterborough through to Skegness
+              </strong>{" "}
+              and{" "}
+              <strong>
+                Long Sutton through to Lincoln
+              </strong>
+              , with many surrounding towns and villages.
+            </p>
 
-            <details>
-              <summary>
-                Do you cover my area?
-                <span>+</span>
-              </summary>
+            <p>
+              If your town is not shown, send us your postcode
+              and we’ll confirm whether the property falls
+              within our practical service area.
+            </p>
 
-              <p>
-                We cover Spalding, Peterborough, Lincoln, Skegness, Long Sutton
-                and many surrounding areas across Lincolnshire.
-              </p>
-            </details>
-
-            <details>
-              <summary>
-                What types of work do you carry out?
-                <span>+</span>
-              </summary>
-
-              <p>
-                We provide property maintenance, garden services, plumbing,
-                bathrooms, kitchens, tiling, flooring, roofing and other
-                property services.
-              </p>
-            </details>
+            <Link
+              href="/areas-we-cover"
+              className={styles.textLink}
+            >
+              VIEW AREAS WE COVER →
+            </Link>
           </div>
 
-          <div className={styles.quoteCard}>
-            <div className={styles.quoteLeaf}>◆</div>
+          <div className={styles.areaCloud}>
+            {areas.map((area) => (
+              <span key={area}>{area}</span>
+            ))}
+          </div>
+        </section>
+
+        {/* =====================================================
+            SERVICES
+        ====================================================== */}
+        <section
+          className={styles.servicesSection}
+          aria-labelledby="services-title"
+        >
+          <div className={styles.sectionHeading}>
+            <p className={styles.sectionEyebrow}>
+              QUICK LINKS
+            </p>
+
+            <h2 id="services-title">
+              What Can We Help With?
+            </h2>
+          </div>
+
+          <div className={styles.servicesGrid}>
+            {serviceLinks.map((service) => (
+              <Link
+                href={service.href}
+                key={service.title}
+                className={styles.serviceCard}
+              >
+                <h3>{service.title}</h3>
+
+                <p>{service.description}</p>
+
+                <span>
+                  VIEW {service.title.toUpperCase()} →
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <Link
+            href="/services"
+            className={styles.allServicesLink}
+          >
+            VIEW ALL SERVICES →
+          </Link>
+        </section>
+
+        {/* =====================================================
+            BUSINESS DETAILS
+        ====================================================== */}
+        <section
+          className={styles.businessSection}
+          aria-labelledby="business-title"
+        >
+          <div>
+            <p className={styles.sectionEyebrow}>
+              BUSINESS CONTACT DETAILS
+            </p>
+
+            <h2 id="business-title">
+              Alpha Property &amp; Gardening Services
+            </h2>
+
+            <p className={styles.mobileServiceLine}>
+              Mobile property and garden services across our
+              coverage region.
+            </p>
+          </div>
+
+          <div className={styles.businessDetails}>
+            <a href="tel:01775518068">
+              <strong>Phone</strong>
+              <span>01775 518068</span>
+            </a>
+
+            <a href="mailto:info@alphapropertyandgardening.co.uk">
+              <strong>Email</strong>
+              <span>
+                info@alphapropertyandgardening.co.uk
+              </span>
+            </a>
 
             <div>
-              <h2>Need a Quote?</h2>
+              <strong>Website</strong>
+              <span>
+                alphapropertyandgardening.co.uk
+              </span>
+            </div>
 
-              <p>
-                Get in touch today for a free, no obligation quote. We look
-                forward to hearing from you.
-              </p>
-
-              <Link href="/contact#quote">
-                Request a Free Quote <span>→</span>
-              </Link>
+            <div>
+              <strong>Coverage</strong>
+              <span>
+                Peterborough to Skegness • Long Sutton to
+                Lincoln • Surrounding areas
+              </span>
             </div>
           </div>
 
-          <div className={styles.cleanerMessage}>
-            <span>A Cleaner</span>
-            <span>Greener</span>
-            <span>Brighter</span>
-            <span>Tomorrow</span>
+          <div className={styles.hoursNotice}>
+            <strong>
+              Emergency Property &amp; Plumbing Support
+            </strong>
+
+            <span>
+              Available 24/7 for suitable urgent call-outs.
+            </span>
+
+            <small>
+              General enquiry opening hours are not displayed
+              until confirmed by Alpha.
+            </small>
+          </div>
+        </section>
+
+        {/* =====================================================
+            FAQ
+        ====================================================== */}
+        <section
+          className={styles.faqSection}
+          aria-labelledby="faq-title"
+        >
+          <div className={styles.sectionHeading}>
+            <p className={styles.sectionEyebrow}>
+              FAQS
+            </p>
+
+            <h2 id="faq-title">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className={styles.faqGrid}>
+            {faqs.map((faq) => (
+              <details
+                key={faq.question}
+                className={styles.faqItem}
+              >
+                <summary>
+                  {faq.question}
+                  <span>+</span>
+                </summary>
+
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* =====================================================
+            FINAL CTA
+        ====================================================== */}
+        <section className={styles.finalCta}>
+          <div>
+            <p className={styles.sectionEyebrow}>
+              GET STARTED
+            </p>
+
+            <h2>Ready to Get Started?</h2>
+
+            <p>
+              For planned work, tell us what your property
+              needs and request a quotation. For urgent
+              property or plumbing problems, call us directly.
+            </p>
+
+            <strong>
+              One Team. Complete Property Care.
+            </strong>
+          </div>
+
+          <div className={styles.finalActions}>
+            <Link
+              href="/quote"
+              className={styles.primaryButton}
+            >
+              REQUEST A QUOTE
+            </Link>
+
+            <a
+              href="tel:01775518068"
+              className={styles.secondaryButton}
+            >
+              CALL 01775 518068
+            </a>
           </div>
         </section>
       </main>
+
+      {/* MOBILE ACTION BAR */}
+      <div className={styles.mobileActionBar}>
+        <a href="tel:01775518068">
+          <span>☎</span>
+          CALL
+        </a>
+
+        <a href="tel:01775518068">
+          <span>24/7</span>
+          EMERGENCY
+        </a>
+
+        <Link href="/quote">
+          <span>✓</span>
+          QUOTE
+        </Link>
+      </div>
 
       <Footer />
     </>

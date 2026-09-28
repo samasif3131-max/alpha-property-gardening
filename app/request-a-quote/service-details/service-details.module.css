@@ -1,0 +1,1566 @@
+/* =========================================================
+   ALPHA PROPERTY & GARDENING SERVICES
+   REQUEST A QUOTE - SERVICE DETAILS
+   Matches the existing page.tsx plain className values
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+:global(.alphaQuotePage) {
+  min-height: 100vh;
+  background: #f4f5f3;
+  color: #171a18;
+  overflow-x: hidden;
+  font-family: inherit;
+}
+
+:global(.alphaQuotePage *),
+:global(.alphaQuotePage *::before),
+:global(.alphaQuotePage *::after) {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+:global(.alphaQuoteContainer) {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+:global(.alphaQuoteHero) {
+  position: relative;
+  min-height: 430px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    radial-gradient(
+      circle at 82% 25%,
+      rgba(112, 145, 105, 0.22),
+      transparent 34%
+    ),
+    linear-gradient(
+      135deg,
+      #090b0a 0%,
+      #111512 48%,
+      #222823 100%
+    );
+}
+
+:global(.alphaQuoteHero)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.025) 50%,
+      transparent 100%
+    );
+}
+
+:global(.alphaQuoteHeroOverlay) {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.48),
+      rgba(0, 0, 0, 0.08) 75%,
+      rgba(0, 0, 0, 0.25)
+    );
+}
+
+:global(.alphaQuoteHeroContent) {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 80px 0;
+}
+
+:global(.alphaEyebrow) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  color: #a7c39f;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+:global(.alphaEyebrow span) {
+  width: 38px;
+  height: 2px;
+  flex: 0 0 38px;
+  background: #82a079;
+}
+
+:global(.alphaQuoteHero h1) {
+  max-width: 800px;
+  margin: 0 0 22px;
+  color: #ffffff;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+:global(.alphaQuoteHero p) {
+  max-width: 780px;
+  margin: 8px 0;
+  color: #d7ddd7;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+:global(.alphaQuoteProgress) {
+  position: relative;
+  z-index: 5;
+  background: #101311;
+  border-bottom: 1px solid #2b302c;
+}
+
+:global(.alphaProgressGrid) {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 96px;
+}
+
+:global(.alphaProgressItem) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px 20px;
+  color: #727872;
+  border-right: 1px solid #2b302c;
+}
+
+:global(.alphaProgressItem:last-child) {
+  border-right: 0;
+}
+
+:global(.alphaProgressItem > span) {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #464d47;
+  border-radius: 50%;
+  color: #8d948e;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+:global(.alphaProgressItem small) {
+  display: block;
+  margin-bottom: 5px;
+  color: inherit;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+:global(.alphaProgressItem strong) {
+  display: block;
+  color: #9da49e;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+:global(.alphaProgressComplete) {
+  color: #91b08a;
+}
+
+:global(.alphaProgressComplete > span) {
+  border-color: #72926d;
+  background: #293428;
+  color: #b8ccb3;
+}
+
+:global(.alphaProgressComplete strong) {
+  color: #c5d2c2;
+}
+
+:global(.alphaProgressActive) {
+  background: #1a1e1b;
+  color: #a6c39f;
+}
+
+:global(.alphaProgressActive::after) {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #88a980;
+}
+
+:global(.alphaProgressActive > span) {
+  border-color: #89a982;
+  background: #31402f;
+  color: #d5e2d1;
+}
+
+:global(.alphaProgressActive strong) {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+:global(.alphaQuoteLayout) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 34px;
+  align-items: start;
+  padding-top: 54px;
+  padding-bottom: 80px;
+}
+
+:global(.alphaQuoteMain) {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   EMERGENCY BANNER
+   ========================================================= */
+
+:global(.alphaEmergencyBanner) {
+  margin-bottom: 28px;
+  padding: 28px;
+  border: 1px solid #8b4038;
+  border-left: 5px solid #d26a5e;
+  border-radius: 5px;
+  background:
+    linear-gradient(
+      135deg,
+      #2a1715,
+      #1d1312
+    );
+  color: #ffffff;
+  box-shadow: 0 15px 40px rgba(40, 10, 5, 0.12);
+}
+
+:global(.alphaEmergencyLabel) {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #ff9b90;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+:global(.alphaEmergencyBanner h2) {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+:global(.alphaEmergencyBanner p) {
+  max-width: 700px;
+  margin: 0 0 18px;
+  color: #e7d8d5;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+:global(.alphaEmergencyBanner strong) {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffb0a8;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+:global(.alphaEmergencyPhone) {
+  display: block;
+  width: fit-content;
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+:global(.alphaEmergencyButton) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border: 0;
+  background: #d05d51;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+:global(.alphaEmergencyButton:hover) {
+  background: #e06b5f;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FORM SECTION
+   ========================================================= */
+
+:global(.alphaFormSection) {
+  margin-bottom: 28px;
+  padding: 36px;
+  border: 1px solid #dfe3df;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 0 10px 35px rgba(20, 25, 21, 0.045);
+}
+
+:global(.alphaSectionIntro) {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+:global(.alphaSectionNumber) {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #b7c1b5;
+  background: #f2f5f1;
+  color: #5d7558;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+:global(.alphaSectionIntro h2) {
+  margin: 0 0 7px;
+  color: #161a17;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+:global(.alphaSectionIntro p) {
+  max-width: 720px;
+  margin: 0;
+  color: #69706b;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   SERVICE CARDS
+   ========================================================= */
+
+:global(.alphaServiceCards) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+:global(.alphaServiceCard) {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 18px;
+  border: 1px solid #d5dbd5;
+  border-radius: 3px;
+  background: #fafbfa;
+  color: #1b201c;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+:global(.alphaServiceCard:hover) {
+  border-color: #8fa78a;
+  background: #f4f7f3;
+  transform: translateY(-1px);
+}
+
+:global(.alphaServiceCardActive) {
+  border-color: #698862;
+  background: #edf3eb;
+  box-shadow:
+    inset 0 0 0 1px #698862,
+    0 7px 18px rgba(66, 88, 62, 0.08);
+}
+
+:global(.alphaServiceIcon) {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #c7d1c4;
+  background: #ffffff;
+  color: #66815f;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+:global(.alphaServiceCard strong) {
+  color: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   FIELD
+   ========================================================= */
+
+:global(.alphaField) {
+  margin-top: 26px;
+}
+
+:global(.alphaFieldLabel) {
+  display: block;
+  margin-bottom: 10px;
+  color: #1d221f;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+:global(.alphaRequired) {
+  color: #a9493d;
+}
+
+:global(.alphaField input),
+:global(.alphaField textarea),
+:global(.alphaField select),
+:global(.alphaMultiPropertyBox input) {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccd2cc;
+  border-radius: 3px;
+  outline: none;
+  background: #ffffff;
+  color: #181c19;
+  font: inherit;
+  font-size: 15px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+:global(.alphaField input),
+:global(.alphaField select),
+:global(.alphaMultiPropertyBox input) {
+  min-height: 52px;
+  padding: 0 15px;
+}
+
+:global(.alphaField textarea) {
+  min-height: 145px;
+  padding: 14px 15px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+:global(.alphaField input::placeholder),
+:global(.alphaField textarea::placeholder) {
+  color: #9ba19c;
+}
+
+:global(.alphaField input:focus),
+:global(.alphaField textarea:focus),
+:global(.alphaField select:focus),
+:global(.alphaMultiPropertyBox input:focus) {
+  border-color: #75916e;
+  box-shadow: 0 0 0 3px rgba(117, 145, 110, 0.12);
+}
+
+:global(.alphaFieldError) {
+  margin: 9px 0 0;
+  color: #a13e35;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+:global(.alphaSupportingText) {
+  margin: 9px 0 0;
+  color: #737a74;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   RADIO GRID
+   ========================================================= */
+
+:global(.alphaRadioGrid) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+:global(.alphaRadioCard) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 15px;
+  border: 1px solid #d4dad4;
+  border-radius: 3px;
+  background: #fafbfa;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+:global(.alphaRadioCard:hover) {
+  border-color: #9bad97;
+  background: #f5f8f4;
+}
+
+:global(.alphaRadioCardActive) {
+  border-color: #6d8967;
+  background: #edf3eb;
+  box-shadow: inset 0 0 0 1px #6d8967;
+}
+
+:global(.alphaRadioCard input) {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  margin: 0 11px 0 0;
+  accent-color: #66835f;
+}
+
+:global(.alphaRadioCard span) {
+  color: #242924;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   CHECKBOX GRID
+   ========================================================= */
+
+:global(.alphaCheckboxGrid) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+:global(.alphaCheckboxCard) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 49px;
+  padding: 10px 13px;
+  border: 1px solid #d4dad4;
+  border-radius: 3px;
+  background: #fafbfa;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+:global(.alphaCheckboxCard:hover) {
+  border-color: #9bad97;
+}
+
+:global(.alphaCheckboxCardActive) {
+  border-color: #6d8967;
+  background: #edf3eb;
+  box-shadow: inset 0 0 0 1px #6d8967;
+}
+
+:global(.alphaCheckboxCard input) {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  margin: 0 10px 0 0;
+  accent-color: #66835f;
+}
+
+:global(.alphaCheckboxCard span) {
+  color: #272d28;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   CONDITIONAL SECTIONS
+   ========================================================= */
+
+:global(.alphaConditionalSection) {
+  margin-top: 32px;
+  padding: 28px;
+  border: 1px solid #dce2dc;
+  border-left: 3px solid #7c9775;
+  background: #f7f9f6;
+}
+
+:global(.alphaConditionalSection h2) {
+  margin: 0 0 22px;
+  color: #202520;
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+:global(.alphaInlineNotice) {
+  margin-top: 13px;
+  padding: 13px 15px;
+  border: 1px solid #d7dfd5;
+  background: #eef4ec;
+  color: #52624f;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+:global(.alphaInlineNotice a) {
+  color: #435d3f;
+  font-weight: 800;
+}
+
+:global(.alphaEmergencyInline) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 13px;
+  padding: 14px 16px;
+  border: 1px solid #e1b8b3;
+  background: #fff5f3;
+  color: #7e332c;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+:global(.alphaEmergencyInline a) {
+  flex: 0 0 auto;
+  color: #9a3e35;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+:global(.alphaNotSureBox) {
+  margin-top: 30px;
+  padding: 22px;
+  border: 1px solid #cbd9c8;
+  background: #f0f5ee;
+}
+
+:global(.alphaNotSureBox strong) {
+  display: block;
+  margin-bottom: 7px;
+  color: #334c30;
+  font-size: 15px;
+}
+
+:global(.alphaNotSureBox p) {
+  margin: 0;
+  color: #5d675b;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+:global(.alphaGreenNote) {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border-left: 3px solid #779370;
+  background: #f0f5ef;
+  color: #53604f;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+:global(.alphaGreenNote strong) {
+  display: block;
+  margin-top: 5px;
+  color: #344931;
+}
+
+
+/* =========================================================
+   MULTI PROPERTY
+   ========================================================= */
+
+:global(.alphaMultiPropertyBox) {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #d9dfd9;
+  background: #f8faf8;
+}
+
+:global(.alphaMultiPropertyBox p) {
+  margin: 0 0 15px;
+  color: #626962;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   UPLOAD SECTION
+   ========================================================= */
+
+:global(.alphaUploadSection) {
+  overflow: hidden;
+}
+
+:global(.alphaUploadGrid) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+
+:global(.alphaUploadCard) {
+  display: flex;
+  flex-direction: column;
+  min-height: 290px;
+  padding: 22px;
+  border: 1px dashed #bfc8be;
+  border-radius: 4px;
+  background: #f9faf9;
+}
+
+:global(.alphaUploadIcon) {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 17px;
+  border: 1px solid #c7d1c5;
+  background: #ffffff;
+  color: #688462;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+:global(.alphaUploadCard h3) {
+  margin: 0 0 9px;
+  color: #202520;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+:global(.alphaUploadCard p) {
+  flex: 1;
+  margin: 0 0 17px;
+  color: #6c746d;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+:global(.alphaUploadCard small) {
+  display: block;
+  margin-top: 10px;
+  color: #858b86;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+:global(.alphaUploadButtons) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+:global(.alphaUploadButton) {
+  min-height: 43px;
+  padding: 0 13px;
+  border: 1px solid #587052;
+  background: #5f7b59;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+:global(.alphaUploadButton:hover) {
+  background: #4e6749;
+  transform: translateY(-1px);
+}
+
+:global(.alphaUploadSecondary) {
+  border-color: #aeb8ad;
+  background: #ffffff;
+  color: #4e5d4b;
+}
+
+:global(.alphaUploadSecondary:hover) {
+  background: #f1f4f0;
+}
+
+:global(.alphaHiddenInput) {
+  display: none !important;
+}
+
+:global(.alphaUploadError) {
+  margin-top: 16px;
+  padding: 13px 15px;
+  border: 1px solid #e0b4ae;
+  background: #fff5f3;
+  color: #963b32;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+:global(.alphaPrivacyNote) {
+  margin-top: 17px;
+  padding: 13px 15px;
+  border: 1px solid #e0e3df;
+  background: #f7f8f7;
+  color: #727872;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   ATTACHMENTS
+   ========================================================= */
+
+:global(.alphaAttachments) {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #e0e4e0;
+}
+
+:global(.alphaAttachmentHeader) {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+:global(.alphaAttachmentHeader h3) {
+  margin: 0 0 4px;
+  color: #242924;
+  font-size: 17px;
+}
+
+:global(.alphaAttachmentHeader p) {
+  margin: 0;
+  color: #7a817b;
+  font-size: 11px;
+}
+
+:global(.alphaAttachmentGrid) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+}
+
+:global(.alphaAttachmentCard) {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #d9ded9;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+:global(.alphaAttachmentCard img),
+:global(.alphaAttachmentPlaceholder) {
+  width: 100%;
+  height: 135px;
+  display: block;
+  object-fit: cover;
+}
+
+:global(.alphaAttachmentPlaceholder) {
+  display: grid;
+  place-items: center;
+  background: #eef1ed;
+  color: #70816d;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+:global(.alphaAttachmentInfo) {
+  padding: 12px;
+}
+
+:global(.alphaAttachmentInfo > strong) {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 4px;
+  color: #272c28;
+  font-size: 11px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(.alphaAttachmentInfo > small) {
+  display: block;
+  margin-bottom: 7px;
+  color: #858b85;
+  font-size: 10px;
+}
+
+:global(.alphaUploadStatus),
+:global(.alphaUploadSuccess),
+:global(.alphaUploadFailed) {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+:global(.alphaUploadStatus) {
+  color: #7a7f7a;
+}
+
+:global(.alphaUploadSuccess) {
+  color: #5b7955;
+}
+
+:global(.alphaUploadFailed) {
+  color: #a14137;
+}
+
+:global(.alphaAttachmentActions) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+:global(.alphaAttachmentActions button) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #5c7657;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+:global(.alphaAttachmentActions button:hover) {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   FORM BOTTOM ACTIONS
+   ========================================================= */
+
+:global(.alphaFormBottomActions) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 5px;
+}
+
+:global(.alphaBackButton) {
+  min-height: 56px;
+  padding: 0 20px;
+  border: 1px solid #bcc4bc;
+  background: #ffffff;
+  color: #4e584f;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+:global(.alphaBackButton:hover) {
+  border-color: #879687;
+  background: #f5f7f5;
+}
+
+:global(.alphaContinueButton) {
+  min-width: 300px;
+  min-height: 58px;
+  padding: 0 26px;
+  border: 1px solid #526a4d;
+  background: #5d7757;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+:global(.alphaContinueButton:hover:not(:disabled)) {
+  background: #4d6449;
+  transform: translateY(-1px);
+}
+
+:global(.alphaContinueButton:disabled) {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+:global(.alphaSavedNotice) {
+  margin: 17px 0 0;
+  padding: 12px 15px;
+  border: 1px solid #cbdac8;
+  background: #eff5ed;
+  color: #4e654a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+:global(.alphaQuoteSidebar) {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+:global(.alphaSidebarCard) {
+  padding: 25px;
+  border: 1px solid #303630;
+  background: #171b18;
+  color: #ffffff;
+  box-shadow: 0 18px 45px rgba(20, 25, 21, 0.12);
+}
+
+:global(.alphaSidebarEyebrow) {
+  display: block;
+  margin-bottom: 11px;
+  color: #91ac8a;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+:global(.alphaSidebarCard h2) {
+  margin: 0 0 23px;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+:global(.alphaSidebarCard ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:global(.alphaSidebarCard li) {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0 0 20px;
+}
+
+:global(.alphaSidebarCard li:not(:last-child)::after) {
+  content: "";
+  position: absolute;
+  top: 31px;
+  left: 14px;
+  width: 1px;
+  height: calc(100% - 20px);
+  background: #343a35;
+}
+
+:global(.alphaSidebarCard li > span) {
+  position: relative;
+  z-index: 2;
+  width: 29px;
+  height: 29px;
+  flex: 0 0 29px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #414841;
+  border-radius: 50%;
+  background: #171b18;
+  color: #7f8780;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+:global(.alphaSidebarCard li > div) {
+  padding-top: 2px;
+}
+
+:global(.alphaSidebarCard li strong) {
+  display: block;
+  color: #8f968f;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+:global(.alphaSidebarCard li small) {
+  display: block;
+  margin-top: 3px;
+  color: #656c66;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+:global(.alphaSidebarCard .alphaSidebarActive > span) {
+  border-color: #789571;
+  background: #31402f;
+  color: #d4e0d1;
+}
+
+:global(.alphaSidebarCard .alphaSidebarActive strong) {
+  color: #ffffff;
+}
+
+:global(.alphaSidebarCard .alphaSidebarActive small) {
+  color: #99a59a;
+}
+
+:global(.alphaSidebarNote) {
+  margin-top: 4px;
+  padding-top: 18px;
+  border-top: 1px solid #303630;
+  color: #858d86;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+:global(.alphaSidebarEmergency) {
+  padding: 21px;
+  border: 1px solid #6f3934;
+  background: #271816;
+}
+
+:global(.alphaSidebarEmergency > span) {
+  display: block;
+  margin-bottom: 7px;
+  color: #df8177;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+:global(.alphaSidebarEmergency h3) {
+  margin: 0 0 7px;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+:global(.alphaSidebarEmergency p) {
+  margin: 0 0 14px;
+  color: #cbbab7;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+:global(.alphaSidebarEmergency a) {
+  color: #ffaea5;
+  font-size: 18px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+:global(.alphaSidebarContact) {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 21px;
+  border: 1px solid #d7ddd7;
+  background: #ffffff;
+}
+
+:global(.alphaSidebarContact strong) {
+  margin-bottom: 3px;
+  color: #2a302b;
+  font-size: 13px;
+}
+
+:global(.alphaSidebarContact a) {
+  color: #5e7759;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+:global(.alphaSidebarContact a:hover) {
+  text-decoration: underline;
+}
+
+:global(.alphaPrivacyLink) {
+  color: #737a74;
+  font-size: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+:global(.alphaPrivacyLink:hover) {
+  color: #4f604c;
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:global(.alphaQuotePage button:focus-visible),
+:global(.alphaQuotePage a:focus-visible),
+:global(.alphaQuotePage input:focus-visible),
+:global(.alphaQuotePage textarea:focus-visible),
+:global(.alphaQuotePage select:focus-visible) {
+  outline: 3px solid rgba(99, 130, 93, 0.35);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  :global(.alphaQuoteLayout) {
+    grid-template-columns: 1fr;
+  }
+
+  :global(.alphaQuoteSidebar) {
+    position: static;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.75fr);
+  }
+
+  :global(.alphaSidebarContact),
+  :global(.alphaPrivacyLink) {
+    grid-column: 1 / -1;
+  }
+
+  :global(.alphaUploadGrid) {
+    grid-template-columns: 1fr;
+  }
+
+  :global(.alphaUploadCard) {
+    min-height: auto;
+  }
+
+  :global(.alphaAttachmentGrid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  :global(.alphaQuoteContainer) {
+    width: min(100% - 28px, 680px);
+  }
+
+  :global(.alphaQuoteHero) {
+    min-height: 390px;
+  }
+
+  :global(.alphaQuoteHeroContent) {
+    padding: 65px 0;
+  }
+
+  :global(.alphaQuoteHero h1) {
+    font-size: clamp(38px, 11vw, 58px);
+  }
+
+  :global(.alphaQuoteHero p) {
+    font-size: 15px;
+  }
+
+  :global(.alphaProgressGrid) {
+    grid-template-columns: repeat(4, minmax(130px, 1fr));
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  :global(.alphaProgressGrid::-webkit-scrollbar) {
+    display: none;
+  }
+
+  :global(.alphaProgressItem) {
+    min-width: 130px;
+    padding: 15px 12px;
+  }
+
+  :global(.alphaProgressItem strong) {
+    font-size: 11px;
+  }
+
+  :global(.alphaProgressItem small) {
+    font-size: 8px;
+  }
+
+  :global(.alphaQuoteLayout) {
+    gap: 22px;
+    padding-top: 28px;
+    padding-bottom: 50px;
+  }
+
+  :global(.alphaFormSection) {
+    padding: 23px 18px;
+  }
+
+  :global(.alphaSectionIntro) {
+    gap: 12px;
+    margin-bottom: 23px;
+  }
+
+  :global(.alphaSectionNumber) {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  :global(.alphaSectionIntro h2) {
+    font-size: 22px;
+  }
+
+  :global(.alphaSectionIntro p) {
+    font-size: 13px;
+  }
+
+  :global(.alphaServiceCards),
+  :global(.alphaRadioGrid),
+  :global(.alphaCheckboxGrid) {
+    grid-template-columns: 1fr;
+  }
+
+  :global(.alphaServiceCard) {
+    min-height: 68px;
+  }
+
+  :global(.alphaConditionalSection) {
+    padding: 20px 16px;
+  }
+
+  :global(.alphaEmergencyBanner) {
+    padding: 21px 18px;
+  }
+
+  :global(.alphaEmergencyPhone) {
+    font-size: 24px;
+  }
+
+  :global(.alphaQuoteSidebar) {
+    display: flex;
+  }
+
+  :global(.alphaSidebarCard) {
+    padding: 22px;
+  }
+
+  :global(.alphaFormBottomActions) {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  :global(.alphaContinueButton),
+  :global(.alphaBackButton) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  :global(.alphaAttachmentGrid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  :global(.alphaAttachmentCard img),
+  :global(.alphaAttachmentPlaceholder) {
+    height: 120px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  :global(.alphaQuoteContainer) {
+    width: calc(100% - 22px);
+  }
+
+  :global(.alphaQuoteHeroContent) {
+    padding: 52px 0;
+  }
+
+  :global(.alphaQuoteHero h1) {
+    font-size: 39px;
+  }
+
+  :global(.alphaQuoteHero p) {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  :global(.alphaProgressGrid) {
+    width: max-content;
+  }
+
+  :global(.alphaProgressItem) {
+    width: 135px;
+    min-width: 135px;
+  }
+
+  :global(.alphaFormSection) {
+    padding: 20px 14px;
+  }
+
+  :global(.alphaSectionIntro) {
+    align-items: flex-start;
+  }
+
+  :global(.alphaSectionIntro h2) {
+    font-size: 20px;
+  }
+
+  :global(.alphaSectionIntro p) {
+    font-size: 12px;
+  }
+
+  :global(.alphaServiceCard) {
+    padding: 13px;
+  }
+
+  :global(.alphaServiceIcon) {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  :global(.alphaEmergencyInline) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  :global(.alphaUploadCard) {
+    padding: 18px;
+  }
+
+  :global(.alphaAttachmentGrid) {
+    grid-template-columns: 1fr;
+  }
+
+  :global(.alphaAttachmentCard img),
+  :global(.alphaAttachmentPlaceholder) {
+    height: 170px;
+  }
+
+  :global(.alphaEmergencyButton) {
+    width: 100%;
+  }
+
+  :global(.alphaEmergencyPhone) {
+    font-size: 22px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.alphaQuotePage *),
+  :global(.alphaQuotePage *::before),
+  :global(.alphaQuotePage *::after) {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+/* =========================================================
+   HIGH CONTRAST
+   ========================================================= */
+
+@media (forced-colors: active) {
+  :global(.alphaServiceCard),
+  :global(.alphaRadioCard),
+  :global(.alphaCheckboxCard),
+  :global(.alphaUploadCard),
+  :global(.alphaFormSection),
+  :global(.alphaSidebarContact) {
+    border: 1px solid CanvasText;
+  }
+
+  :global(.alphaContinueButton),
+  :global(.alphaUploadButton) {
+    border: 1px solid ButtonText;
+  }
+}

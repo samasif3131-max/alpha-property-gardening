@@ -354,8 +354,7 @@ export default function PaintingDecoratingPage() {
             <div className={styles.heroVisual}>
               <div className={styles.visualCircle}>
                 <div className={styles.paintCan}>
-                  <span>ALPHA</span>
-                  <small>PAINTING &amp; DECORATING</small>
+                  <span>PAINTING &amp; DECORATING</span>
                 </div>
 
                 <div className={styles.brush} />
