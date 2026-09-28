@@ -484,10 +484,10 @@ export default function BathroomServicesPage() {
           </div>
 
           <div className={styles.technicalNote}>
-            Where an electric shower requires new electrical work, the website
-            does not imply that Alpha personally undertakes that regulated
-            electrical element unless the appropriate capability and
-            arrangements are in place.
+            Where an electric shower requires additional electrical work, that
+            electrical element will need to be assessed separately and must
+            not be assumed to be included within the bathroom quotation unless
+            specifically confirmed.
           </div>
         </div>
       </section>
@@ -979,9 +979,10 @@ export default function BathroomServicesPage() {
         <div className={styles.damageNote}>
           <strong>Important</strong>
           <p>
-            Specialist mould, asbestos, structural or waterproofing
-            remediation should not be assumed to be included unless separately
-            confirmed and appropriately qualified.
+            If previously hidden issues such as suspected asbestos, significant
+            mould, structural damage or specialist waterproofing requirements
+            are uncovered, these will need to be assessed separately before
+            any related work proceeds.
           </p>
         </div>
       </section>

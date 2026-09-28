@@ -255,7 +255,7 @@ const faqs = [
   {
     question: "Can you install kitchen appliances?",
     answer:
-      "Suitable appliance installation or connection work may be possible depending on the appliance and requirements. Work requiring Gas Safe registration or other specialist regulated competence is not currently advertised as being undertaken directly by Alpha.",
+      "Suitable appliance installation or connection work may be possible depending on the appliance and requirements. Alpha does not currently undertake work that legally requires Gas Safe registration. Any specialist or regulated electrical work will need to be assessed separately.",
   },
   {
     question: "Can you renovate only part of my kitchen?",
@@ -304,7 +304,9 @@ export default function KitchenServicesPage() {
 
           <div className={styles.heroGrid}>
             <div className={styles.heroText}>
-              <div className={styles.eyebrow}>KITCHEN INSTALLATION &amp; RENOVATION</div>
+              <div className={styles.eyebrow}>
+                KITCHEN INSTALLATION &amp; RENOVATION
+              </div>
 
               <h1>
                 Complete Kitchen
@@ -346,10 +348,15 @@ export default function KitchenServicesPage() {
                 </a>
               </div>
 
-              <Link href="/property-maintenance" className={styles.supportingLink}>
-                Need a smaller repair or plumbing job? → View Property
-                Maintenance / Plumbing Services
-              </Link>
+              <div className={styles.supportingLink}>
+                <Link href="/property-maintenance">
+                  Need a smaller repair? → View Property Maintenance
+                </Link>
+
+                <Link href="/plumbing-services">
+                  Need a plumbing job? → View Plumbing Services
+                </Link>
+              </div>
             </div>
 
             <div className={styles.heroImage}>
@@ -716,13 +723,11 @@ export default function KitchenServicesPage() {
           <div className={styles.warningBoxDark}>
             <strong>Regulated work</strong>
             <p>
-              Gas hob installation, gas cooker installation, gas appliance work
-              and other Gas Safe-regulated work are not currently advertised as
-              being undertaken directly by Alpha.
-            </p>
-            <p>
-              Regulated electrical installation work is also not claimed unless
-              the relevant competence and arrangements have been confirmed.
+              Alpha does not currently undertake gas hob, gas cooker or other
+              work that legally requires Gas Safe registration. Where an
+              appliance requires specialist or regulated electrical work, that
+              element will need to be assessed separately and is only included
+              where specifically confirmed.
             </p>
           </div>
         </article>
@@ -869,7 +874,9 @@ export default function KitchenServicesPage() {
             ))}
           </div>
 
-          <div className={styles.bigStatement}>No job is too big or too small.</div>
+          <div className={styles.bigStatement}>
+            No job is too big or too small.
+          </div>
         </div>
       </section>
 
@@ -885,7 +892,9 @@ export default function KitchenServicesPage() {
         <div className={styles.propertyContent}>
           <div className={styles.sectionKicker}>PROPERTY RENOVATIONS</div>
 
-          <h2>Renovating the Kitchen in a Property You&apos;ve Just Bought?</h2>
+          <h2>
+            Renovating the Kitchen in a Property You&apos;ve Just Bought?
+          </h2>
 
           <p>
             A dated or damaged kitchen is often one of the first areas new
@@ -1058,7 +1067,7 @@ export default function KitchenServicesPage() {
             what materials are needed.
           </p>
 
-          <p>The quotation should clearly state which items are:</p>
+          <p>Your quotation will clearly state which items are:</p>
 
           <div className={styles.productsGrid}>
             <div>
@@ -1088,7 +1097,9 @@ export default function KitchenServicesPage() {
         </div>
 
         <div className={styles.retailerBox}>
-          <div className={styles.sectionKickerLight}>CUSTOMER-SUPPLIED KITCHENS</div>
+          <div className={styles.sectionKickerLight}>
+            CUSTOMER-SUPPLIED KITCHENS
+          </div>
 
           <h2>Installing Kitchens From Major Retailers</h2>
 
@@ -1101,9 +1112,10 @@ export default function KitchenServicesPage() {
           <div className={styles.noAffiliation}>
             <strong>Important</strong>
             <p>
-              Alpha does not claim approved-installer, partner or affiliate
-              status with any kitchen retailer unless that status has genuinely
-              been obtained.
+              Any retailer-specific installation requirements, specialist
+              components or additional work will be identified during
+              assessment and reflected in the agreed project scope where
+              applicable.
             </p>
           </div>
         </div>
@@ -1176,8 +1188,10 @@ export default function KitchenServicesPage() {
           <p>
             Alpha provides kitchen installation and renovation services
             throughout our regional service area, extending{" "}
-            <strong>from Peterborough to Skegness and from Long Sutton to Lincoln</strong>,
-            including surrounding towns, villages and rural communities.
+            <strong>
+              from Peterborough to Skegness and from Long Sutton to Lincoln
+            </strong>
+            , including surrounding towns, villages and rural communities.
           </p>
 
           <Link href="/areas-we-cover" className={styles.textButton}>
@@ -1207,7 +1221,9 @@ export default function KitchenServicesPage() {
           <Link href="/plumbing-services">Plumbing Services →</Link>
           <Link href="/bathroom-services">Bathroom Services →</Link>
           <Link href="/tiling-flooring">Tiling &amp; Flooring →</Link>
-          <Link href="/painting-decorating">Painting &amp; Decorating →</Link>
+          <Link href="/painting-decorating">
+            Painting &amp; Decorating →
+          </Link>
           <Link href="/landlords-letting-agents">
             Landlords &amp; Letting Agents →
           </Link>
@@ -1264,10 +1280,7 @@ export default function KitchenServicesPage() {
             REQUEST A KITCHEN QUOTE →
           </Link>
 
-          <a
-            href="tel:01775518068"
-            className={styles.finalPhoneButton}
-          >
+          <a href="tel:01775518068" className={styles.finalPhoneButton}>
             CALL 01775 518068
           </a>
         </div>

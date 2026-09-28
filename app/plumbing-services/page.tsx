@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./PlumbingServices.module.css";
+
+export const metadata: Metadata = {
+  title: "Plumbing Repairs & Emergency Plumbing | Alpha",
+};
 
 const plumbingServices = [
   {
@@ -302,8 +307,9 @@ export default function PlumbingServicesPage() {
           </p>
 
           <p>
-            Alpha provides <strong>24/7 emergency plumbing call-out support</strong>{" "}
-            across our service area for suitable urgent plumbing problems.
+            Alpha provides{" "}
+            <strong>24/7 emergency plumbing call-out support</strong> across
+            our service area for suitable urgent plumbing problems.
           </p>
 
           <div className={styles.emergencyGrid}>
@@ -514,7 +520,10 @@ export default function PlumbingServicesPage() {
               CALL 01775 518068
             </a>
 
-            <Link href="/property-maintenance" className={styles.outlineButton}>
+            <Link
+              href="/property-maintenance"
+              className={styles.outlineButton}
+            >
               VIEW PROPERTY MAINTENANCE →
             </Link>
           </div>
@@ -679,16 +688,11 @@ export default function PlumbingServicesPage() {
           </p>
 
           <p>
-            This means the website should not advertise Alpha as directly
-            providing services such as gas boiler installation, gas boiler
-            repairs, gas appliance installation, gas pipework, gas safety
-            certificates or other work legally requiring Gas Safe
+            Alpha’s plumbing service covers general water plumbing, repairs
+            and suitable installations. We do not currently undertake gas
+            boiler work, gas appliance work, gas pipework, gas safety
+            certificates or other work that legally requires Gas Safe
             registration.
-          </p>
-
-          <p>
-            Our plumbing service remains focused on general water plumbing,
-            repairs, suitable installations and property-maintenance work.
           </p>
         </div>
       </section>
@@ -886,8 +890,8 @@ export default function PlumbingServicesPage() {
           </p>
 
           <p>
-            Emergency call-outs should have their pricing and call-out terms
-            explained clearly to the customer before or at attendance wherever
+            For emergency call-outs, we’ll explain the applicable call-out
+            charge and pricing terms before or at attendance wherever
             reasonably possible.
           </p>
         </div>
@@ -945,27 +949,6 @@ export default function PlumbingServicesPage() {
             ))}
           </div>
         </div>
-
-        <aside className={styles.emergencyCard}>
-          <div className={styles.emergencyIcon}>☎</div>
-
-          <p className={styles.sectionEyebrow}>URGENT PLUMBING PROBLEM?</p>
-
-          <h2>Need a Plumber?</h2>
-
-          <p>
-            For urgent plumbing problems, call Alpha directly rather than
-            waiting for an online quote response.
-          </p>
-
-          <a href="tel:01775518068" className={styles.largeCallButton}>
-            01775 518068
-          </a>
-
-          <small>
-            24/7 emergency property and plumbing call-outs available.
-          </small>
-        </aside>
       </section>
 
       {/* FINAL CTA */}
