@@ -87,12 +87,12 @@ const faqs = [
   {
     question: "Do you provide tree surgery?",
     answer:
-      "Alpha's current garden service focuses on garden maintenance, grass cutting, strimming, hedge and shrub maintenance, weeding, tidy-ups and garden clearances. Specialist tree surgery or arboricultural work is not currently advertised as part of this service.",
+      "No. Alpha’s current garden service focuses on garden maintenance, grass cutting, strimming, hedge and shrub maintenance, weeding, tidy-ups and garden clearances. We do not currently provide specialist tree surgery or arboricultural work.",
   },
   {
     question: "Do you use weedkiller?",
     answer:
-      "Routine garden weeding can be undertaken. Any use of chemical weed-control products would depend on the product, situation and appropriate legal and safety requirements.",
+      "Our standard garden service focuses on manual weeding. Any chemical weed-control treatment would need to be assessed separately based on the product, location and applicable safety requirements.",
   },
   {
     question: "How do I request a garden quote?",
@@ -166,7 +166,7 @@ export default function GardenServicesPage() {
               </p>
 
               <div className={styles.heroActions}>
-                <Link href="/contact" className={styles.primaryButton}>
+                <Link href="#garden-quote" className={styles.primaryButton}>
                   REQUEST A GARDEN QUOTE
                 </Link>
 
@@ -350,7 +350,10 @@ export default function GardenServicesPage() {
                   the property and the level of maintenance required.
                 </p>
 
-                <Link href="/contact" className={styles.lightButton}>
+                <Link
+                  href="#garden-quote"
+                  className={styles.lightButton}
+                >
                   DISCUSS REGULAR GARDEN MAINTENANCE →
                 </Link>
               </div>
@@ -434,8 +437,10 @@ export default function GardenServicesPage() {
                 </p>
 
                 <div className={styles.note}>
-                  Chemical weed-control products are not presented as a
-                  standard garden service.
+                  Our standard garden service focuses on manual weeding. Any
+                  chemical weed-control treatment would need to be assessed
+                  separately based on the product, location and applicable
+                  safety requirements.
                 </div>
               </article>
             </div>
@@ -473,7 +478,10 @@ export default function GardenServicesPage() {
                   <li>Seasonal maintenance</li>
                 </ul>
 
-                <Link href="/contact" className={styles.textLink}>
+                <Link
+                  href="#garden-quote"
+                  className={styles.textLink}
+                >
                   REQUEST A GARDEN TIDY-UP QUOTE →
                 </Link>
               </article>
@@ -892,7 +900,10 @@ export default function GardenServicesPage() {
         </section>
 
         {/* QUOTE FORM */}
-        <section className={`${styles.section} ${styles.quoteSection}`}>
+        <section
+          id="garden-quote"
+          className={`${styles.section} ${styles.quoteSection}`}
+        >
           <div className={styles.container}>
             <div className={styles.quoteGrid}>
               <div className={styles.quoteIntro}>
@@ -912,8 +923,6 @@ export default function GardenServicesPage() {
                 </div>
               </div>
 
-              {/* No onSubmit handler here.
-                  This keeps the page as a Server Component. */}
               <form className={styles.quoteForm} action="/contact">
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
@@ -1061,7 +1070,10 @@ export default function GardenServicesPage() {
               </div>
 
               <div className={styles.finalActions}>
-                <Link href="/contact" className={styles.goldButton}>
+                <Link
+                  href="#garden-quote"
+                  className={styles.goldButton}
+                >
                   REQUEST A GARDEN QUOTE
                 </Link>
 
