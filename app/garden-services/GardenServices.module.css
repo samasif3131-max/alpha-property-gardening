@@ -5,322 +5,240 @@
   --gold: #c59a3b;
   --gold-light: #dfb75d;
   --cream: #f5f5f1;
+  --white: #ffffff;
   --text: #202520;
   --muted: #686e68;
   --border: #dedfd9;
 
-  width: 100%;
-  overflow-x: hidden;
-
   color: var(--text);
-  background: #ffffff;
-}
-
-.page *,
-.page *::before,
-.page *::after {
-  box-sizing: border-box;
+  background: var(--white);
+  overflow: hidden;
 }
 
 .container {
-  width: min(1440px, calc(100% - 70px));
+  width: min(1180px, calc(100% - 48px));
   margin: 0 auto;
 }
 
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero {
   position: relative;
-  min-height: 515px;
-
-  overflow: hidden;
-
-  color: #ffffff;
-  background: var(--green-dark);
-}
-
-.heroImage {
-  position: absolute;
-  inset: 0;
-
-  background-image: url("https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2200&q=90");
-
-  background-position: center;
-  background-size: cover;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 37, 29, 0.98) 0%,
+      rgba(0, 55, 44, 0.94) 48%,
+      rgba(0, 37, 29, 0.68) 100%
+    ),
+    url("https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=90")
+      center / cover no-repeat;
 }
 
 .heroOverlay {
   position: absolute;
   inset: 0;
-
   background:
-    linear-gradient(
-      90deg,
-      rgba(0, 34, 26, 0.98) 0%,
-      rgba(0, 34, 26, 0.91) 31%,
-      rgba(0, 34, 26, 0.65) 62%,
-      rgba(0, 34, 26, 0.48) 100%
+    radial-gradient(
+      circle at 75% 45%,
+      rgba(197, 154, 59, 0.15),
+      transparent 32%
     );
+  pointer-events: none;
 }
 
-.breadcrumb {
+.hero .container {
   position: relative;
   z-index: 2;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 17px 0 28px;
-
-  color: rgba(255, 255, 255, 0.72);
-
-  font-size: 13px;
-  line-height: 1.2;
-}
-
-.breadcrumb a {
-  color: rgba(255, 255, 255, 0.72);
-  text-decoration: none;
-
-  transition: color 0.2s ease;
-}
-
-.breadcrumb a:hover {
-  color: var(--gold-light);
-}
-
-.breadcrumb strong {
-  color: #ffffff;
-}
-
-.heroGrid {
-  position: relative;
-  z-index: 2;
-
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
-
-  gap: 65px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(350px, 0.8fr);
+  gap: 70px;
   align-items: center;
-
-  padding-bottom: 45px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .heroContent {
-  max-width: 800px;
+  max-width: 760px;
 }
 
-.heroContent h1 {
-  margin: 0;
-
-  color: #ffffff;
-
-  font-size: clamp(48px, 5.5vw, 76px);
-  line-height: 0.96;
-
-  letter-spacing: -3px;
-
+.heroEyebrow,
+.sectionEyebrow,
+.cardEyebrow {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 12px;
   font-weight: 800;
+  letter-spacing: 2.5px;
+  line-height: 1.4;
 }
 
-.heroContent h1 span {
-  display: block;
-
-  color: var(--gold-light);
+.hero h1 {
+  max-width: 780px;
+  margin: 18px 0 24px;
+  color: var(--white);
+  font-size: clamp(42px, 5vw, 70px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -2px;
 }
 
-.heroContent h1 small {
-  display: block;
-
-  margin-top: 10px;
-
-  color: #ffffff;
-
-  font-size: 0.55em;
-  line-height: 1.08;
-
-  letter-spacing: -1px;
+.heroLead {
+  max-width: 720px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 20px;
+  line-height: 1.7;
 }
 
-.heroContent > p {
-  max-width: 750px;
-
-  margin: 23px 0 25px;
-
-  color: rgba(255, 255, 255, 0.91);
-
+.heroText {
+  max-width: 700px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
   font-size: 16px;
-  line-height: 1.58;
+  line-height: 1.7;
 }
 
-.heroButtons {
+.heroActions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
+  margin-top: 34px;
 }
 
+.primaryButton,
+.lightButton,
 .goldButton,
-.outlineButton {
-  min-height: 51px;
-
+.phoneButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  gap: 8px;
-
-  padding: 0 23px;
-
-  border-radius: 5px;
-
-  font-size: 13px;
-  font-weight: 800;
-
+  min-height: 52px;
+  padding: 0 25px;
+  border-radius: 2px;
   text-decoration: none;
-
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
   transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
-.goldButton {
-  color: #1c211d;
-
-  background: linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
-
-  border: 1px solid var(--gold-light);
+.primaryButton {
+  color: var(--white);
+  background: var(--gold);
 }
 
-.goldButton:hover {
+.primaryButton:hover {
+  color: var(--white);
+  background: #ad852f;
   transform: translateY(-2px);
 }
 
-.outlineButton {
-  color: #ffffff;
-
-  background: rgba(0, 0, 0, 0.22);
-
-  border: 1px solid rgba(255, 255, 255, 0.9);
+.phoneButton {
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.outlineButton:hover {
-  color: var(--gold-light);
-
-  border-color: var(--gold-light);
-
+.phoneButton:hover {
+  color: var(--green);
+  background: var(--white);
   transform: translateY(-2px);
 }
 
-/* HERO SIDE PANEL */
+.heroSubline {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  font-weight: 600;
+}
 
 .heroPanel {
-  padding: 24px 23px 21px;
-
-  background: rgba(0, 48, 37, 0.97);
-
-  border: 1px solid rgba(215, 176, 79, 0.5);
-
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 37, 29, 0.72);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
 }
 
-.heroPanel ul {
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
-}
-
-.heroPanel li {
+.panelTop {
   display: flex;
   align-items: center;
-
-  gap: 11px;
-
-  padding: 8px 0;
-
-  color: #ffffff;
-
-  font-size: 14px;
-  line-height: 1.35;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
 }
 
-.heroPanel li span {
-  width: 24px;
-  height: 24px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  flex: 0 0 auto;
-
-  color: var(--gold-light);
-
-  border: 1px solid var(--gold-light);
+.panelDot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-
-  font-size: 12px;
+  background: var(--gold);
 }
 
-.panelQuote {
-  margin-top: 15px;
-  padding-top: 15px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-
-  color: #ffffff;
-
-  text-align: center;
-
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
-
-  font-size: 28px;
-  line-height: 0.98;
-
-  transform: rotate(-3deg);
+.panelList {
+  display: grid;
 }
 
-/* =========================================================
-   BENEFITS BAR
-========================================================= */
+.panelItem {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panelItem:last-child {
+  border-bottom: 0;
+}
+
+.panelItem span {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.panelItem strong {
+  color: var(--white);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* =========================
+   BENEFITS
+========================= */
 
 .benefitBar {
-  background: #ffffff;
-
-  border-bottom: 1px solid #e0e1dc;
-
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
 }
 
 .benefitGrid {
   display: grid;
-
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .benefitItem {
-  min-height: 88px;
-
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  gap: 13px;
-
-  padding: 12px 17px;
-
-  border-right: 1px solid #e1e2de;
+  gap: 14px;
+  min-height: 105px;
+  padding: 18px 22px;
+  border-right: 1px solid var(--border);
 }
 
 .benefitItem:last-child {
@@ -328,1255 +246,1207 @@
 }
 
 .benefitIcon {
-  width: 42px;
-  height: 42px;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(197, 154, 59, 0.55);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 800;
+}
 
-  flex: 0 0 auto;
-
-  color: var(--green);
-
-  font-size: 32px;
+.benefitItem strong,
+.benefitItem span {
+  display: block;
 }
 
 .benefitItem strong {
-  display: block;
-
-  color: #202520;
-
+  margin-bottom: 4px;
+  color: var(--green);
   font-size: 13px;
-  line-height: 1.2;
 }
 
-.benefitItem span {
-  display: block;
-
-  margin-top: 4px;
-
-  color: #727772;
-
-  font-size: 11px;
-  line-height: 1.25;
-}
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
-.servicesSection {
-  padding: 48px 0 55px;
-
-  background: #ffffff;
-}
-
-.servicesLayout {
-  display: grid;
-
-  grid-template-columns: minmax(0, 1fr) 350px;
-
-  gap: 32px;
-
-  align-items: start;
-}
-
-.sectionHeading {
-  margin-bottom: 25px;
-}
-
-.sectionHeading > span {
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: var(--gold);
-
+.benefitItem div span {
+  color: var(--muted);
   font-size: 12px;
-  font-weight: 800;
-
-  letter-spacing: 2px;
+  line-height: 1.4;
 }
 
-.sectionHeading h2 {
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+.section {
+  padding: 105px 0;
+}
+
+.softSection {
+  background: var(--cream);
+}
+
+.sectionHeader {
+  max-width: 780px;
+  margin: 0 auto 52px;
+  text-align: center;
+}
+
+.sectionHeader h2,
+.introContent h2,
+.featureContent h2,
+.detailCard h2,
+.whiteFeatureCard h2,
+.outlineCard h2,
+.infoCard h2,
+.propertyGardenBox h2,
+.rentalGrid h2 {
+  margin: 13px 0 18px;
+  color: var(--green);
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.12;
+  letter-spacing: -1px;
+}
+
+.sectionHeader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 75px;
+  align-items: center;
+}
+
+.imageCard {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.imageCard img,
+.featureImage img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.imageLabel {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  padding: 10px 14px;
+  color: var(--white);
+  background: rgba(0, 55, 44, 0.92);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.introContent p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.highlightBox {
   display: flex;
   align-items: center;
-
-  gap: 12px;
-
-  margin: 0;
-
-  color: var(--green-dark);
-
-  font-size: clamp(34px, 3.5vw, 46px);
-  line-height: 1;
-
-  letter-spacing: -1.5px;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 20px 22px;
+  border-left: 3px solid var(--gold);
+  background: var(--cream);
 }
 
-.sectionHeading h2 i {
-  display: inline-block;
-
-  width: 40px;
-  height: 4px;
-
-  background: var(--gold);
+.highlightBox span {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
 }
 
-.sectionHeading p {
-  max-width: 760px;
-
-  margin: 11px 0 0;
-
-  color: var(--muted);
-
-  font-size: 15px;
-  line-height: 1.55;
+.highlightBox strong {
+  color: var(--green);
+  font-size: 17px;
 }
 
-/* SERVICE GRID */
+/* =========================
+   SERVICE CARDS
+========================= */
 
-.servicesGrid {
+.servicesSection {
+  background: var(--cream);
+}
+
+.serviceGrid {
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
   gap: 18px;
 }
 
 .serviceCard {
-  overflow: hidden;
-
-  background: #ffffff;
-
-  border: 1px solid #dfe0db;
-
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.055);
-
+  min-height: 245px;
+  padding: 30px;
+  border: 1px solid var(--border);
+  background: var(--white);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .serviceCard:hover {
-  transform: translateY(-4px);
-
-  box-shadow: 0 13px 30px rgba(0, 0, 0, 0.11);
+  transform: translateY(-5px);
+  border-color: rgba(197, 154, 59, 0.5);
+  box-shadow: 0 18px 45px rgba(0, 55, 44, 0.08);
 }
 
-.serviceImage {
-  height: 155px;
-
-  background-position: center;
-  background-size: cover;
-
-  transition: transform 0.3s ease;
-}
-
-.serviceCard:hover .serviceImage {
-  transform: scale(1.03);
-}
-
-/*
-   FIX FOR 2ND SERVICE IMAGE
-
-   Hedge Cutting & Pruning image.
-   This overrides the broken inline image from page.tsx.
-*/
-
-.servicesGrid .serviceCard:nth-child(2) .serviceImage {
-  background-image: url("https://images.unsplash.com/photo-1777297821426-a8033c40ba59?auto=format&fit=crop&w=1200&q=85") !important;
-
-  background-position: center;
-  background-size: cover;
-}
-
-.serviceCardContent {
-  min-height: 175px;
-
-  padding: 16px 15px 15px;
-}
-
-.serviceCardContent h3 {
-  margin: 0 0 8px;
-
-  color: #202520;
-
-  font-size: 17px;
-  line-height: 1.18;
-}
-
-.serviceCardContent p {
-  margin: 0;
-
-  color: #656b65;
-
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.learnMore {
+.serviceNumber {
   display: inline-flex;
   align-items: center;
-
-  gap: 6px;
-
-  margin-top: 12px;
-
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(197, 154, 59, 0.5);
   color: var(--gold);
+  font-size: 11px;
+  font-weight: 800;
+}
 
+.serviceCard h3 {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.serviceCard p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================
+   DARK SECTION
+========================= */
+
+.darkSection {
+  color: var(--white);
+  background: var(--green);
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 90px;
+  align-items: center;
+}
+
+.sectionEyebrowLight {
+  display: inline-block;
+  color: var(--gold-light);
   font-size: 12px;
   font-weight: 800;
-
-  text-decoration: none;
+  letter-spacing: 2.5px;
 }
 
-.learnMore span {
-  font-size: 18px;
-}
-
-/* =========================================================
-   QUOTE FORM
-========================================================= */
-
-.quoteCard {
-  padding: 22px 19px;
-
-  background: #f4f4f0;
-
-  border: 1px solid #e0e1dc;
-
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.035);
-}
-
-.quoteHeader h2 {
-  margin: 0 0 16px;
-
-  color: #1e251f;
-
-  font-size: 23px;
+.darkSection h2 {
+  margin: 14px 0 18px;
+  color: var(--white);
+  font-size: clamp(31px, 4vw, 48px);
   line-height: 1.12;
 }
 
-.quoteForm {
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
+.darkSection p {
+  max-width: 650px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+  line-height: 1.8;
 }
 
-.quoteForm input,
-.quoteForm select,
-.quoteForm textarea {
-  width: 100%;
-
-  padding: 12px 12px;
-
-  border: 1px solid #d9dad5;
-  border-radius: 3px;
-
-  color: #404640;
-  background: #ffffff;
-
-  font-family: inherit;
-
-  font-size: 12px;
-
-  outline: none;
-}
-
-.quoteForm textarea {
-  resize: vertical;
-}
-
-.quoteForm input:focus,
-.quoteForm select:focus,
-.quoteForm textarea:focus {
-  border-color: var(--gold);
-}
-
-.quoteForm button {
-  min-height: 46px;
-
-  border: 0;
-  border-radius: 3px;
-
-  color: #ffffff;
-
-  background: var(--gold);
-
-  font-family: inherit;
-
-  font-size: 12px;
-  font-weight: 800;
-
-  cursor: pointer;
-
-  transition: background 0.2s ease;
-}
-
-.quoteForm button:hover {
-  background: #af842d;
-}
-
-.quoteFeatures {
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  margin-top: 18px;
-  padding-top: 15px;
-
-  border-top: 1px solid #dddeda;
-}
-
-.quoteFeatures div {
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-
-  gap: 6px;
-
-  border-right: 1px solid #dddeda;
-}
-
-.quoteFeatures div:last-child {
-  border-right: 0;
-}
-
-.quoteFeatures span {
+.lightButton {
+  margin-top: 15px;
   color: var(--green);
-
-  font-size: 24px;
+  background: var(--white);
 }
 
-.quoteFeatures small {
-  color: #555b55;
-
-  font-size: 9px;
+.lightButton:hover {
+  color: var(--green);
+  background: var(--gold-light);
+  transform: translateY(-2px);
 }
 
-/* =========================================================
-   LANDLORD SECTION
-========================================================= */
-
-.landlordSection {
+.checkList {
   display: grid;
-
-  grid-template-columns: 30% 40% 30%;
-
-  min-height: 340px;
-
-  background: #f3f4ef;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.landlordImage {
-  min-height: 340px;
-
-  background-image: url("https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1200&q=85");
-
-  background-position: center;
-  background-size: cover;
+.checkList div {
+  min-height: 90px;
+  padding: 25px 20px 25px 48px;
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  line-height: 1.5;
+  position: relative;
 }
 
-.landlordContent {
-  padding: 38px 32px 30px;
-}
-
-.goldLabel {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: var(--gold);
-
-  font-size: 11px;
-  font-weight: 800;
-
-  letter-spacing: 1.5px;
-}
-
-.landlordContent h2 {
-  margin: 0 0 13px;
-
-  color: var(--green-dark);
-
-  font-size: 31px;
-  line-height: 1.05;
-
-  letter-spacing: -1px;
-}
-
-.landlordContent > p {
-  max-width: 540px;
-
-  margin: 0 0 17px;
-
-  color: #626861;
-
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-.landlordBenefits {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 9px 20px;
-
-  margin-bottom: 20px;
-}
-
-.landlordBenefits div {
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  color: #3f463f;
-
-  font-size: 12px;
-}
-
-.landlordBenefits span {
-  width: 19px;
-  height: 19px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex: 0 0 auto;
-
-  border-radius: 50%;
-
-  color: #ffffff;
-
-  background: var(--green);
-
-  font-size: 10px;
-}
-
-/* PROCESS CARD */
-
-.processCard {
-  padding: 32px 27px;
-
-  color: #ffffff;
-
-  background: var(--green-dark);
-}
-
-.processCard h2 {
-  margin: 0 0 21px;
-
-  color: #ffffff;
-
-  font-size: 24px;
-  line-height: 1.15;
-}
-
-.processItem {
-  display: flex;
-  align-items: flex-start;
-
-  gap: 12px;
-
-  margin-bottom: 15px;
-}
-
-.processNumber {
-  width: 33px;
-  height: 33px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex: 0 0 auto;
-
-  border: 1px solid var(--gold-light);
-  border-radius: 50%;
-
+.checkList div::before {
+  content: "✓";
+  position: absolute;
+  left: 20px;
+  top: 25px;
   color: var(--gold-light);
-
-  font-size: 13px;
   font-weight: 800;
 }
 
-.processItem strong {
-  display: block;
+/* =========================
+   DETAIL CARDS
+========================= */
 
-  color: #ffffff;
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
 
+.detailCard {
+  padding: 35px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+
+.cardEyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.detailCard h2,
+.whiteFeatureCard h2,
+.outlineCard h2,
+.infoCard h2 {
+  font-size: 28px;
+}
+
+.detailCard p,
+.whiteFeatureCard p,
+.outlineCard p,
+.infoCard p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.note {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-left: 2px solid var(--gold);
+  background: var(--cream);
+  color: var(--muted);
   font-size: 13px;
+  line-height: 1.6;
 }
 
-.processItem p {
-  margin: 3px 0 0;
+/* =========================
+   TWO FEATURE CARDS
+========================= */
 
-  color: rgba(255, 255, 255, 0.66);
-
-  font-size: 11px;
-  line-height: 1.4;
+.twoFeatureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
 }
 
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-.projectsSection {
-  padding: 45px 0 50px;
-
-  background: #ffffff;
+.whiteFeatureCard,
+.outlineCard {
+  padding: 38px;
+  background: var(--white);
+  border: 1px solid var(--border);
 }
 
-.sectionHeadingRow {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  margin-bottom: 22px;
+.whiteFeatureCard ul,
+.outlineCard ul,
+.infoCard ul,
+.simpleList,
+.propertyList {
+  margin: 20px 0 25px;
+  padding: 0;
+  list-style: none;
 }
 
-.sectionHeadingRow .sectionHeading {
-  margin-bottom: 0;
+.whiteFeatureCard li,
+.outlineCard li,
+.infoCard li,
+.simpleList li,
+.propertyList li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 23px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-.topLink {
+.whiteFeatureCard li::before,
+.outlineCard li::before,
+.infoCard li::before,
+.simpleList li::before,
+.propertyList li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
   color: var(--gold);
-
-  font-size: 12px;
   font-weight: 800;
+}
 
+.textLink {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
   text-decoration: none;
 }
 
-.projectsGrid {
+.textLink:hover {
+  color: var(--gold);
+}
+
+.whiteFeatureCard .note {
+  margin-bottom: 0;
+}
+
+/* =========================
+   IMAGE FEATURE
+========================= */
+
+.featureImageGrid {
   display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
 
-  grid-template-columns: repeat(4, 1fr);
+.featureImage {
+  height: 520px;
+  overflow: hidden;
+}
 
+.featureContent p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.simpleList {
+  margin: 25px 0;
+}
+
+.featureContent .primaryButton {
+  margin-top: 10px;
+}
+
+/* =========================
+   LANDLORDS
+========================= */
+
+.landlordGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 45px;
+  align-items: stretch;
+}
+
+.landlordList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.landlordList div {
+  display: flex;
+  align-items: center;
+  min-height: 78px;
+  padding: 15px 20px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.landlordContent {
+  padding: 35px;
+  background: var(--green);
+}
+
+.landlordContent h3 {
+  margin: 0 0 14px;
+  color: var(--white);
+  font-size: 25px;
+}
+
+.landlordContent p {
+  margin: 0 0 25px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* =========================
+   RENTAL
+========================= */
+
+.rentalGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.rentalGrid h2 {
+  color: var(--white);
+}
+
+.rentalFactors {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.rentalFactors span {
+  padding: 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+}
+
+/* =========================
+   PROPERTY & GARDEN
+========================= */
+
+.propertyGardenBox {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 70px;
+  padding: 55px;
+  border: 1px solid var(--border);
+  background: var(--cream);
+}
+
+.largeText {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.bigStatement {
+  margin-top: 30px;
+  color: var(--green);
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.propertyList {
+  margin-top: 0;
+}
+
+/* =========================
+   INFO CARDS
+========================= */
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.infoCard {
+  padding: 35px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+
+.infoCard h2 {
+  min-height: 68px;
+}
+
+.infoCard ul {
+  margin-top: 22px;
+}
+
+.smallText {
+  font-size: 13px !important;
+}
+
+/* =========================
+   PROCESS
+========================= */
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
 
-.projectCard {
-  overflow: hidden;
+.processCard {
+  padding: 30px;
+  border: 1px solid var(--border);
+  background: var(--white);
 }
 
-.projectImage {
+.processCard > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 20px;
+  background: var(--green);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.processCard h3 {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 19px;
+}
+
+.processCard p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================
+   AREA
+========================= */
+
+.areaSection {
   position: relative;
-
-  height: 145px;
-
-  display: flex;
-  align-items: flex-end;
-
-  overflow: hidden;
-
-  background-position: center;
-  background-size: cover;
-}
-
-.projectImage::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
+  padding: 95px 0;
   background:
     linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.4),
-      transparent 55%
-    );
+      90deg,
+      rgba(0, 37, 29, 0.96),
+      rgba(0, 55, 44, 0.88)
+    ),
+    url("https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1800&q=85")
+      center / cover no-repeat;
 }
 
-.projectImage span {
-  position: relative;
-  z-index: 2;
-
-  padding: 5px 8px;
-
-  color: #ffffff;
-
-  background: rgba(0, 55, 44, 0.82);
-
-  font-size: 9px;
-  font-weight: 700;
+.areaContent {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.projectImage span + span {
-  margin-left: 2px;
-
-  background: rgba(197, 154, 59, 0.9);
+.areaContent h2 {
+  margin: 15px 0 20px;
+  color: var(--white);
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
 }
 
-.projectCard h3 {
-  margin: 9px 0 3px;
-
-  color: #222722;
-
-  font-size: 14px;
-  line-height: 1.2;
+.areaContent p {
+  margin: 0 auto 28px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 17px;
+  line-height: 1.8;
 }
 
-.projectCard p {
-  margin: 0;
+/* =========================
+   FAQ
+========================= */
 
-  color: #777c76;
-
-  font-size: 11px;
+.faqSection {
+  background: var(--white);
 }
 
-/* =========================================================
-   FAQ + AREAS
-========================================================= */
-
-.faqAreaSection {
-  padding: 25px 0 50px;
-
-  background: #ffffff;
-}
-
-.faqAreaGrid {
-  display: grid;
-
-  grid-template-columns: 60% 40%;
-
-  gap: 28px;
-}
-
-.faqAreaGrid .sectionHeading {
-  margin-bottom: 18px;
-}
-
-.faqGrid {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 9px 12px;
+.faqList {
+  max-width: 900px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
 }
 
 .faqItem {
-  border: 1px solid #dfe0db;
-
-  background: #ffffff;
+  border-bottom: 1px solid var(--border);
 }
 
 .faqItem summary {
-  min-height: 46px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 0 14px;
-
-  color: #353b35;
-
-  font-size: 12px;
-  font-weight: 600;
-
+  gap: 20px;
+  padding: 23px 0;
   cursor: pointer;
-
   list-style: none;
+  color: var(--green);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .faqItem summary::-webkit-details-marker {
   display: none;
 }
 
-.faqItem summary span {
-  color: #555b55;
-
-  font-size: 20px;
-}
-
-.faqItem p {
-  margin: 0;
-
-  padding: 0 14px 13px;
-
-  color: #737973;
-
-  font-size: 10px;
-  line-height: 1.5;
-}
-
-.areasCard {
-  display: grid;
-
-  grid-template-columns: 53% 47%;
-
-  min-height: 270px;
-
-  overflow: hidden;
-
-  border: 1px solid #dfe0db;
-
-  background: #f2f4ee;
-}
-
-.areasText {
-  padding: 25px 19px;
-}
-
-.areasText > span {
-  display: block;
-
-  margin-bottom: 7px;
-
+.faqItem summary b {
+  flex: 0 0 auto;
   color: var(--gold);
-
-  font-size: 10px;
-  font-weight: 800;
-
-  letter-spacing: 1.4px;
+  font-size: 24px;
+  font-weight: 400;
+  transition: transform 0.2s ease;
 }
 
-.areasText h2 {
-  margin: 0 0 10px;
+.faqItem[open] summary b {
+  transform: rotate(45deg);
+}
 
-  color: var(--green-dark);
+.faqAnswer {
+  padding: 0 45px 23px 0;
+}
 
-  font-size: 24px;
+.faqAnswer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* =========================
+   QUOTE
+========================= */
+
+.quoteSection {
+  background: var(--cream);
+}
+
+.quoteGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 70px;
+  align-items: start;
+}
+
+.quoteIntro h2 {
+  margin: 14px 0 18px;
+  color: var(--green);
+  font-size: clamp(34px, 4vw, 50px);
   line-height: 1.1;
 }
 
-.areasText p {
-  margin: 0 0 18px;
+.quoteIntro > p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
 
-  color: #656c65;
+.quoteContact {
+  margin-top: 30px;
+  padding: 22px;
+  border-left: 3px solid var(--gold);
+  background: var(--white);
+}
 
+.quoteContact span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.quoteContact a {
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.quoteForm {
+  padding: 35px;
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.formGroup {
+  margin-bottom: 18px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--green);
   font-size: 11px;
-  line-height: 1.55;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 
-.areasText .goldButton {
-  min-height: 39px;
-
-  padding: 0 15px;
-
-  font-size: 10px;
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  outline: none;
+  padding: 14px 15px;
+  background: var(--cream);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
-.map {
-  position: relative;
-
-  min-height: 270px;
-
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      25deg,
-      transparent 40%,
-      rgba(255, 255, 255, 0.95) 41%,
-      rgba(255, 255, 255, 0.95) 44%,
-      transparent 45%
-    ),
-    linear-gradient(
-      110deg,
-      transparent 43%,
-      rgba(255, 255, 255, 0.9) 44%,
-      rgba(255, 255, 255, 0.9) 47%,
-      transparent 48%
-    ),
-    #dce7d7;
+.formGroup input,
+.formGroup select {
+  min-height: 48px;
 }
 
-.map::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(
-      75deg,
-      transparent 35%,
-      #c7d7c1 36%,
-      #c7d7c1 38%,
-      transparent 39%
-    ),
-    linear-gradient(
-      155deg,
-      transparent 55%,
-      #c7d7c1 56%,
-      #c7d7c1 59%,
-      transparent 60%
-    );
+.formGroup textarea {
+  resize: vertical;
+  min-height: 130px;
 }
 
-.mapTownOne,
-.mapTownTwo,
-.mapTownThree,
-.mapTownFour {
-  position: absolute;
-  z-index: 2;
-
-  color: #687166;
-
-  font-size: 10px;
-  font-weight: 600;
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  border-color: var(--gold);
+  background: var(--white);
 }
 
-.mapTownOne {
-  top: 23px;
-  right: 15px;
+.submitButton {
+  width: 100%;
+  min-height: 54px;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  background: var(--green);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
-.mapTownTwo {
-  top: 78px;
-  left: 13px;
+.submitButton:hover {
+  background: var(--green-light);
+  transform: translateY(-2px);
 }
 
-.mapTownThree {
-  bottom: 22px;
-  left: 13px;
-}
-
-.mapTownFour {
-  right: 14px;
-  bottom: 73px;
-}
-
-.mapPin {
-  position: absolute;
-  z-index: 4;
-
-  left: 53%;
-  top: 54%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  transform: translate(-50%, -50%);
-}
-
-.mapPin span {
-  color: var(--green-dark);
-
-  font-size: 34px;
-  line-height: 0.7;
-}
-
-.mapPin strong {
-  margin-top: 5px;
-  padding: 5px 7px;
-
-  color: var(--green-dark);
-
-  background: rgba(255, 255, 255, 0.94);
-
-  font-size: 10px;
-}
-
-/* =========================================================
+/* =========================
    FINAL CTA
-========================================================= */
+========================= */
 
 .finalCta {
-  padding: 20px 0 55px;
-
-  background: #ffffff;
-}
-
-.finalCtaInner {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 35px;
-
-  padding: 34px 36px;
-
-  overflow: hidden;
-
-  color: #ffffff;
-
+  padding: 100px 0;
   background: var(--green-dark);
 }
 
-.finalCtaInner::after {
-  content: "";
-
-  position: absolute;
-
-  right: -70px;
-  top: -120px;
-
-  width: 310px;
-  height: 310px;
-
-  border: 1px solid rgba(197, 154, 59, 0.18);
-
-  border-radius: 50%;
+.finalCtaContent {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.finalCtaInner > div:first-child {
-  position: relative;
-  z-index: 2;
-
-  max-width: 720px;
+.finalCta h2 {
+  margin: 15px 0 20px;
+  color: var(--white);
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
 }
 
-.finalCtaInner > div:first-child > span {
-  display: block;
+.finalCta p {
+  max-width: 760px;
+  margin: 0 auto 12px;
+  color: rgba(255, 255, 255, 0.77);
+  font-size: 17px;
+  line-height: 1.8;
+}
 
-  margin-bottom: 7px;
-
+.finalStatement {
+  margin: 30px 0;
   color: var(--gold-light);
-
-  font-size: 11px;
+  font-size: 20px;
   font-weight: 800;
-
-  letter-spacing: 1.7px;
 }
 
-.finalCtaInner h2 {
-  margin: 0 0 10px;
-
-  color: #ffffff;
-
-  font-size: 32px;
-  line-height: 1.1;
-}
-
-.finalCtaInner p {
-  margin: 0;
-
-  color: rgba(255, 255, 255, 0.72);
-
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-.finalButtons {
-  position: relative;
-  z-index: 3;
-
+.finalActions {
   display: flex;
   flex-wrap: wrap;
-
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
+.goldButton {
+  color: var(--green-dark);
+  background: var(--gold-light);
+}
+
+.goldButton:hover {
+  color: var(--green-dark);
+  background: var(--white);
+  transform: translateY(-2px);
+}
+
+.finalPhone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 25px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-decoration: none;
+}
+
+.finalPhone:hover {
+  color: var(--green-dark);
+  background: var(--white);
+}
+
+/* =========================
+   RESPONSIVE 1100px
+========================= */
 
 @media (max-width: 1100px) {
-  .container {
-    width: min(100% - 42px, 1050px);
-  }
-
-  .heroGrid {
-    grid-template-columns: minmax(0, 1fr) 320px;
-
-    gap: 35px;
-  }
-
-  .heroContent h1 {
-    font-size: 55px;
-  }
-
-  .heroContent > p {
-    font-size: 14px;
-  }
-
-  .servicesLayout {
-    grid-template-columns: minmax(0, 1fr) 300px;
-  }
-
-  .servicesGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .landlordSection {
-    grid-template-columns: 30% 40% 30%;
-  }
-
-  .landlordContent {
-    padding: 28px 22px;
-  }
-
-  .landlordContent h2 {
-    font-size: 25px;
-  }
-
-  .projectsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .faqAreaGrid {
+  .hero .container {
     grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .heroContent {
+    max-width: 850px;
+  }
+
+  .heroPanel {
+    max-width: 700px;
+  }
+
+  .benefitGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .benefitItem:nth-child(2) {
+    border-right: 0;
+  }
+
+  .benefitItem:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .introGrid,
+  .featureImageGrid {
+    gap: 45px;
+  }
+
+  .serviceGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .infoCard:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quoteGrid {
+    gap: 45px;
   }
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
+/* =========================
+   RESPONSIVE 800px
+========================= */
 
 @media (max-width: 800px) {
   .container {
-    width: calc(100% - 30px);
+    width: min(100% - 34px, 700px);
+  }
+
+  .section {
+    padding: 75px 0;
   }
 
   .hero {
     min-height: auto;
   }
 
-  .heroGrid {
+  .hero .container {
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 9vw, 58px);
+    letter-spacing: -1px;
+  }
+
+  .heroLead {
+    font-size: 17px;
+  }
+
+  .introGrid,
+  .featureGrid,
+  .featureImageGrid,
+  .landlordGrid,
+  .rentalGrid,
+  .propertyGardenBox,
+  .quoteGrid {
     grid-template-columns: 1fr;
-
-    gap: 30px;
   }
 
-  .heroContent h1 {
-    font-size: 52px;
+  .introGrid {
+    gap: 40px;
   }
 
-  .heroPanel {
-    max-width: 520px;
+  .imageCard {
+    min-height: 400px;
   }
 
-  .benefitGrid {
+  .featureImage {
+    height: 400px;
+  }
+
+  .checkList {
+    margin-top: 10px;
+  }
+
+  .landlordList {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .benefitItem:nth-child(2n) {
-    border-right: 0;
+  .propertyGardenBox {
+    gap: 35px;
+    padding: 35px;
   }
 
-  .servicesLayout {
-    grid-template-columns: 1fr;
+  .quoteGrid {
+    gap: 35px;
   }
 
-  .quoteCard {
+  .quoteIntro {
     max-width: 650px;
-  }
-
-  .landlordSection {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .landlordImage {
-    min-height: 360px;
-  }
-
-  .processCard {
-    grid-column: 1 / -1;
-  }
-
-  .finalCtaInner {
-    flex-direction: column;
-
-    align-items: flex-start;
   }
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* =========================
+   RESPONSIVE 560px
+========================= */
 
 @media (max-width: 560px) {
   .container {
-    width: calc(100% - 20px);
+    width: min(100% - 26px, 500px);
   }
 
-  .breadcrumb {
-    gap: 7px;
-
-    padding-top: 13px;
-
-    font-size: 10px;
+  .section {
+    padding: 60px 0;
   }
 
-  .heroContent h1 {
-    font-size: 41px;
-
-    letter-spacing: -1.7px;
+  .hero .container {
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 
-  .heroContent h1 small {
-    font-size: 0.52em;
+  .hero h1 {
+    margin-top: 14px;
+    font-size: 39px;
   }
 
-  .heroContent > p {
-    margin-top: 17px;
-
-    font-size: 13px;
+  .heroLead {
+    font-size: 16px;
+    line-height: 1.65;
   }
 
-  .heroButtons {
+  .heroText {
+    font-size: 14px;
+  }
+
+  .heroActions {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .heroButtons .goldButton,
-  .heroButtons .outlineButton {
+  .primaryButton,
+  .phoneButton,
+  .lightButton,
+  .goldButton,
+  .finalPhone {
     width: 100%;
+    box-sizing: border-box;
   }
 
   .heroPanel {
-    padding: 18px;
+    padding: 22px;
   }
 
-  .heroPanel li {
-    font-size: 12px;
+  .panelItem {
+    grid-template-columns: 32px 1fr;
+    padding: 15px 0;
   }
 
-  .panelQuote {
-    font-size: 23px;
+  .panelItem strong {
+    font-size: 13px;
   }
 
   .benefitGrid {
     grid-template-columns: 1fr;
   }
 
-  .benefitItem {
-    min-height: 72px;
-
-    justify-content: flex-start;
-
+  .benefitItem,
+  .benefitItem:nth-child(2) {
     border-right: 0;
-    border-bottom: 1px solid #e1e2de;
+    border-bottom: 1px solid var(--border);
   }
 
   .benefitItem:last-child {
     border-bottom: 0;
   }
 
-  .servicesSection {
-    padding: 38px 0;
+  .benefitItem {
+    min-height: 88px;
   }
 
-  .sectionHeading h2 {
-    font-size: 32px;
+  .imageCard {
+    min-height: 330px;
   }
 
-  .sectionHeading p {
-    font-size: 13px;
-  }
-
-  .servicesGrid {
+  .serviceGrid,
+  .detailGrid,
+  .twoFeatureGrid,
+  .infoGrid,
+  .processGrid {
     grid-template-columns: 1fr;
   }
 
-  .serviceImage {
-    height: 205px;
+  .infoCard:last-child {
+    grid-column: auto;
   }
 
-  .serviceCardContent {
-    min-height: 165px;
-
-    padding: 17px;
+  .detailCard,
+  .whiteFeatureCard,
+  .outlineCard,
+  .infoCard,
+  .processCard {
+    padding: 26px;
   }
 
-  .serviceCardContent h3 {
-    font-size: 18px;
-  }
-
-  .serviceCardContent p {
-    font-size: 13px;
-  }
-
-  .learnMore {
-    font-size: 12px;
-  }
-
-  .landlordSection {
+  .landlordList {
     grid-template-columns: 1fr;
-  }
-
-  .landlordImage {
-    min-height: 280px;
   }
 
   .landlordContent {
-    padding: 30px 20px;
+    padding: 28px;
   }
 
-  .landlordContent h2 {
-    font-size: 28px;
-  }
-
-  .landlordContent > p {
-    font-size: 12px;
-  }
-
-  .landlordBenefits {
+  .checkList {
     grid-template-columns: 1fr;
   }
 
-  .processCard {
-    padding: 28px 20px;
+  .propertyGardenBox {
+    padding: 28px;
   }
 
-  .projectsGrid {
+  .rentalFactors {
     grid-template-columns: 1fr;
   }
 
-  .projectImage {
-    height: 190px;
+  .featureImage {
+    height: 330px;
   }
 
-  .sectionHeadingRow {
-    display: block;
+  .areaSection {
+    padding: 70px 0;
   }
 
-  .topLink {
-    display: inline-block;
-
-    margin-top: 7px;
-  }
-
-  .faqGrid {
-    grid-template-columns: 1fr;
+  .areaContent h2 {
+    font-size: 34px;
   }
 
   .faqItem summary {
-    min-height: 50px;
-
-    font-size: 12px;
+    padding: 20px 0;
+    font-size: 14px;
   }
 
-  .areasCard {
+  .faqAnswer {
+    padding-right: 20px;
+  }
+
+  .quoteForm {
+    padding: 24px;
+  }
+
+  .formRow {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  .map {
-    min-height: 230px;
+  .finalCta {
+    padding: 70px 0;
   }
 
-  .finalCtaInner {
-    padding: 28px 20px;
+  .finalCta h2 {
+    font-size: 40px;
   }
 
-  .finalCtaInner h2 {
-    font-size: 26px;
+  .finalCta p {
+    font-size: 15px;
   }
 
-  .finalCtaInner p {
-    font-size: 12px;
-  }
-
-  .finalButtons {
-    width: 100%;
-
+  .finalActions {
     flex-direction: column;
-  }
-
-  .finalButtons .goldButton,
-  .finalButtons .outlineButton {
-    width: 100%;
+    align-items: stretch;
   }
 }

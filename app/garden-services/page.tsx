@@ -1,530 +1,1036 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./GardenServices.module.css";
 
-const gardenServices = [
+export const metadata: Metadata = {
+  title: "Garden Maintenance & Clearance Services | Alpha",
+  description:
+    "Garden maintenance and clearances for homeowners, landlords and letting agents, including mowing, strimming, hedge cutting, weeding and recurring maintenance.",
+};
+
+const coreServices = [
   {
-    title: "Lawn Mowing & Lawn Care",
-    description:
-      "Regular mowing, edging, feeding and lawn treatment to keep your grass healthy and looking its best.",
-    image:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Hedge Cutting & Pruning",
-    description:
-      "Keep your hedges, shrubs and trees tidy, safe and well-maintained.",
-    image:
-      "https://images.unsplash.com/photo-1599685315640-4c6f5f9b0f9a?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Garden Clearances",
-    description:
-      "Full or part garden clearances, removal of green waste and general tidy ups.",
-    image:
-      "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Fencing & Decking",
-    description:
-      "New fences, fence repairs, gates, decking installation and replacements.",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Patios & Landscaping",
-    description:
-      "Patios, paths, gravel, sleepers, raised beds and general landscaping work.",
-    image:
-      "https://images.unsplash.com/photo-1558521958-0a228e77e984?auto=format&fit=crop&w=900&q=85",
-  },
-  {
+    number: "01",
     title: "Regular Garden Maintenance",
-    description:
-      "Scheduled visits to keep your garden in top condition all year round. Ideal for busy homeowners, landlords and businesses.",
-    image:
-      "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=900&q=85",
-  },
-];
-
-const benefits = [
-  {
-    icon: "♧",
-    title: "All Types of",
-    subtitle: "Garden Work",
+    text: "Recurring garden maintenance to keep grass, edges, hedges, shrubs, weeds and general garden areas under control.",
   },
   {
-    icon: "♧",
-    title: "Homes, Landlords",
-    subtitle: "& Businesses",
+    number: "02",
+    title: "Grass Cutting & Lawn Mowing",
+    text: "Lawn mowing and grass cutting with suitable strimming around edges and difficult areas.",
   },
   {
-    icon: "✓",
-    title: "Fully Insured",
-    subtitle: "For your peace of mind",
+    number: "03",
+    title: "Strimming & Overgrown Grass",
+    text: "Strimming for garden boundaries, fences, edges, obstacles and areas where mowing is not suitable.",
   },
   {
-    icon: "⌖",
-    title: "Local & Trusted",
-    subtitle: "Spalding and surrounding areas",
+    number: "04",
+    title: "Hedge & Shrub Cutting",
+    text: "Suitable hedge trimming, shrub maintenance, cutting back and general shaping based on access and condition.",
   },
   {
-    icon: "☆",
-    title: "5 Star Service",
-    subtitle: "Hundreds of happy customers",
-  },
-];
-
-const landlordBenefits = [
-  "Regular maintenance visits",
-  "Detailed reports & photos",
-  "One-off garden clearances",
-  "Competitive rates",
-  "Fast, reliable service",
-  "Property manager friendly",
-];
-
-const projects = [
-  {
-    title: "Garden Clearance",
-    location: "Spalding, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=700&q=85",
+    number: "05",
+    title: "Garden Weeding",
+    text: "Routine manual garden weeding for maintenance visits, one-off tidy-ups, property preparation and clearances.",
   },
   {
-    title: "Patio Installation",
-    location: "Donington, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1558521958-0a228e77e984?auto=format&fit=crop&w=700&q=85",
-  },
-  {
-    title: "New Fencing",
-    location: "Surfleet, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=85",
-  },
-  {
-    title: "Garden Transformation",
-    location: "Pinchbeck, Lincolnshire",
-    image:
-      "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=700&q=85",
+    number: "06",
+    title: "One-Off Garden Tidy-Ups",
+    text: "Practical one-off garden work including grass cutting, strimming, hedge and shrub cutting, weeding and general tidying.",
   },
 ];
 
 const faqs = [
-  "Do you offer regular garden maintenance?",
-  "Do you provide free quotes?",
-  "Do you remove all the garden waste?",
-  "What areas do you cover?",
-  "Can you work at rental properties?",
-  "Can you help with overgrown gardens?",
+  {
+    question: "Do you provide regular garden maintenance?",
+    answer:
+      "Yes. Recurring garden maintenance can be arranged where suitable, with frequency agreed according to the property and work required.",
+  },
+  {
+    question: "Do you cut grass?",
+    answer:
+      "Yes. We provide lawn mowing, grass cutting and suitable strimming.",
+  },
+  {
+    question: "Do you cut hedges?",
+    answer:
+      "Yes. Suitable hedge and shrub maintenance is available subject to size, access and project requirements.",
+  },
+  {
+    question: "Do you clear overgrown gardens?",
+    answer:
+      "Yes. We provide suitable garden clearances where gardens have become overgrown or neglected.",
+  },
+  {
+    question: "Do you provide one-off garden tidy-ups?",
+    answer:
+      "Yes. One-off garden maintenance and tidy-ups are available as well as recurring services.",
+  },
+  {
+    question: "Do you remove garden waste?",
+    answer:
+      "Waste removal can be included where agreed. Your quotation will confirm what is removed and whether disposal is included.",
+  },
+  {
+    question: "Do you work for landlords and letting agents?",
+    answer:
+      "Yes. We provide garden maintenance, clearances, void-property garden work and recurring services for landlords, letting agents and property managers.",
+  },
+  {
+    question: "Can you maintain the garden while also doing property repairs?",
+    answer:
+      "Yes. Garden maintenance can be combined with wider property-maintenance and renovation work.",
+  },
+  {
+    question: "Do you provide tree surgery?",
+    answer:
+      "Alpha's current garden service focuses on garden maintenance, grass cutting, strimming, hedge and shrub maintenance, weeding, tidy-ups and garden clearances. Specialist tree surgery or arboricultural work is not currently advertised as part of this service.",
+  },
+  {
+    question: "Do you use weedkiller?",
+    answer:
+      "Routine garden weeding can be undertaken. Any use of chemical weed-control products would depend on the product, situation and appropriate legal and safety requirements.",
+  },
+  {
+    question: "How do I request a garden quote?",
+    answer:
+      "Use the quote request form and send photos where possible. For overgrown gardens, wide photos showing the overall condition are useful.",
+  },
 ];
 
 const processSteps = [
   {
-    number: "1",
-    title: "Get in Touch",
-    text: "Tell us what you need.",
+    number: "01",
+    title: "Tell Us About the Garden",
+    text: "Send us details of the garden and photos where possible.",
   },
   {
-    number: "2",
-    title: "Free Assessment",
-    text: "We'll assess the work and provide a quote.",
+    number: "02",
+    title: "Assessment",
+    text: "We consider the garden size, condition, access and work required.",
   },
   {
-    number: "3",
-    title: "Book Your Appointment",
-    text: "Choose a time that suits you.",
+    number: "03",
+    title: "Agree the Scope",
+    text: "We agree whether the work involves maintenance, clearance, waste removal or a combination.",
   },
   {
-    number: "4",
-    title: "We Get to Work",
-    text: "Our team carries out the work to a high standard.",
+    number: "04",
+    title: "Quotation",
+    text: "Your quotation is based on the agreed work and scope.",
   },
   {
-    number: "5",
-    title: "Enjoy Your Garden",
-    text: "A cleaner, greener, more enjoyable outdoor space.",
+    number: "05",
+    title: "Garden Work",
+    text: "The agreed garden work is completed according to the quotation.",
+  },
+  {
+    number: "06",
+    title: "Recurring Maintenance",
+    text: "Ongoing visits can be arranged where regular maintenance is required.",
   },
 ];
 
 export default function GardenServicesPage() {
   return (
-    <div className={styles.page}>
+    <>
       <Header />
 
-      <main>
+      <main className={styles.page}>
         {/* HERO */}
         <section className={styles.hero}>
-          <div className={styles.heroImage} />
-          <div className={styles.heroOverlay} />
+          <div className={styles.heroOverlay}></div>
 
           <div className={styles.container}>
-            <div className={styles.breadcrumb}>
-              <Link href="/">Home</Link>
-              <span>›</span>
-              <Link href="/services">Our Services</Link>
-              <span>›</span>
-              <strong>Garden Services</strong>
-            </div>
-
-            <div className={styles.heroGrid}>
-              <div className={styles.heroContent}>
-                <h1>
-                  Garden Maintenance &amp;
-                  <span>Gardening Services</span>
-                  <small>in Spalding and Surrounding Areas</small>
-                </h1>
-
-                <p>
-                  Keep your outdoor spaces looking their best with our reliable
-                  and professional garden services. From regular maintenance to
-                  full garden transformations, we provide high-quality,
-                  affordable solutions for homes, landlords and businesses
-                  across Spalding and the surrounding areas.
-                </p>
-
-                <div className={styles.heroButtons}>
-                  <Link href="/contact" className={styles.goldButton}>
-                    Request a Free Quote <span>→</span>
-                  </Link>
-
-                  <a
-                    href="tel:01234567890"
-                    className={styles.outlineButton}
-                  >
-                    ☎ &nbsp; Call 01234 567890
-                  </a>
-                </div>
+            <div className={styles.heroContent}>
+              <div className={styles.heroEyebrow}>
+                GARDEN MAINTENANCE & CLEARANCE
               </div>
 
-              <aside className={styles.heroPanel}>
-                <ul>
-                  <li>
-                    <span>✓</span>
-                    Regular &amp; One-Off Garden Work
-                  </li>
-                  <li>
-                    <span>✓</span>
-                    Garden Clearances
-                  </li>
-                  <li>
-                    <span>✓</span>
-                    Hedge Cutting &amp; Tree Work
-                  </li>
-                  <li>
-                    <span>✓</span>
-                    Fencing &amp; Decking
-                  </li>
-                  <li>
-                    <span>✓</span>
-                    Patios, Paths &amp; Landscaping
-                  </li>
-                  <li>
-                    <span>✓</span>
-                    Landlord Garden Maintenance
-                  </li>
-                </ul>
+              <h1>Garden Maintenance & Clearance Services</h1>
 
-                <div className={styles.panelQuote}>
-                  A Cleaner Greener
-                  <br />
-                  Brighter Tomorrow
+              <p className={styles.heroLead}>
+                From regular grass cutting and garden maintenance to tackling
+                an overgrown outside space, Alpha Property & Gardening
+                Services provides practical garden services for homeowners,
+                landlords and letting agents.
+              </p>
+
+              <p className={styles.heroText}>
+                We can help with one-off tidy-ups, seasonal maintenance,
+                garden clearances and recurring visits to keep outside areas
+                under control.
+              </p>
+
+              <div className={styles.heroActions}>
+                <Link href="/contact" className={styles.primaryButton}>
+                  REQUEST A GARDEN QUOTE
+                </Link>
+
+                <a href="tel:+441775518068" className={styles.phoneButton}>
+                  CALL 01775 518068
+                </a>
+              </div>
+
+              <div className={styles.heroSubline}>
+                One-off jobs or regular maintenance.
+              </div>
+            </div>
+
+            <div className={styles.heroPanel}>
+              <div className={styles.panelTop}>
+                <span>GARDEN SERVICES</span>
+                <span className={styles.panelDot}></span>
+              </div>
+
+              <div className={styles.panelList}>
+                <div className={styles.panelItem}>
+                  <span>01</span>
+                  <strong>Regular Garden Maintenance</strong>
                 </div>
-              </aside>
+
+                <div className={styles.panelItem}>
+                  <span>02</span>
+                  <strong>Grass Cutting & Lawn Mowing</strong>
+                </div>
+
+                <div className={styles.panelItem}>
+                  <span>03</span>
+                  <strong>Strimming & Overgrown Grass</strong>
+                </div>
+
+                <div className={styles.panelItem}>
+                  <span>04</span>
+                  <strong>Hedge & Shrub Cutting</strong>
+                </div>
+
+                <div className={styles.panelItem}>
+                  <span>05</span>
+                  <strong>Garden Weeding</strong>
+                </div>
+
+                <div className={styles.panelItem}>
+                  <span>06</span>
+                  <strong>Garden Clearances</strong>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* BENEFITS BAR */}
+        {/* BENEFITS */}
         <section className={styles.benefitBar}>
           <div className={styles.container}>
             <div className={styles.benefitGrid}>
-              {benefits.map((benefit) => (
-                <div className={styles.benefitItem} key={benefit.title}>
-                  <div className={styles.benefitIcon}>{benefit.icon}</div>
-
-                  <div>
-                    <strong>{benefit.title}</strong>
-                    <span>{benefit.subtitle}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* MAIN SERVICES */}
-        <section className={styles.servicesSection}>
-          <div className={styles.container}>
-            <div className={styles.servicesLayout}>
-              <div>
-                <div className={styles.sectionHeading}>
-                  <span>OUR GARDEN SERVICES</span>
-
-                  <h2>
-                    Our Garden Services
-                    <i />
-                  </h2>
-
-                  <p>
-                    We offer a complete range of garden maintenance and outdoor
-                    services to keep your property looking great all year
-                    round.
-                  </p>
-                </div>
-
-                <div className={styles.servicesGrid}>
-                  {gardenServices.map((service) => (
-                    <article
-                      className={styles.serviceCard}
-                      key={service.title}
-                    >
-                      <div
-                        className={styles.serviceImage}
-                        style={{
-                          backgroundImage: `url("${service.image}")`,
-                        }}
-                      />
-
-                      <div className={styles.serviceCardContent}>
-                        <h3>{service.title}</h3>
-
-                        <p>{service.description}</p>
-
-                        <Link
-                          href="/contact"
-                          className={styles.learnMore}
-                        >
-                          Learn More <span>→</span>
-                        </Link>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-
-              {/* QUOTE FORM */}
-              <aside className={styles.quoteCard}>
-                <div className={styles.quoteHeader}>
-                  <h2>Get a Free Garden Quote</h2>
-                </div>
-
-                <form className={styles.quoteForm}>
-                  <input type="text" placeholder="Name *" />
-                  <input type="tel" placeholder="Phone *" />
-                  <input type="email" placeholder="Email *" />
-                  <input type="text" placeholder="Postcode *" />
-
-                  <select defaultValue="">
-                    <option value="" disabled>
-                      Type of Work Required
-                    </option>
-                    <option value="maintenance">
-                      Garden Maintenance
-                    </option>
-                    <option value="clearance">Garden Clearance</option>
-                    <option value="fencing">Fencing & Decking</option>
-                    <option value="landscaping">
-                      Patios & Landscaping
-                    </option>
-                  </select>
-
-                  <select defaultValue="">
-                    <option value="" disabled>
-                      Please select
-                    </option>
-                    <option value="home">Home</option>
-                    <option value="landlord">Landlord</option>
-                    <option value="business">Business</option>
-                  </select>
-
-                  <textarea
-                    placeholder="Tell us more (optional)"
-                    rows={4}
-                  />
-
-                  <button type="submit">
-                    Request My Free Quote <span>→</span>
-                  </button>
-                </form>
-
-                <div className={styles.quoteFeatures}>
-                  <div>
-                    <span>✓</span>
-                    <small>No obligation</small>
-                  </div>
-
-                  <div>
-                    <span>✓</span>
-                    <small>Quick response</small>
-                  </div>
-
-                  <div>
-                    <span>⌖</span>
-                    <small>Local team</small>
-                  </div>
-                </div>
-              </aside>
-            </div>
-          </div>
-        </section>
-
-        {/* LANDLORDS */}
-        <section className={styles.landlordSection}>
-          <div className={styles.landlordImage} />
-
-          <div className={styles.landlordContent}>
-            <span className={styles.goldLabel}>
-              LANDLORDS &amp; LETTING AGENTS
-            </span>
-
-            <h2>
-              Garden Maintenance for Landlords
-              <br />
-              &amp; Letting Agents
-            </h2>
-
-            <p>
-              We help landlords and letting agents keep their properties
-              well-maintained, tidy and tenant-ready. We can work on a one-off
-              basis or provide regular scheduled garden maintenance for your
-              portfolio.
-            </p>
-
-            <div className={styles.landlordBenefits}>
-              {landlordBenefits.map((item) => (
-                <div key={item}>
-                  <span>✓</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-
-            <Link href="/landlords-letting-agents" className={styles.goldButton}>
-              Find Out More <span>→</span>
-            </Link>
-          </div>
-
-          <div className={styles.processCard}>
-            <h2>How Our Garden Service Works</h2>
-
-            {processSteps.map((step) => (
-              <div className={styles.processItem} key={step.number}>
-                <span className={styles.processNumber}>{step.number}</span>
-
+              <div className={styles.benefitItem}>
+                <span className={styles.benefitIcon}>01</span>
                 <div>
-                  <strong>{step.title}</strong>
-                  <p>{step.text}</p>
+                  <strong>One-Off & Recurring</strong>
+                  <span>Maintenance options</span>
                 </div>
               </div>
-            ))}
+
+              <div className={styles.benefitItem}>
+                <span className={styles.benefitIcon}>02</span>
+                <div>
+                  <strong>Homes & Rentals</strong>
+                  <span>Homeowners, landlords & agents</span>
+                </div>
+              </div>
+
+              <div className={styles.benefitItem}>
+                <span className={styles.benefitIcon}>03</span>
+                <div>
+                  <strong>Clear Quotations</strong>
+                  <span>Agreed scope of work</span>
+                </div>
+              </div>
+
+              <div className={styles.benefitItem}>
+                <span className={styles.benefitIcon}>04</span>
+                <div>
+                  <strong>Complete Property Care</strong>
+                  <span>Garden & property services</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* PROJECTS */}
-        <section className={styles.projectsSection}>
+        {/* INTRO */}
+        <section className={`${styles.section} ${styles.introSection}`}>
           <div className={styles.container}>
-            <div className={styles.sectionHeadingRow}>
-              <div className={styles.sectionHeading}>
-                <span>OUR WORK</span>
-
-                <h2>
-                  Recent Garden Projects
-                  <i />
-                </h2>
-
-                <p>See the transformation in our recent work.</p>
+            <div className={styles.introGrid}>
+              <div className={styles.imageCard}>
+                <img
+                  src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1200&q=85"
+                  alt="Illustrative garden maintenance image"
+                />
+                <div className={styles.imageLabel}>GARDEN MAINTENANCE</div>
               </div>
 
-              <Link href="/our-work" className={styles.topLink}>
-                View More Projects <span>→</span>
-              </Link>
+              <div className={styles.introContent}>
+                <span className={styles.sectionEyebrow}>
+                  PRACTICAL SERVICE
+                </span>
+
+                <h2>Practical Garden Maintenance</h2>
+
+                <p>
+                  Gardens can quickly become difficult to manage when regular
+                  maintenance falls behind. Grass grows, hedges become
+                  difficult to control and weeds can quickly take over.
+                </p>
+
+                <p>
+                  Alpha provides straightforward garden maintenance and
+                  clearance services for homeowners, landlords and letting
+                  agents. We can also combine garden work with wider property
+                  maintenance where required.
+                </p>
+
+                <div className={styles.highlightBox}>
+                  <span>ONE TEAM</span>
+                  <strong>Complete Property Care.</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CORE SERVICES */}
+        <section className={`${styles.section} ${styles.servicesSection}`}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionEyebrow}>OUR SERVICES</span>
+              <h2>Garden Maintenance Services</h2>
+              <p>
+                Practical garden services for one-off work, recurring
+                maintenance and gardens that need bringing back under control.
+              </p>
             </div>
 
-            <div className={styles.projectsGrid}>
-              {projects.map((project) => (
-                <article className={styles.projectCard} key={project.title}>
-                  <div
-                    className={styles.projectImage}
-                    style={{
-                      backgroundImage: `url("${project.image}")`,
-                    }}
-                  >
-                    <span>Before</span>
-                    <span>After</span>
-                  </div>
+            <div className={styles.serviceGrid}>
+              {coreServices.map((service) => (
+                <article className={styles.serviceCard} key={service.number}>
+                  <span className={styles.serviceNumber}>
+                    {service.number}
+                  </span>
 
-                  <h3>{project.title}</h3>
-                  <p>{project.location}</p>
+                  <h3>{service.title}</h3>
+
+                  <p>{service.text}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* FAQ + AREAS */}
-        <section className={styles.faqAreaSection}>
+        {/* REGULAR MAINTENANCE */}
+        <section className={`${styles.section} ${styles.darkSection}`}>
           <div className={styles.container}>
-            <div className={styles.faqAreaGrid}>
+            <div className={styles.featureGrid}>
               <div>
-                <div className={styles.sectionHeading}>
-                  <span>FAQ</span>
+                <span className={styles.sectionEyebrowLight}>
+                  RECURRING MAINTENANCE
+                </span>
 
-                  <h2>
-                    Frequently Asked Questions
-                    <i />
-                  </h2>
+                <h2>Regular Garden Maintenance</h2>
+
+                <p>
+                  Recurring maintenance can be arranged where suitable, helping
+                  keep outside areas under control throughout the year.
+                </p>
+
+                <p>
+                  The work included and visit frequency can be agreed around
+                  the property and the level of maintenance required.
+                </p>
+
+                <Link href="/contact" className={styles.lightButton}>
+                  DISCUSS REGULAR GARDEN MAINTENANCE →
+                </Link>
+              </div>
+
+              <div className={styles.checkList}>
+                <div>Grass under control</div>
+                <div>Edges maintained</div>
+                <div>Hedges and shrubs manageable</div>
+                <div>Weeds reduced</div>
+                <div>General garden areas tidier</div>
+                <div>Seasonal growth from becoming excessive</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* GRASS / STRIMMING / HEDGE / WEEDING */}
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.detailGrid}>
+              <article className={styles.detailCard}>
+                <span className={styles.cardEyebrow}>01</span>
+                <h2>Grass Cutting & Lawn Mowing</h2>
+
+                <p>
+                  Lawn mowing and grass cutting can include suitable strimming
+                  around edges and difficult areas, followed by general tidying
+                  following the cut.
+                </p>
+
+                <p>
+                  Condition, length, access and waste requirements are
+                  considered when preparing the quotation.
+                </p>
+
+                <div className={styles.note}>
+                  Very overgrown grass may require clearance rather than
+                  routine mowing.
                 </div>
+              </article>
 
-                <div className={styles.faqGrid}>
-                  {faqs.map((faq) => (
-                    <details className={styles.faqItem} key={faq}>
-                      <summary>
-                        {faq}
-                        <span>+</span>
-                      </summary>
+              <article className={styles.detailCard}>
+                <span className={styles.cardEyebrow}>02</span>
+                <h2>Strimming & Overgrown Grass</h2>
 
-                      <p>
-                        Please contact our friendly team and we will be happy
-                        to discuss this with you and provide the relevant
-                        information.
-                      </p>
-                    </details>
-                  ))}
+                <p>
+                  Strimming is suitable for edges, fences, garden boundaries,
+                  obstacles, overgrown sections and areas unsuitable for
+                  mowing.
+                </p>
+
+                <p>
+                  Strimming can be combined with mowing or wider garden
+                  clearance work.
+                </p>
+              </article>
+
+              <article className={styles.detailCard}>
+                <span className={styles.cardEyebrow}>03</span>
+                <h2>Hedge & Shrub Cutting</h2>
+
+                <p>
+                  We provide suitable hedge trimming, cutting back of suitable
+                  overgrowth, shrub maintenance and general shaping.
+                </p>
+
+                <p>
+                  Height, size, access and condition are assessed before work
+                  is agreed.
+                </p>
+              </article>
+
+              <article className={styles.detailCard}>
+                <span className={styles.cardEyebrow}>04</span>
+                <h2>Garden Weeding</h2>
+
+                <p>
+                  Suitable manual garden weeding can be undertaken for routine
+                  maintenance, one-off tidy-ups, property preparation,
+                  landlord maintenance and clearances.
+                </p>
+
+                <div className={styles.note}>
+                  Chemical weed-control products are not presented as a
+                  standard garden service.
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* ONE OFF TIDY + OVERGROWN */}
+        <section className={`${styles.section} ${styles.softSection}`}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionEyebrow}>ONE-OFF WORK</span>
+              <h2>Garden Tidy-Ups & Clearances</h2>
+              <p>
+                If a garden has fallen behind, we can assess the work required
+                and provide a clear quotation for bringing it back under
+                control.
+              </p>
+            </div>
+
+            <div className={styles.twoFeatureGrid}>
+              <article className={styles.whiteFeatureCard}>
+                <span className={styles.cardEyebrow}>ONE-OFF</span>
+
+                <h2>One-Off Garden Tidy-Ups</h2>
+
+                <p>One-off garden work can include:</p>
+
+                <ul>
+                  <li>Grass cutting</li>
+                  <li>Strimming</li>
+                  <li>Hedge and shrub cutting</li>
+                  <li>Weeding</li>
+                  <li>Loose garden debris</li>
+                  <li>General tidying</li>
+                  <li>Seasonal maintenance</li>
+                </ul>
+
+                <Link href="/contact" className={styles.textLink}>
+                  REQUEST A GARDEN TIDY-UP QUOTE →
+                </Link>
+              </article>
+
+              <article className={styles.whiteFeatureCard}>
+                <span className={styles.cardEyebrow}>CLEARANCE</span>
+
+                <h2>Overgrown Garden Clearances</h2>
+
+                <p>Suitable overgrown garden clearances can include:</p>
+
+                <ul>
+                  <li>Long grass</li>
+                  <li>Strimming</li>
+                  <li>Cutting back suitable vegetation</li>
+                  <li>Hedge and shrub reduction</li>
+                  <li>Weeding</li>
+                  <li>Loose garden debris</li>
+                  <li>General garden clearance</li>
+                  <li>Preparing for future maintenance</li>
+                </ul>
+
+                <div className={styles.note}>
+                  Exact work is assessed before quotation.
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* VACANT PROPERTIES */}
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.featureImageGrid}>
+              <div className={styles.featureImage}>
+                <img
+                  src="https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1200&q=85"
+                  alt="Illustrative garden clearance image"
+                />
+              </div>
+
+              <div className={styles.featureContent}>
+                <span className={styles.sectionEyebrow}>
+                  VACANT PROPERTIES
+                </span>
+
+                <h2>Garden Clearances for Vacant Properties</h2>
+
+                <p>
+                  Garden work may be required when a rental property becomes
+                  vacant, a recently purchased property needs attention or a
+                  home is being prepared for sale.
+                </p>
+
+                <ul className={styles.simpleList}>
+                  <li>Rental voids</li>
+                  <li>Recently purchased properties</li>
+                  <li>Properties being prepared for sale</li>
+                  <li>Long-term vacant homes</li>
+                  <li>Renovation properties</li>
+                </ul>
+
+                <p>
+                  Where required, garden work can be coordinated with internal
+                  property maintenance.
+                </p>
+
+                <Link
+                  href="/property-maintenance"
+                  className={styles.primaryButton}
+                >
+                  VIEW PROPERTY MAINTENANCE →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* LANDLORDS */}
+        <section className={`${styles.section} ${styles.softSection}`}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionEyebrow}>
+                LANDLORDS & LETTING AGENTS
+              </span>
+
+              <h2>Garden Maintenance for Landlords & Letting Agents</h2>
+
+              <p>
+                One-off and recurring garden work for rental properties,
+                managed properties and property voids.
+              </p>
+            </div>
+
+            <div className={styles.landlordGrid}>
+              <div className={styles.landlordList}>
+                <div>Grass cutting</div>
+                <div>Strimming</div>
+                <div>Hedge and shrub maintenance</div>
+                <div>Weeding</div>
+                <div>Garden tidy-ups</div>
+                <div>Overgrown garden clearances</div>
+                <div>Void-property garden work</div>
+                <div>End-of-tenancy garden preparation</div>
+                <div>Recurring garden maintenance</div>
+              </div>
+
+              <div className={styles.landlordContent}>
+                <h3>Wider Property Work</h3>
+
+                <p>
+                  Where required, wider internal maintenance, repairs,
+                  decorating and renovation work can also be handled by one
+                  team.
+                </p>
+
+                <Link
+                  href="/landlords-letting-agents"
+                  className={styles.primaryButton}
+                >
+                  VIEW LANDLORD & LETTING AGENT SERVICES →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* END OF TENANCY + SEASONAL */}
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.twoFeatureGrid}>
+              <article className={styles.outlineCard}>
+                <span className={styles.cardEyebrow}>END OF TENANCY</span>
+
+                <h2>End-of-Tenancy Garden Work</h2>
+
+                <p>
+                  Garden work for rental properties approaching the end of a
+                  tenancy can include:
+                </p>
+
+                <ul>
+                  <li>Mowing</li>
+                  <li>Strimming</li>
+                  <li>Hedge cutting</li>
+                  <li>Weeding</li>
+                  <li>General tidy-up</li>
+                  <li>Suitable garden debris</li>
+                </ul>
+
+                <p>
+                  This can be combined with internal void-property maintenance
+                  where required.
+                </p>
+              </article>
+
+              <article className={styles.outlineCard}>
+                <span className={styles.cardEyebrow}>SEASONAL</span>
+
+                <h2>Seasonal Garden Maintenance</h2>
+
+                <p>
+                  Garden maintenance requirements change throughout the year.
+                  Suitable seasonal work can include:
+                </p>
+
+                <ul>
+                  <li>Spring tidy-ups</li>
+                  <li>Regular summer mowing</li>
+                  <li>Hedge and shrub maintenance</li>
+                  <li>Autumn tidy-ups</li>
+                  <li>General preparation before winter</li>
+                </ul>
+
+                <p>
+                  Services are based on practical garden maintenance rather
+                  than specialist horticultural consultancy.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* RECURRING RENTAL */}
+        <section className={`${styles.section} ${styles.darkSection}`}>
+          <div className={styles.container}>
+            <div className={styles.rentalGrid}>
+              <div>
+                <span className={styles.sectionEyebrowLight}>
+                  RENTAL PROPERTIES
+                </span>
+
+                <h2>Recurring Garden Maintenance for Rental Properties</h2>
+
+                <p>
+                  Recurring visits can be arranged around the requirements of
+                  the property and the agreed maintenance scope.
+                </p>
+              </div>
+
+              <div className={styles.rentalFactors}>
+                <span>Garden size</span>
+                <span>Grass growth</span>
+                <span>Hedge requirements</span>
+                <span>Season</span>
+                <span>Tenant arrangements</span>
+                <span>Access</span>
+                <span>Required frequency</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PROPERTY + GARDEN */}
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.propertyGardenBox}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  PROPERTY & GARDEN
+                </span>
+
+                <h2>Need Work Inside and Outside the Property?</h2>
+
+                <p className={styles.largeText}>
+                  Garden work can sometimes form part of a wider property
+                  maintenance or renovation requirement.
+                </p>
+
+                <div className={styles.bigStatement}>
+                  One enquiry. One team. One point of contact.
                 </div>
               </div>
 
-              <div className={styles.areasCard}>
-                <div className={styles.areasText}>
-                  <span>AREAS WE COVER</span>
+              <div>
+                <ul className={styles.propertyList}>
+                  <li>Property repairs</li>
+                  <li>Plumbing</li>
+                  <li>Decorating</li>
+                  <li>Flooring</li>
+                  <li>Bathroom and kitchen work</li>
+                  <li>Garden clearance</li>
+                </ul>
 
-                  <h2>Spalding &amp; Surrounding Areas</h2>
+                <Link
+                  href="/property-maintenance"
+                  className={styles.primaryButton}
+                >
+                  VIEW PROPERTY MAINTENANCE →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                  <p>
-                    We provide garden services across Spalding and the
-                    surrounding areas including Donington, Pinchbeck, Surfleet,
-                    Holbeach, Long Sutton, Crowland and many more.
-                  </p>
+        {/* WASTE / ACCESS / QUOTATIONS */}
+        <section className={`${styles.section} ${styles.softSection}`}>
+          <div className={styles.container}>
+            <div className={styles.infoGrid}>
+              <article className={styles.infoCard}>
+                <span className={styles.cardEyebrow}>01</span>
 
-                  <Link href="/areas-we-cover" className={styles.goldButton}>
-                    View All Areas <span>→</span>
-                  </Link>
+                <h2>Garden Waste & Clearance</h2>
+
+                <p>
+                  Your quotation will clearly state whether waste removal is
+                  included.
+                </p>
+
+                <ul>
+                  <li>Grass cuttings</li>
+                  <li>Hedge cuttings</li>
+                  <li>Shrub cuttings</li>
+                  <li>Weeds</li>
+                  <li>Loose vegetation</li>
+                  <li>Other agreed garden waste</li>
+                </ul>
+
+                <p className={styles.smallText}>
+                  Construction waste, hazardous materials, household rubbish
+                  and specialist waste are separately assessed.
+                </p>
+              </article>
+
+              <article className={styles.infoCard}>
+                <span className={styles.cardEyebrow}>02</span>
+
+                <h2>Garden Access</h2>
+
+                <p>
+                  Access can affect the work, equipment requirements and
+                  quotation. Please let us know about:
+                </p>
+
+                <ul>
+                  <li>Rear-garden access</li>
+                  <li>Side access</li>
+                  <li>Gates</li>
+                  <li>Steps</li>
+                  <li>Restricted pathways</li>
+                  <li>Equipment access through the house</li>
+                  <li>Parking and access limitations</li>
+                </ul>
+              </article>
+
+              <article className={styles.infoCard}>
+                <span className={styles.cardEyebrow}>03</span>
+
+                <h2>Clear Garden Maintenance Quotations</h2>
+
+                <p>
+                  Quotations are based on the agreed scope rather than an
+                  unexplained hourly rate.
+                </p>
+
+                <ul>
+                  <li>Garden size</li>
+                  <li>Condition</li>
+                  <li>Grass length</li>
+                  <li>Overgrowth</li>
+                  <li>Hedge size</li>
+                  <li>Access</li>
+                  <li>Waste removal</li>
+                  <li>One-off or recurring work</li>
+                </ul>
+
+                <p className={styles.smallText}>
+                  Recurring visit frequency and included work are clearly
+                  agreed.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* PROCESS */}
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionEyebrow}>OUR PROCESS</span>
+
+              <h2>How Your Garden Job Works</h2>
+
+              <p>
+                A straightforward process from the initial enquiry through to
+                the completed work and any ongoing maintenance.
+              </p>
+            </div>
+
+            <div className={styles.processGrid}>
+              {processSteps.map((step) => (
+                <article className={styles.processCard} key={step.number}>
+                  <span>{step.number}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* AREAS */}
+        <section className={styles.areaSection}>
+          <div className={styles.container}>
+            <div className={styles.areaContent}>
+              <span className={styles.sectionEyebrowLight}>
+                SERVICE AREA
+              </span>
+
+              <h2>Garden Services Across Our Region</h2>
+
+              <p>
+                We provide garden maintenance and clearance services from
+                Peterborough to Skegness and from Long Sutton to Lincoln,
+                including surrounding towns, villages and rural communities.
+              </p>
+
+              <Link href="/areas-we-cover" className={styles.lightButton}>
+                VIEW AREAS WE COVER →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className={`${styles.section} ${styles.faqSection}`}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionEyebrow}>
+                FREQUENTLY ASKED QUESTIONS
+              </span>
+
+              <h2>Garden Services FAQs</h2>
+
+              <p>
+                Answers to common questions about garden maintenance,
+                clearances and recurring garden work.
+              </p>
+            </div>
+
+            <div className={styles.faqList}>
+              {faqs.map((faq, index) => (
+                <details className={styles.faqItem} key={index}>
+                  <summary>
+                    <span>{faq.question}</span>
+                    <b>+</b>
+                  </summary>
+
+                  <div className={styles.faqAnswer}>
+                    <p>{faq.answer}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* QUOTE FORM */}
+        <section className={`${styles.section} ${styles.quoteSection}`}>
+          <div className={styles.container}>
+            <div className={styles.quoteGrid}>
+              <div className={styles.quoteIntro}>
+                <span className={styles.sectionEyebrow}>GET A QUOTE</span>
+
+                <h2>Request a Garden Quote</h2>
+
+                <p>
+                  Tell us what needs doing and provide photos where possible.
+                  For overgrown gardens, wide photos showing the overall
+                  condition are particularly useful.
+                </p>
+
+                <div className={styles.quoteContact}>
+                  <span>Prefer to speak to us?</span>
+                  <a href="tel:+441775518068">01775 518068</a>
                 </div>
+              </div>
 
-                <div className={styles.map}>
-                  <span className={styles.mapTownOne}>Long Sutton</span>
-                  <span className={styles.mapTownTwo}>Holbeach</span>
-                  <span className={styles.mapTownThree}>Crowland</span>
-                  <span className={styles.mapTownFour}>Donington</span>
+              {/* No onSubmit handler here.
+                  This keeps the page as a Server Component. */}
+              <form className={styles.quoteForm} action="/contact">
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="name">Your Name</label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Your name"
+                    />
+                  </div>
 
-                  <div className={styles.mapPin}>
-                    <span>●</span>
-                    <strong>Spalding</strong>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="phone">Phone</label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="Your phone number"
+                    />
                   </div>
                 </div>
-              </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="email">Email</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="Your email address"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="service">Garden Service</label>
+
+                    <select id="service" name="service" defaultValue="">
+                      <option value="" disabled>
+                        Select a service
+                      </option>
+
+                      <option value="maintenance">
+                        Regular Garden Maintenance
+                      </option>
+
+                      <option value="grass">
+                        Grass Cutting / Lawn Mowing
+                      </option>
+
+                      <option value="strimming">Strimming</option>
+
+                      <option value="hedges">
+                        Hedge / Shrub Cutting
+                      </option>
+
+                      <option value="weeding">Garden Weeding</option>
+
+                      <option value="tidy-up">Garden Tidy-Up</option>
+
+                      <option value="clearance">
+                        Overgrown Garden Clearance
+                      </option>
+
+                      <option value="other">Other Garden Work</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="customerType">I Am A</label>
+
+                    <select
+                      id="customerType"
+                      name="customerType"
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select one
+                      </option>
+
+                      <option value="homeowner">Homeowner</option>
+                      <option value="landlord">Landlord</option>
+                      <option value="agent">Letting Agent</option>
+                      <option value="manager">Property Manager</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="postcode">Postcode</label>
+
+                    <input
+                      id="postcode"
+                      name="postcode"
+                      type="text"
+                      placeholder="Your postcode"
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label htmlFor="message">Tell Us About The Garden</label>
+
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    placeholder="Tell us what needs doing. Photos can be provided where possible."
+                  ></textarea>
+                </div>
+
+                <button type="submit" className={styles.submitButton}>
+                  REQUEST A GARDEN QUOTE
+                </button>
+              </form>
             </div>
           </div>
         </section>
@@ -532,28 +1038,38 @@ export default function GardenServicesPage() {
         {/* FINAL CTA */}
         <section className={styles.finalCta}>
           <div className={styles.container}>
-            <div className={styles.finalCtaInner}>
-              <div>
-                <span>READY TO GET STARTED?</span>
+            <div className={styles.finalCtaContent}>
+              <span className={styles.sectionEyebrowLight}>
+                GET YOUR GARDEN UNDER CONTROL
+              </span>
 
-                <h2>Ready for a Cleaner, Greener Garden?</h2>
+              <h2>Need Help With Your Garden?</h2>
 
-                <p>
-                  Get in touch today for a free, no-obligation quote. Our
-                  friendly team is here to help with all your garden needs.
-                </p>
+              <p>
+                Whether you need regular mowing, a seasonal tidy-up, hedge
+                maintenance or an overgrown garden brought back under control,
+                tell Alpha what needs doing.
+              </p>
+
+              <p>
+                We&apos;ll assess the garden, agree the work and provide a
+                clear quotation.
+              </p>
+
+              <div className={styles.finalStatement}>
+                One Team. Complete Property Care.
               </div>
 
-              <div className={styles.finalButtons}>
+              <div className={styles.finalActions}>
                 <Link href="/contact" className={styles.goldButton}>
-                  Request a Free Quote <span>→</span>
+                  REQUEST A GARDEN QUOTE
                 </Link>
 
                 <a
-                  href="tel:01234567890"
-                  className={styles.outlineButton}
+                  href="tel:+441775518068"
+                  className={styles.finalPhone}
                 >
-                  ☎ &nbsp; Call 01234 567890
+                  CALL 01775 518068
                 </a>
               </div>
             </div>
@@ -562,6 +1078,6 @@ export default function GardenServicesPage() {
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
