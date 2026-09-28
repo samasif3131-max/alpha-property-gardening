@@ -341,12 +341,12 @@ export default function LandlordsLettingAgentsPage() {
           <div className={styles.heroGrid}>
             <div className={styles.heroContent}>
               <p className={styles.eyebrow}>
-                LANDLORD & LETTING AGENT SERVICES
+                LANDLORD &amp; LETTING AGENT SERVICES
               </p>
 
               <h1>
                 Property Maintenance for{" "}
-                <span>Landlords & Letting Agents</span>
+                <span>Landlords &amp; Letting Agents</span>
               </h1>
 
               <div className={styles.goldLine} />
@@ -358,8 +358,8 @@ export default function LandlordsLettingAgentsPage() {
               </p>
 
               <p className={styles.heroDescription}>
-                Alpha Property & Gardening Services gives landlords, letting
-                agents and property managers one place to start. From
+                Alpha Property &amp; Gardening Services gives landlords,
+                letting agents and property managers one place to start. From
                 tenant-reported repairs and urgent plumbing problems to
                 void-property preparation, decorating, gardens, kitchens,
                 bathrooms and complete renovations, our multi-service approach
@@ -367,7 +367,9 @@ export default function LandlordsLettingAgentsPage() {
               </p>
 
               <div className={styles.heroProposition}>
-                <strong>One enquiry. One team. One point of contact.</strong>
+                <strong>
+                  One enquiry. One team. One point of contact.
+                </strong>
               </div>
 
               <div className={styles.heroButtons}>
@@ -392,7 +394,7 @@ export default function LandlordsLettingAgentsPage() {
 
               <div className={styles.imageLabel}>
                 <strong>ONE PROPERTY TEAM</strong>
-                <span>Maintenance, repairs & refurbishment</span>
+                <span>Maintenance, repairs &amp; refurbishment</span>
               </div>
             </div>
 
@@ -421,17 +423,17 @@ export default function LandlordsLettingAgentsPage() {
 
               <div className={styles.checkItem}>
                 <b>✓</b>
-                <span>Renovations & refurbishment</span>
+                <span>Renovations &amp; refurbishment</span>
               </div>
 
               <div className={styles.checkItem}>
                 <b>✓</b>
-                <span>Gardens, kitchens & bathrooms</span>
+                <span>Gardens, kitchens &amp; bathrooms</span>
               </div>
 
               <div className={styles.checkItem}>
                 <b>✓</b>
-                <span>Plumbing & suitable repairs</span>
+                <span>Plumbing &amp; suitable repairs</span>
               </div>
 
               <div className={styles.priority}>
@@ -624,7 +626,7 @@ export default function LandlordsLettingAgentsPage() {
             <div>
               <p className={styles.eyebrow}>24/7 EMERGENCY SUPPORT</p>
 
-              <h2>24/7 Emergency Property & Plumbing Call-Outs</h2>
+              <h2>24/7 Emergency Property &amp; Plumbing Call-Outs</h2>
 
               <p>
                 Urgent property problems do not always happen during normal
@@ -641,7 +643,7 @@ export default function LandlordsLettingAgentsPage() {
             </div>
 
             <div className={styles.emergencyCall}>
-              <span>For an urgent issue:</span>
+              <span>For an urgent issue: CALL 01775 518068</span>
               <a href="tel:01775518068">CALL 01775 518068</a>
             </div>
 
@@ -806,7 +808,10 @@ export default function LandlordsLettingAgentsPage() {
       {/* =========================
           BATHROOMS
       ========================= */}
-      <ContentSection eyebrow="BATHROOMS" title="Rental Property Bathrooms">
+      <ContentSection
+        eyebrow="BATHROOMS"
+        title="Rental Property Bathrooms"
+      >
         <p>
           Bathroom maintenance can range from individual repairs through to
           complete refurbishment.
@@ -868,7 +873,7 @@ export default function LandlordsLettingAgentsPage() {
             href="/services/painting-decorating"
             className={styles.darkButton}
           >
-            View Painting & Decorating →
+            View Painting &amp; Decorating →
           </Link>
         </div>
       </ContentSection>
@@ -890,7 +895,7 @@ export default function LandlordsLettingAgentsPage() {
             href="/services/tiling-flooring"
             className={styles.darkButton}
           >
-            View Tiling & Flooring →
+            View Tiling &amp; Flooring →
           </Link>
         </div>
       </ContentSection>
@@ -948,7 +953,7 @@ export default function LandlordsLettingAgentsPage() {
             href="/services/roofing-gutters"
             className={styles.darkButton}
           >
-            View Roofing & Gutters →
+            View Roofing &amp; Gutters →
           </Link>
         </div>
       </ContentSection>
@@ -1243,8 +1248,9 @@ export default function LandlordsLettingAgentsPage() {
         </p>
 
         <div className={styles.areaStatement}>
-          <strong>Peterborough to Skegness</strong>
-          <strong>Long Sutton to Lincoln</strong>
+          <strong>
+            Peterborough to Skegness • Long Sutton to Lincoln
+          </strong>
         </div>
 
         <p>
@@ -1264,9 +1270,11 @@ export default function LandlordsLettingAgentsPage() {
       <section className={styles.faqSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeading}>
-            <p className={styles.eyebrow}>FREQUENTLY ASKED QUESTIONS</p>
+            <p className={styles.eyebrow}>
+              FREQUENTLY ASKED QUESTIONS
+            </p>
 
-            <h2>Landlord & Letting Agent FAQs</h2>
+            <h2>Landlord &amp; Letting Agent FAQs</h2>
 
             <p>
               Answers to common questions about property maintenance,
@@ -1409,11 +1417,11 @@ export default function LandlordsLettingAgentsPage() {
                           <option value="kitchens">Kitchens</option>
 
                           <option value="painting">
-                            Painting & Decorating
+                            Painting &amp; Decorating
                           </option>
 
                           <option value="tiling-flooring">
-                            Tiling & Flooring
+                            Tiling &amp; Flooring
                           </option>
 
                           <option value="garden">
@@ -1421,7 +1429,7 @@ export default function LandlordsLettingAgentsPage() {
                           </option>
 
                           <option value="roofing-gutters">
-                            Roofing & Gutters
+                            Roofing &amp; Gutters
                           </option>
 
                           <option value="renovation">
@@ -1480,7 +1488,10 @@ export default function LandlordsLettingAgentsPage() {
             </div>
 
             <div className={styles.finalButtons}>
-              <a href="tel:01775518068" className={styles.outlineButton}>
+              <a
+                href="tel:01775518068"
+                className={styles.outlineButton}
+              >
                 CALL 01775 518068
               </a>
             </div>

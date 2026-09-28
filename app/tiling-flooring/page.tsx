@@ -871,16 +871,17 @@ export default function TilingFlooringPage() {
               <p>This can include projects involving:</p>
 
               <ul className={styles.checkList}>
-                <li>Property renovations</li>
-                <li>Bathrooms</li>
-                <li>Kitchens</li>
-                <li>
-                  <Link href="/painting-decorating">
-                    Painting &amp; Decorating
-                  </Link>
-                </li>
-                <li>Plumbing</li>
-                <li>General property repairs</li>
+                {renovationWork.map((item) => (
+                  <li key={item}>
+                    {item === "Decorating" ? (
+                      <Link href="/painting-decorating">
+                        Painting &amp; Decorating
+                      </Link>
+                    ) : (
+                      item
+                    )}
+                  </li>
+                ))}
               </ul>
 
               <Link

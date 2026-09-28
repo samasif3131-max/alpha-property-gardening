@@ -685,8 +685,7 @@ export default function ServiceDetailsPage() {
   const documentInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    document.title =
-      "Request a Quote — Service Details | Alpha Property & Gardening Services";
+    document.title = "Service Details | Request a Quote | Alpha";
 
     const description =
       "Tell Alpha Property & Gardening Services what work you need, add relevant details and upload photos, videos or supporting documents for your quote request.";
@@ -2498,8 +2497,8 @@ export default function ServiceDetailsPage() {
             </ol>
 
             <div className="alphaSidebarNote">
-              Your Step 17 information stays attached to this quote
-              journey while you add your service details and files.
+              The details you entered in Step 1 will be carried through while you
+              complete the rest of your quote request.
             </div>
           </div>
 

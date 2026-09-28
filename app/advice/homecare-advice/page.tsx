@@ -1,700 +1,1070 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./homecare-advice.module.css";
 
-const featuredArticles = [
-  {
-    tag: "GUIDE",
-    title: "The Ultimate Home Maintenance Checklist",
-    description:
-      "A room-by-room checklist to keep your home in top condition all year round.",
-    image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=85",
-    href: "/advice/homecare-advice/home-maintenance-checklist",
+export const metadata: Metadata = {
+  title: "Home Maintenance & Property Care Advice | Alpha",
+  description:
+    "Practical home maintenance and property-care advice covering repairs, plumbing, bathrooms, kitchens, decorating, flooring, gutters and gardens.",
+  alternates: {
+    canonical: "/advice/homecare-advice",
   },
-  {
-    tag: "ADVICE",
-    title: "How to Make Your Home More Energy Efficient",
-    description:
-      "Simple steps to reduce your energy bills and keep your home warmer in winter and cooler in summer.",
-    image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
-    href: "/advice/homecare-advice/energy-efficient-home",
-  },
-];
+};
 
-const smallArticles = [
+const topicCards = [
   {
-    tag: "TIPS",
-    title: "How to Keep Your Home Clean and Tidy",
-    description:
-      "Practical cleaning tips and routines to keep your home fresh, hygienic and clutter-free.",
-    image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=85",
-    href: "/advice/homecare-advice/keep-home-clean-tidy",
-  },
-  {
-    tag: "SAFETY",
-    title: "Home Safety Essentials",
-    description:
-      "Key safety checks every home should have, from smoke alarms to carbon monoxide detectors.",
-    image:
-      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=85",
-    href: "/advice/homecare-advice/home-safety-essentials",
-  },
-  {
-    tag: "PROBLEMS",
-    title: "Spotting and Preventing Damp in Your Home",
-    description:
-      "Learn the signs of damp, how to prevent it and when to get professional help.",
-    image:
-      "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=85",
-    href: "/advice/homecare-advice/prevent-damp",
-  },
-];
-
-const homeCareServices = [
-  {
+    number: "01",
     title: "General Property Maintenance",
-    href: "/property-maintenance",
+    description:
+      "Everyday repairs, damage, wear and property upkeep.",
+    topics:
+      "Cracks and holes • Damaged plaster • Doors and fittings • Water staining • Failed sealant • General maintenance lists",
+    href: "/advice/search?q=property%20maintenance",
+    label: "View Property Maintenance Advice",
   },
   {
-    title: "Plumbing & Heating",
+    number: "02",
+    title: "Plumbing & Water Problems",
+    description:
+      "Advice around common water-related issues.",
+    topics:
+      "Dripping taps • Running toilets • Leaking pipes • Water escaping • Waste pipe leaks • Stop taps",
+    href: "/advice/search?q=plumbing",
+    label: "View Plumbing Advice",
+  },
+  {
+    number: "03",
+    title: "Bathroom Care",
+    description:
+      "Advice covering bathroom maintenance and warning signs.",
+    topics:
+      "Silicone sealant • Grout • Loose tiles • Toilet leaks • Shower leaks • Bathroom flooring • When a bathroom needs renovation",
+    href: "/our-services",
+    label: "View Bathroom Services",
+  },
+  {
+    number: "04",
+    title: "Kitchen Care",
+    description:
+      "Practical guidance for maintaining kitchens.",
+    topics:
+      "Sink leaks • Taps • Worktop damage • Sealant • Tiles • Flooring • Kitchen renovation planning",
+    href: "/our-services",
+    label: "View Kitchen Services",
+  },
+  {
+    number: "05",
+    title: "Walls, Ceilings & Decorating",
+    description:
+      "Advice on preparation, damaged surfaces and decorating.",
+    topics:
+      "Preparing walls • Peeling paint • Ceiling stains • Cracks • Making good • Woodwork",
+    href: "/advice/search?q=painting%20decorating",
+    label: "View Decorating Advice",
+  },
+  {
+    number: "06",
+    title: "Tiling, Grout & Flooring",
+    description:
+      "Advice covering tiled and floor surfaces.",
+    topics:
+      "Loose tiles • Cracked tiles • Failed grout • Regrouting • Sealant • Uneven flooring • Flooring replacement",
+    href: "/our-services",
+    label: "View Tiling & Flooring Advice",
+  },
+  {
+    number: "07",
+    title: "Roofs, Gutters & Exterior Care",
+    description:
+      "Advice covering visible external maintenance.",
+    topics:
+      "Blocked gutters • Leaking gutters • Downpipes • Water ingress • Roofline defects • Weather damage",
+    href: "/roofing-and-gutter-services",
+    label: "View Roof & Gutter Advice",
+  },
+  {
+    number: "08",
+    title: "Garden Care",
+    description:
+      "Practical advice for everyday garden maintenance.",
+    topics:
+      "Grass cutting • Overgrowth • Hedge maintenance • Garden clearance • Recurring maintenance • Rental gardens",
+    href: "/advice/search?q=garden%20maintenance",
+    label: "View Garden Advice",
+  },
+];
+
+const publishedArticles = [
+  {
+    category: "HOME CARE",
+    title: "How to Keep Your Home Warm in Winter",
+    description:
+      "Practical guidance for looking after your home during colder weather.",
+    href: "/advice/how-to-keep-your-home-warm",
+  },
+  {
+    category: "PROPERTY MAINTENANCE",
+    title: "How to Prevent Damp and Mould",
+    description:
+      "Useful guidance on common damp and mould warning signs and property care.",
+    href: "/advice/how-to-prevent-damp-and-mould",
+  },
+  {
+    category: "HOME CARE",
+    title: "Improving Ventilation in Your Home",
+    description:
+      "Helpful advice on ventilation and maintaining better indoor conditions.",
+    href: "/advice/improving-home-ventilation",
+  },
+  {
+    category: "HOME CARE",
+    title: "Small Improvements That Make a Difference",
+    description:
+      "Practical ideas for keeping a property maintained and cared for.",
+    href: "/advice/small-home-improvements",
+  },
+  {
+    category: "PROPERTY MAINTENANCE",
+    title: "Easy DIY Maintenance Jobs Around the Home",
+    description:
+      "A practical guide to straightforward property maintenance tasks.",
+    href: "/advice/diy-maintenance-jobs",
+  },
+];
+
+const checklistInside = [
+  "Look for new water staining",
+  "Check visible sealant around wet areas",
+  "Watch for dripping taps",
+  "Check toilets for constant running",
+  "Look for damaged or loose tiles",
+  "Monitor cracks or damaged plaster",
+  "Check doors and fittings for damage",
+  "Look for flooring deterioration",
+];
+
+const checklistOutside = [
+  "Check visible gutters for overflow",
+  "Look for damaged downpipes",
+  "Watch for obvious roofline defects",
+  "Keep outside areas reasonably clear",
+  "Keep garden growth manageable",
+];
+
+const warningSections = [
+  {
+    eyebrow: "WATER DAMAGE",
+    title: "Signs of Water Damage",
+    items: [
+      "Brown or yellow staining",
+      "Peeling paint",
+      "Bubbling finishes",
+      "Damp-looking patches",
+      "Swollen materials",
+      "Water around fittings",
+      "Persistent dripping",
+    ],
+    copy:
+      "Water damage can have several different causes. The visible stain is not always the source of the problem, so the underlying cause should be identified before cosmetic repairs are completed.",
+    linkLabel: "View Property Maintenance",
+    href: "/property-maintenance",
+    emergency: true,
+  },
+  {
+    eyebrow: "PLUMBING",
+    title: "Common Plumbing Problems",
+    items: [
+      "Dripping tap",
+      "Constantly running toilet",
+      "Slow or leaking waste",
+      "Water around a sink",
+      "Pipework leak",
+      "Sudden loss of water containment",
+    ],
+    copy:
+      "Small plumbing faults can become larger problems if water continues escaping.",
+    linkLabel: "View Plumbing Services",
     href: "/plumbing-services",
+    emergency: true,
   },
   {
-    title: "Electrical Minor Works",
+    eyebrow: "BATHROOM CARE",
+    title: "Keeping Bathrooms in Good Condition",
+    items: [
+      "Sealant",
+      "Grout",
+      "Loose tiles",
+      "Fittings",
+      "Leaks",
+      "Flooring",
+      "Ventilation-related surface condition",
+    ],
+    copy:
+      "Persistent mould, damp or staining can have different causes and may require further assessment rather than simply cleaning or repainting the surface.",
+    linkLabel: "View Bathroom Services",
+    href: "/our-services",
+  },
+  {
+    eyebrow: "KITCHEN CARE",
+    title: "Keeping Kitchens Maintained",
+    items: [
+      "Sink and tap leaks",
+      "Sealant",
+      "Damaged worktops",
+      "Loose fittings",
+      "Tile damage",
+      "Flooring",
+      "Plumbing connections",
+    ],
+    copy:
+      "Kitchens often combine plumbing, cabinetry, flooring and finishes in one space, so a small fault can affect several areas if left unresolved.",
+    linkLabel: "View Kitchen Services",
+    href: "/our-services",
+  },
+  {
+    eyebrow: "WALLS & CEILINGS",
+    title: "Cracks, Holes & Damaged Surfaces",
+    items: [
+      "Small fixing holes",
+      "Damaged plaster",
+      "Cracks",
+      "Water staining",
+      "Peeling coatings",
+      "Previous repair areas",
+    ],
+    copy:
+      "Not every crack has the same cause. If cracking is significant, recurring, widening or associated with movement, it may require appropriate professional assessment before ordinary decorating work proceeds.",
+    linkLabel: "View Property Maintenance",
     href: "/property-maintenance",
   },
   {
-    title: "Painting & Decorating",
-    href: "/painting-decorating",
+    eyebrow: "PAINTING & DECORATING",
+    title: "Before You Repaint",
+    items: [
+      "Active leaks",
+      "Damp-looking areas",
+      "Loose or flaking coatings",
+      "Cracks",
+      "Damaged plaster",
+      "Failed sealant",
+    ],
+    copy:
+      "Deal with the cause of damage first, then prepare the surface properly before redecorating.",
+    linkLabel: "View Painting & Decorating",
+    href: "/painting-and-decorating",
   },
   {
-    title: "Flooring & Tiling",
-    href: "/property-maintenance",
+    eyebrow: "TILES & GROUT",
+    title: "When Tiled Areas Need Attention",
+    items: [
+      "Cracked tiles",
+      "Loose tiles",
+      "Missing grout",
+      "Failed silicone",
+      "Movement",
+      "Water reaching surrounding finishes",
+    ],
+    copy:
+      "Regrouting or resealing can help where the underlying tiled area is sound, but loose tiles or movement may indicate that more than surface maintenance is required.",
+    linkLabel: "View Tiling & Flooring",
+    href: "/our-services",
   },
   {
-    title: "Damp Prevention & Repairs",
-    href: "/property-maintenance",
+    eyebrow: "FLOORING",
+    title: "Signs Flooring May Need Repair or Replacement",
+    items: [
+      "Lifting",
+      "Movement",
+      "Damage",
+      "Water-related deterioration",
+      "Failed edges",
+      "Uneven areas",
+    ],
+    copy:
+      "The existing floor and underlying surface may need to be assessed before replacement flooring is installed.",
+    linkLabel: "View Tiling & Flooring",
+    href: "/our-services",
   },
   {
-    title: "Gutter Cleaning",
+    eyebrow: "GUTTERS",
+    title: "Why Gutters Matter",
+    items: [
+      "Water spilling over gutter edges",
+      "Visible debris",
+      "Leaking joints",
+      "Staining on exterior walls",
+      "Downpipe problems",
+    ],
+    copy:
+      "If safe inspection is not possible from ground level, arrange appropriate professional assessment rather than attempting unsafe access.",
+    linkLabel: "View Roofing & Gutters",
+    href: "/roofing-and-gutter-services",
+  },
+  {
+    eyebrow: "GARDEN CARE",
+    title: "Keeping Gardens Manageable",
+    items: [
+      "Grass cutting",
+      "Strimming",
+      "Hedge and shrub maintenance",
+      "Weeding",
+      "Tidy-ups",
+      "Recurring maintenance",
+    ],
+    copy:
+      "Routine maintenance can help prevent gardens becoming difficult and expensive to recover.",
+    linkLabel: "View Garden Services",
     href: "/garden-services",
   },
-  {
-    title: "Exterior Maintenance",
-    href: "/property-maintenance",
-  },
-  {
-    title: "Home Safety Checks",
-    href: "/property-maintenance",
-  },
-  {
-    title: "Seasonal Property Checks",
-    href: "/advice/seasonal-advice",
-  },
 ];
 
-const relatedArticles = [
-  {
-    title: "How to Reduce Condensation at Home",
-    image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=300&q=80",
-    href: "/advice/homecare-advice/reduce-condensation",
-  },
-  {
-    title: "Best Paint Colours for a Brighter Home",
-    image:
-      "https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=300&q=80",
-    href: "/advice/painting-decorating-advice",
-  },
-  {
-    title: "Preparing Your Home for Winter",
-    image:
-      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=300&q=80",
-    href: "/advice/seasonal-advice",
-  },
-  {
-    title: "Spring Cleaning Checklist",
-    image:
-      "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=300&q=80",
-    href: "/advice/homecare-advice/spring-cleaning-checklist",
-  },
-  {
-    title: "How to Keep Your Home Safe for Children",
-    image:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=300&q=80",
-    href: "/advice/homecare-advice/home-safety-children",
-  },
-];
-
-const faqs = [
-  {
-    question:
-      "How often should I carry out home maintenance checks?",
-    answer:
-      "A quick check every month is useful, with more detailed seasonal checks carried out throughout the year. Roofs, gutters, heating systems, plumbing and exterior areas should all be checked regularly.",
-  },
-  {
-    question:
-      "What are the most important safety checks for a home?",
-    answer:
-      "Check smoke alarms, carbon monoxide alarms, electrical fittings, locks, doors, windows, stairways and exterior lighting. Replace batteries and test alarms regularly.",
-  },
-  {
-    question: "How can I prevent damp in my home?",
-    answer:
-      "Good ventilation, keeping gutters clear, fixing leaks quickly and maintaining the roof and exterior of your property can all help reduce the risk of damp.",
-  },
-  {
-    question:
-      "What’s the best way to keep my home warm in winter?",
-    answer:
-      "Check your heating system, improve insulation where needed, seal obvious draughts and make sure radiators and heating controls are working properly before cold weather arrives.",
-  },
-  {
-    question:
-      "How can I make my home more energy efficient?",
-    answer:
-      "Start with insulation, efficient heating controls, draught-proofing, LED lighting and regular maintenance of windows, doors and heating equipment.",
-  },
-  {
-    question:
-      "Do you offer regular home maintenance plans?",
-    answer:
-      "Yes. Our property maintenance services can help homeowners and landlords keep on top of regular repairs, inspections and seasonal maintenance.",
-  },
+const commonTopics = [
+  "Water leaks",
+  "Sealant",
+  "Grout",
+  "Decorating preparation",
+  "Property repairs",
+  "Gutters",
+  "Garden maintenance",
 ];
 
 export default function HomecareAdvicePage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Advice",
+        item: "/advice",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Home Care Advice",
+        item: "/advice/homecare-advice",
+      },
+    ],
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Home Maintenance & Property Care Advice | Alpha",
+    description:
+      "Practical home maintenance and property-care advice covering repairs, plumbing, bathrooms, kitchens, decorating, flooring, gutters and gardens.",
+    url: "/advice/homecare-advice",
+  };
+
   return (
     <>
       <Header />
 
       <main className={styles.page}>
-        {/* =====================================================
-            HERO
-        ====================================================== */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webPageSchema),
+          }}
+        />
 
         <section className={styles.hero}>
-          <div className={styles.heroImage} />
-
-          <div className={styles.heroOverlay} />
-
           <div className={styles.heroInner}>
-            <div className={styles.breadcrumb}>
+            <nav
+              className={styles.breadcrumbs}
+              aria-label="Breadcrumb"
+            >
               <Link href="/">Home</Link>
-              <span>›</span>
-              <Link href="/advice">Advice Hub</Link>
-              <span>›</span>
-              <span>Home Care</span>
-            </div>
+              <span>→</span>
+              <Link href="/advice">Advice</Link>
+              <span>→</span>
+              <span>Home Care Advice</span>
+            </nav>
 
             <div className={styles.heroContent}>
-              <div className={styles.heroLabel}>
+              <span className={styles.heroEyebrow}>
                 HOME CARE ADVICE
-              </div>
+              </span>
 
-              <h1>
-                Home Care{" "}
-                <span>Advice</span>
-              </h1>
+              <h1>Home Care Advice</h1>
+
+              <h2>
+                Practical guidance for looking after your property.
+              </h2>
 
               <p>
-                Practical guidance, useful checklists and
-                expert tips to help you look after your
-                home, keep it in great condition and
-                prevent costly problems. Simple advice for
-                a safer, cleaner, more comfortable home
-                all year round.
+                Small maintenance issues are often easier to deal
+                with before they become larger repairs.
+              </p>
+
+              <p>
+                The Alpha Home Care Advice section brings together
+                useful guidance on common property problems,
+                preventative maintenance and the signs that
+                something may need professional attention.
+              </p>
+
+              <div className={styles.heroActions}>
+                <a
+                  href="#home-care-search"
+                  className={styles.primaryButton}
+                >
+                  Search Home Care Advice
+                </a>
+
+                <a
+                  href="#main-topics"
+                  className={styles.secondaryButton}
+                >
+                  Browse Topics
+                </a>
+              </div>
+            </div>
+
+            <div className={styles.heroSlogan}>
+              One Team. Complete Property Care.
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="home-care-search"
+          className={styles.searchSection}
+        >
+          <div className={styles.container}>
+            <div className={styles.searchPanel}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  HOME CARE SEARCH
+                </span>
+
+                <h2>What Do You Need Help With?</h2>
+
+                <p>
+                  Search the main Alpha Advice library for practical
+                  guidance on property and home maintenance.
+                </p>
+              </div>
+
+              <form
+                action="/advice/search"
+                method="get"
+                className={styles.searchForm}
+              >
+                <label
+                  htmlFor="homecare-search-input"
+                  className={styles.srOnly}
+                >
+                  Search home care advice
+                </label>
+
+                <input
+                  id="homecare-search-input"
+                  name="q"
+                  type="search"
+                  placeholder="Search home care advice..."
+                  autoComplete="off"
+                />
+
+                <button type="submit">Search</button>
+              </form>
+
+              <div className={styles.searchExamples}>
+                <span>Examples:</span>
+
+                {[
+                  "leaking toilet",
+                  "cracked wall",
+                  "black bathroom sealant",
+                  "loose tile",
+                  "dripping tap",
+                  "peeling paint",
+                  "blocked gutter",
+                  "damaged flooring",
+                ].map((example) => (
+                  <Link
+                    key={example}
+                    href={`/advice/search?q=${encodeURIComponent(
+                      example
+                    )}`}
+                  >
+                    {example}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="main-topics"
+          className={styles.section}
+        >
+          <div className={styles.container}>
+            <div className={styles.sectionIntro}>
+              <span className={styles.sectionEyebrow}>
+                MAIN TOPICS
+              </span>
+
+              <h2>Home Care Advice by Topic</h2>
+
+              <p>
+                Start with the area that best matches the problem
+                you are trying to understand.
               </p>
             </div>
 
-            <div className={styles.heroFeatures}>
-              <div className={styles.heroFeature}>
-                <div className={styles.heroFeatureIcon}>
-                  ⌂
-                </div>
+            <div className={styles.topicGrid}>
+              {topicCards.map((topic) => (
+                <article
+                  key={topic.number}
+                  className={styles.topicCard}
+                >
+                  <span className={styles.topicNumber}>
+                    {topic.number}
+                  </span>
 
-                <div>
-                  <strong>Practical Tips</strong>
-                  <span>Easy to follow</span>
+                  <div className={styles.topicCardBody}>
+                    <h3>{topic.title}</h3>
+
+                    <p>{topic.description}</p>
+
+                    <div className={styles.topicList}>
+                      {topic.topics.split(" • ").map((item) => (
+                        <span key={item}>{item}</span>
+                      ))}
+                    </div>
+
+                    <Link href={topic.href}>
+                      {topic.label} <span>→</span>
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.featuredSection}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeadingRow}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  FEATURED HOME CARE GUIDES
+                </span>
+
+                <h2>Useful Home Care Guides</h2>
+
+                <p>
+                  Published articles covering practical property
+                  maintenance and home-care questions.
+                </p>
+              </div>
+
+              <Link
+                href="/advice/search?q=home%20care"
+                className={styles.textLink}
+              >
+                Search Home Care Advice <span>→</span>
+              </Link>
+            </div>
+
+            <div className={styles.articleGrid}>
+              {publishedArticles.map((article) => (
+                <article
+                  key={article.href}
+                  className={styles.articleCard}
+                >
+                  <div className={styles.articleCardTop}>
+                    <span>{article.category}</span>
+                  </div>
+
+                  <div className={styles.articleCardBody}>
+                    <h3>
+                      <Link href={article.href}>
+                        {article.title}
+                      </Link>
+                    </h3>
+
+                    <p>{article.description}</p>
+
+                    <Link
+                      href={article.href}
+                      className={styles.articleLink}
+                    >
+                      Read Article <span>→</span>
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.checklistSection}>
+          <div className={styles.container}>
+            <div className={styles.sectionIntro}>
+              <span className={styles.sectionEyebrow}>
+                PROPERTY MAINTENANCE CHECKLIST
+              </span>
+
+              <h2>Everyday Property Maintenance Checklist</h2>
+
+              <p>
+                Use this as a simple reminder for visible,
+                everyday checks. This is not a formal property
+                inspection.
+              </p>
+            </div>
+
+            <div className={styles.checklistGrid}>
+              <div className={styles.checklistCard}>
+                <h3>Inside the Property</h3>
+
+                <div className={styles.checkItems}>
+                  {checklistInside.map((item) => (
+                    <div key={item} className={styles.checkItem}>
+                      <span aria-hidden="true">☐</span>
+                      <p>{item}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className={styles.heroFeature}>
-                <div className={styles.heroFeatureIcon}>
-                  ♢
+              <div className={styles.checklistCard}>
+                <h3>Outside the Property</h3>
+
+                <div className={styles.checkItems}>
+                  {checklistOutside.map((item) => (
+                    <div key={item} className={styles.checkItem}>
+                      <span aria-hidden="true">☐</span>
+                      <p>{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.checklistNote}>
+              <strong>Important:</strong>
+              <span>
+                If something changes noticeably or is causing
+                damage, it may need further assessment.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeadingRow}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  WARNING SIGNS
+                </span>
+
+                <h2>Practical Home Care Guidance</h2>
+
+                <p>
+                  Understand common warning signs, what to watch
+                  for and when a small issue may need practical
+                  attention.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.warningGrid}>
+              {warningSections.map((section) => (
+                <article
+                  key={section.title}
+                  className={styles.warningCard}
+                >
+                  <span className={styles.warningEyebrow}>
+                    {section.eyebrow}
+                  </span>
+
+                  <h3>{section.title}</h3>
+
+                  <ul>
+                    {section.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+
+                  <p>{section.copy}</p>
+
+                  <Link
+                    href={section.href}
+                    className={styles.outlineLink}
+                  >
+                    {section.linkLabel} <span>→</span>
+                  </Link>
+
+                  {section.emergency && (
+                    <div className={styles.emergencyMini}>
+                      <strong>
+                        Active water escape?
+                      </strong>
+
+                      <a href="tel:01775518068">
+                        Call 01775 518068
+                      </a>
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.renovationSection}>
+          <div className={styles.container}>
+            <div className={styles.renovationGrid}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  WHEN TO REPAIR VS RENOVATE
+                </span>
+
+                <h2>Repair, Maintain or Renovate?</h2>
+
+                <p>
+                  Understanding the difference can make it easier
+                  to decide what type of work a property actually
+                  needs.
+                </p>
+
+                <div className={styles.definitionGrid}>
+                  <div>
+                    <h3>Maintenance</h3>
+                    <p>
+                      Keeping something in working condition.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3>Repair</h3>
+                    <p>
+                      Fixing something damaged or faulty.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3>Renovation</h3>
+                    <p>
+                      Improving or transforming a room or property.
+                    </p>
+                  </div>
                 </div>
 
-                <div>
-                  <strong>Prevent Problems</strong>
-                  <span>Save money</span>
+                <p className={styles.bridgeCopy}>
+                  If several areas need work at the same time, it
+                  may be more practical to assess the property as
+                  a wider renovation rather than treating every
+                  issue separately.
+                </p>
+
+                <div className={styles.inlineActions}>
+                  <Link
+                    href="/property-maintenance"
+                    className={styles.primaryButton}
+                  >
+                    View Property Maintenance
+                  </Link>
+
+                  <Link
+                    href="/property-renovations"
+                    className={styles.secondaryButton}
+                  >
+                    View Property Renovations
+                  </Link>
                 </div>
               </div>
 
-              <div className={styles.heroFeature}>
-                <div className={styles.heroFeatureIcon}>
-                  ♡
-                </div>
+              <div className={styles.renovationPanel}>
+                <span className={styles.panelIcon}>◆</span>
 
-                <div>
-                  <strong>A Healthier Home</strong>
-                  <span>For your family</span>
-                </div>
+                <h3>
+                  Start with the problem,
+                  <br />
+                  then choose the right service.
+                </h3>
+
+                <p>
+                  Advice helps you understand what may be happening.
+                  The next step is choosing the practical service
+                  that matches the job.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.landlordSection}>
+          <div className={styles.container}>
+            <div className={styles.landlordGrid}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  LANDLORD HOME CARE
+                </span>
+
+                <h2>Property Care for Rental Homes</h2>
+
+                <p>
+                  Consistent maintenance can help stop small issues
+                  building into larger void-period refurbishment
+                  projects.
+                </p>
               </div>
 
-              <div className={styles.heroFeature}>
-                <div className={styles.heroFeatureIcon}>
-                  ◇
+              <div className={styles.landlordContent}>
+                <div className={styles.landlordTopics}>
+                  {[
+                    "Reporting repairs",
+                    "Void-property checks",
+                    "End-of-tenancy work",
+                    "Garden maintenance",
+                    "Water leaks",
+                    "Decorating",
+                    "Recording damage",
+                    "Recurring maintenance",
+                  ].map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
                 </div>
 
-                <div>
-                  <strong>Year-Round Advice</strong>
-                  <span>Keep your home in top condition</span>
+                <div className={styles.inlineActions}>
+                  <Link
+                    href="/advice/search?q=landlord%20property%20maintenance"
+                    className={styles.secondaryButton}
+                  >
+                    View Landlord Advice
+                  </Link>
+
+                  <Link
+                    href="/landlords-letting-agents"
+                    className={styles.primaryButton}
+                  >
+                    View Landlord Services
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* =====================================================
-            MAIN CONTENT
-        ====================================================== */}
+        <section className={styles.safetySection}>
+          <div className={styles.container}>
+            <div className={styles.safetyGrid}>
+              <div className={styles.safetyCard}>
+                <span className={styles.sectionEyebrow}>
+                  DIY BOUNDARIES
+                </span>
 
-        <section className={styles.contentSection}>
-          <div className={styles.contentContainer}>
-            {/* LEFT COLUMN */}
+                <h2>Know When to Stop</h2>
 
-            <div className={styles.mainColumn}>
-              {/* FEATURED */}
+                <p>
+                  Advice should help you understand a problem
+                  without encouraging unsafe or regulated DIY.
+                </p>
 
-              <section className={styles.featuredSection}>
-                <div className={styles.sectionHeading}>
-                  <div>
-                    <h2>Featured Home Care Advice</h2>
-
-                    <p>
-                      Our most popular home care guides to
-                      help you maintain a safe, clean and
-                      comfortable home.
-                    </p>
-                  </div>
-
-                  <Link
-                    href="/advice?category=Home%20Care"
-                    className={styles.viewAllLink}
-                  >
-                    View All Home Care Articles
-                    <span>→</span>
-                  </Link>
-                </div>
-
-                <div className={styles.featuredGrid}>
-                  {featuredArticles.map((article) => (
-                    <article
-                      key={article.href}
-                      className={styles.featuredCard}
-                    >
-                      <Link
-                        href={article.href}
-                        className={styles.cardImageLink}
-                      >
-                        <div className={styles.cardImage}>
-                          <img
-                            src={article.image}
-                            alt={article.title}
-                          />
-                        </div>
-                      </Link>
-
-                      <div className={styles.cardBody}>
-                        <span className={styles.cardTag}>
-                          {article.tag}
-                        </span>
-
-                        <h3>
-                          <Link href={article.href}>
-                            {article.title}
-                          </Link>
-                        </h3>
-
-                        <p>{article.description}</p>
-
-                        <Link
-                          href={article.href}
-                          className={styles.readMore}
-                        >
-                          Read Article
-                          <span>→</span>
-                        </Link>
-                      </div>
-                    </article>
+                <div className={styles.doNotList}>
+                  {[
+                    "Repair gas appliances",
+                    "Alter gas pipework",
+                    "Work on unsafe electrical systems",
+                    "Climb roofs",
+                    "Disturb suspected asbestos",
+                    "Perform structural work",
+                    "Use regulated chemicals improperly",
+                  ].map((item) => (
+                    <div key={item}>
+                      <span aria-hidden="true">×</span>
+                      <p>{item}</p>
+                    </div>
                   ))}
                 </div>
 
-                {/* SMALL ARTICLES */}
-
-                <div className={styles.smallArticlesGrid}>
-                  {smallArticles.map((article) => (
-                    <article
-                      key={article.href}
-                      className={styles.smallCard}
-                    >
-                      <Link
-                        href={article.href}
-                        className={styles.cardImageLink}
-                      >
-                        <div className={styles.smallCardImage}>
-                          <img
-                            src={article.image}
-                            alt={article.title}
-                            loading="lazy"
-                          />
-                        </div>
-                      </Link>
-
-                      <div className={styles.smallCardBody}>
-                        <span className={styles.cardTag}>
-                          {article.tag}
-                        </span>
-
-                        <h3>
-                          <Link href={article.href}>
-                            {article.title}
-                          </Link>
-                        </h3>
-
-                        <p>{article.description}</p>
-
-                        <Link
-                          href={article.href}
-                          className={styles.readMore}
-                        >
-                          Read Article
-                          <span>→</span>
-                        </Link>
-                      </div>
-                    </article>
-                  ))}
+                <div className={styles.safetyNote}>
+                  If the work requires specialist competence,
+                  regulated work or unsafe access, arrange
+                  appropriate professional help.
                 </div>
-              </section>
+              </div>
 
-              {/* =================================================
-                  WHY HOME CARE MATTERS
-              ================================================== */}
+              <div className={styles.gasCard}>
+                <span className={styles.sectionEyebrow}>
+                  GAS SAFE BOUNDARY
+                </span>
 
-              <section className={styles.whySection}>
-                <h2>Why Home Care Matters</h2>
+                <h2>Gas-Related Work</h2>
 
-                <div className={styles.whyGrid}>
-                  <div className={styles.whyItem}>
-                    <div className={styles.roundIcon}>
-                      ⌂
-                    </div>
+                <p>
+                  Alpha does not currently undertake work that
+                  legally requires Gas Safe registration.
+                </p>
 
-                    <span>
-                      Keeps your home
-                      <strong> safe and secure</strong>
-                    </span>
-                  </div>
+                <p>
+                  Where gas work is required, use an appropriately
+                  registered gas professional.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                  <div className={styles.whyItem}>
-                    <div className={styles.roundIcon}>
-                      £
-                    </div>
+        <section className={styles.emergencySection}>
+          <div className={styles.container}>
+            <div className={styles.emergencyPanel}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  EMERGENCY HOME CARE
+                </span>
 
-                    <span>
-                      Helps prevent
-                      <strong> costly repairs</strong>
-                    </span>
-                  </div>
+                <h2>When a Problem Is Urgent</h2>
 
-                  <div className={styles.whyItem}>
-                    <div className={styles.roundIcon}>
-                      ♧
-                    </div>
+                <p>
+                  Urgent warning signs can include active water
+                  escape, burst pipes, rapid water damage, major
+                  leaks or immediate property damage.
+                </p>
+              </div>
 
-                    <span>
-                      Creates a healthier
-                      <strong> environment</strong>
-                    </span>
-                  </div>
+              <div className={styles.emergencyCall}>
+                <strong>
+                  24/7 Emergency Property &amp; Plumbing Support
+                </strong>
 
-                  <div className={styles.whyItem}>
-                    <div className={styles.roundIcon}>
-                      ◇
-                    </div>
+                <a href="tel:01775518068">
+                  Call 01775 518068
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                    <span>
-                      Maintains and
-                      <strong> protects your investment</strong>
-                    </span>
-                  </div>
-                </div>
-              </section>
+        <section className={styles.topicsSection}>
+          <div className={styles.container}>
+            <div className={styles.topicsIntro}>
+              <span className={styles.sectionEyebrow}>
+                COMMON HOME CARE TOPICS
+              </span>
 
-              {/* =================================================
-                  FAQ
-              ================================================== */}
+              <h2>Common Home Care Topics</h2>
 
-              <section className={styles.faqSection}>
-                <div className={styles.faqHeading}>
-                  <div className={styles.faqIcon}>?</div>
-
-                  <h2>Frequently Asked Questions</h2>
-                </div>
-
-                <div className={styles.faqList}>
-                  {faqs.map((faq) => (
-                    <details
-                      key={faq.question}
-                      className={styles.faqItem}
-                    >
-                      <summary>
-                        <span>{faq.question}</span>
-                        <strong>+</strong>
-                      </summary>
-
-                      <div className={styles.faqAnswer}>
-                        <p>{faq.answer}</p>
-                      </div>
-                    </details>
-                  ))}
-                </div>
-              </section>
+              <p>
+                Start with a practical topic, then use the Advice
+                search to find a more specific question.
+              </p>
             </div>
 
-            {/* =================================================
-                SIDEBAR
-            ================================================== */}
+            <div className={styles.commonTopics}>
+              {commonTopics.map((topic) => (
+                <Link
+                  key={topic}
+                  href={`/advice/search?q=${encodeURIComponent(
+                    topic
+                  )}`}
+                >
+                  {topic}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <aside className={styles.sidebar}>
-              {/* HELP BOX */}
+        <section className={styles.seasonalSection}>
+          <div className={styles.container}>
+            <div className={styles.seasonalPanel}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  RELATED SEASONAL ADVICE
+                </span>
 
-              <section className={styles.helpBox}>
-                <div className={styles.helpTop}>
-                  <div className={styles.helpIcon}>
-                    ⌂
-                  </div>
+                <h2>Looking for Seasonal Guidance?</h2>
 
-                  <div>
-                    <h3>
-                      Need Help with Home Maintenance?
-                    </h3>
+                <p>
+                  Some maintenance tasks become more important at
+                  different times of year. Explore seasonal advice
+                  for spring, summer, autumn and winter.
+                </p>
+              </div>
 
-                    <p>
-                      Get a free, no obligation quote for
-                      repairs, improvements or ongoing
-                      property maintenance.
-                    </p>
-                  </div>
-                </div>
+              <Link
+                href="/advice/seasonal-advice"
+                className={styles.primaryButton}
+              >
+                View Seasonal Advice
+                <span>→</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
+        <section className={styles.finalCta}>
+          <div className={styles.container}>
+            <div className={styles.finalCtaInner}>
+              <div>
+                <span className={styles.sectionEyebrow}>
+                  PROPERTY &amp; HOME CARE
+                </span>
+
+                <h2>Found Something That Needs Repairing?</h2>
+
+                <p>
+                  Advice can help you understand a problem, but some
+                  jobs need practical attention.
+                </p>
+
+                <p>
+                  If you need property maintenance, plumbing,
+                  decorating, tiling, renovation work or garden
+                  maintenance, tell Alpha what needs doing.
+                </p>
+
+                <strong>
+                  One Team. Complete Property Care.
+                </strong>
+              </div>
+
+              <div className={styles.finalCtaActions}>
                 <Link
                   href="/request-a-quote"
-                  className={styles.sidebarQuote}
+                  className={styles.finalPrimary}
                 >
                   Request a Quote
                   <span>→</span>
                 </Link>
-              </section>
 
-              {/* SERVICES */}
+                <Link
+                  href="/our-services"
+                  className={styles.finalSecondary}
+                >
+                  View Our Services
+                </Link>
 
-              <section className={styles.sidebarCard}>
-                <div className={styles.sidebarTitle}>
-                  <div className={styles.sidebarTitleIcon}>
-                    ⚙
-                  </div>
-
-                  <h3>Home Care Services</h3>
-                </div>
-
-                <div className={styles.serviceList}>
-                  {homeCareServices.map((service) => (
-                    <Link
-                      key={service.href + service.title}
-                      href={service.href}
-                      className={styles.serviceListItem}
-                    >
-                      <span>{service.title}</span>
-                      <strong>›</strong>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-
-              {/* LOOKING AFTER HOMES */}
-
-              <section className={styles.imagePromo}>
-                <div className={styles.imagePromoImage}>
-                  <img
-                    src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85"
-                    alt="Well maintained home"
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className={styles.imagePromoOverlay} />
-
-                <div className={styles.imagePromoContent}>
-                  <div className={styles.leafIcon}>◇</div>
-
-                  <h3>
-                    Looking After Homes
-                    <br />
-                    Inside and Out
-                  </h3>
-
-                  <p>
-                    From small repairs to regular
-                    maintenance, we help keep your home
-                    safe, comfortable and looking its best
-                    all year round.
-                  </p>
-
-                  <Link
-                    href="/services"
-                    className={styles.promoButton}
-                  >
-                    View Our Services
-                    <span>→</span>
-                  </Link>
-                </div>
-              </section>
-
-              {/* RELATED */}
-
-              <section className={styles.relatedSection}>
-                <div className={styles.sidebarTitle}>
-                  <div className={styles.sidebarTitleIcon}>
-                    ▣
-                  </div>
-
-                  <h3>Related Articles</h3>
-                </div>
-
-                <div className={styles.relatedList}>
-                  {relatedArticles.map((article) => (
-                    <Link
-                      key={article.href + article.title}
-                      href={article.href}
-                      className={styles.relatedItem}
-                    >
-                      <div className={styles.relatedImage}>
-                        <img
-                          src={article.image}
-                          alt={article.title}
-                          loading="lazy"
-                        />
-                      </div>
-
-                      <span>{article.title}</span>
-
-                      <strong>›</strong>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-
-              {/* CONTACT */}
-
-              <section className={styles.contactBox}>
-                <div className={styles.contactIcon}>
-                  ☎
-                </div>
-
-                <div>
-                  <h3>Speak to Our Team</h3>
-
-                  <p>
-                    Call us on{" "}
-                    <a href="tel:01234567890">
-                      01234 567890
-                    </a>
-                  </p>
-
-                  <span>
-                    We’re happy to help you with any
-                    questions.
-                  </span>
-                </div>
-              </section>
-            </aside>
-          </div>
-        </section>
-
-        {/* =====================================================
-            TRUST STRIP
-        ====================================================== */}
-
-        <section className={styles.trustStrip}>
-          <div className={styles.trustContainer}>
-            <div className={styles.trustItem}>
-              <div className={styles.trustIcon}>♧</div>
-              <span>Trusted Local Team</span>
-            </div>
-
-            <div className={styles.trustItem}>
-              <div className={styles.trustIcon}>☆</div>
-              <span>Quality Workmanship</span>
-            </div>
-
-            <div className={styles.trustItem}>
-              <div className={styles.trustIcon}>◇</div>
-              <span>Helping Homes &amp; Gardens</span>
-            </div>
-
-            <div className={styles.trustItem}>
-              <div className={styles.trustIcon}>♢</div>
-              <span>Reliable &amp; Professional</span>
-            </div>
-
-            <div className={styles.trustItem}>
-              <div className={styles.trustIcon}>⌂</div>
-              <span>One Team. Complete Property Care.</span>
-            </div>
-          </div>
-        </section>
-
-        {/* =====================================================
-            FINAL CTA
-        ====================================================== */}
-
-        <section className={styles.finalCta}>
-          <div className={styles.finalCtaInner}>
-            <div>
-              <span>HOME &amp; PROPERTY CARE</span>
-
-              <h2>
-                Need Help Looking After Your Home?
-              </h2>
-
-              <p>
-                From small repairs to ongoing property
-                maintenance, our local team is here to
-                help.
-              </p>
-            </div>
-
-            <div className={styles.finalCtaButtons}>
-              <Link
-                href="/request-a-quote"
-                className={styles.finalQuote}
-              >
-                Request a Quote
-                <span>→</span>
-              </Link>
-
-              <Link
-                href="/contact"
-                className={styles.finalContact}
-              >
-                Contact Our Team
-              </Link>
+                <a
+                  href="tel:01775518068"
+                  className={styles.finalPhone}
+                >
+                  Call 01775 518068
+                </a>
+              </div>
             </div>
           </div>
         </section>

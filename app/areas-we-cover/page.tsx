@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./areas-we-cover.module.css";
@@ -225,7 +225,6 @@ const areaSections: AreaSection[] = [
       "Branston",
       "Bracebridge Heath",
       "South Hykeham",
-      "Skellingthorpe",
     ],
   },
   {
@@ -260,7 +259,6 @@ const areaSections: AreaSection[] = [
       "Skegness",
       "Wainfleet All Saints",
       "Burgh le Marsh",
-      "Ingoldmells",
       "Croft",
     ],
   },
@@ -309,8 +307,8 @@ const mapLocations: MapLocation[] = [
   },
   {
     name: "Lincoln",
-    lat: 53.230,
-    lng: -0.540,
+    lat: 53.23,
+    lng: -0.54,
   },
   {
     name: "Woodhall Spa",
@@ -335,9 +333,9 @@ const mapLocations: MapLocation[] = [
 ];
 
 /*
-  Geographic bounds used by the OpenStreetMap embed.
-  The marker positions below are calculated from these real coordinates.
-*/
+ * Geographic bounds used by the OpenStreetMap embed.
+ * The marker positions below are calculated from these real coordinates.
+ */
 const mapBounds = {
   west: -0.9,
   east: 0.45,
@@ -346,7 +344,11 @@ const mapBounds = {
 };
 
 function projectLongitude(lng: number) {
-  return ((lng - mapBounds.west) / (mapBounds.east - mapBounds.west)) * 100;
+  return (
+    ((lng - mapBounds.west) /
+      (mapBounds.east - mapBounds.west)) *
+    100
+  );
 }
 
 function mercatorY(lat: number) {
@@ -354,7 +356,11 @@ function mercatorY(lat: number) {
 
   return (
     (1 -
-      Math.log(Math.tan(radians) + 1 / Math.cos(radians)) / Math.PI) /
+      Math.log(
+        Math.tan(radians) +
+          1 / Math.cos(radians)
+      ) /
+        Math.PI) /
     2
   );
 }
@@ -363,7 +369,11 @@ function projectLatitude(lat: number) {
   const top = mercatorY(mapBounds.north);
   const bottom = mercatorY(mapBounds.south);
 
-  return ((mercatorY(lat) - top) / (bottom - top)) * 100;
+  return (
+    ((mercatorY(lat) - top) /
+      (bottom - top)) *
+    100
+  );
 }
 
 const services = [
@@ -493,19 +503,37 @@ function SectionHeading({
 }) {
   return (
     <div className={styles.sectionHeading}>
-      {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
+      {eyebrow && (
+        <p className={styles.eyebrow}>
+          {eyebrow}
+        </p>
+      )}
+
       <h2>{title}</h2>
+
       {text && <p>{text}</p>}
     </div>
   );
 }
 
-function AreaLocationList({ locations }: { locations: string[] }) {
+function AreaLocationList({
+  locations,
+}: {
+  locations: string[];
+}) {
   return (
     <div className={styles.locationList}>
       {locations.map((location) => (
-        <span key={location} className={styles.locationTag}>
-          <span className={styles.locationCheck}>✓</span>
+        <span
+          key={location}
+          className={styles.locationTag}
+        >
+          <span
+            className={styles.locationCheck}
+          >
+            ✓
+          </span>
+
           {location}
         </span>
       ))}
@@ -526,10 +554,18 @@ function ServiceCard({
 }) {
   return (
     <article className={styles.serviceCard}>
-      <div className={styles.serviceIcon}>⌂</div>
+      <div className={styles.serviceIcon}>
+        ⌂
+      </div>
+
       <h3>{title}</h3>
+
       <p>{text}</p>
-      <Link href={href} className={styles.serviceLink}>
+
+      <Link
+        href={href}
+        className={styles.serviceLink}
+      >
         {link}
       </Link>
     </article>
@@ -559,24 +595,30 @@ export default function AreasWeCoverPage() {
                   ALPHA PROPERTY &amp; GARDENING SERVICES
                 </p>
 
-                <h1>Property &amp; Garden Services Across Lincolnshire &amp; Peterborough</h1>
+                <h1>
+                  Property &amp; Garden Services Across
+                  Lincolnshire &amp; Peterborough
+                </h1>
 
                 <p className={styles.heroLead}>
-                  Alpha Property &amp; Gardening Services provides property
-                  maintenance, repairs, renovations and garden services across
-                  a wide regional area covering{" "}
+                  Alpha Property &amp; Gardening Services
+                  provides property maintenance, repairs,
+                  renovations and garden services across a
+                  wide regional area covering{" "}
                   <strong>
-                    Peterborough through to Skegness and Long Sutton through to
-                    Lincoln
+                    Peterborough through to Skegness and
+                    Long Sutton through to Lincoln
                   </strong>
-                  , together with many of the towns, villages and rural
-                  communities in between.
+                  , together with many of the towns,
+                  villages and rural communities in between.
                 </p>
 
                 <p>
-                  Whether you need a small repair, plumbing work, a bathroom or
-                  kitchen renovation, property decorating, garden maintenance
-                  or support across a rental portfolio, start with Alpha.
+                  Whether you need a small repair, plumbing
+                  work, a bathroom or kitchen renovation,
+                  property decorating, garden maintenance or
+                  support across a rental portfolio, start
+                  with Alpha.
                 </p>
 
                 <div className={styles.heroStatement}>
@@ -584,7 +626,10 @@ export default function AreasWeCoverPage() {
                 </div>
 
                 <div className={styles.heroButtons}>
-                  <a href="#coverage-map" className={styles.primaryButton}>
+                  <a
+                    href="#coverage-map"
+                    className={styles.primaryButton}
+                  >
                     CHECK YOUR AREA
                     <span>→</span>
                   </a>
@@ -606,18 +651,35 @@ export default function AreasWeCoverPage() {
               </div>
 
               <div className={styles.heroVisual}>
-                <div className={styles.heroVisualCard}>
-                  <span className={styles.heroVisualLabel}>
+                <div
+                  className={
+                    styles.heroVisualCard
+                  }
+                >
+                  <span
+                    className={
+                      styles.heroVisualLabel
+                    }
+                  >
                     REGIONAL COVERAGE
                   </span>
 
                   <div className={styles.heroRoute}>
                     <div>
-                      <strong>Peterborough</strong>
-                      <span>Southern coverage</span>
+                      <strong>
+                        Peterborough
+                      </strong>
+
+                      <span>
+                        Southern coverage
+                      </span>
                     </div>
 
-                    <div className={styles.routeLine}>
+                    <div
+                      className={
+                        styles.routeLine
+                      }
+                    >
                       <span />
                       <span />
                       <span />
@@ -625,28 +687,48 @@ export default function AreasWeCoverPage() {
 
                     <div>
                       <strong>Lincoln</strong>
-                      <span>Central coverage</span>
+
+                      <span>
+                        Central coverage
+                      </span>
                     </div>
 
-                    <div className={styles.routeLine}>
+                    <div
+                      className={
+                        styles.routeLine
+                      }
+                    >
                       <span />
                       <span />
                       <span />
                     </div>
 
                     <div>
-                      <strong>Skegness</strong>
-                      <span>Coastal coverage</span>
+                      <strong>
+                        Skegness
+                      </strong>
+
+                      <span>
+                        Coastal coverage
+                      </span>
                     </div>
                   </div>
 
-                  <div className={styles.heroMiniGrid}>
-                    <span>Property Maintenance</span>
+                  <div
+                    className={
+                      styles.heroMiniGrid
+                    }
+                  >
+                    <span>
+                      Property Maintenance
+                    </span>
                     <span>Renovations</span>
                     <span>Plumbing</span>
                     <span>Bathrooms</span>
                     <span>Kitchens</span>
-                    <span>Garden Services</span>
+                    <span>
+                      Garden Services
+                    </span>
                   </div>
                 </div>
               </div>
@@ -655,7 +737,9 @@ export default function AreasWeCoverPage() {
         </section>
 
         {/* REGIONAL INTRODUCTION */}
-        <section className={styles.introSection}>
+        <section
+          className={styles.introSection}
+        >
           <div className={styles.container}>
             <SectionHeading
               eyebrow="OUR SERVICE AREA"
@@ -668,35 +752,55 @@ export default function AreasWeCoverPage() {
                 <p>
                   Our work takes us across{" "}
                   <strong>
-                    South Lincolnshire, South East Lincolnshire, parts of
-                    Central and East Lincolnshire and the Peterborough area
+                    South Lincolnshire, South East
+                    Lincolnshire, parts of Central and East
+                    Lincolnshire and the Peterborough area
                   </strong>
                   .
                 </p>
 
                 <p>
-                  Major locations within our service region include:
+                  Major locations within our service
+                  region include:
                 </p>
 
-                <div className={styles.majorLocationLine}>
-                  Peterborough <span>•</span> Market Deeping{" "}
-                  <span>•</span> Bourne <span>•</span> Spalding{" "}
-                  <span>•</span> Holbeach <span>•</span> Long Sutton{" "}
-                  <span>•</span> Sutton Bridge <span>•</span> Boston{" "}
-                  <span>•</span> Sleaford <span>•</span> Lincoln{" "}
-                  <span>•</span> Horncastle <span>•</span> Spilsby{" "}
+                <div
+                  className={
+                    styles.majorLocationLine
+                  }
+                >
+                  Peterborough{" "}
+                  <span>•</span> Market Deeping{" "}
+                  <span>•</span> Bourne{" "}
+                  <span>•</span> Spalding{" "}
+                  <span>•</span> Holbeach{" "}
+                  <span>•</span> Long Sutton{" "}
+                  <span>•</span> Sutton Bridge{" "}
+                  <span>•</span> Boston{" "}
+                  <span>•</span> Sleaford{" "}
+                  <span>•</span> Lincoln{" "}
+                  <span>•</span> Horncastle{" "}
+                  <span>•</span> Spilsby{" "}
                   <span>•</span> Skegness
                 </div>
 
                 <p>
-                  We also work across many surrounding towns, villages and
-                  rural communities rather than limiting our service to the
+                  We also work across many surrounding
+                  towns, villages and rural communities
+                  rather than limiting our service to the
                   major locations shown above.
                 </p>
               </div>
 
-              <div className={styles.introHighlight}>
-                <span>WIDE REGIONAL COVERAGE</span>
+              <div
+                className={
+                  styles.introHighlight
+                }
+              >
+                <span>
+                  WIDE REGIONAL COVERAGE
+                </span>
+
                 <strong>
                   Peterborough
                   <br />
@@ -718,26 +822,52 @@ export default function AreasWeCoverPage() {
         </section>
 
         {/* PRIMARY AREAS */}
-        <section className={styles.primaryAreasSection}>
+        <section
+          className={
+            styles.primaryAreasSection
+          }
+        >
           <div className={styles.container}>
             <SectionHeading
               eyebrow="PRIMARY AREAS"
               title="Main Areas We Serve"
-              text="Our strongest visual location hubs across the regional service area."
+              text="Key towns and communities across our regional service area."
             />
 
-            <div className={styles.primaryAreasGrid}>
+            <div
+              className={
+                styles.primaryAreasGrid
+              }
+            >
               {primaryAreas.map((area) => (
-                <article className={styles.primaryAreaCard} key={area.title}>
-                  <div className={styles.cardTop}>
-                    <span className={styles.cardPin}>⌖</span>
-                    <span>ALPHA SERVICE AREA</span>
+                <article
+                  className={
+                    styles.primaryAreaCard
+                  }
+                  key={area.title}
+                >
+                  <div
+                    className={styles.cardTop}
+                  >
+                    <span
+                      className={styles.cardPin}
+                    >
+                      ⌖
+                    </span>
+
+                    <span>
+                      ALPHA SERVICE AREA
+                    </span>
                   </div>
 
                   <h3>{area.title}</h3>
+
                   <p>{area.text}</p>
 
-                  <Link href="/request-a-quote" className={styles.cardLink}>
+                  <Link
+                    href="/request-a-quote"
+                    className={styles.cardLink}
+                  >
                     REQUEST A QUOTE →
                   </Link>
                 </article>
@@ -766,16 +896,32 @@ export default function AreasWeCoverPage() {
                 className={styles.map}
               />
 
-              <div className={styles.mapRouteLabel}>
-                <strong>Approximate Alpha Service Region</strong>
+              <div
+                className={
+                  styles.mapRouteLabel
+                }
+              >
+                <strong>
+                  Approximate Alpha service region
+                </strong>
+
                 <span>
-                  Peterborough → Lincoln → Skegness → Long Sutton → Peterborough
+                  Peterborough to Skegness • Long Sutton
+                  to Lincoln • plus surrounding communities
+                  within the coverage area
                 </span>
               </div>
 
               {mapLocations.map((location) => {
-                const left = projectLongitude(location.lng);
-                const top = projectLatitude(location.lat);
+                const left =
+                  projectLongitude(
+                    location.lng
+                  );
+
+                const top =
+                  projectLatitude(
+                    location.lat
+                  );
 
                 const markerStyle = {
                   left: `${left}%`,
@@ -785,12 +931,23 @@ export default function AreasWeCoverPage() {
                 return (
                   <div
                     key={location.name}
-                    className={styles.mapMarker}
+                    className={
+                      styles.mapMarker
+                    }
                     style={markerStyle}
                     title={location.name}
                   >
-                    <span className={styles.markerDot} />
-                    <span className={styles.markerLabel}>
+                    <span
+                      className={
+                        styles.markerDot
+                      }
+                    />
+
+                    <span
+                      className={
+                        styles.markerLabel
+                      }
+                    >
                       {location.name}
                     </span>
                   </div>
@@ -799,40 +956,65 @@ export default function AreasWeCoverPage() {
             </div>
 
             <div className={styles.mapNote}>
-              <strong>Main service hubs:</strong>{" "}
-              {mapLocations.map((location, index) => (
-                <span key={location.name}>
-                  {location.name}
-                  {index < mapLocations.length - 1 ? " • " : ""}
-                </span>
-              ))}
+              <strong>
+                Main service hubs:
+              </strong>{" "}
+              {mapLocations.map(
+                (location, index) => (
+                  <span key={location.name}>
+                    {location.name}
+                    {index <
+                    mapLocations.length - 1
+                      ? " • "
+                      : ""}
+                  </span>
+                )
+              )}
             </div>
           </div>
         </section>
 
         {/* NOT SURE */}
-        <section className={styles.notSureSection}>
+        <section
+          className={styles.notSureSection}
+        >
           <div className={styles.container}>
             <div className={styles.notSureInner}>
-              <div className={styles.notSureIcon}>⌖</div>
+              <div
+                className={styles.notSureIcon}
+              >
+                ⌖
+              </div>
 
               <div>
-                <p className={styles.eyebrow}>NOT SURE IF WE COVER YOUR AREA?</p>
+                <p
+                  className={styles.eyebrow}
+                >
+                  NOT SURE IF WE COVER YOUR AREA?
+                </p>
 
-                <h2>Can&apos;t See Your Town Listed?</h2>
+                <h2>
+                  Can&apos;t See Your Town Listed?
+                </h2>
 
                 <p>
-                  Our service area includes many smaller villages and rural
-                  communities between the locations shown on this page.
+                  Our service area includes many smaller
+                  villages and rural communities between
+                  the locations shown on this page.
                 </p>
 
                 <p>
-                  If your property is within or close to our main coverage
-                  region, send us your postcode and tell us what work you need.
+                  If your property is within or close to
+                  our main coverage region, send us your
+                  postcode and tell us what work you need.
                 </p>
               </div>
 
-              <div className={styles.notSureActions}>
+              <div
+                className={
+                  styles.notSureActions
+                }
+              >
                 <Link
                   href="/request-a-quote"
                   className={styles.primaryButton}
@@ -852,7 +1034,11 @@ export default function AreasWeCoverPage() {
         </section>
 
         {/* FULL AREA SECTIONS */}
-        <section className={styles.areaSectionsSection}>
+        <section
+          className={
+            styles.areaSectionsSection
+          }
+        >
           <div className={styles.container}>
             <SectionHeading
               eyebrow="REGIONAL COVERAGE"
@@ -860,31 +1046,55 @@ export default function AreasWeCoverPage() {
               text="Our coverage is organised into natural regional areas so customers can quickly find their part of Lincolnshire and Peterborough."
             />
 
-            <div className={styles.areaSectionsGrid}>
-              {areaSections.map((section, index) => (
-                <article
-                  className={`${styles.areaSectionCard} ${
-                    index % 3 === 0 ? styles.areaSectionFeatured : ""
-                  }`}
-                  key={section.title}
-                >
-                  <div className={styles.areaSectionNumber}>
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
+            <div
+              className={
+                styles.areaSectionsGrid
+              }
+            >
+              {areaSections.map(
+                (section, index) => (
+                  <article
+                    className={`${styles.areaSectionCard} ${
+                      index % 3 === 0
+                        ? styles.areaSectionFeatured
+                        : ""
+                    }`}
+                    key={section.title}
+                  >
+                    <div
+                      className={
+                        styles.areaSectionNumber
+                      }
+                    >
+                      {String(
+                        index + 1
+                      ).padStart(2, "0")}
+                    </div>
 
-                  <h3>{section.title}</h3>
+                    <h3>
+                      {section.title}
+                    </h3>
 
-                  <p>{section.intro}</p>
+                    <p>
+                      {section.intro}
+                    </p>
 
-                  <AreaLocationList locations={section.locations} />
-                </article>
-              ))}
+                    <AreaLocationList
+                      locations={
+                        section.locations
+                      }
+                    />
+                  </article>
+                )
+              )}
             </div>
           </div>
         </section>
 
         {/* SERVICES */}
-        <section className={styles.servicesSection}>
+        <section
+          className={styles.servicesSection}
+        >
           <div className={styles.container}>
             <SectionHeading
               eyebrow="SERVICES ACROSS THE REGION"
@@ -892,7 +1102,9 @@ export default function AreasWeCoverPage() {
               text="One regional property team for a broad range of maintenance, improvement and garden work."
             />
 
-            <div className={styles.servicesGrid}>
+            <div
+              className={styles.servicesGrid}
+            >
               {services.map((service) => (
                 <ServiceCard
                   key={service.title}
@@ -907,48 +1119,79 @@ export default function AreasWeCoverPage() {
         </section>
 
         {/* LANDLORD REGIONAL COVERAGE */}
-        <section className={styles.landlordSection}>
+        <section
+          className={
+            styles.landlordSection
+          }
+        >
           <div className={styles.container}>
-            <div className={styles.landlordGrid}>
+            <div
+              className={styles.landlordGrid}
+            >
               <div>
-                <p className={styles.eyebrow}>LANDLORD REGIONAL COVERAGE</p>
+                <p
+                  className={
+                    styles.eyebrow
+                  }
+                >
+                  LANDLORD REGIONAL COVERAGE
+                </p>
 
-                <h2>Managing Properties Across More Than One Area?</h2>
+                <h2>
+                  Managing Properties Across More Than One Area?
+                </h2>
 
                 <p>
-                  Landlords and letting agents do not always manage properties
-                  in one town.
+                  Landlords and letting agents do not
+                  always manage properties in one town.
                 </p>
 
                 <p>
-                  Alpha&apos;s regional service area means we can potentially
-                  support properties across several locations through one
+                  Alpha&apos;s regional service area means
+                  we can potentially support properties
+                  across several locations through one
                   maintenance relationship.
                 </p>
 
                 <p>
-                  Whether your portfolio includes properties in Spalding,
-                  Boston, Sleaford, Peterborough or elsewhere within our
-                  coverage area, start with one enquiry.
+                  Whether your portfolio includes
+                  properties in Spalding, Boston,
+                  Sleaford, Peterborough or elsewhere
+                  within our coverage area, start with
+                  one enquiry.
                 </p>
 
-                <div className={styles.landlordStatement}>
-                  One enquiry. One team. One point of contact.
+                <div
+                  className={
+                    styles.landlordStatement
+                  }
+                >
+                  One enquiry. One team. One point of
+                  contact.
                 </div>
 
                 <Link
                   href="/landlords-letting-agents"
-                  className={styles.primaryButton}
+                  className={
+                    styles.primaryButton
+                  }
                 >
-                  VIEW LANDLORD &amp; LETTING AGENT SERVICES →
+                  VIEW LANDLORD &amp; LETTING AGENT
+                  SERVICES →
                 </Link>
               </div>
 
-              <div className={styles.landlordLocations}>
+              <div
+                className={
+                  styles.landlordLocations
+                }
+              >
                 <span>Spalding</span>
                 <span>Boston</span>
                 <span>Sleaford</span>
-                <span>Peterborough</span>
+                <span>
+                  Peterborough
+                </span>
                 <span>Lincoln</span>
                 <span>Skegness</span>
               </div>
@@ -966,8 +1209,12 @@ export default function AreasWeCoverPage() {
 
             <div className={styles.faqGrid}>
               {faqs.map((faq) => (
-                <article className={styles.faqCard} key={faq.question}>
+                <article
+                  className={styles.faqCard}
+                  key={faq.question}
+                >
                   <h3>{faq.question}</h3>
+
                   <p>{faq.answer}</p>
                 </article>
               ))}
@@ -978,35 +1225,60 @@ export default function AreasWeCoverPage() {
         {/* FINAL CTA */}
         <section className={styles.finalCta}>
           <div className={styles.container}>
-            <div className={styles.finalCtaInner}>
-              <p className={styles.eyebrow}>PROPERTY &amp; GARDEN SERVICES</p>
+            <div
+              className={
+                styles.finalCtaInner
+              }
+            >
+              <p
+                className={
+                  styles.eyebrow
+                }
+              >
+                PROPERTY &amp; GARDEN SERVICES
+              </p>
 
-              <h2>Need Property or Garden Work in Our Service Area?</h2>
+              <h2>
+                Need Property or Garden Work in Our Service
+                Area?
+              </h2>
 
               <p>
-                From Peterborough through South Lincolnshire and across towards
-                Lincoln, Boston and Skegness, Alpha provides one team for a
+                From Peterborough through South Lincolnshire
+                and across towards Lincoln, Boston and
+                Skegness, Alpha provides one team for a
                 broad range of property and garden work.
               </p>
 
               <p>
-                If your town or village isn&apos;t shown, send us your postcode
-                and tell us what you need.
+                If your town or village isn&apos;t shown,
+                send us your postcode and tell us what you
+                need.
               </p>
 
-              <h3>One Team. Complete Property Care.</h3>
+              <h3>
+                One Team. Complete Property Care.
+              </h3>
 
-              <div className={styles.finalButtons}>
+              <div
+                className={
+                  styles.finalButtons
+                }
+              >
                 <Link
                   href="/request-a-quote"
-                  className={styles.primaryButton}
+                  className={
+                    styles.primaryButton
+                  }
                 >
                   REQUEST A QUOTE
                 </Link>
 
                 <a
                   href="tel:01775518068"
-                  className={styles.secondaryButton}
+                  className={
+                    styles.secondaryButton
+                  }
                 >
                   CALL 01775 518068
                 </a>

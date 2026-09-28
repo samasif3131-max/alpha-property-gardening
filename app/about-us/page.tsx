@@ -74,7 +74,7 @@ const processSteps = [
   {
     number: "03",
     title: "Agree the Scope",
-    text: "The customer should understand what is included in the job.",
+    text: "We make clear what is included in the agreed job before work proceeds.",
   },
   {
     number: "04",
@@ -320,9 +320,9 @@ export default function AboutUsPage() {
             </p>
 
             <p>
-              Property remains the lead theme. Alpha is a property
-              maintenance, repair and renovation business with garden
-              services.
+              Alpha is a property maintenance, repair and renovation business
+              with garden services, bringing a broad range of practical
+              property care together through one team.
             </p>
 
             <Link href="/services" className={styles.goldButton}>
@@ -484,9 +484,9 @@ export default function AboutUsPage() {
             <h2>The Alpha Team</h2>
 
             <p>
-              Alpha currently operates with a small practical team focused on
-              property maintenance, garden work, plumbing and property
-              improvement.
+              Alpha currently operates with a practical three-person team
+              covering property maintenance, garden work, plumbing, bathrooms,
+              kitchens and wider property improvement work.
             </p>
 
             <p>The team structure currently includes:</p>
@@ -499,8 +499,8 @@ export default function AboutUsPage() {
               <h3>Property &amp; Garden Maintenance</h3>
 
               <p>
-                Team members handling general property maintenance, repairs,
-                garden maintenance and practical property work.
+                Two members of the team focus on general property maintenance,
+                repairs, garden maintenance and practical property work.
               </p>
             </article>
 
@@ -510,7 +510,7 @@ export default function AboutUsPage() {
               <h3>Plumbing, Bathrooms &amp; Kitchens</h3>
 
               <p>
-                Dedicated capability covering plumbing work, bathroom fitting,
+                One member of the team focuses on plumbing, bathroom fitting,
                 kitchen installation and associated property work.
               </p>
             </article>
@@ -527,11 +527,6 @@ export default function AboutUsPage() {
               </p>
             </article>
           </div>
-
-          <p className={styles.teamNote}>
-            Team photographs and individual profiles can be added when genuine
-            Alpha team imagery and confirmed information are available.
-          </p>
         </section>
 
         {/* PROCESS */}
@@ -582,9 +577,10 @@ export default function AboutUsPage() {
             </ul>
 
             <p>
-              If hidden problems or previously inaccessible issues are found
-              during a project, any additional work should be discussed before
-              proceeding wherever reasonably possible.
+              If hidden problems or previously inaccessible issues are
+              discovered during a project, we’ll discuss any additional work
+              with the customer before proceeding wherever reasonably
+              possible.
             </p>
           </div>
         </section>
@@ -597,13 +593,9 @@ export default function AboutUsPage() {
             <h2>Clear About What We Do</h2>
 
             <p>
-              Being a multi-service property company does not mean claiming to
-              provide every possible trade.
-            </p>
-
-            <p>
-              Alpha should be clear about the services it currently offers
-              and where specialist regulated work falls outside that scope.
+              Alpha provides a broad range of property services, while
+              remaining clear about work that falls outside our current scope
+              or requires separately regulated expertise.
             </p>
 
             <div className={styles.gasNotice}>
@@ -619,11 +611,6 @@ export default function AboutUsPage() {
               <p>
                 That means regulated gas work is not currently advertised as a
                 direct Alpha service.
-              </p>
-
-              <p>
-                As the business expands and obtains the appropriate
-                capability, the website can be updated accordingly.
               </p>
             </div>
           </div>
@@ -652,8 +639,7 @@ export default function AboutUsPage() {
             </p>
 
             <div className={styles.emergencyCall}>
-              <span>FOR AN EMERGENCY:</span>
-              <a href="tel:01775518068">CALL 01775 518068</a>
+              <span>FOR AN EMERGENCY: CALL 01775 518068</span>
             </div>
           </div>
         </section>
@@ -839,8 +825,8 @@ export default function AboutUsPage() {
             <h2>Building Trust Through the Work</h2>
 
             <p>
-              As Alpha grows, trust should come from genuine evidence rather
-              than invented numerical claims.
+              We believe trust should be built through the quality of the
+              work, clear communication and genuine customer experiences.
             </p>
 
             <div className={styles.trustGrid}>
@@ -849,11 +835,8 @@ export default function AboutUsPage() {
               <span>Clear quotations</span>
               <span>Professional communication</span>
               <span>Before-and-after work</span>
-              <span>Consistent branding</span>
-              <span>Reliable job records</span>
-              <span>
-                Repeat landlord and homeowner relationships
-              </span>
+              <span>Consistent job records</span>
+              <span>Repeat customer relationships</span>
             </div>
 
             <Link href="/our-work" className={styles.goldButton}>

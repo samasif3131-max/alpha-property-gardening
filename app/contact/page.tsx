@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -114,6 +114,10 @@ export default function ContactPage() {
     "idle" | "success" | "error"
   >("idle");
 
+  useEffect(() => {
+    document.title = "Contact Alpha Property & Gardening Services";
+  }, []);
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -210,7 +214,7 @@ export default function ContactPage() {
 
               <div className={styles.heroButtons}>
                 <Link
-                  href="/quote"
+                  href="/request-a-quote"
                   className={styles.primaryButton}
                 >
                   REQUEST A QUOTE
@@ -342,7 +346,7 @@ export default function ContactPage() {
             </a>
 
             <Link
-              href="/quote"
+              href="/request-a-quote"
               className={styles.optionCard}
             >
               <span className={styles.optionIcon}>✓</span>
@@ -356,16 +360,6 @@ export default function ContactPage() {
                 work and projects that need a price.
               </p>
             </Link>
-          </div>
-
-          <div className={styles.whatsappNotice}>
-            <strong>WhatsApp</strong>
-
-            <span>
-              WhatsApp will be displayed once Alpha’s correct
-              WhatsApp Business number and link are fully
-              operational.
-            </span>
           </div>
         </section>
 
@@ -424,16 +418,15 @@ export default function ContactPage() {
                 </h3>
 
                 <p>
-                  We’ve received your enquiry. If your email
-                  application opened, please complete the send
-                  step there. For urgent property or plumbing
-                  problems, call 01775 518068 rather than
-                  waiting for an email response.
+                  Please complete the sending step shown by
+                  your email application. For urgent property
+                  or plumbing problems, call 01775 518068
+                  rather than waiting for an email response.
                 </p>
 
                 <div className={styles.stateActions}>
                   <Link
-                    href="/quote"
+                    href="/request-a-quote"
                     className={styles.primaryButton}
                   >
                     REQUEST A QUOTE
@@ -630,29 +623,6 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-
-                  {/* FILE */}
-                  <div
-                    className={`${styles.formGroup} ${styles.fullWidth}`}
-                  >
-                    <label htmlFor="file">
-                      Optional File / Photo
-                    </label>
-
-                    <input
-                      id="file"
-                      name="file"
-                      type="file"
-                      accept="image/*,.pdf,.doc,.docx"
-                    />
-
-                    <small>
-                      Useful for photos or documents.
-                      Attachments require a server-side form
-                      handler and are not included in the
-                      mailto fallback.
-                    </small>
-                  </div>
                 </div>
 
                 <button
@@ -667,7 +637,7 @@ export default function ContactPage() {
                   can use the information provided to respond
                   to your enquiry.{" "}
                   <Link href="/privacy-policy">
-                    PRIVACY POLICY
+                    Privacy Policy
                   </Link>
                 </p>
               </form>
@@ -700,7 +670,7 @@ export default function ContactPage() {
           </div>
 
           <Link
-            href="/quote"
+            href="/request-a-quote"
             className={styles.primaryButton}
           >
             START A QUOTE REQUEST →
@@ -746,13 +716,13 @@ export default function ContactPage() {
                 EMAIL INFO@ALPHAPROPERTYANDGARDENING.CO.UK
               </a>
 
-              <Link href="/landlords">
+              <Link href="/landlords-letting-agents">
                 REQUEST LANDLORD SUPPORT →
               </Link>
             </div>
 
             <Link
-              href="/landlords"
+              href="/landlords-letting-agents"
               className={styles.textLink}
             >
               VIEW LANDLORD &amp; LETTING AGENT SERVICES →
@@ -952,11 +922,6 @@ export default function ContactPage() {
             <span>
               Available 24/7 for suitable urgent call-outs.
             </span>
-
-            <small>
-              General enquiry opening hours are not displayed
-              until confirmed by Alpha.
-            </small>
           </div>
         </section>
 
@@ -1018,7 +983,7 @@ export default function ContactPage() {
 
           <div className={styles.finalActions}>
             <Link
-              href="/quote"
+              href="/request-a-quote"
               className={styles.primaryButton}
             >
               REQUEST A QUOTE
@@ -1046,7 +1011,7 @@ export default function ContactPage() {
           EMERGENCY
         </a>
 
-        <Link href="/quote">
+        <Link href="/request-a-quote">
           <span>✓</span>
           QUOTE
         </Link>

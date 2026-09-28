@@ -147,14 +147,14 @@ export default function GardenServicesPage() {
           <div className={styles.container}>
             <div className={styles.heroContent}>
               <div className={styles.heroEyebrow}>
-                GARDEN MAINTENANCE & CLEARANCE
+                GARDEN MAINTENANCE &amp; CLEARANCE
               </div>
 
-              <h1>Garden Maintenance & Clearance Services</h1>
+              <h1>Garden Maintenance &amp; Clearance Services</h1>
 
               <p className={styles.heroLead}>
                 From regular grass cutting and garden maintenance to tackling
-                an overgrown outside space, Alpha Property & Gardening
+                an overgrown outside space, Alpha Property &amp; Gardening
                 Services provides practical garden services for homeowners,
                 landlords and letting agents.
               </p>
@@ -194,17 +194,17 @@ export default function GardenServicesPage() {
 
                 <div className={styles.panelItem}>
                   <span>02</span>
-                  <strong>Grass Cutting & Lawn Mowing</strong>
+                  <strong>Grass Cutting &amp; Lawn Mowing</strong>
                 </div>
 
                 <div className={styles.panelItem}>
                   <span>03</span>
-                  <strong>Strimming & Overgrown Grass</strong>
+                  <strong>Strimming &amp; Overgrown Grass</strong>
                 </div>
 
                 <div className={styles.panelItem}>
                   <span>04</span>
-                  <strong>Hedge & Shrub Cutting</strong>
+                  <strong>Hedge &amp; Shrub Cutting</strong>
                 </div>
 
                 <div className={styles.panelItem}>
@@ -228,7 +228,7 @@ export default function GardenServicesPage() {
               <div className={styles.benefitItem}>
                 <span className={styles.benefitIcon}>01</span>
                 <div>
-                  <strong>One-Off & Recurring</strong>
+                  <strong>One-Off &amp; Recurring</strong>
                   <span>Maintenance options</span>
                 </div>
               </div>
@@ -236,8 +236,8 @@ export default function GardenServicesPage() {
               <div className={styles.benefitItem}>
                 <span className={styles.benefitIcon}>02</span>
                 <div>
-                  <strong>Homes & Rentals</strong>
-                  <span>Homeowners, landlords & agents</span>
+                  <strong>Homes &amp; Rentals</strong>
+                  <span>Homeowners, landlords &amp; agents</span>
                 </div>
               </div>
 
@@ -253,7 +253,7 @@ export default function GardenServicesPage() {
                 <span className={styles.benefitIcon}>04</span>
                 <div>
                   <strong>Complete Property Care</strong>
-                  <span>Garden & property services</span>
+                  <span>Property &amp; garden services</span>
                 </div>
               </div>
             </div>
@@ -269,7 +269,9 @@ export default function GardenServicesPage() {
                   src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1200&q=85"
                   alt="Illustrative garden maintenance image"
                 />
-                <div className={styles.imageLabel}>GARDEN MAINTENANCE</div>
+                <div className={styles.imageLabel}>
+                  GARDEN MAINTENANCE
+                </div>
               </div>
 
               <div className={styles.introContent}>
@@ -376,7 +378,7 @@ export default function GardenServicesPage() {
             <div className={styles.detailGrid}>
               <article className={styles.detailCard}>
                 <span className={styles.cardEyebrow}>01</span>
-                <h2>Grass Cutting & Lawn Mowing</h2>
+                <h2>Grass Cutting &amp; Lawn Mowing</h2>
 
                 <p>
                   Lawn mowing and grass cutting can include suitable strimming
@@ -397,7 +399,7 @@ export default function GardenServicesPage() {
 
               <article className={styles.detailCard}>
                 <span className={styles.cardEyebrow}>02</span>
-                <h2>Strimming & Overgrown Grass</h2>
+                <h2>Strimming &amp; Overgrown Grass</h2>
 
                 <p>
                   Strimming is suitable for edges, fences, garden boundaries,
@@ -413,7 +415,7 @@ export default function GardenServicesPage() {
 
               <article className={styles.detailCard}>
                 <span className={styles.cardEyebrow}>03</span>
-                <h2>Hedge & Shrub Cutting</h2>
+                <h2>Hedge &amp; Shrub Cutting</h2>
 
                 <p>
                   We provide suitable hedge trimming, cutting back of suitable
@@ -452,7 +454,7 @@ export default function GardenServicesPage() {
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <span className={styles.sectionEyebrow}>ONE-OFF WORK</span>
-              <h2>Garden Tidy-Ups & Clearances</h2>
+              <h2>Garden Tidy-Ups &amp; Clearances</h2>
               <p>
                 If a garden has fallen behind, we can assess the work required
                 and provide a clear quotation for bringing it back under
@@ -565,10 +567,10 @@ export default function GardenServicesPage() {
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <span className={styles.sectionEyebrow}>
-                LANDLORDS & LETTING AGENTS
+                LANDLORDS &amp; LETTING AGENTS
               </span>
 
-              <h2>Garden Maintenance for Landlords & Letting Agents</h2>
+              <h2>Garden Maintenance for Landlords &amp; Letting Agents</h2>
 
               <p>
                 One-off and recurring garden work for rental properties,
@@ -602,7 +604,7 @@ export default function GardenServicesPage() {
                   href="/landlords-letting-agents"
                   className={styles.primaryButton}
                 >
-                  VIEW LANDLORD & LETTING AGENT SERVICES →
+                  VIEW LANDLORD &amp; LETTING AGENT SERVICES →
                 </Link>
               </div>
             </div>
@@ -701,7 +703,7 @@ export default function GardenServicesPage() {
             <div className={styles.propertyGardenBox}>
               <div>
                 <span className={styles.sectionEyebrow}>
-                  PROPERTY & GARDEN
+                  PROPERTY &amp; GARDEN
                 </span>
 
                 <h2>Need Work Inside and Outside the Property?</h2>
@@ -744,7 +746,7 @@ export default function GardenServicesPage() {
               <article className={styles.infoCard}>
                 <span className={styles.cardEyebrow}>01</span>
 
-                <h2>Garden Waste & Clearance</h2>
+                <h2>Garden Waste &amp; Clearance</h2>
 
                 <p>
                   Your quotation will clearly state whether waste removal is

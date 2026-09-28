@@ -326,7 +326,7 @@ export default function RequestAQuotePage() {
       nextErrors.customerType = "Please select who you are requesting a quote as.";
     }
 
-    if (form.customerType === "tenant" && !form.tenantAuthorisation) {
+    if (form.emergency !== true && form.customerType === "tenant" && !form.tenantAuthorisation) {
       nextErrors.tenantAuthorisation =
         "Please tell us whether you are responsible for authorising the work.";
     }

@@ -674,13 +674,13 @@ export default function PropertyDetailsPage() {
   const [photoError, setPhotoError] = useState("");
   const [saving, setSaving] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [journeyReady, setJourneyReady] = useState(false);
   const [lookupLoading, setLookupLoading] = useState(false);
 
   const photoInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    document.title =
-      "Request a Quote — Property Details | Alpha Property & Gardening Services";
+    document.title = "Property Details | Request a Quote | Alpha";
 
     const description =
       "Tell Alpha Property & Gardening Services where the work is taking place and provide useful property, access and attendance information for your quotation request.";
@@ -706,6 +706,32 @@ export default function PropertyDetailsPage() {
     const savedStep19 =
       readSession<Step19Draft>(STEP19_STORAGE_KEY);
 
+    const hasStep1 = Boolean(
+      savedStep17.enquiryId &&
+      savedStep17.customerType &&
+      savedStep17.email &&
+      savedStep17.phone,
+    );
+
+    if (!hasStep1) {
+      router.replace("/request-a-quote");
+      return;
+    }
+
+    const hasStep2 = Boolean(
+      savedStep18?.enquiryId &&
+      savedStep18?.form &&
+      (savedStep18.step2CompletedAt ||
+        savedStep18.form.primaryService ||
+        savedStep18.form.jobDescription ||
+        (savedStep18.form.multipleServices?.length ?? 0) > 0),
+    );
+
+    if (!hasStep2) {
+      router.replace("/request-a-quote/service-details");
+      return;
+    }
+
     const id =
       savedStep17.enquiryId ??
       savedStep18?.enquiryId ??
@@ -729,6 +755,7 @@ export default function PropertyDetailsPage() {
 
     trackQuoteEvent("quote_step_3_started");
 
+    setJourneyReady(true);
     setHydrated(true);
   }, []);
 
@@ -836,8 +863,7 @@ export default function PropertyDetailsPage() {
     hasService("Property Renovation") ||
     hasService("Painting & Decorating") ||
     hasService("Landlord / Rental Property Work") ||
-    hasService("Multiple Services") ||
-    hasService("Property Maintenance & Repairs");
+    hasService("Multiple Services");
 
   const isOccupancyRelevant =
     isLandlordOrAgent ||
@@ -940,22 +966,58 @@ export default function PropertyDetailsPage() {
     if (!postcode) {
       updateForm(
         "addressLookupStatus",
-        "Enter your postcode first, then use manual address entry if needed.",
+        "Enter your postcode first. Manual address entry remains available.",
       );
       setLookupLoading(false);
       return;
     }
 
-    updateForm(
-      "addressLookupStatus",
-      "Address lookup is not connected to an address database yet. Your postcode has been kept, and you can enter the address manually.",
-    );
+    try {
+      const response = await fetch(
+        `https://api.postcodes.io/postcodes/${encodeURIComponent(postcode)}`,
+        { headers: { Accept: "application/json" } },
+      );
 
-    setLookupLoading(false);
+      if (!response.ok) {
+        throw new Error("Postcode not found");
+      }
 
-    document
-      .getElementById("addressLine1")
-      ?.focus();
+      const data = (await response.json()) as {
+        result?: {
+          postcode?: string;
+          admin_district?: string;
+          admin_county?: string | null;
+          region?: string | null;
+        };
+      };
+
+      const result = data.result;
+
+      updateForm("postcode", result?.postcode ?? postcode.toUpperCase());
+      updateForm(
+        "townCity",
+        result?.admin_district ?? form.townCity,
+      );
+      updateForm(
+        "county",
+        result?.admin_county ?? result?.region ?? form.county,
+      );
+      updateForm(
+        "addressLookupStatus",
+        "Postcode found. Please select or confirm the property address using the manual address fields below. The lookup does not block submission.",
+      );
+
+      document
+        .getElementById("addressLine1")
+        ?.focus();
+    } catch {
+      updateForm(
+        "addressLookupStatus",
+        "We couldn't complete the postcode lookup. You can continue with manual address entry; the lookup failure does not block your quote request.",
+      );
+    } finally {
+      setLookupLoading(false);
+    }
   }
 
   function validate() {
@@ -1331,6 +1393,27 @@ export default function PropertyDetailsPage() {
     ];
   }
 
+  if (!hydrated || !journeyReady || !step18) {
+    return (
+      <main className={styles.page}>
+        <Header />
+        <div className={styles.container}>
+          <section className={styles.section}>
+            <div className={styles.sectionIntro}>
+              <div>
+                <h2>Loading your quote details…</h2>
+                <p>
+                  We’re checking the previous quote steps before opening this page.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
+
   return (
     <main className={styles.page}>
       <Header />
@@ -1421,11 +1504,6 @@ export default function PropertyDetailsPage() {
         <div className={styles.main}>
           <section className={styles.section}>
             <div className={styles.sectionIntro}>
-              <span
-                className={styles.sectionNumber}
-              >
-                01
-              </span>
 
               <div>
                 <h2>
@@ -1671,11 +1749,6 @@ export default function PropertyDetailsPage() {
 
           <section className={styles.section}>
             <div className={styles.sectionIntro}>
-              <span
-                className={styles.sectionNumber}
-              >
-                02
-              </span>
 
               <div>
                 <h2>
@@ -1791,8 +1864,7 @@ export default function PropertyDetailsPage() {
                 </span>
 
                 <strong>
-                  {customerType ||
-                    "Customer / organisation"}
+                  {customerType}
                 </strong>
               </div>
 
@@ -1805,11 +1877,6 @@ export default function PropertyDetailsPage() {
           {isOccupancyRelevant ? (
             <section className={styles.section}>
               <div className={styles.sectionIntro}>
-                <span
-                  className={styles.sectionNumber}
-                >
-                  03
-                </span>
 
                 <div>
                   <h2>
@@ -1829,12 +1896,20 @@ export default function PropertyDetailsPage() {
                 name="occupancy"
                 value={form.occupancy}
                 options={renderOccupancyOptions()}
-                onChange={(value) =>
-                  updateForm(
-                    "occupancy",
-                    value as OccupancyStatus,
-                  )
-                }
+                onChange={(value) => {
+                  const nextValue = value as OccupancyStatus;
+                  updateForm("occupancy", nextValue);
+
+                  if (nextValue !== "Yes — Tenant occupied") {
+                    setForm((current) => ({
+                      ...current,
+                      shouldContactTenant: "",
+                      tenantName: "",
+                      tenantPhone: "",
+                      tenantEmail: "",
+                    }));
+                  }
+                }}
               />
 
               {shouldShowTenantContact ? (
@@ -1858,12 +1933,19 @@ export default function PropertyDetailsPage() {
                       "No",
                       "To be confirmed",
                     ]}
-                    onChange={(value) =>
-                      updateForm(
-                        "shouldContactTenant",
-                        value as YesNo,
-                      )
-                    }
+                    onChange={(value) => {
+                      const nextValue = value as YesNo;
+                      updateForm("shouldContactTenant", nextValue);
+
+                      if (nextValue !== "Yes") {
+                        setForm((current) => ({
+                          ...current,
+                          tenantName: "",
+                          tenantPhone: "",
+                          tenantEmail: "",
+                        }));
+                      }
+                    }}
                   />
 
                   {form.shouldContactTenant ===
@@ -2026,11 +2108,6 @@ export default function PropertyDetailsPage() {
 
           <section className={styles.section}>
             <div className={styles.sectionIntro}>
-              <span
-                className={styles.sectionNumber}
-              >
-                04
-              </span>
 
               <div>
                 <h2>
@@ -2096,11 +2173,6 @@ export default function PropertyDetailsPage() {
           {isExternalAccessRelevant ? (
             <section className={styles.section}>
               <div className={styles.sectionIntro}>
-                <span
-                  className={styles.sectionNumber}
-                >
-                  05
-                </span>
 
                 <div>
                   <h2>
@@ -2158,11 +2230,6 @@ export default function PropertyDetailsPage() {
 
           <section className={styles.section}>
             <div className={styles.sectionIntro}>
-              <span
-                className={styles.sectionNumber}
-              >
-                06
-              </span>
 
               <div>
                 <h2>
@@ -2217,11 +2284,6 @@ export default function PropertyDetailsPage() {
           {isProblemLocationRelevant ? (
             <section className={styles.section}>
               <div className={styles.sectionIntro}>
-                <span
-                  className={styles.sectionNumber}
-                >
-                  07
-                </span>
 
                 <div>
                   <h2>
@@ -2261,11 +2323,6 @@ export default function PropertyDetailsPage() {
             )) ? (
             <section className={styles.section}>
               <div className={styles.sectionIntro}>
-                <span
-                  className={styles.sectionNumber}
-                >
-                  08
-                </span>
 
                 <div>
                   <h2>
@@ -2409,11 +2466,6 @@ export default function PropertyDetailsPage() {
           {isWaterStopTapRelevant ? (
             <section className={styles.section}>
               <div className={styles.sectionIntro}>
-                <span
-                  className={styles.sectionNumber}
-                >
-                  09
-                </span>
 
                 <div>
                   <h2>
@@ -2477,11 +2529,6 @@ export default function PropertyDetailsPage() {
           {shouldShowCommercialFields ? (
             <section className={styles.section}>
               <div className={styles.sectionIntro}>
-                <span
-                  className={styles.sectionNumber}
-                >
-                  10
-                </span>
 
                 <div>
                   <h2>
@@ -2568,11 +2615,6 @@ export default function PropertyDetailsPage() {
           {portfolioRequired ? (
             <section className={styles.section}>
               <div className={styles.sectionIntro}>
-                <span
-                  className={styles.sectionNumber}
-                >
-                  11
-                </span>
 
                 <div>
                   <h2>
@@ -2735,11 +2777,6 @@ export default function PropertyDetailsPage() {
 
           <section className={styles.section}>
             <div className={styles.sectionIntro}>
-              <span
-                className={styles.sectionNumber}
-              >
-                12
-              </span>
 
               <div>
                 <h2>
@@ -3032,11 +3069,6 @@ export default function PropertyDetailsPage() {
 
           <section className={styles.section}>
             <div className={styles.sectionIntro}>
-              <span
-                className={styles.sectionNumber}
-              >
-                13
-              </span>
 
               <div>
                 <h2>
@@ -3267,9 +3299,8 @@ export default function PropertyDetailsPage() {
                 styles.sidebarNote
               }
             >
-              Your Step 17 customer information and Step
-              18 service details remain attached to this
-              enquiry while you complete this page.
+              The details you've already provided will be
+              carried through while you complete your quote request.
             </div>
           </div>
 
@@ -3283,8 +3314,7 @@ export default function PropertyDetailsPage() {
             </span>
 
             <strong>
-              {customerType ||
-                "Customer / organisation"}
+              {customerType}
             </strong>
 
             <Link href="/request-a-quote">

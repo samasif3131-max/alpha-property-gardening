@@ -310,10 +310,10 @@ export default function OurWorkPage() {
 
               <div className={styles.introText}>
                 <p>
-                  Our work portfolio is designed to grow alongside the
-                  business. As genuine Alpha projects are completed,
-                  suitable photographs and project details can be added
-                  here.
+                  As our portfolio grows, we’ll share genuine Alpha projects
+                  across property maintenance, repairs, renovations and
+                  garden work, using real photographs and clear details of
+                  the work completed.
                 </p>
 
                 <p>
@@ -468,8 +468,9 @@ export default function OurWorkPage() {
                     <span>03</span>
                     <strong>Useful Project Details</strong>
                     <p>
-                      Future project details will explain the work,
-                      scope and result clearly.
+                      Each project we publish will clearly explain the
+                      work completed, the agreed scope and the finished
+                      result.
                     </p>
                   </div>
                 </div>

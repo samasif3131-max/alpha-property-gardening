@@ -1,0 +1,759 @@
+.page {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #1a1d1b;
+}
+
+.container {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 78% 10%,
+      rgba(115, 145, 126, 0.18),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #111312 0%,
+      #1c211e 52%,
+      #253129 100%
+    );
+  color: #ffffff;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -180px;
+  right: -180px;
+  width: 500px;
+  height: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 65px rgba(255, 255, 255, 0.018),
+    0 0 0 130px rgba(255, 255, 255, 0.012);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 22px 0 74px;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.backLink,
+.helpLink {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.backLink:hover,
+.helpLink:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.72fr;
+  gap: 72px;
+  align-items: center;
+  padding-top: 76px;
+}
+
+.heroContent {
+  max-width: 720px;
+}
+
+.eyebrow,
+.sectionEyebrow,
+.finalEyebrow,
+.emergencyEyebrow,
+.cardEyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  margin-bottom: 16px;
+  color: #bcc7bf;
+}
+
+.heroContent h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 5.7rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.heroContent h1 span {
+  color: #cad5cd;
+}
+
+.heroLead {
+  margin: 26px 0 0;
+  color: #ffffff;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.heroText {
+  max-width: 690px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+
+.slogan {
+  margin-top: 25px;
+  color: #d5e0d7;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.primaryButton,
+.secondaryButton,
+.finalPrimary,
+.finalSecondary,
+.emergencyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 49px;
+  padding: 0 19px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.primaryButton,
+.finalPrimary {
+  background: #e0ebe2;
+  color: #17251c;
+}
+
+.secondaryButton,
+.finalSecondary {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover,
+.finalPrimary:hover,
+.finalSecondary:hover,
+.emergencyButton:hover {
+  transform: translateY(-2px);
+}
+
+.comingSoonCard {
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(8px);
+}
+
+.lockIcon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #d6e0d8;
+  font-size: 1.35rem;
+}
+
+.cardEyebrow {
+  color: #adbab1;
+}
+
+.comingSoonCard h2 {
+  margin: 10px 0 0;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.08;
+}
+
+.comingSoonCard > p {
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(222, 235, 224, 0.1);
+  color: #dbe9dd;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.statusBadge span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b6d1ba;
+}
+
+.cardDivider {
+  height: 1px;
+  margin: 24px 0;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cardSupport {
+  display: grid;
+  gap: 7px;
+}
+
+.cardSupport strong {
+  font-size: 0.95rem;
+}
+
+.cardSupport span {
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.cardSupport a {
+  width: fit-content;
+  margin-top: 6px;
+  color: #e0ebe2;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.cardSupport a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.introSection {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.sectionHeading {
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.sectionEyebrow {
+  margin-bottom: 11px;
+  color: #557960;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  color: #1a2820;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.sectionHeading p {
+  max-width: 780px;
+  margin: 16px 0 0;
+  color: #617067;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.featureCard {
+  min-height: 190px;
+  padding: 23px;
+  border: 1px solid #e0e6e1;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.featureIcon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 17px;
+  border-radius: 12px;
+  background: #f0f4f1;
+  color: #4a7054;
+  font-size: 1.2rem;
+}
+
+.featureCard h3 {
+  margin: 0;
+  color: #1c3023;
+  font-size: 1.12rem;
+}
+
+.featureCard p {
+  margin: 9px 0 0;
+  color: #69766e;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   ACCOUNT TYPES
+========================================================= */
+
+.accountSection {
+  padding: 88px 0;
+  background: #f5f7f5;
+}
+
+.accountGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.accountGrid h2 {
+  margin: 0;
+  color: #1a2d21;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.accountGrid > div:first-child > p {
+  max-width: 720px;
+  margin: 16px 0 0;
+  color: #647168;
+  line-height: 1.8;
+}
+
+.accountCard {
+  padding: 25px;
+  border: 1px solid #dce5de;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.accountRow {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #edf1ed;
+}
+
+.accountRow:first-child {
+  padding-top: 0;
+}
+
+.accountRow:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.accountIcon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #f0f5f1;
+  color: #47704f;
+}
+
+.accountRow strong,
+.accountRow span {
+  display: block;
+}
+
+.accountRow strong {
+  color: #213426;
+  font-size: 0.95rem;
+}
+
+.accountRow div span {
+  margin-top: 4px;
+  color: #727e76;
+  line-height: 1.5;
+  font-size: 0.84rem;
+}
+
+/* =========================================================
+   NEW CUSTOMER
+========================================================= */
+
+.newCustomerSection {
+  padding: 72px 0;
+}
+
+.newCustomerCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  padding: 30px;
+  border: 1px solid #dbe5dd;
+  border-radius: 17px;
+  background: #f5f8f5;
+}
+
+.newCustomerCard h2 {
+  margin: 0;
+  color: #193321;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  line-height: 1.15;
+}
+
+.newCustomerCard p {
+  max-width: 750px;
+  margin: 10px 0 0;
+  color: #66736a;
+  line-height: 1.7;
+}
+
+.newCustomerCard .primaryButton {
+  flex: 0 0 auto;
+  background: #293d2e;
+  color: #ffffff;
+}
+
+/* =========================================================
+   HELP
+========================================================= */
+
+.helpSection {
+  padding: 88px 0;
+  background: #fafbfa;
+}
+
+.helpGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.72fr;
+  gap: 28px;
+}
+
+.helpGrid h2 {
+  margin: 0;
+  color: #1a2d21;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+
+.helpGrid > div:first-child > p {
+  max-width: 720px;
+  margin: 15px 0 0;
+  color: #657168;
+  line-height: 1.75;
+}
+
+.helpLinks {
+  display: grid;
+  gap: 9px;
+  margin-top: 25px;
+}
+
+.helpLinks a {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #2f613a;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.helpLinks a:hover {
+  text-decoration: underline;
+}
+
+.helpLinks span {
+  color: #6c8572;
+}
+
+.emergencyCard {
+  padding: 28px;
+  border-radius: 16px;
+  background: #282c29;
+  color: #ffffff;
+}
+
+.emergencyEyebrow {
+  margin-bottom: 10px;
+  color: #d2e6d5;
+}
+
+.emergencyCard h3 {
+  margin: 0;
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+
+.emergencyCard p {
+  margin: 11px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.65;
+}
+
+.emergencyButton {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 22px;
+  background: #d9efdc;
+  color: #16321f;
+}
+
+.emergencyButton strong {
+  font-size: 1.3rem;
+}
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.finalCta {
+  padding: 78px 0;
+  background:
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(110, 166, 118, 0.14),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #111412 0%,
+      #1b2820 60%,
+      #24382a 100%
+    );
+  color: #ffffff;
+}
+
+.finalCtaInner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.finalEyebrow {
+  margin-bottom: 11px;
+  color: #cbdccf;
+}
+
+.finalCta h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.finalCta p {
+  max-width: 730px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.75;
+}
+
+.finalActions {
+  display: grid;
+  gap: 10px;
+}
+
+.finalPrimary {
+  background: #e0ebe2;
+  color: #17251c;
+}
+
+.finalSecondary {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* =========================================================
+   STAFF
+========================================================= */
+
+.staffLink {
+  padding: 20px 0 26px;
+  text-align: center;
+  background: #111412;
+}
+
+.staffLink a {
+  color: rgba(255, 255, 255, 0.38);
+  text-decoration: none;
+  font-size: 0.74rem;
+}
+
+.staffLink a:hover {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .heroGrid,
+  .accountGrid,
+  .helpGrid,
+  .finalCtaInner {
+    grid-template-columns: 1fr;
+  }
+
+  .featureGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .comingSoonCard {
+    max-width: 650px;
+  }
+
+  .newCustomerCard {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .newCustomerCard .primaryButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .container,
+  .heroInner {
+    width: min(100% - 28px, 1160px);
+  }
+
+  .heroInner {
+    padding-bottom: 56px;
+  }
+
+  .heroGrid {
+    gap: 42px;
+    padding-top: 48px;
+  }
+
+  .topBar {
+    align-items: flex-start;
+  }
+
+  .heroContent h1 {
+    font-size: clamp(2.7rem, 13vw, 4.4rem);
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .introSection,
+  .accountSection,
+  .helpSection {
+    padding: 65px 0;
+  }
+
+  .newCustomerSection {
+    padding: 55px 0;
+  }
+
+  .finalCta {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .topBar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .heroActions a {
+    width: 100%;
+  }
+
+  .comingSoonCard {
+    padding: 25px;
+  }
+
+  .accountCard {
+    padding: 20px;
+  }
+
+  .newCustomerCard {
+    padding: 23px 20px;
+  }
+
+  .helpGrid > div,
+  .emergencyCard {
+    padding: 0;
+  }
+
+  .emergencyCard {
+    padding: 23px;
+  }
+}
