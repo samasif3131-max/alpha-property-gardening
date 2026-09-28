@@ -311,7 +311,7 @@ export default function PaintingDecoratingPage() {
           <div className={styles.container}>
             <div className={styles.heroContent}>
               <p className={styles.eyebrow}>
-                ALPHA PROPERTY &amp; GARDENING SERVICES
+                PAINTING &amp; DECORATING
               </p>
 
               <h1>Painting &amp; Decorating Services</h1>
@@ -682,9 +682,9 @@ export default function PaintingDecoratingPage() {
           <p>
             Exterior decorating is subject to safe and practical access. If
             scaffolding, specialist access equipment, specialist coatings or
-            substantial repairs are required, we'll identify this during
-            assessment and clearly confirm what is or isn't included within the
-            quotation.
+            substantial repairs are required, we&apos;ll identify this during
+            assessment and clearly confirm what is or isn&apos;t included
+            within the quotation.
           </p>
         </Section>
 

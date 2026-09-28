@@ -212,7 +212,7 @@ const processSteps = [
   {
     number: "6",
     title: "Installation",
-    text: "",
+    text: "The agreed tiling or flooring is installed and finished in accordance with the agreed project scope.",
   },
   {
     number: "7",
@@ -255,7 +255,10 @@ export default function TilingFlooringPage() {
                 </p>
 
                 <div className={styles.heroActions}>
-                  <Link href="/contact" className={styles.primaryButton}>
+                  <Link
+                    href="/request-a-quote"
+                    className={styles.primaryButton}
+                  >
                     REQUEST A TILING OR FLOORING QUOTE
                   </Link>
 
@@ -366,7 +369,10 @@ export default function TilingFlooringPage() {
                   </ul>
                 </div>
 
-                <Link href="/contact" className={styles.textButton}>
+                <Link
+                  href="/request-a-quote"
+                  className={styles.textButton}
+                >
                   REQUEST A TILING QUOTE →
                 </Link>
               </div>
@@ -459,7 +465,10 @@ export default function TilingFlooringPage() {
                   </ul>
                 </div>
 
-                <Link href="/bathroom-services" className={styles.textButton}>
+                <Link
+                  href="/bathroom-services"
+                  className={styles.textButton}
+                >
                   VIEW BATHROOM SERVICES →
                 </Link>
               </div>
@@ -514,7 +523,10 @@ export default function TilingFlooringPage() {
                   complete kitchen installation or renovation.
                 </p>
 
-                <Link href="/kitchen-services" className={styles.textButton}>
+                <Link
+                  href="/kitchen-services"
+                  className={styles.textButton}
+                >
                   VIEW KITCHEN SERVICES →
                 </Link>
               </div>
@@ -701,13 +713,6 @@ export default function TilingFlooringPage() {
                 finishes are installed.
               </p>
 
-              <p>
-                Where additional waterproofing or tanking work is required,
-                this should be assessed as part of the project and clearly
-                included in the agreed quotation where Alpha is undertaking
-                it.
-              </p>
-
               <div className={styles.warningBox}>
                 <p>
                   Where tanking or additional waterproofing is required, this
@@ -878,7 +883,10 @@ export default function TilingFlooringPage() {
                 <li>General property repairs</li>
               </ul>
 
-              <Link href="/property-renovations" className={styles.textButton}>
+              <Link
+                href="/property-renovations"
+                className={styles.textButton}
+              >
                 VIEW PROPERTY RENOVATIONS →
               </Link>
             </div>
@@ -1109,7 +1117,10 @@ export default function TilingFlooringPage() {
               </p>
 
               <div className={styles.heroActions}>
-                <Link href="/contact" className={styles.primaryButton}>
+                <Link
+                  href="/request-a-quote"
+                  className={styles.primaryButton}
+                >
                   REQUEST A TILING OR FLOORING QUOTE
                 </Link>
 

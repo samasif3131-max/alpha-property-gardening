@@ -1,173 +1,202 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./our-work.module.css";
 
 type Category =
   | "All Projects"
-  | "Garden Services"
   | "Property Maintenance"
+  | "Property Renovations"
   | "Plumbing"
   | "Bathrooms"
   | "Kitchens"
   | "Tiling & Flooring"
-  | "Roofing & Gutters";
+  | "Painting & Decorating"
+  | "Roofing & Gutters"
+  | "Garden Services"
+  | "Landlord & Rental Properties";
 
 type Project = {
+  slug: string;
   title: string;
   location: string;
+  customerType?: string;
   description: string;
   category: Exclude<Category, "All Projects">;
-  before: string;
-  after: string;
+  services: string[];
+  image: string;
+  alt: string;
+  completed?: string;
 };
 
-const projects: Project[] = [
+/*
+  IMPORTANT:
+  Do not add projects here unless they are genuine Alpha projects.
+
+  When genuine projects become available, add them in this format:
+
   {
-    title: "Garden Transformation",
-    location: "Spalding, Lincolnshire",
+    slug: "bathroom-renovation-spalding",
+    title: "Complete Bathroom Renovation in Spalding",
+    location: "Spalding",
+    customerType: "Homeowner",
     description:
-      "Overgrown garden cleared, new lawn laid, fencing installed and patio area created.",
-    category: "Garden Services",
-    before:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Bathroom Renovation",
-    location: "Holbeach, Lincolnshire",
-    description:
-      "Full bathroom installation including new suite, tiling, lighting and plastering.",
+      "Genuine description of the work completed by Alpha.",
     category: "Bathrooms",
-    before:
-      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85",
+    services: [
+      "Bathroom Services",
+      "Plumbing Services",
+      "Tiling & Flooring",
+    ],
+    image: "/images/projects/bathroom-spalding-after.webp",
+    alt: "Completed bathroom renovation by Alpha in Spalding",
+    completed: "September 2026",
   },
-  {
-    title: "Kitchen Makeover",
-    location: "Long Sutton, Lincolnshire",
-    description:
-      "Old kitchen removed and new modern supplied and fitted.",
-    category: "Kitchens",
-    before:
-      "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Full Property Decoration",
-    location: "Pinchbeck, Lincolnshire",
-    description:
-      "Complete internal decoration including walls, ceilings, woodwork and feature walls.",
-    category: "Property Maintenance",
-    before:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Patio Installation",
-    location: "Donington, Lincolnshire",
-    description:
-      "New patio area laid with paving, edging and gravel surrounds.",
-    category: "Garden Services",
-    before:
-      "https://images.unsplash.com/photo-1558521958-0a228e77e984?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "New Guttering",
-    location: "Spalding, Lincolnshire",
-    description:
-      "Old guttering removed and new uPVC guttering and downpipes fitted.",
-    category: "Roofing & Gutters",
-    before:
-      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Boiler Replacement",
-    location: "Holbeach, Lincolnshire",
-    description:
-      "Old boiler removed and new energy-efficient boiler installed.",
-    category: "Plumbing",
-    before:
-      "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Flooring Installation",
-    location: "Surfleet, Lincolnshire",
-    description:
-      "New laminate flooring fitted throughout the ground floor.",
-    category: "Tiling & Flooring",
-    before:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Exterior Refresh",
-    location: "Long Sutton, Lincolnshire",
-    description:
-      "External walls cleaned, repaired and repainted for a fresh, modern look.",
-    category: "Property Maintenance",
-    before:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=85",
-    after:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85",
-  },
-];
+
+  Only use genuine Alpha work and genuine photographs.
+*/
+
+const projects: Project[] = [];
 
 const categories: Category[] = [
   "All Projects",
-  "Garden Services",
   "Property Maintenance",
+  "Property Renovations",
   "Plumbing",
   "Bathrooms",
   "Kitchens",
   "Tiling & Flooring",
+  "Painting & Decorating",
   "Roofing & Gutters",
+  "Garden Services",
+  "Landlord & Rental Properties",
 ];
 
 const categoryIcons: Record<Category, string> = {
   "All Projects": "▦",
-  "Garden Services": "♧",
-  "Property Maintenance": "🛠",
-  Plumbing: "♢",
+  "Property Maintenance": "◆",
+  "Property Renovations": "⌂",
+  Plumbing: "◇",
   Bathrooms: "▱",
   Kitchens: "▣",
   "Tiling & Flooring": "▦",
+  "Painting & Decorating": "✦",
   "Roofing & Gutters": "⌂",
+  "Garden Services": "♧",
+  "Landlord & Rental Properties": "▤",
 };
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <article className={styles.projectCard}>
+      <Link
+        href={`/our-work/${project.slug}`}
+        className={styles.projectImageLink}
+        aria-label={`View ${project.title}`}
+      >
+        <div className={styles.projectImage}>
+          <img src={project.image} alt={project.alt} loading="lazy" />
+          <span className={styles.projectCategory}>
+            {project.category}
+          </span>
+        </div>
+      </Link>
+
+      <div className={styles.projectInfo}>
+        <p className={styles.projectType}>{project.category}</p>
+
+        <h3>{project.title}</h3>
+
+        <div className={styles.projectMeta}>
+          <span>
+            <strong>Area:</strong> {project.location}
+          </span>
+
+          {project.customerType && (
+            <span>
+              <strong>Customer:</strong> {project.customerType}
+            </span>
+          )}
+
+          {project.completed && (
+            <span>
+              <strong>Completed:</strong> {project.completed}
+            </span>
+          )}
+        </div>
+
+        <p className={styles.projectDescription}>
+          {project.description}
+        </p>
+
+        {project.services.length > 0 && (
+          <div className={styles.projectServices}>
+            {project.services.map((service) => (
+              <span key={service}>{service}</span>
+            ))}
+          </div>
+        )}
+
+        <Link
+          href={`/our-work/${project.slug}`}
+          className={styles.viewProject}
+        >
+          View Project <span>→</span>
+        </Link>
+      </div>
+    </article>
+  );
+}
 
 export default function OurWorkPage() {
   const [activeCategory, setActiveCategory] =
     useState<Category>("All Projects");
 
+  useEffect(() => {
+    document.title =
+      "Our Work | Property Maintenance & Renovations | Alpha";
+
+    const description =
+      "See examples of Alpha’s growing portfolio of property maintenance, renovation and garden projects across our service region.";
+
+    let meta = document.querySelector(
+      'meta[name="description"]'
+    ) as HTMLMetaElement | null;
+
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+
+    meta.content = description;
+  }, []);
+
   const filteredProjects =
     activeCategory === "All Projects"
       ? projects
-      : projects.filter((project) => project.category === activeCategory);
+      : projects.filter(
+          (project) => project.category === activeCategory
+        );
+
+  const hasProjects = projects.length > 0;
+  const hasFilteredProjects = filteredProjects.length > 0;
 
   return (
     <>
       <Header />
 
       <main className={styles.page}>
-        {/* HERO */}
+        {/* =====================================================
+            HERO
+        ====================================================== */}
         <section className={styles.hero}>
-          <div className={styles.heroOverlay} />
+          <div className={styles.heroGlow} />
 
-          <div className={styles.heroContent}>
+          <div className={styles.container}>
             <div className={styles.breadcrumb}>
               <Link href="/">Home</Link>
               <span>›</span>
@@ -175,267 +204,549 @@ export default function OurWorkPage() {
             </div>
 
             <div className={styles.heroGrid}>
-              <div className={styles.heroText}>
-                <p className={styles.smallLabel}>OUR RECENT PROJECTS</p>
+              <div className={styles.heroContent}>
+                <p className={styles.eyebrow}>SEE THE WORK BEHIND ALPHA</p>
 
                 <h1>
                   Our Work
-                  <span>Real Projects. Real Results.</span>
+                  <span>Real projects. Real properties. Real results.</span>
                 </h1>
 
+                <div className={styles.goldLine} />
+
+                <p className={styles.heroLead}>
+                  Alpha Property &amp; Gardening Services works across
+                  property maintenance, repairs, renovations, plumbing,
+                  bathrooms, kitchens, decorating, flooring, gardens and
+                  wider property improvement.
+                </p>
+
                 <p className={styles.heroDescription}>
-                  Take a look at some of our recent property and garden
-                  projects across Spalding and surrounding areas. From full
-                  renovations to simple garden makeovers, we take pride in
-                  delivering high-quality work for homeowners, landlords and
-                  businesses.
+                  This is where we show genuine examples of that work as
+                  our portfolio grows. Every project presented as Alpha
+                  work should be based on a real job completed by our
+                  team.
                 </p>
 
                 <div className={styles.heroButtons}>
-                  <Link href="/contact" className={styles.primaryButton}>
-                    Request a Free Quote <span>→</span>
+                  <Link
+                    href="/contact"
+                    className={styles.primaryButton}
+                  >
+                    Request a Quote
+                    <span>→</span>
                   </Link>
 
-                  <a
-                    href="tel:01234567890"
-                    className={styles.phoneButton}
+                  <Link
+                    href="/services"
+                    className={styles.secondaryButton}
                   >
-                    <span className={styles.phoneIcon}>☎</span>
-                    Call 01234 567890
-                  </a>
+                    View Our Services
+                  </Link>
                 </div>
               </div>
 
-              <div className={styles.heroImageBox}>
-                <img
-                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1500&q=90"
-                  alt="Completed modern property project"
-                />
+              <div className={styles.heroStatement}>
+                <div className={styles.statementIcon}>◆</div>
 
-                <div className={styles.heroQuote}>
-                  <span>"Transforming</span>
-                  <span>Properties.</span>
-                  <span>Improving Lives."</span>
-                  <i />
-                </div>
+                <p>One property.</p>
+                <p>Multiple jobs.</p>
+
+                <strong>One team.</strong>
+
+                <div className={styles.statementLine} />
+
+                <span>
+                  Genuine work.
+                  <br />
+                  Honest presentation.
+                </span>
               </div>
             </div>
 
-            <div className={styles.heroFeatures}>
+            <div className={styles.heroTrust}>
               <div>
-                <span>⌂</span>
-                <strong>Quality Workmanship</strong>
+                <span>✓</span>
+                <strong>Genuine Alpha Projects</strong>
               </div>
 
               <div>
                 <span>✓</span>
-                <strong>Trusted & Local</strong>
+                <strong>Real Property Work</strong>
               </div>
 
               <div>
-                <span>♧</span>
-                <strong>Homeowners, Landlords & Businesses</strong>
+                <span>✓</span>
+                <strong>Before &amp; After When Available</strong>
               </div>
 
               <div>
-                <span>◈</span>
-                <strong>Indoor & Outdoor Projects</strong>
+                <span>✓</span>
+                <strong>Growing Portfolio</strong>
               </div>
             </div>
           </div>
         </section>
 
-        {/* FILTERS */}
-        <section className={styles.projectsSection}>
+        {/* =====================================================
+            INTRODUCTION
+        ====================================================== */}
+        <section className={styles.introduction}>
           <div className={styles.container}>
-            <div className={styles.filters}>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => setActiveCategory(category)}
-                  className={`${styles.filterButton} ${
-                    activeCategory === category
-                      ? styles.activeFilter
-                      : ""
-                  }`}
-                >
-                  <span className={styles.filterIcon}>
-                    {categoryIcons[category]}
+            <div className={styles.introGrid}>
+              <div className={styles.introHeading}>
+                <p className={styles.sectionEyebrow}>OUR PORTFOLIO</p>
+
+                <h2>See the work behind Alpha.</h2>
+
+                <div className={styles.goldLineDark} />
+              </div>
+
+              <div className={styles.introText}>
+                <p>
+                  Our work portfolio is designed to grow alongside the
+                  business. As genuine Alpha projects are completed,
+                  suitable photographs and project details can be added
+                  here.
+                </p>
+
+                <p>
+                  We believe a portfolio should show real property
+                  maintenance projects, renovations, bathroom and
+                  kitchen work, plumbing repairs, decorating, flooring,
+                  gardens and landlord property work — not stock
+                  photographs presented as completed Alpha jobs.
+                </p>
+
+                <div className={styles.introHighlight}>
+                  <strong>
+                    Only genuine Alpha work belongs in the portfolio.
+                  </strong>
+
+                  <span>
+                    Real projects. Real properties. Real results.
                   </span>
-                  <span>{category}</span>
-                </button>
-              ))}
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
 
-            {/* PROJECT GRID */}
-            <div className={styles.projectGrid}>
-              {filteredProjects.map((project) => (
-                <article
-                  className={styles.projectCard}
-                  key={project.title}
-                >
-                  <div className={styles.beforeAfter}>
-                    <div className={styles.imageSide}>
-                      <img
-                        src={project.before}
-                        alt={`${project.title} before`}
-                      />
-                      <span className={styles.imageLabel}>
-                        Before
-                      </span>
-                    </div>
+        {/* =====================================================
+            FEATURED PROJECTS
+        ====================================================== */}
+        {hasProjects && (
+          <section className={styles.featuredSection}>
+            <div className={styles.container}>
+              <div className={styles.sectionHeading}>
+                <div>
+                  <p className={styles.sectionEyebrow}>
+                    FEATURED WORK
+                  </p>
 
-                    <div className={styles.arrowCircle}>→</div>
+                  <h2>Featured Alpha Projects</h2>
+                </div>
 
-                    <div className={styles.imageSide}>
-                      <img
-                        src={project.after}
-                        alt={`${project.title} after`}
-                      />
-                      <span
-                        className={`${styles.imageLabel} ${styles.afterLabel}`}
-                      >
-                        After
-                      </span>
-                    </div>
+                <p>
+                  A selection of genuine projects showing the range of
+                  property work carried out by Alpha.
+                </p>
+              </div>
+
+              <div className={styles.featuredGrid}>
+                {projects.slice(0, 6).map((project) => (
+                  <ProjectCard
+                    key={project.slug}
+                    project={project}
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* =====================================================
+            PROJECT FILTERS
+        ====================================================== */}
+        <section
+          className={`${styles.projectsSection} ${
+            !hasProjects ? styles.emptyPortfolioSection : ""
+          }`}
+        >
+          <div className={styles.container}>
+            {hasProjects && (
+              <>
+                <div className={styles.sectionHeading}>
+                  <div>
+                    <p className={styles.sectionEyebrow}>
+                      ALPHA PORTFOLIO
+                    </p>
+
+                    <h2>Latest Work</h2>
                   </div>
 
-                  <div className={styles.projectInfo}>
-                    <h2>{project.title}</h2>
+                  <p>
+                    Explore genuine Alpha projects by type of work.
+                  </p>
+                </div>
 
-                    <div className={styles.location}>
-                      <span>●</span>
-                      {project.location}
-                    </div>
+                <div className={styles.filters}>
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      type="button"
+                      onClick={() => setActiveCategory(category)}
+                      className={`${styles.filterButton} ${
+                        activeCategory === category
+                          ? styles.activeFilter
+                          : ""
+                      }`}
+                    >
+                      <span className={styles.filterIcon}>
+                        {categoryIcons[category]}
+                      </span>
 
-                    <p>{project.description}</p>
+                      <span>{category}</span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {/* =================================================
+                EMPTY STATE
+            ================================================== */}
+            {!hasProjects ? (
+              <div className={styles.emptyState}>
+                <div className={styles.emptyIcon}>◆</div>
+
+                <p className={styles.emptyEyebrow}>
+                  GENUINE ALPHA PROJECTS
+                </p>
+
+                <h2>Our Project Portfolio Is Growing</h2>
+
+                <div className={styles.emptyLine} />
+
+                <p className={styles.emptyLead}>
+                  We’re building this section with genuine
+                  photographs and details from Alpha projects.
+                </p>
+
+                <p>
+                  We’d rather show real work than fill this page with
+                  stock images presented as our own. As the portfolio
+                  grows, you’ll be able to explore property
+                  maintenance, renovations, bathrooms, kitchens,
+                  gardens and landlord projects here.
+                </p>
+
+                <div className={styles.emptyPrinciples}>
+                  <div>
+                    <span>01</span>
+                    <strong>Real Alpha Work</strong>
+                    <p>
+                      Projects will only be added when the work has
+                      genuinely been completed by Alpha.
+                    </p>
+                  </div>
+
+                  <div>
+                    <span>02</span>
+                    <strong>Genuine Photography</strong>
+                    <p>
+                      Portfolio photographs will come from genuine
+                      Alpha projects.
+                    </p>
+                  </div>
+
+                  <div>
+                    <span>03</span>
+                    <strong>Useful Project Details</strong>
+                    <p>
+                      Future case studies will explain the work,
+                      scope and result clearly.
+                    </p>
+                  </div>
+                </div>
+
+                <div className={styles.emptyButtons}>
+                  <Link
+                    href="/services"
+                    className={styles.primaryButton}
+                  >
+                    View Our Services
+                    <span>→</span>
+                  </Link>
+
+                  <Link
+                    href="/contact"
+                    className={styles.secondaryButtonDark}
+                  >
+                    Request a Quote
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className={styles.filters}>
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      type="button"
+                      onClick={() => setActiveCategory(category)}
+                      className={`${styles.filterButton} ${
+                        activeCategory === category
+                          ? styles.activeFilter
+                          : ""
+                      }`}
+                    >
+                      <span className={styles.filterIcon}>
+                        {categoryIcons[category]}
+                      </span>
+
+                      <span>{category}</span>
+                    </button>
+                  ))}
+                </div>
+
+                {hasFilteredProjects ? (
+                  <div className={styles.projectGrid}>
+                    {filteredProjects.map((project) => (
+                      <ProjectCard
+                        key={project.slug}
+                        project={project}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className={styles.noProjects}>
+                    <h3>No projects in this category yet.</h3>
+
+                    <p>
+                      As genuine Alpha projects are completed, relevant
+                      examples will be added here.
+                    </p>
 
                     <Link
-                      href={`/${project.category
-                        .toLowerCase()
-                        .replace(/&/g, "and")
-                        .replace(/\s+/g, "-")}`}
-                      className={styles.categoryLink}
+                      href="/services"
+                      className={styles.textLink}
                     >
-                      {project.category}
+                      View Our Services →
                     </Link>
                   </div>
-                </article>
-              ))}
-            </div>
-
-            {filteredProjects.length === 0 && (
-              <div className={styles.noProjects}>
-                No projects found in this category.
-              </div>
+                )}
+              </>
             )}
           </div>
         </section>
 
-        {/* TESTIMONIALS */}
-        <section className={styles.testimonials}>
-          <div className={styles.testimonialContainer}>
-            <div className={styles.testimonialHeading}>
-              <p>REAL PEOPLE. REAL FEEDBACK.</p>
-              <h2>What Our Customers Say</h2>
+        {/* =====================================================
+            HOW PORTFOLIO WILL GROW
+        ====================================================== */}
+        <section className={styles.processSection}>
+          <div className={styles.container}>
+            <div className={styles.processHeading}>
+              <p className={styles.sectionEyebrow}>
+                BUILT FROM REAL WORK
+              </p>
+
+              <h2>How the Alpha Portfolio Will Grow</h2>
+
+              <p>
+                Every suitable project can become an opportunity to
+                document genuine workmanship and show future customers
+                what Alpha can do.
+              </p>
             </div>
 
-            <div className={styles.testimonialGrid}>
-              <div className={styles.testimonialCard}>
-                <div className={styles.stars}>★★★★★</div>
-
+            <div className={styles.processGrid}>
+              <div className={styles.processCard}>
+                <span>01</span>
+                <h3>Before</h3>
                 <p>
-                  “Brilliant job from start to finish. The garden looks
-                  amazing and the team were professional, friendly and
-                  reliable. Highly recommend!”
+                  Genuine photographs showing the starting condition
+                  and relevant areas requiring attention.
                 </p>
-
-                <strong>Homeowner, Spalding</strong>
               </div>
 
-              <div className={styles.testimonialCard}>
-                <div className={styles.stars}>★★★★★</div>
-
+              <div className={styles.processCard}>
+                <span>02</span>
+                <h3>During</h3>
                 <p>
-                  “Our new bathroom is perfect. Great communication,
-                  excellent workmanship and completed on time. Will
-                  definitely use Alpha again.”
+                  Useful progress photographs showing preparation and
+                  key stages of the agreed work.
                 </p>
-
-                <strong>Landlord, Holbeach</strong>
               </div>
 
-              <div className={styles.testimonialCard}>
-                <div className={styles.stars}>★★★★★</div>
-
+              <div className={styles.processCard}>
+                <span>03</span>
+                <h3>After</h3>
                 <p>
-                  “Reliable, tidy and high quality work. The team
-                  decorated our full house and it looks like a new
-                  home.”
+                  Clear finished photographs showing the completed
+                  Alpha work.
                 </p>
-
-                <strong>Homeowner, Long Sutton</strong>
               </div>
 
-              <div className={styles.socialBox}>
-                <h3>See More of Our Work</h3>
-
+              <div className={styles.processCard}>
+                <span>04</span>
+                <h3>Project Story</h3>
                 <p>
-                  Follow us on social media for more before & after
-                  photos, latest projects and updates.
+                  A factual summary covering the brief, scope, location
+                  and relevant services.
                 </p>
-
-                <div className={styles.socialIcons}>
-                  <a href="#" aria-label="Facebook">
-                    f
-                  </a>
-                  <a href="#" aria-label="Instagram">
-                    ◎
-                  </a>
-                  <a href="#" aria-label="TikTok">
-                    ♪
-                  </a>
-                  <a href="#" aria-label="YouTube">
-                    ▶
-                  </a>
-                </div>
-
-                <Link href="/contact" className={styles.followButton}>
-                  Follow Us <span>→</span>
-                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className={styles.cta}>
-          <div className={styles.ctaContainer}>
-            <div className={styles.ctaIcon}>⌂</div>
+        {/* =====================================================
+            PORTFOLIO STANDARDS
+        ====================================================== */}
+        <section className={styles.standardsSection}>
+          <div className={styles.container}>
+            <div className={styles.standardsGrid}>
+              <div>
+                <p className={styles.sectionEyebrow}>OUR STANDARD</p>
 
-            <div className={styles.ctaText}>
-              <h2>Have a Project in Mind?</h2>
+                <h2>
+                  Honest project information matters.
+                </h2>
+
+                <div className={styles.goldLineDark} />
+              </div>
+
+              <div className={styles.standardsContent}>
+                <p>
+                  Portfolio images should accurately represent the work
+                  carried out by Alpha. Customer privacy should also be
+                  respected when photographing private properties.
+                </p>
+
+                <div className={styles.standardList}>
+                  <div>
+                    <span>✓</span>
+                    <p>
+                      Town or general area rather than a private
+                      residential address.
+                    </p>
+                  </div>
+
+                  <div>
+                    <span>✓</span>
+                    <p>
+                      Genuine photographs from the relevant project.
+                    </p>
+                  </div>
+
+                  <div>
+                    <span>✓</span>
+                    <p>
+                      Accurate descriptions of the work completed.
+                    </p>
+                  </div>
+
+                  <div>
+                    <span>✓</span>
+                    <p>
+                      Customer permission where required for portfolio
+                      use.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =====================================================
+            FUTURE CASE STUDIES
+        ====================================================== */}
+        <section className={styles.caseStudySection}>
+          <div className={styles.container}>
+            <div className={styles.caseStudyInner}>
+              <div className={styles.caseStudyBadge}>
+                FUTURE CASE STUDIES
+              </div>
+
+              <h2>
+                Strong projects can have their own detailed project
+                page.
+              </h2>
+
               <p>
-                Get in touch today for a free, no-obligation quote. Our
-                friendly team is ready to help.
+                Larger genuine projects can eventually be presented as
+                detailed case studies covering the brief, problem,
+                scope of work, before photographs, progress photographs,
+                completed work and relevant Alpha services.
+              </p>
+
+              <div className={styles.caseStudyFeatures}>
+                <span>Project Brief</span>
+                <span>Scope of Work</span>
+                <span>Before Photos</span>
+                <span>During Photos</span>
+                <span>After Photos</span>
+                <span>Project Outcome</span>
+              </div>
+
+              <p className={styles.caseStudyNote}>
+                Example future structure:
+                <strong>
+                  {" "}
+                  /our-work/bathroom-renovation-spalding
+                </strong>
               </p>
             </div>
+          </div>
+        </section>
 
-            <div className={styles.ctaActions}>
-              <a href="tel:01234567890" className={styles.ctaPhone}>
-                ☎ &nbsp; Call 01234 567890
-              </a>
+        {/* =====================================================
+            FINAL CTA
+        ====================================================== */}
+        <section className={styles.cta}>
+          <div className={styles.container}>
+            <div className={styles.ctaInner}>
+              <div className={styles.ctaContent}>
+                <p className={styles.ctaEyebrow}>START YOUR PROJECT</p>
 
-              <Link href="/contact" className={styles.ctaQuote}>
-                Request a Free Quote <span>→</span>
-              </Link>
-            </div>
+                <h2>Have a Property Project of Your Own?</h2>
 
-            <div className={styles.ctaSlogan}>
-              <strong>One Team.</strong>
-              <strong>Complete Property Care.</strong>
-              <i />
+                <p>
+                  Every job is different. Whether you need a small
+                  repair, ongoing property maintenance, a complete
+                  renovation or help with the garden, tell Alpha what
+                  you need.
+                </p>
+
+                <div className={styles.ctaSlogan}>
+                  One Team. Complete Property Care.
+                </div>
+              </div>
+
+              <div className={styles.ctaActions}>
+                <Link
+                  href="/contact"
+                  className={styles.ctaPrimary}
+                >
+                  Request a Quote
+                  <span>→</span>
+                </Link>
+
+                <Link
+                  href="/services"
+                  className={styles.ctaSecondary}
+                >
+                  View All Services
+                </Link>
+
+                <a
+                  href="tel:01775518068"
+                  className={styles.ctaPhone}
+                >
+                  ☎ &nbsp; 01775 518068
+                </a>
+              </div>
             </div>
           </div>
         </section>
