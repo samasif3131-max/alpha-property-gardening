@@ -1,0 +1,680 @@
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0;
+  background: #00372c;
+  color: #ffffff;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(197, 154, 59, 0.2),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 80%,
+      rgba(7, 83, 66, 0.7),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #00251d 0%, #00372c 55%, #075342 100%);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 70px;
+}
+
+.heroContent {
+  max-width: 760px;
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: #c59a3b;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0 0 28px;
+  color: #ffffff;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+}
+
+.hero p {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.heroLead {
+  color: #ffffff !important;
+  font-size: 20px !important;
+}
+
+.heroMessage {
+  margin-top: 32px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.primaryButton {
+  background: #c59a3b;
+  color: #ffffff;
+}
+
+.primaryButton:hover {
+  background: #dfb75d;
+  color: #00251d;
+  transform: translateY(-2px);
+}
+
+.secondaryButton {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  color: #ffffff;
+}
+
+.secondaryButton:hover {
+  background: #ffffff;
+  color: #00372c;
+  transform: translateY(-2px);
+}
+
+.heroVisual {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visualCircle {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255, 255, 255, 0.16),
+      transparent 20%
+    ),
+    linear-gradient(145deg, #075342, #00251d);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+.paintCan {
+  position: absolute;
+  left: 50%;
+  bottom: 65px;
+  width: 130px;
+  height: 120px;
+  transform: translateX(-50%);
+  border-radius: 8px 8px 20px 20px;
+  background: #eeeeea;
+  box-shadow: 0 18px 25px rgba(0, 0, 0, 0.2);
+  color: #00372c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.paintCan::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 8px;
+  right: 8px;
+  height: 18px;
+  border-radius: 50%;
+  background: #d5d5cf;
+}
+
+.paintCan span {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.paintCan small {
+  margin-top: 5px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.brush {
+  position: absolute;
+  top: 70px;
+  left: 75px;
+  width: 25px;
+  height: 150px;
+  transform: rotate(-38deg);
+  border-radius: 4px;
+  background: #c59a3b;
+}
+
+.brush::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  bottom: -34px;
+  width: 33px;
+  height: 42px;
+  border-radius: 3px 3px 10px 10px;
+  background: #eeeeea;
+}
+
+.roller {
+  position: absolute;
+  top: 78px;
+  right: 48px;
+  width: 78px;
+  height: 25px;
+  border-radius: 20px;
+  background: #eeeeea;
+  transform: rotate(35deg);
+}
+
+.roller::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: -24px;
+  width: 58px;
+  height: 8px;
+  border-radius: 10px;
+  background: #c59a3b;
+  transform: rotate(55deg);
+  transform-origin: left center;
+}
+
+.visualBadge {
+  position: absolute;
+  right: 0;
+  bottom: 15px;
+  width: 185px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: #ffffff;
+  color: #00372c;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+}
+
+.visualBadge strong {
+  color: #00372c;
+  font-size: 15px;
+}
+
+.visualBadge span {
+  color: #686e68;
+  font-size: 14px;
+}
+
+.section {
+  padding: 85px 0;
+  background: #ffffff;
+}
+
+.creamSection {
+  background: #f5f5f1;
+}
+
+.section h2,
+.processSection h2,
+.faqSection h2,
+.finalCta h2 {
+  max-width: 900px;
+  margin: 0 0 28px;
+  color: #00372c;
+  font-size: clamp(32px, 4vw, 50px);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.content {
+  max-width: 900px;
+}
+
+.content p {
+  margin: 0 0 18px;
+  color: #555c56;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.content strong {
+  color: #00372c;
+}
+
+.serviceList {
+  max-width: 900px;
+  margin: 24px 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+  list-style: none;
+}
+
+.serviceList li {
+  position: relative;
+  padding: 14px 18px 14px 38px;
+  border: 1px solid #dedfd9;
+  background: #ffffff;
+  color: #303630;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.serviceList li::before {
+  content: "✓";
+  position: absolute;
+  left: 15px;
+  top: 14px;
+  color: #c59a3b;
+  font-weight: 900;
+}
+
+.creamSection .serviceList li {
+  background: #ffffff;
+}
+
+.highlightHeading {
+  max-width: 850px;
+  margin: 30px 0 0;
+  color: #00372c;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.finalParagraph {
+  margin-top: 25px !important;
+}
+
+.linkIntro {
+  margin-top: 24px !important;
+  margin-bottom: 8px !important;
+  color: #303630 !important;
+  font-weight: 700;
+}
+
+.textLink {
+  display: inline-block;
+  margin-top: 15px;
+  color: #075342;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  border-bottom: 2px solid #c59a3b;
+  padding-bottom: 5px;
+}
+
+.textLink:hover {
+  color: #c59a3b;
+}
+
+.relatedLinks {
+  margin-top: 22px;
+}
+
+.relatedLinks a {
+  color: #075342;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.relatedLinks a:hover {
+  color: #c59a3b;
+}
+
+.processSection {
+  padding: 90px 0;
+  background: #00372c;
+}
+
+.processSection h2 {
+  color: #ffffff;
+}
+
+.processSection .eyebrow {
+  color: #dfb75d;
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.processCard {
+  min-height: 230px;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.processNumber {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #c59a3b;
+  color: #00251d;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.processCard h3 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+.processCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.faqSection {
+  padding: 90px 0;
+  background: #f5f5f1;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.faqCard {
+  padding: 30px;
+  border: 1px solid #dedfd9;
+  background: #ffffff;
+}
+
+.faqCard h3 {
+  margin: 0 0 13px;
+  color: #00372c;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.faqCard p {
+  margin: 0;
+  color: #626861;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.finalCta {
+  padding: 100px 0;
+  background: #00251d;
+}
+
+.finalCtaInner {
+  max-width: 900px;
+}
+
+.finalCta h2 {
+  color: #ffffff;
+}
+
+.finalCta p {
+  max-width: 850px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.finalCta h3 {
+  margin: 30px 0;
+  color: #dfb75d;
+  font-size: 22px;
+}
+
+.finalButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .heroVisual {
+    min-height: 360px;
+  }
+
+  .processGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: min(100% - 30px, 700px);
+  }
+
+  .hero {
+    padding: 65px 0;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+    letter-spacing: -1px;
+  }
+
+  .heroLead {
+    font-size: 18px !important;
+  }
+
+  .section,
+  .processSection,
+  .faqSection,
+  .finalCta {
+    padding: 65px 0;
+  }
+
+  .section h2,
+  .processSection h2,
+  .faqSection h2,
+  .finalCta h2 {
+    font-size: 36px;
+  }
+
+  .serviceList {
+    grid-template-columns: 1fr;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .visualCircle {
+    width: 290px;
+    height: 290px;
+  }
+
+  .visualBadge {
+    right: 10px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .hero {
+    padding: 50px 0;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .hero p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .heroLead {
+    font-size: 17px !important;
+  }
+
+  .heroButtons,
+  .finalButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .heroVisual {
+    min-height: 300px;
+  }
+
+  .visualCircle {
+    width: 245px;
+    height: 245px;
+  }
+
+  .paintCan {
+    width: 100px;
+    height: 95px;
+    bottom: 45px;
+  }
+
+  .paintCan span {
+    font-size: 16px;
+  }
+
+  .paintCan small {
+    font-size: 7px;
+  }
+
+  .brush {
+    top: 50px;
+    left: 52px;
+    height: 110px;
+  }
+
+  .roller {
+    top: 55px;
+    right: 30px;
+    width: 58px;
+  }
+
+  .visualBadge {
+    right: 0;
+    bottom: 0;
+    width: 145px;
+    padding: 15px;
+  }
+
+  .visualBadge strong,
+  .visualBadge span {
+    font-size: 12px;
+  }
+
+  .section,
+  .processSection,
+  .faqSection,
+  .finalCta {
+    padding: 55px 0;
+  }
+
+  .section h2,
+  .processSection h2,
+  .faqSection h2,
+  .finalCta h2 {
+    font-size: 31px;
+  }
+
+  .content p,
+  .finalCta p {
+    font-size: 15px;
+  }
+
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processCard {
+    min-height: auto;
+  }
+
+  .faqCard {
+    padding: 23px;
+  }
+}
