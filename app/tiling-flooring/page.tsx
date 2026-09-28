@@ -214,6 +214,11 @@ const processSteps = [
     title: "Installation",
     text: "",
   },
+  {
+    number: "7",
+    title: "Completion",
+    text: "Grouting, sealant, trims and other agreed finishing work are completed before handover.",
+  },
 ];
 
 export default function TilingFlooringPage() {
@@ -299,7 +304,10 @@ export default function TilingFlooringPage() {
 
             <div className={styles.introGrid}>
               <div>
-                <p>A good finished surface depends on more than the tile or flooring product itself.</p>
+                <p>
+                  A good finished surface depends on more than the tile or
+                  flooring product itself.
+                </p>
 
                 <p>
                   Existing finishes may need removing, damaged areas may
@@ -378,7 +386,9 @@ export default function TilingFlooringPage() {
         {/* FLOOR TILING */}
         <section className={`${styles.section} ${styles.sectionAlt}`}>
           <div className={styles.container}>
-            <div className={`${styles.contentGrid} ${styles.contentGridReverse}`}>
+            <div
+              className={`${styles.contentGrid} ${styles.contentGridReverse}`}
+            >
               <div className={styles.infoBox}>
                 <span>02</span>
                 <h3>Floor Tiling</h3>
@@ -469,7 +479,9 @@ export default function TilingFlooringPage() {
         {/* KITCHEN TILING */}
         <section className={`${styles.section} ${styles.sectionAlt}`}>
           <div className={styles.container}>
-            <div className={`${styles.contentGrid} ${styles.contentGridReverse}`}>
+            <div
+              className={`${styles.contentGrid} ${styles.contentGridReverse}`}
+            >
               <div className={styles.darkCard}>
                 <span>04</span>
                 <h3>Kitchen Tiling &amp; Splashbacks</h3>
@@ -611,7 +623,9 @@ export default function TilingFlooringPage() {
                   and should be dealt with before further deterioration occurs.
                 </p>
 
-                <p>Alpha can undertake suitable sealant replacement including:</p>
+                <p>
+                  Alpha can undertake suitable sealant replacement including:
+                </p>
 
                 <ul className={styles.checkList}>
                   {sealant.map((item) => (
@@ -666,12 +680,9 @@ export default function TilingFlooringPage() {
 
               <div className={styles.warningBox}>
                 <p>
-                  Do not promise that every existing surface can simply be
-                  tiled over.
-                </p>
-
-                <p>
-                  The condition of the substrate should be assessed first.
+                  Not every existing surface will be suitable for tiling
+                  without preparation. We’ll assess the underlying surface
+                  first and identify any work required before installation.
                 </p>
               </div>
             </div>
@@ -699,9 +710,9 @@ export default function TilingFlooringPage() {
 
               <div className={styles.warningBox}>
                 <p>
-                  Do not imply that specialist waterproofing systems are
-                  automatically included in every tiling quotation unless
-                  specifically stated.
+                  Where tanking or additional waterproofing is required, this
+                  will be assessed separately and clearly included in the
+                  quotation where it forms part of Alpha’s agreed work.
                 </p>
               </div>
             </div>
@@ -738,9 +749,9 @@ export default function TilingFlooringPage() {
                 </div>
 
                 <p className={styles.note}>
-                  The page should not list specialist flooring types unless
-                  Alpha has specifically confirmed that those products are
-                  offered.
+                  The flooring products we can install will depend on the
+                  material, room, existing subfloor and project requirements.
+                  We’ll confirm suitability when assessing the job.
                 </p>
               </div>
 
@@ -855,9 +866,16 @@ export default function TilingFlooringPage() {
               <p>This can include projects involving:</p>
 
               <ul className={styles.checkList}>
-                {renovationWork.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
+                <li>Property renovations</li>
+                <li>Bathrooms</li>
+                <li>Kitchens</li>
+                <li>
+                  <Link href="/painting-decorating">
+                    Painting &amp; Decorating
+                  </Link>
+                </li>
+                <li>Plumbing</li>
+                <li>General property repairs</li>
               </ul>
 
               <Link href="/property-renovations" className={styles.textButton}>
@@ -873,7 +891,9 @@ export default function TilingFlooringPage() {
             <div className={styles.contentGrid}>
               <div>
                 <p className={styles.eyebrow}>LANDLORDS</p>
-                <h2>Tiling &amp; Flooring for Landlords &amp; Letting Agents</h2>
+                <h2>
+                  Tiling &amp; Flooring for Landlords &amp; Letting Agents
+                </h2>
 
                 <p className={styles.lead}>
                   Flooring and tiled areas in rental properties can experience
@@ -935,8 +955,8 @@ export default function TilingFlooringPage() {
 
               <p>
                 Alpha can assess the condition of existing surfaces and include
-                suitable tiling or flooring work as part of a wider void-
-                property programme.
+                suitable tiling or flooring work as part of a wider
+                void-property programme.
               </p>
 
               <p>This may be combined with:</p>
@@ -997,7 +1017,7 @@ export default function TilingFlooringPage() {
                 flooring, or may still be considering the available options.
               </p>
 
-              <p>The quotation should establish:</p>
+              <p>Your quotation will clearly confirm:</p>
 
               <ul className={styles.checkList}>
                 {materials.map((item) => (
@@ -1013,8 +1033,8 @@ export default function TilingFlooringPage() {
               </div>
 
               <p className={styles.note}>
-                Avoid promising compatibility with customer-supplied products
-                until they have been assessed.
+                Customer-supplied tiles or flooring will need to be assessed
+                for suitability before installation is confirmed.
               </p>
             </div>
           </div>

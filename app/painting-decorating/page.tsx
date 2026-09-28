@@ -247,7 +247,7 @@ const faqs = [
   {
     question: "Do you supply the paint?",
     answer:
-      "This can be agreed as part of the quotation. The quotation should clearly confirm which materials Alpha is supplying and which, if any, are being supplied by the customer.",
+      "This can be agreed as part of the quotation. Your quotation will clearly confirm which materials Alpha is supplying and which, if any, are being supplied by you.",
   },
   {
     question: "How do I request a decorating quote?",
@@ -310,7 +310,9 @@ export default function PaintingDecoratingPage() {
 
           <div className={styles.container}>
             <div className={styles.heroContent}>
-              <p className={styles.eyebrow}>ALPHA PROPERTY &amp; GARDENING SERVICES</p>
+              <p className={styles.eyebrow}>
+                ALPHA PROPERTY &amp; GARDENING SERVICES
+              </p>
 
               <h1>Painting &amp; Decorating Services</h1>
 
@@ -353,7 +355,7 @@ export default function PaintingDecoratingPage() {
               <div className={styles.visualCircle}>
                 <div className={styles.paintCan}>
                   <span>ALPHA</span>
-                  <small>DECORATING</small>
+                  <small>PAINTING &amp; DECORATING</small>
                 </div>
 
                 <div className={styles.brush} />
@@ -445,11 +447,7 @@ export default function PaintingDecoratingPage() {
         </Section>
 
         {/* CEILINGS */}
-        <Section
-          eyebrow="CEILINGS"
-          title="Ceiling Painting"
-          tone="cream"
-        >
+        <Section eyebrow="CEILINGS" title="Ceiling Painting" tone="cream">
           <p>
             Ceilings can show staining, cracking, previous repairs and general
             wear more noticeably than other surfaces.
@@ -682,13 +680,11 @@ export default function PaintingDecoratingPage() {
           <ServiceList items={exteriorServices} />
 
           <p>
-            Any access requirements should be assessed before work is agreed.
-          </p>
-
-          <p>
-            Where scaffolding, specialist access equipment, specialist coatings
-            or substantial exterior repairs are required, these should be
-            identified separately within the quotation or project scope.
+            Exterior decorating is subject to safe and practical access. If
+            scaffolding, specialist access equipment, specialist coatings or
+            substantial repairs are required, we'll identify this during
+            assessment and clearly confirm what is or isn't included within the
+            quotation.
           </p>
         </Section>
 
@@ -796,7 +792,7 @@ export default function PaintingDecoratingPage() {
             may still be considering their options.
           </p>
 
-          <p>The agreed quotation should make clear:</p>
+          <p>Your quotation will clearly confirm:</p>
 
           <ServiceList items={materialServices} />
 
@@ -812,13 +808,10 @@ export default function PaintingDecoratingPage() {
           title="Wallpaper & Specialist Decorative Finishes"
         >
           <p>
-            For launch, painting and conventional decorating should remain the
-            page&apos;s main focus.
-          </p>
-
-          <p>
-            Wallpapering and specialist decorative finishes are not being
-            prominently advertised unless specifically confirmed by Alpha.
+            Our current decorating service focuses primarily on painting and
+            conventional interior and exterior finishes. Wallpapering and
+            specialist decorative finishes are not currently included as
+            standard services.
           </p>
         </Section>
 
@@ -867,7 +860,10 @@ export default function PaintingDecoratingPage() {
         </section>
 
         {/* SERVICE AREA */}
-        <Section eyebrow="SERVICE AREA" title="Painting & Decorating Across Our Region">
+        <Section
+          eyebrow="SERVICE AREA"
+          title="Painting & Decorating Across Our Region"
+        >
           <p>
             Alpha provides painting and decorating throughout our regional
             service area, extending{" "}
