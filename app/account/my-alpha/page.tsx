@@ -200,9 +200,12 @@ export default function MyAlphaPage() {
   );
 
   const pendingQuotes = quotes.filter((quote) =>
-    ["pending", "sent", "awaiting approval", "awaiting_approval"].includes(
-      quote.status.toLowerCase()
-    )
+    [
+      "pending",
+      "sent",
+      "awaiting approval",
+      "awaiting_approval",
+    ].includes(quote.status.toLowerCase())
   );
 
   const outstandingInvoices = invoices.filter(
@@ -238,7 +241,7 @@ export default function MyAlphaPage() {
       } = await supabase.auth.getUser();
 
       if (userError || !user) {
-        router.replace("/account/homeowner-login");
+        router.replace("/my-alpha");
         return;
       }
 
@@ -253,9 +256,45 @@ export default function MyAlphaPage() {
         return;
       }
 
-      if (profileData.role !== "client") {
+      /*
+       * My Alpha is the shared customer-facing portal.
+       *
+       * Customer / homeowner accounts remain on this dashboard.
+       * Landlord / agent accounts can use the same login and are
+       * routed to the portfolio portal when that portal exists.
+       */
+      const role = String(profileData.role || "").toLowerCase();
+
+      const landlordAgentRoles = [
+        "landlord",
+        "agent",
+        "property_manager",
+        "property-manager",
+        "agent_user",
+        "agent-user",
+        "agent_manager",
+        "agent-manager",
+        "organisation_admin",
+        "organization_admin",
+        "organisation-admin",
+        "organization-admin",
+      ];
+
+      if (landlordAgentRoles.includes(role)) {
+        router.replace("/my-alpha/portfolio");
+        return;
+      }
+
+      const customerRoles = [
+        "client",
+        "customer",
+        "homeowner",
+        "home_owner",
+      ];
+
+      if (!customerRoles.includes(role)) {
         await supabase.auth.signOut();
-        router.replace("/account/homeowner-login");
+        router.replace("/my-alpha");
         return;
       }
 
@@ -330,6 +369,7 @@ export default function MyAlphaPage() {
 
       if (firstError) {
         console.error(firstError);
+
         setError(
           "Some portal information could not be loaded. Please refresh the page."
         );
@@ -364,7 +404,8 @@ export default function MyAlphaPage() {
 
   async function handleLogout() {
     await supabase.auth.signOut();
-    router.replace("/account/homeowner-login");
+
+    router.replace("/my-alpha");
     router.refresh();
   }
 
@@ -455,13 +496,15 @@ export default function MyAlphaPage() {
   }
 
   async function markNotificationRead(notificationId: number) {
+    if (!profile) return;
+
     const now = new Date().toISOString();
 
     const { error: updateError } = await supabase
       .from("notifications")
       .update({ read_at: now })
       .eq("id", notificationId)
-      .eq("user_id", profile?.id);
+      .eq("user_id", profile.id);
 
     if (updateError) {
       console.error(updateError);
@@ -561,6 +604,7 @@ export default function MyAlphaPage() {
 
   function goTo(tab: Tab) {
     setActiveTab(tab);
+
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -574,8 +618,12 @@ export default function MyAlphaPage() {
 
         <main className={styles.loadingPage}>
           <div className={styles.loader}></div>
+
           <h2>Loading My Alpha...</h2>
-          <p>Please wait while we load your account.</p>
+
+          <p>
+            Please wait while we securely load your account.
+          </p>
         </main>
 
         <Footer />
@@ -591,14 +639,38 @@ export default function MyAlphaPage() {
         <main className={styles.errorPage}>
           <div className={styles.errorBox}>
             <h1>Unable to load your account</h1>
-            <p>{error || "Please login again."}</p>
+
+            <p>
+              {error ||
+                "Your My Alpha account could not be loaded. Please sign in again."}
+            </p>
 
             <Link
-              href="/account/homeowner-login"
+              href="/my-alpha"
               className={styles.primaryButton}
             >
-              Return to Login
+              Return to My Alpha
             </Link>
+
+            <div
+              style={{
+                marginTop: "24px",
+                textAlign: "center",
+              }}
+            >
+              <p>
+                Need help?{" "}
+                <a href="tel:01775518068">
+                  01775 518068
+                </a>
+              </p>
+
+              <p>
+                <a href="mailto:info@alphapropertyandgardening.co.uk">
+                  info@alphapropertyandgardening.co.uk
+                </a>
+              </p>
+            </div>
           </div>
         </main>
 
@@ -615,12 +687,15 @@ export default function MyAlphaPage() {
         {/* =====================================================
             PORTAL HERO
         ====================================================== */}
+
         <section className={styles.portalHero}>
           <div className={styles.portalHeroOverlay}></div>
 
           <div className={styles.portalHeroContent}>
             <div>
-              <p className={styles.heroEyebrow}>MY ALPHA CLIENT PORTAL</p>
+              <p className={styles.heroEyebrow}>
+                MY ALPHA CLIENT PORTAL
+              </p>
 
               <h1>
                 Welcome back,
@@ -630,9 +705,19 @@ export default function MyAlphaPage() {
               </h1>
 
               <p>
-                Manage your properties, jobs, quotes, appointments
-                and invoices all in one place.
+                Manage your properties, jobs, quotes, invoices and
+                service requests all in one place.
               </p>
+
+              <small
+                style={{
+                  display: "block",
+                  marginTop: "10px",
+                  fontWeight: 600,
+                }}
+              >
+                One Team. Complete Property Care.
+              </small>
             </div>
 
             <div className={styles.heroUser}>
@@ -641,8 +726,13 @@ export default function MyAlphaPage() {
               </div>
 
               <div>
-                <strong>{profile.full_name || "Alpha Client"}</strong>
-                <span>{profile.email || "Client account"}</span>
+                <strong>
+                  {profile.full_name || "Alpha Client"}
+                </strong>
+
+                <span>
+                  {profile.email || "My Alpha account"}
+                </span>
               </div>
             </div>
           </div>
@@ -652,8 +742,11 @@ export default function MyAlphaPage() {
           {/* ===================================================
               SIDEBAR
           ==================================================== */}
+
           <aside className={styles.sidebar}>
-            <div className={styles.sidebarTitle}>My Alpha</div>
+            <div className={styles.sidebarTitle}>
+              My Alpha
+            </div>
 
             <button
               className={
@@ -742,7 +835,10 @@ export default function MyAlphaPage() {
             >
               <span>●</span>
               Notifications
-              {unreadNotifications > 0 && <b>{unreadNotifications}</b>}
+
+              {unreadNotifications > 0 && (
+                <b>{unreadNotifications}</b>
+              )}
             </button>
 
             <button
@@ -776,22 +872,35 @@ export default function MyAlphaPage() {
               onClick={handleLogout}
             >
               <span>↪</span>
-              Logout
+              Sign Out
             </button>
 
             <div className={styles.sidebarHelp}>
               <strong>Need help?</strong>
-              <p>Our team is here for you.</p>
 
-              <a href="tel:01234567890">
-                01234 567890
+              <p>
+                Our Alpha team is here to help with your account,
+                jobs and services.
+              </p>
+
+              <a href="tel:01775518068">
+                01775 518068
               </a>
+
+              <a href="mailto:info@alphapropertyandgardening.co.uk">
+                info@alphapropertyandgardening.co.uk
+              </a>
+
+              <small>
+                24/7 emergency support: 01775 518068
+              </small>
             </div>
           </aside>
 
           {/* ===================================================
               MAIN CONTENT
           ==================================================== */}
+
           <section className={styles.dashboardContent}>
             {message && (
               <div className={styles.successMessage}>
@@ -808,17 +917,25 @@ export default function MyAlphaPage() {
             {/* =================================================
                 DASHBOARD
             ================================================== */}
+
             {activeTab === "dashboard" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>DASHBOARD</p>
+                    <p className={styles.smallLabel}>
+                      DASHBOARD
+                    </p>
+
                     <h2>
                       Hello,{" "}
-                      {profile.full_name?.split(" ")[0] || "there"}!
+                      {profile.full_name?.split(" ")[0] ||
+                        "there"}
+                      !
                     </h2>
+
                     <p>
-                      Here&apos;s an overview of your Alpha account.
+                      Here&apos;s an overview of your Alpha account
+                      and current services.
                     </p>
                   </div>
 
@@ -826,17 +943,17 @@ export default function MyAlphaPage() {
                     href="/contact"
                     className={styles.goldButton}
                   >
-                    Request a Service →
+                    Request a Quote →
                   </Link>
                 </div>
 
-                {/* STAT CARDS */}
                 <div className={styles.statsGrid}>
                   <button
                     className={styles.statCard}
                     onClick={() => goTo("properties")}
                   >
                     <div className={styles.statIcon}>⌂</div>
+
                     <div>
                       <span>Properties</span>
                       <strong>{properties.length}</strong>
@@ -848,6 +965,7 @@ export default function MyAlphaPage() {
                     onClick={() => goTo("jobs")}
                   >
                     <div className={styles.statIcon}>✓</div>
+
                     <div>
                       <span>Active Jobs</span>
                       <strong>{activeJobs.length}</strong>
@@ -859,6 +977,7 @@ export default function MyAlphaPage() {
                     onClick={() => goTo("quotes")}
                   >
                     <div className={styles.statIcon}>£</div>
+
                     <div>
                       <span>Pending Quotes</span>
                       <strong>{pendingQuotes.length}</strong>
@@ -870,8 +989,10 @@ export default function MyAlphaPage() {
                     onClick={() => goTo("invoices")}
                   >
                     <div className={styles.statIcon}>▤</div>
+
                     <div>
                       <span>Outstanding</span>
+
                       <strong>
                         {formatMoney(
                           outstandingInvoices.reduce(
@@ -886,7 +1007,6 @@ export default function MyAlphaPage() {
                 </div>
 
                 <div className={styles.dashboardGrid}>
-                  {/* UPCOMING */}
                   <div className={styles.panel}>
                     <div className={styles.panelHeader}>
                       <div>
@@ -902,9 +1022,12 @@ export default function MyAlphaPage() {
                     {upcomingJobs.length === 0 ? (
                       <div className={styles.emptyState}>
                         <div>◷</div>
+
                         <h4>No upcoming jobs</h4>
+
                         <p>
-                          Your upcoming appointments will appear here.
+                          Your upcoming appointments will appear
+                          here.
                         </p>
                       </div>
                     ) : (
@@ -927,9 +1050,12 @@ export default function MyAlphaPage() {
                                 {job.preferred_date
                                   ? new Date(
                                       `${job.preferred_date}T12:00:00`
-                                    ).toLocaleDateString("en-GB", {
-                                      month: "short",
-                                    })
+                                    ).toLocaleDateString(
+                                      "en-GB",
+                                      {
+                                        month: "short",
+                                      }
+                                    )
                                   : ""}
                               </span>
                             </div>
@@ -946,7 +1072,10 @@ export default function MyAlphaPage() {
 
                               <small>
                                 {job.preferred_start_time
-                                  ? job.preferred_start_time.slice(0, 5)
+                                  ? job.preferred_start_time.slice(
+                                      0,
+                                      5
+                                    )
                                   : "Time TBC"}
                                 {" · "}
                                 {job.property_id
@@ -972,7 +1101,6 @@ export default function MyAlphaPage() {
                     )}
                   </div>
 
-                  {/* PROFILE SUMMARY */}
                   <div className={styles.panel}>
                     <div className={styles.panelHeader}>
                       <div>
@@ -1002,6 +1130,7 @@ export default function MyAlphaPage() {
                     <div className={styles.detailRows}>
                       <div>
                         <span>Phone</span>
+
                         <strong>
                           {profile.phone || "Not added"}
                         </strong>
@@ -1009,6 +1138,7 @@ export default function MyAlphaPage() {
 
                       <div>
                         <span>Address</span>
+
                         <strong>
                           {profile.address || "Not added"}
                         </strong>
@@ -1016,6 +1146,7 @@ export default function MyAlphaPage() {
 
                       <div>
                         <span>Location</span>
+
                         <strong>
                           {[profile.city, profile.postcode]
                             .filter(Boolean)
@@ -1026,7 +1157,6 @@ export default function MyAlphaPage() {
                   </div>
                 </div>
 
-                {/* RECENT JOBS */}
                 <div className={styles.panel}>
                   <div className={styles.panelHeader}>
                     <div>
@@ -1042,6 +1172,7 @@ export default function MyAlphaPage() {
                   {jobs.length === 0 ? (
                     <div className={styles.emptyState}>
                       <h4>No jobs yet</h4>
+
                       <p>
                         Jobs created for your account will appear
                         here.
@@ -1065,6 +1196,7 @@ export default function MyAlphaPage() {
                             <tr key={job.id}>
                               <td>
                                 <strong>{job.title}</strong>
+
                                 <small>
                                   {job.service_id
                                     ? serviceMap[job.service_id] ||
@@ -1100,7 +1232,9 @@ export default function MyAlphaPage() {
                               <td>
                                 <button
                                   className={styles.viewButton}
-                                  onClick={() => goTo("jobs")}
+                                  onClick={() =>
+                                    goTo("jobs")
+                                  }
                                 >
                                   View
                                 </button>
@@ -1113,7 +1247,6 @@ export default function MyAlphaPage() {
                   )}
                 </div>
 
-                {/* NOTIFICATIONS */}
                 {notifications.length > 0 && (
                   <div className={styles.panel}>
                     <div className={styles.panelHeader}>
@@ -1123,40 +1256,54 @@ export default function MyAlphaPage() {
                       </div>
 
                       <button
-                        onClick={() => goTo("notifications")}
+                        onClick={() =>
+                          goTo("notifications")
+                        }
                       >
                         View all →
                       </button>
                     </div>
 
                     <div className={styles.notificationList}>
-                      {notifications.slice(0, 3).map((notification) => (
-                        <button
-                          key={notification.id}
-                          className={
-                            notification.read_at
-                              ? styles.notificationItem
-                              : styles.notificationUnread
-                          }
-                          onClick={() =>
-                            markNotificationRead(notification.id)
-                          }
-                        >
-                          <div className={styles.notificationIcon}>
-                            ●
-                          </div>
+                      {notifications
+                        .slice(0, 3)
+                        .map((notification) => (
+                          <button
+                            key={notification.id}
+                            className={
+                              notification.read_at
+                                ? styles.notificationItem
+                                : styles.notificationUnread
+                            }
+                            onClick={() =>
+                              markNotificationRead(
+                                notification.id
+                              )
+                            }
+                          >
+                            <div
+                              className={
+                                styles.notificationIcon
+                              }
+                            >
+                              ●
+                            </div>
 
-                          <div>
-                            <strong>{notification.title}</strong>
-                            <p>{notification.message}</p>
-                            <small>
-                              {formatDateTime(
-                                notification.created_at
-                              )}
-                            </small>
-                          </div>
-                        </button>
-                      ))}
+                            <div>
+                              <strong>
+                                {notification.title}
+                              </strong>
+
+                              <p>{notification.message}</p>
+
+                              <small>
+                                {formatDateTime(
+                                  notification.created_at
+                                )}
+                              </small>
+                            </div>
+                          </button>
+                        ))}
                     </div>
                   </div>
                 )}
@@ -1166,14 +1313,20 @@ export default function MyAlphaPage() {
             {/* =================================================
                 PROPERTIES
             ================================================== */}
+
             {activeTab === "properties" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>My Properties</h2>
+
                     <p>
-                      All properties connected to your client account.
+                      All properties connected to your client
+                      account.
                     </p>
                   </div>
 
@@ -1181,24 +1334,35 @@ export default function MyAlphaPage() {
                     href="/contact"
                     className={styles.goldButton}
                   >
-                    Add / Request Property →
+                    Request a Property Update →
                   </Link>
                 </div>
 
                 {properties.length === 0 ? (
                   <div className={styles.emptyLarge}>
                     <div>⌂</div>
+
                     <h3>No properties yet</h3>
+
                     <p>
                       Once a property is added to your account it
                       will appear here.
                     </p>
+
+                    <Link
+                      href="/contact"
+                      className={styles.goldButton}
+                      style={{ display: "inline-flex" }}
+                    >
+                      Request a Quote →
+                    </Link>
                   </div>
                 ) : (
                   <div className={styles.propertyGrid}>
                     {properties.map((property) => {
                       const propertyJobs = jobs.filter(
-                        (job) => job.property_id === property.id
+                        (job) =>
+                          job.property_id === property.id
                       );
 
                       return (
@@ -1207,7 +1371,11 @@ export default function MyAlphaPage() {
                           key={property.id}
                         >
                           <div className={styles.propertyTop}>
-                            <div className={styles.propertyIcon}>
+                            <div
+                              className={
+                                styles.propertyIcon
+                              }
+                            >
                               ⌂
                             </div>
 
@@ -1225,7 +1393,10 @@ export default function MyAlphaPage() {
                           <p>
                             {property.address}
                             <br />
-                            {[property.city, property.postcode]
+                            {[
+                              property.city,
+                              property.postcode,
+                            ]
                               .filter(Boolean)
                               .join(", ")}
                           </p>
@@ -1257,8 +1428,13 @@ export default function MyAlphaPage() {
                           </div>
 
                           {property.notes && (
-                            <div className={styles.propertyNotes}>
+                            <div
+                              className={
+                                styles.propertyNotes
+                              }
+                            >
                               <strong>Notes</strong>
+
                               <p>{property.notes}</p>
                             </div>
                           )}
@@ -1273,12 +1449,17 @@ export default function MyAlphaPage() {
             {/* =================================================
                 JOBS
             ================================================== */}
+
             {activeTab === "jobs" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>My Jobs</h2>
+
                     <p>
                       Track all jobs and service requests for your
                       properties.
@@ -1289,18 +1470,28 @@ export default function MyAlphaPage() {
                     href="/contact"
                     className={styles.goldButton}
                   >
-                    Request a Job →
+                    Request a Service →
                   </Link>
                 </div>
 
                 {jobs.length === 0 ? (
                   <div className={styles.emptyLarge}>
                     <div>✓</div>
+
                     <h3>No jobs yet</h3>
+
                     <p>
                       Your jobs will appear here once a service
                       request has been created.
                     </p>
+
+                    <Link
+                      href="/contact"
+                      className={styles.goldButton}
+                      style={{ display: "inline-flex" }}
+                    >
+                      Request a Service →
+                    </Link>
                   </div>
                 ) : (
                   <div className={styles.jobsList}>
@@ -1378,7 +1569,9 @@ export default function MyAlphaPage() {
 
                           {job.estimated_price !== null && (
                             <strong>
-                              {formatMoney(job.estimated_price)}
+                              {formatMoney(
+                                job.estimated_price
+                              )}
                             </strong>
                           )}
                         </div>
@@ -1392,26 +1585,48 @@ export default function MyAlphaPage() {
             {/* =================================================
                 QUOTES
             ================================================== */}
+
             {activeTab === "quotes" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>My Quotes</h2>
+
                     <p>
                       Review and manage quotes provided for your
                       jobs.
                     </p>
                   </div>
+
+                  <Link
+                    href="/contact"
+                    className={styles.goldButton}
+                  >
+                    Request a Quote →
+                  </Link>
                 </div>
 
                 {quotes.length === 0 ? (
                   <div className={styles.emptyLarge}>
                     <div>£</div>
+
                     <h3>No quotes yet</h3>
+
                     <p>
                       Quotes for your jobs will appear here.
                     </p>
+
+                    <Link
+                      href="/contact"
+                      className={styles.goldButton}
+                      style={{ display: "inline-flex" }}
+                    >
+                      Request a Quote →
+                    </Link>
                   </div>
                 ) : (
                   <div className={styles.quoteList}>
@@ -1423,7 +1638,9 @@ export default function MyAlphaPage() {
                         "sent",
                         "awaiting approval",
                         "awaiting_approval",
-                      ].includes(quote.status.toLowerCase());
+                      ].includes(
+                        quote.status.toLowerCase()
+                      );
 
                       return (
                         <article
@@ -1431,34 +1648,49 @@ export default function MyAlphaPage() {
                           key={quote.id}
                         >
                           <div>
-                            <span className={styles.cardEyebrow}>
+                            <span
+                              className={styles.cardEyebrow}
+                            >
                               QUOTE #{quote.id}
                             </span>
 
                             <h3>
-                              {job?.title || "Service Quote"}
+                              {job?.title ||
+                                "Service Quote"}
                             </h3>
 
                             {quote.description && (
-                              <p>{quote.description}</p>
+                              <p>
+                                {quote.description}
+                              </p>
                             )}
 
                             <small>
                               Created{" "}
-                              {formatDateTime(quote.created_at)}
+                              {formatDateTime(
+                                quote.created_at
+                              )}
                             </small>
 
                             {quote.valid_until && (
                               <small>
                                 Valid until{" "}
-                                {formatDate(quote.valid_until)}
+                                {formatDate(
+                                  quote.valid_until
+                                )}
                               </small>
                             )}
                           </div>
 
-                          <div className={styles.quoteRight}>
+                          <div
+                            className={
+                              styles.quoteRight
+                            }
+                          >
                             <strong>
-                              {formatMoney(quote.amount)}
+                              {formatMoney(
+                                quote.amount
+                              )}
                             </strong>
 
                             <span
@@ -1470,9 +1702,15 @@ export default function MyAlphaPage() {
                             </span>
 
                             {pending && (
-                              <div className={styles.quoteActions}>
+                              <div
+                                className={
+                                  styles.quoteActions
+                                }
+                              >
                                 <button
-                                  className={styles.approveButton}
+                                  className={
+                                    styles.approveButton
+                                  }
                                   onClick={() =>
                                     handleQuoteDecision(
                                       quote.id,
@@ -1484,7 +1722,9 @@ export default function MyAlphaPage() {
                                 </button>
 
                                 <button
-                                  className={styles.declineButton}
+                                  className={
+                                    styles.declineButton
+                                  }
                                   onClick={() =>
                                     handleQuoteDecision(
                                       quote.id,
@@ -1508,12 +1748,17 @@ export default function MyAlphaPage() {
             {/* =================================================
                 INVOICES
             ================================================== */}
+
             {activeTab === "invoices" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>My Invoices</h2>
+
                     <p>
                       View your invoices and payment status.
                     </p>
@@ -1523,7 +1768,9 @@ export default function MyAlphaPage() {
                 {invoices.length === 0 ? (
                   <div className={styles.emptyLarge}>
                     <div>▤</div>
+
                     <h3>No invoices yet</h3>
+
                     <p>
                       Your invoices will appear here when issued.
                     </p>
@@ -1548,8 +1795,11 @@ export default function MyAlphaPage() {
                               <strong>
                                 {invoice.invoice_number}
                               </strong>
+
                               <small>
-                                {formatDate(invoice.created_at)}
+                                {formatDate(
+                                  invoice.created_at
+                                )}
                               </small>
                             </td>
 
@@ -1560,12 +1810,16 @@ export default function MyAlphaPage() {
 
                             <td>
                               <strong>
-                                {formatMoney(invoice.amount)}
+                                {formatMoney(
+                                  invoice.amount
+                                )}
                               </strong>
                             </td>
 
                             <td>
-                              {formatDate(invoice.due_date)}
+                              {formatDate(
+                                invoice.due_date
+                              )}
                             </td>
 
                             <td>
@@ -1589,12 +1843,17 @@ export default function MyAlphaPage() {
             {/* =================================================
                 MESSAGES
             ================================================== */}
+
             {activeTab === "messages" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>Messages</h2>
+
                     <p>
                       Your communication related to Alpha jobs and
                       services.
@@ -1612,9 +1871,12 @@ export default function MyAlphaPage() {
                 {messages.length === 0 ? (
                   <div className={styles.emptyLarge}>
                     <div>✉</div>
+
                     <h3>No messages yet</h3>
+
                     <p>
-                      Messages from the Alpha team will appear here.
+                      Messages from the Alpha team will appear
+                      here.
                     </p>
                   </div>
                 ) : (
@@ -1636,7 +1898,9 @@ export default function MyAlphaPage() {
                           </strong>
 
                           <span>
-                            {formatDateTime(item.created_at)}
+                            {formatDateTime(
+                              item.created_at
+                            )}
                           </span>
                         </div>
 
@@ -1657,14 +1921,20 @@ export default function MyAlphaPage() {
             {/* =================================================
                 NOTIFICATIONS
             ================================================== */}
+
             {activeTab === "notifications" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>Notifications</h2>
+
                     <p>
-                      Important updates about your account and jobs.
+                      Important updates about your account and
+                      jobs.
                     </p>
                   </div>
 
@@ -1681,13 +1951,17 @@ export default function MyAlphaPage() {
                 {notifications.length === 0 ? (
                   <div className={styles.emptyLarge}>
                     <div>●</div>
+
                     <h3>No notifications</h3>
-                    <p>
-                      You&apos;re all caught up.
-                    </p>
+
+                    <p>You&apos;re all caught up.</p>
                   </div>
                 ) : (
-                  <div className={styles.notificationListLarge}>
+                  <div
+                    className={
+                      styles.notificationListLarge
+                    }
+                  >
                     {notifications.map((notification) => (
                       <button
                         className={
@@ -1697,21 +1971,33 @@ export default function MyAlphaPage() {
                         }
                         key={notification.id}
                         onClick={() =>
-                          markNotificationRead(notification.id)
+                          markNotificationRead(
+                            notification.id
+                          )
                         }
                       >
-                        <div className={styles.notificationBigIcon}>
+                        <div
+                          className={
+                            styles.notificationBigIcon
+                          }
+                        >
                           {notification.type === "job"
                             ? "✓"
-                            : notification.type === "invoice"
+                            : notification.type ===
+                              "invoice"
                             ? "£"
-                            : notification.type === "quote"
+                            : notification.type ===
+                              "quote"
                             ? "?"
                             : "●"}
                         </div>
 
                         <div>
-                          <div className={styles.notificationHeading}>
+                          <div
+                            className={
+                              styles.notificationHeading
+                            }
+                          >
                             <strong>
                               {notification.title}
                             </strong>
@@ -1739,12 +2025,17 @@ export default function MyAlphaPage() {
             {/* =================================================
                 REVIEWS
             ================================================== */}
+
             {activeTab === "reviews" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>My Reviews</h2>
+
                     <p>
                       Reviews you have left for completed services.
                     </p>
@@ -1754,7 +2045,9 @@ export default function MyAlphaPage() {
                 {reviews.length === 0 ? (
                   <div className={styles.emptyLarge}>
                     <div>★</div>
+
                     <h3>No reviews yet</h3>
+
                     <p>
                       Your submitted reviews will appear here.
                     </p>
@@ -1777,11 +2070,15 @@ export default function MyAlphaPage() {
                         </h3>
 
                         {review.comment && (
-                          <p>&quot;{review.comment}&quot;</p>
+                          <p>
+                            &quot;{review.comment}&quot;
+                          </p>
                         )}
 
                         <small>
-                          {formatDateTime(review.created_at)}
+                          {formatDateTime(
+                            review.created_at
+                          )}
                         </small>
                       </article>
                     ))}
@@ -1793,12 +2090,17 @@ export default function MyAlphaPage() {
             {/* =================================================
                 PROFILE
             ================================================== */}
+
             {activeTab === "profile" && (
               <>
                 <div className={styles.contentHeader}>
                   <div>
-                    <p className={styles.smallLabel}>MY ALPHA</p>
+                    <p className={styles.smallLabel}>
+                      MY ALPHA
+                    </p>
+
                     <h2>My Profile</h2>
+
                     <p>
                       Keep your contact and property information
                       up to date.
@@ -1808,7 +2110,11 @@ export default function MyAlphaPage() {
 
                 <div className={styles.profilePanel}>
                   <div className={styles.profilePanelTop}>
-                    <div className={styles.profileAvatarLarge}>
+                    <div
+                      className={
+                        styles.profileAvatarLarge
+                      }
+                    >
                       {profile.full_name
                         ?.charAt(0)
                         .toUpperCase() || "A"}
@@ -1816,11 +2122,12 @@ export default function MyAlphaPage() {
 
                     <div>
                       <h3>
-                        {profile.full_name || "Your Name"}
+                        {profile.full_name ||
+                          "Your Name"}
                       </h3>
 
                       <p>
-                        Client account ·{" "}
+                        My Alpha account ·{" "}
                         {profile.email}
                       </p>
                     </div>
@@ -1833,12 +2140,18 @@ export default function MyAlphaPage() {
                     <div className={styles.formGrid}>
                       <label>
                         Full Name
+
                         <input
-                          value={profileForm.full_name}
+                          name="full_name"
+                          autoComplete="name"
+                          value={
+                            profileForm.full_name
+                          }
                           onChange={(event) =>
                             setProfileForm({
                               ...profileForm,
-                              full_name: event.target.value,
+                              full_name:
+                                event.target.value,
                             })
                           }
                           required
@@ -1847,26 +2160,38 @@ export default function MyAlphaPage() {
 
                       <label>
                         Email
+
                         <input
+                          name="email"
                           type="email"
-                          value={profileForm.email}
+                          autoComplete="email"
+                          value={
+                            profileForm.email
+                          }
                           readOnly
                         />
 
                         <small>
-                          Your login email is managed through your
-                          account.
+                          Your login email is managed through
+                          your account.
                         </small>
                       </label>
 
                       <label>
                         Phone
+
                         <input
-                          value={profileForm.phone}
+                          name="phone"
+                          type="tel"
+                          autoComplete="tel"
+                          value={
+                            profileForm.phone
+                          }
                           onChange={(event) =>
                             setProfileForm({
                               ...profileForm,
-                              phone: event.target.value,
+                              phone:
+                                event.target.value,
                             })
                           }
                         />
@@ -1874,12 +2199,18 @@ export default function MyAlphaPage() {
 
                       <label>
                         Address
+
                         <input
-                          value={profileForm.address}
+                          name="address"
+                          autoComplete="street-address"
+                          value={
+                            profileForm.address
+                          }
                           onChange={(event) =>
                             setProfileForm({
                               ...profileForm,
-                              address: event.target.value,
+                              address:
+                                event.target.value,
                             })
                           }
                         />
@@ -1887,12 +2218,18 @@ export default function MyAlphaPage() {
 
                       <label>
                         City
+
                         <input
-                          value={profileForm.city}
+                          name="city"
+                          autoComplete="address-level2"
+                          value={
+                            profileForm.city
+                          }
                           onChange={(event) =>
                             setProfileForm({
                               ...profileForm,
-                              city: event.target.value,
+                              city:
+                                event.target.value,
                             })
                           }
                         />
@@ -1900,12 +2237,18 @@ export default function MyAlphaPage() {
 
                       <label>
                         Postcode
+
                         <input
-                          value={profileForm.postcode}
+                          name="postcode"
+                          autoComplete="postal-code"
+                          value={
+                            profileForm.postcode
+                          }
                           onChange={(event) =>
                             setProfileForm({
                               ...profileForm,
-                              postcode: event.target.value,
+                              postcode:
+                                event.target.value,
                             })
                           }
                         />
@@ -1922,6 +2265,29 @@ export default function MyAlphaPage() {
                         : "Save Profile"}
                     </button>
                   </form>
+
+                  <div
+                    style={{
+                      marginTop: "30px",
+                      paddingTop: "24px",
+                      borderTop:
+                        "1px solid rgba(0,0,0,0.08)",
+                    }}
+                  >
+                    <h4>Need help with your account?</h4>
+
+                    <p>
+                      Contact Alpha at{" "}
+                      <a href="tel:01775518068">
+                        01775 518068
+                      </a>{" "}
+                      or{" "}
+                      <a href="mailto:info@alphapropertyandgardening.co.uk">
+                        info@alphapropertyandgardening.co.uk
+                      </a>
+                      .
+                    </p>
+                  </div>
                 </div>
               </>
             )}
