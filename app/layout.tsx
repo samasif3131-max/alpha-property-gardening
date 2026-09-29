@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Property & Garden Maintenance Services | Alpha",
   description:
-    "Property and garden maintenance for homeowners, landlords and letting agents. Repairs, plumbing, bathrooms, kitchens, gardens and 24/7 emergency call-outs.",
+    "Alpha Property & Gardening Services provides property maintenance, repairs, plumbing, bathrooms, kitchens, gardens and 24/7 emergency call-outs for homeowners, landlords, letting agents and businesses.",
 };
 
 export default function RootLayout({
