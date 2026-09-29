@@ -368,7 +368,7 @@ export default function LandlordsLettingAgentsPage() {
 
               <div className={styles.heroProposition}>
                 <strong>
-                  One enquiry. One team. One point of contact.
+                  One enquiry.One team.One point of contact. Alpha Property Gardening
                 </strong>
               </div>
 
@@ -1228,7 +1228,7 @@ export default function LandlordsLettingAgentsPage() {
               <h3>Alpha aims to provide:</h3>
 
               <div className={styles.centralProposition}>
-                One enquiry. One team. One point of contact.
+                One enquiry.One team.One point of contact. Alpha Property Gardening
               </div>
             </div>
           </div>
@@ -1487,7 +1487,7 @@ export default function LandlordsLettingAgentsPage() {
               </p>
 
               <div className={styles.finalProposition}>
-                One enquiry. One team. One point of contact.
+                One enquiry.One team.One point of contact. Alpha Property Gardening
               </div>
             </div>
 

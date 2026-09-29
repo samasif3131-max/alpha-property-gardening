@@ -925,7 +925,7 @@ export default function HomecareAdvicePage() {
 
               <div className={styles.emergencyCall}>
                 <strong>
-                  24/7 Emergency Property &amp; Plumbing Support —
+                  24/7 Emergency Property &amp; Plumbing Support — 
                 </strong>
 
                 <a href="tel:01775518068">
