@@ -319,14 +319,20 @@ export default function RequestAQuotePage() {
     const nextErrors: Record<string, string> = {};
 
     if (form.emergency === null) {
-      nextErrors.emergency = "Please tell us whether this is planned or urgent work.";
+      nextErrors.emergency =
+        "Please tell us whether this is planned or urgent work.";
     }
 
     if (!form.customerType) {
-      nextErrors.customerType = "Please select who you are requesting a quote as.";
+      nextErrors.customerType =
+        "Please select who you are requesting a quote as.";
     }
 
-    if (form.emergency !== true && form.customerType === "tenant" && !form.tenantAuthorisation) {
+    if (
+      form.emergency !== true &&
+      form.customerType === "tenant" &&
+      !form.tenantAuthorisation
+    ) {
       nextErrors.tenantAuthorisation =
         "Please tell us whether you are responsible for authorising the work.";
     }
