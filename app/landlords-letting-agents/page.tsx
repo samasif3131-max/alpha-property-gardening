@@ -643,8 +643,9 @@ export default function LandlordsLettingAgentsPage() {
             </div>
 
             <div className={styles.emergencyCall}>
-              <span>For an urgent issue: CALL 01775 518068</span>
-              <a href="tel:01775518068">CALL 01775 518068</a>
+              <a href="tel:01775518068">
+                For an urgent issue: CALL 01775 518068
+              </a>
             </div>
 
             <div className={styles.emergencyExamples}>
