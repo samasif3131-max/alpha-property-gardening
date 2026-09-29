@@ -1453,7 +1453,10 @@ export default function LandlordsLettingAgentsPage() {
                       />
                     </label>
 
-                    <button type="submit" className={styles.formButton}>
+                    <button
+                      type="submit"
+                      className={styles.formButton}
+                    >
                       Request Landlord / Agent Support →
                     </button>
                   </form>

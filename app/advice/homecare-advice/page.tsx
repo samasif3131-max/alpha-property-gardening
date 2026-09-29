@@ -642,7 +642,7 @@ export default function HomecareAdvicePage() {
             </div>
 
             <div className={styles.checklistNote}>
-              <strong>Important:</strong>
+              <strong>Important: </strong>
               <span>
                 If something changes noticeably or is causing
                 damage, it may need further assessment.
@@ -698,7 +698,7 @@ export default function HomecareAdvicePage() {
 
                   {section.emergency && (
                     <div className={styles.emergencyMini}>
-                      <strong>Active water escape?</strong>
+                      <strong>Active water escape? </strong>
 
                       <a href="tel:01775518068">
                         Call 01775 518068

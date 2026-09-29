@@ -109,16 +109,41 @@ const faqs = [
   },
 ];
 
+const enquiryTypes = [
+  "General Enquiry",
+  "New Work / Service Enquiry",
+  "Existing Quote",
+  "Existing Job / Appointment",
+  "Invoice / Payment Query",
+  "Landlord / Letting Agent Enquiry",
+  "Other",
+];
+
+const referenceTypes = [
+  "Existing Quote",
+  "Existing Job / Appointment",
+  "Invoice / Payment Query",
+];
+
 export default function ContactPage() {
   const [formState, setFormState] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
 
+  const [selectedEnquiryType, setSelectedEnquiryType] =
+    useState("");
+
+  const [submittedReference, setSubmittedReference] =
+    useState("");
+
   useEffect(() => {
-    document.title = "Contact Alpha Property & Gardening Services";
+    document.title =
+      "Contact Alpha Property & Gardening Services";
   }, []);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
     // Prevent duplicate submissions
@@ -133,22 +158,45 @@ export default function ContactPage() {
      * Honeypot spam protection.
      * Genuine users never see or complete this field.
      */
-    const honeypot = String(data.get("website") ?? "").trim();
+    const honeypot = String(
+      data.get("website") ?? ""
+    ).trim();
 
     if (honeypot) {
+      setSubmittedReference("");
       setFormState("success");
       form.reset();
+      setSelectedEnquiryType("");
       return;
     }
 
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
-    const postcode = String(data.get("postcode") ?? "").trim();
+    const name = String(
+      data.get("name") ?? ""
+    ).trim();
+
+    const email = String(
+      data.get("email") ?? ""
+    ).trim();
+
+    const phone = String(
+      data.get("phone") ?? ""
+    ).trim();
+
+    const postcode = String(
+      data.get("postcode") ?? ""
+    ).trim();
+
     const enquiryType = String(
       data.get("enquiryType") ?? ""
     ).trim();
-    const message = String(data.get("message") ?? "").trim();
+
+    const referenceNumber = String(
+      data.get("referenceNumber") ?? ""
+    ).trim();
+
+    const message = String(
+      data.get("message") ?? ""
+    ).trim();
 
     // Required field validation
     if (
@@ -160,6 +208,33 @@ export default function ContactPage() {
     ) {
       setFormState("error");
       return;
+    }
+
+    // Validate enquiry type
+    if (!enquiryTypes.includes(enquiryType)) {
+      setFormState("error");
+      return;
+    }
+
+    // Reference number is optional, but only applies
+    // to the three relevant enquiry types.
+    if (
+      referenceNumber &&
+      !referenceTypes.includes(enquiryType)
+    ) {
+      setFormState("error");
+      return;
+    }
+
+    // Validate reference format if supplied
+    if (referenceNumber) {
+      const referencePattern =
+        /^(QUO|JOB|INV)-[A-Za-z0-9-]+$/i;
+
+      if (!referencePattern.test(referenceNumber)) {
+        setFormState("error");
+        return;
+      }
     }
 
     // Email validation
@@ -185,6 +260,7 @@ export default function ContactPage() {
           phone,
           postcode,
           enquiryType,
+          referenceNumber,
           message,
           website: honeypot,
         }),
@@ -198,9 +274,15 @@ export default function ContactPage() {
         );
       }
 
-      // Only reset the form after successful API response
+      // Save the actual CRM enquiry reference
+      setSubmittedReference(
+        result.reference || ""
+      );
+
+      // Only reset after successful API response
       setFormState("success");
       form.reset();
+      setSelectedEnquiryType("");
     } catch (error) {
       console.error(
         "Contact form submission error:",
@@ -216,6 +298,13 @@ export default function ContactPage() {
     }
   }
 
+  const showReferenceField =
+    referenceTypes.includes(selectedEnquiryType);
+
+  const showQuotePrompt =
+    selectedEnquiryType ===
+    "New Work / Service Enquiry";
+
   return (
     <>
       <Header />
@@ -224,12 +313,15 @@ export default function ContactPage() {
         {/* =====================================================
             HERO
         ====================================================== */}
+
         <section className={styles.hero}>
           <div className={styles.heroOverlay} />
 
           <div className={styles.heroContent}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>CONTACT ALPHA</p>
+              <p className={styles.eyebrow}>
+                CONTACT ALPHA
+              </p>
 
               <h1>Contact Alpha</h1>
 
@@ -274,6 +366,7 @@ export default function ContactPage() {
 
               <div className={styles.imageBadge}>
                 <strong>ALPHA</strong>
+
                 <span>
                   Property &amp; Gardening Services
                 </span>
@@ -285,6 +378,7 @@ export default function ContactPage() {
         {/* =====================================================
             EMERGENCY
         ====================================================== */}
+
         <section
           className={styles.emergencySection}
           aria-labelledby="emergency-title"
@@ -327,6 +421,7 @@ export default function ContactPage() {
         {/* =====================================================
             CONTACT OPTIONS
         ====================================================== */}
+
         <section
           className={styles.optionsSection}
           aria-labelledby="contact-options-title"
@@ -346,7 +441,9 @@ export default function ContactPage() {
               href="tel:01775518068"
               className={styles.optionCard}
             >
-              <span className={styles.optionIcon}>☎</span>
+              <span className={styles.optionIcon}>
+                ☎
+              </span>
 
               <h3>Phone</h3>
 
@@ -363,7 +460,9 @@ export default function ContactPage() {
               href="mailto:info@alphapropertyandgardening.co.uk"
               className={styles.optionCard}
             >
-              <span className={styles.optionIcon}>✉</span>
+              <span className={styles.optionIcon}>
+                ✉
+              </span>
 
               <h3>Email</h3>
 
@@ -382,11 +481,15 @@ export default function ContactPage() {
               href="/request-a-quote"
               className={styles.optionCard}
             >
-              <span className={styles.optionIcon}>✓</span>
+              <span className={styles.optionIcon}>
+                ✓
+              </span>
 
               <h3>Request a Quote</h3>
 
-              <strong>START A QUOTE REQUEST →</strong>
+              <strong>
+                START A QUOTE REQUEST →
+              </strong>
 
               <p>
                 Use the dedicated quotation journey for planned
@@ -399,6 +502,7 @@ export default function ContactPage() {
         {/* =====================================================
             GENERAL ENQUIRY FORM
         ====================================================== */}
+
         <section
           className={styles.formSection}
           id="message"
@@ -447,29 +551,42 @@ export default function ContactPage() {
                 </span>
 
                 <h3>
-                  Thanks — Your Message Has Been Sent
+                  Thanks — We’ve Received Your Enquiry
                 </h3>
 
                 <p>
                   Your enquiry has been received successfully.
-                  For urgent property or plumbing problems, call
-                  01775 518068 rather than waiting for an email
-                  response.
+                </p>
+
+                {submittedReference && (
+                  <p>
+                    <strong>
+                      Your reference:{" "}
+                      {submittedReference}
+                    </strong>
+                  </p>
+                )}
+
+                <p>
+                  We’ll review your message and contact you
+                  where required. For urgent property or
+                  plumbing problems, call 01775 518068
+                  directly.
                 </p>
 
                 <div className={styles.stateActions}>
                   <Link
-                    href="/request-a-quote"
+                    href="/"
                     className={styles.primaryButton}
                   >
-                    REQUEST A QUOTE
+                    RETURN HOME
                   </Link>
 
                   <Link
-                    href="/services"
+                    href="/request-a-quote"
                     className={styles.lightButton}
                   >
-                    VIEW OUR SERVICES
+                    REQUEST A QUOTE
                   </Link>
                 </div>
               </div>
@@ -615,7 +732,12 @@ export default function ContactPage() {
                     <select
                       id="enquiryType"
                       name="enquiryType"
-                      defaultValue=""
+                      value={selectedEnquiryType}
+                      onChange={(event) =>
+                        setSelectedEnquiryType(
+                          event.target.value
+                        )
+                      }
                       required
                     >
                       <option
@@ -625,31 +747,82 @@ export default function ContactPage() {
                         Select an enquiry type
                       </option>
 
-                      <option value="General Enquiry">
-                        General Enquiry
-                      </option>
-
-                      <option value="Existing Quote">
-                        Existing Quote
-                      </option>
-
-                      <option value="Existing Job">
-                        Existing Job
-                      </option>
-
-                      <option value="Landlord / Letting Agent">
-                        Landlord / Letting Agent
-                      </option>
-
-                      <option value="Recurring Maintenance">
-                        Recurring Maintenance
-                      </option>
-
-                      <option value="Other">
-                        Other
-                      </option>
+                      {enquiryTypes.map((type) => (
+                        <option
+                          key={type}
+                          value={type}
+                        >
+                          {type}
+                        </option>
+                      ))}
                     </select>
                   </div>
+
+                  {/* CONDITIONAL REFERENCE NUMBER */}
+                  {showReferenceField && (
+                    <div
+                      className={`${styles.formGroup} ${styles.fullWidth}`}
+                    >
+                      <label htmlFor="referenceNumber">
+                        Reference Number{" "}
+                        <span className={styles.optionalText}>
+                          (if known)
+                        </span>
+                      </label>
+
+                      <input
+                        id="referenceNumber"
+                        name="referenceNumber"
+                        type="text"
+                        placeholder="QUO-xxxxx / JOB-xxxxx / INV-xxxxx"
+                        autoComplete="off"
+                      />
+                    </div>
+                  )}
+
+                  {/* CONDITIONAL QUOTE PROMPT */}
+                  {showQuotePrompt && (
+                    <div
+                      className={`${styles.formGroup} ${styles.fullWidth}`}
+                    >
+                      <div className={styles.warningBox}>
+                        <strong>
+                          Need a price for the work?
+                        </strong>
+
+                        <p>
+                          Our quote form lets you provide more
+                          detail, photographs and property
+                          information.
+                        </p>
+
+                        <div className={styles.stateActions}>
+                          <Link
+                            href="/request-a-quote"
+                            className={
+                              styles.primaryButton
+                            }
+                          >
+                            START A QUOTE REQUEST
+                          </Link>
+
+                          <button
+                            type="button"
+                            className={styles.lightButton}
+                            onClick={() => {
+                              document
+                                .getElementById(
+                                  "message-text"
+                                )
+                                ?.focus();
+                            }}
+                          >
+                            CONTINUE WITH THIS ENQUIRY
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* MESSAGE */}
                   <div
@@ -672,8 +845,12 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   className={styles.submitButton}
-                  disabled={formState === "submitting"}
-                  aria-disabled={formState === "submitting"}
+                  disabled={
+                    formState === "submitting"
+                  }
+                  aria-disabled={
+                    formState === "submitting"
+                  }
                 >
                   {formState === "submitting"
                     ? "SENDING..."
@@ -695,6 +872,7 @@ export default function ContactPage() {
         {/* =====================================================
             QUOTE VS CONTACT
         ====================================================== */}
+
         <section
           className={styles.quoteSection}
           aria-labelledby="quote-title"
@@ -727,6 +905,7 @@ export default function ContactPage() {
         {/* =====================================================
             LANDLORDS + EXISTING CUSTOMERS
         ====================================================== */}
+
         <section className={styles.splitSection}>
           <div className={styles.infoPanel}>
             <p className={styles.sectionEyebrow}>
@@ -744,15 +923,19 @@ export default function ContactPage() {
               <li>
                 One-off repairs and tenant-reported maintenance
               </li>
+
               <li>
                 Emergency plumbing and urgent property issues
               </li>
+
               <li>
                 Void-property work and recurring maintenance
               </li>
+
               <li>
                 Garden maintenance and complete refurbishment
               </li>
+
               <li>
                 Support across multiple properties
               </li>
@@ -820,6 +1003,7 @@ export default function ContactPage() {
         {/* =====================================================
             SERVICE AREA
         ====================================================== */}
+
         <section
           className={styles.serviceAreaSection}
           aria-labelledby="area-title"
@@ -870,6 +1054,7 @@ export default function ContactPage() {
         {/* =====================================================
             SERVICES
         ====================================================== */}
+
         <section
           className={styles.servicesSection}
           aria-labelledby="services-title"
@@ -913,6 +1098,7 @@ export default function ContactPage() {
         {/* =====================================================
             BUSINESS DETAILS
         ====================================================== */}
+
         <section
           className={styles.businessSection}
           aria-labelledby="business-title"
@@ -975,6 +1161,7 @@ export default function ContactPage() {
         {/* =====================================================
             FAQ
         ====================================================== */}
+
         <section
           className={styles.faqSection}
           aria-labelledby="faq-title"
@@ -1009,6 +1196,7 @@ export default function ContactPage() {
         {/* =====================================================
             FINAL CTA
         ====================================================== */}
+
         <section className={styles.finalCta}>
           <div>
             <p className={styles.sectionEyebrow}>
@@ -1047,6 +1235,7 @@ export default function ContactPage() {
       </main>
 
       {/* MOBILE ACTION BAR */}
+
       <div className={styles.mobileActionBar}>
         <a href="tel:01775518068">
           <span>☎</span>
