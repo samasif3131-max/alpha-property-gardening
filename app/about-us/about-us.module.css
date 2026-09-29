@@ -257,15 +257,14 @@
   font-family: Georgia, serif;
   font-size: 25px;
   font-style: italic;
+  line-height: 1.35;
 }
 
-.storyQuote span,
 .storyQuote strong {
   display: block;
-}
-
-.storyQuote strong {
+  margin: 0;
   color: #bd851d;
+  font-weight: 700;
 }
 
 .storyQuote i {

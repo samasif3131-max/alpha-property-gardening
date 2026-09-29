@@ -29,52 +29,22 @@ type SeasonalArticle = {
   href: string;
 };
 
-const seasonalArticles: SeasonalArticle[] = [
-  {
-    title: "Spring Garden Checklist",
-    season: "Spring",
-    category: "Garden Care",
-    date: "20 October 2025",
-    excerpt:
-      "A practical seasonal checklist to help get your garden looking its best as spring arrives.",
-    image:
-      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1200&q=85",
-    href: "/advice/spring-garden-checklist",
-  },
-  {
-    title: "Preparing Your Garden for Summer",
-    season: "Summer",
-    category: "Garden Care",
-    date: "2 January 2026",
-    excerpt:
-      "Get your garden ready for warmer weather with useful maintenance, planting and outdoor-care considerations.",
-    image:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1200&q=85",
-    href: "/advice/preparing-your-garden-for-summer",
-  },
-  {
-    title: "How to Keep Your Home Warm in Winter",
-    season: "Winter",
-    category: "Home Care",
-    date: "15 January 2026",
-    excerpt:
-      "Simple ways to keep your property warm, comfortable and energy efficient throughout the colder months.",
-    image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85",
-    href: "/advice/how-to-keep-your-home-warm",
-  },
-  {
-    title: "Preparing Your Property for Winter",
-    season: "Winter",
-    category: "Seasonal Advice",
-    date: "15 November 2025",
-    excerpt:
-      "Protect your home or rental property from cold weather with useful maintenance checks.",
-    image:
-      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=85",
-    href: "/advice/preparing-property-for-winter",
-  },
-];
+/*
+ * IMPORTANT:
+ * Only genuine published articles should be added here.
+ *
+ * The previous four placeholder / 404 article cards have
+ * intentionally been removed:
+ *
+ * - Spring Garden Checklist
+ * - Preparing Your Garden for Summer
+ * - How to Keep Your Home Warm in Winter
+ * - Preparing Your Property for Winter
+ *
+ * This prevents unpublished content from being shown as live
+ * published advice.
+ */
+const seasonalArticles: SeasonalArticle[] = [];
 
 const seasonNavigation: Array<{
   name: Season;
@@ -114,12 +84,15 @@ const currentSeasonArticles: Record<
   Spring: seasonalArticles.filter(
     (article) => article.season === "Spring",
   ),
+
   Summer: seasonalArticles.filter(
     (article) => article.season === "Summer",
   ),
+
   Autumn: seasonalArticles.filter(
     (article) => article.season === "Autumn",
   ),
+
   Winter: seasonalArticles.filter(
     (article) => article.season === "Winter",
   ),
@@ -193,24 +166,6 @@ function SeasonalArticleCard({
   );
 }
 
-function ServiceLink({
-  title,
-  href,
-}: {
-  title: string;
-  href: string;
-}) {
-  return (
-    <Link
-      href={href}
-      className={styles.serviceLink}
-    >
-      <span>{title}</span>
-      <strong>→</strong>
-    </Link>
-  );
-}
-
 export default function SeasonalAdvicePage() {
   const [search, setSearch] = useState("");
 
@@ -223,6 +178,12 @@ export default function SeasonalAdvicePage() {
     currentSeasonArticles[currentSeason];
 
   useEffect(() => {
+    /*
+     * SEO / Browser title
+     *
+     * Client requested:
+     * Seasonal Property Maintenance Advice | Alpha
+     */
     document.title =
       "Seasonal Property Maintenance Advice | Alpha";
 
@@ -252,6 +213,7 @@ export default function SeasonalAdvicePage() {
     if (!query) {
       window.location.href =
         "/advice/search";
+
       return;
     }
 
@@ -277,11 +239,15 @@ export default function SeasonalAdvicePage() {
         >
           <div className={styles.breadcrumb}>
             <Link href="/">Home</Link>
+
             <span>→</span>
+
             <Link href="/advice">
               Advice
             </Link>
+
             <span>→</span>
+
             <span>Seasonal Advice</span>
           </div>
 
@@ -290,6 +256,7 @@ export default function SeasonalAdvicePage() {
               SEASONAL PROPERTY MAINTENANCE
             </span>
 
+            {/* Existing H1 intentionally unchanged */}
             <h1>
               Seasonal Property &amp; Garden Advice
             </h1>
@@ -364,8 +331,7 @@ export default function SeasonalAdvicePage() {
             {seasonNavigation.map(
               (season) => {
                 const active =
-                  currentSeason ===
-                  season.name;
+                  currentSeason === season.name;
 
                 return (
                   <a
@@ -519,8 +485,7 @@ export default function SeasonalAdvicePage() {
               </p>
 
               <div className={styles.currentSeasonLine}>
-                {currentSeason ===
-                "Spring"
+                {currentSeason === "Spring"
                   ? "This is the current season."
                   : "Plan ahead for the coming months."}
               </div>
@@ -629,21 +594,13 @@ export default function SeasonalAdvicePage() {
               </p>
 
               <div className={styles.topicPills}>
-                <span>
-                  Winter damage
-                </span>
+                <span>Winter damage</span>
 
-                <span>
-                  Water staining
-                </span>
+                <span>Water staining</span>
 
-                <span>
-                  Exterior sealant
-                </span>
+                <span>Exterior sealant</span>
 
-                <span>
-                  Decorating
-                </span>
+                <span>Decorating</span>
               </div>
 
               <Link
@@ -657,9 +614,7 @@ export default function SeasonalAdvicePage() {
 
           <PublishedSeasonArticles
             season="Spring"
-            articles={
-              currentSeasonArticles.Spring
-            }
+            articles={currentSeasonArticles.Spring}
           />
         </div>
       </section>
@@ -695,8 +650,7 @@ export default function SeasonalAdvicePage() {
               </p>
 
               <div className={styles.currentSeasonLine}>
-                {currentSeason ===
-                "Summer"
+                {currentSeason === "Summer"
                   ? "This is the current season."
                   : "Plan ahead for suitable summer work."}
               </div>
@@ -708,41 +662,17 @@ export default function SeasonalAdvicePage() {
               </h3>
 
               <ul>
-                <li>
-                  Exterior painting
-                </li>
-
-                <li>
-                  Property repairs
-                </li>
-
-                <li>
-                  Garden maintenance
-                </li>
-
-                <li>
-                  Renovations
-                </li>
-
-                <li>
-                  Kitchen or bathroom projects
-                </li>
-
-                <li>
-                  Flooring
-                </li>
-
-                <li>
-                  Decorating
-                </li>
-
+                <li>Exterior painting</li>
+                <li>Property repairs</li>
+                <li>Garden maintenance</li>
+                <li>Renovations</li>
+                <li>Kitchen or bathroom projects</li>
+                <li>Flooring</li>
+                <li>Decorating</li>
                 <li>
                   Suitable roof and gutter maintenance
                 </li>
-
-                <li>
-                  Planned landlord work
-                </li>
+                <li>Planned landlord work</li>
               </ul>
 
               <div className={styles.infoNote}>
@@ -769,29 +699,12 @@ export default function SeasonalAdvicePage() {
               </p>
 
               <div className={styles.topicPills}>
-                <span>
-                  Mowing
-                </span>
-
-                <span>
-                  Strimming
-                </span>
-
-                <span>
-                  Hedge maintenance
-                </span>
-
-                <span>
-                  Tidy-ups
-                </span>
-
-                <span>
-                  Recurring maintenance
-                </span>
-
-                <span>
-                  Rental gardens
-                </span>
+                <span>Mowing</span>
+                <span>Strimming</span>
+                <span>Hedge maintenance</span>
+                <span>Tidy-ups</span>
+                <span>Recurring maintenance</span>
+                <span>Rental gardens</span>
               </div>
 
               <Link
@@ -828,9 +741,7 @@ export default function SeasonalAdvicePage() {
 
           <PublishedSeasonArticles
             season="Summer"
-            articles={
-              currentSeasonArticles.Summer
-            }
+            articles={currentSeasonArticles.Summer}
           />
         </div>
       </section>
@@ -866,8 +777,7 @@ export default function SeasonalAdvicePage() {
               </p>
 
               <div className={styles.currentSeasonLine}>
-                {currentSeason ===
-                "Autumn"
+                {currentSeason === "Autumn"
                   ? "This is the current season."
                   : "A useful season to prepare before winter."}
               </div>
@@ -879,34 +789,15 @@ export default function SeasonalAdvicePage() {
               </h3>
 
               <ul>
-                <li>
-                  Gutters
-                </li>
-
-                <li>
-                  Downpipes
-                </li>
-
-                <li>
-                  Roofline maintenance
-                </li>
-
-                <li>
-                  Exterior repairs
-                </li>
-
-                <li>
-                  Garden clearance
-                </li>
-
-                <li>
-                  Fallen leaves and debris
-                </li>
-
+                <li>Gutters</li>
+                <li>Downpipes</li>
+                <li>Roofline maintenance</li>
+                <li>Exterior repairs</li>
+                <li>Garden clearance</li>
+                <li>Fallen leaves and debris</li>
                 <li>
                   Water-ingress warning signs
                 </li>
-
                 <li>
                   Sealant and exposed finishes
                 </li>
@@ -993,9 +884,7 @@ export default function SeasonalAdvicePage() {
 
           <PublishedSeasonArticles
             season="Autumn"
-            articles={
-              currentSeasonArticles.Autumn
-            }
+            articles={currentSeasonArticles.Autumn}
           />
         </div>
       </section>
@@ -1031,8 +920,7 @@ export default function SeasonalAdvicePage() {
               </p>
 
               <div className={styles.currentSeasonLine}>
-                {currentSeason ===
-                "Winter"
+                {currentSeason === "Winter"
                   ? "This is the current season."
                   : "Useful preparation for the colder months."}
               </div>
@@ -1044,30 +932,18 @@ export default function SeasonalAdvicePage() {
               </h3>
 
               <ul>
-                <li>
-                  Plumbing leaks
-                </li>
-
+                <li>Plumbing leaks</li>
                 <li>
                   Burst or damaged pipework
                 </li>
-
-                <li>
-                  Water ingress
-                </li>
-
+                <li>Water ingress</li>
                 <li>
                   Roof and gutter problems
                 </li>
-
-                <li>
-                  Damp-looking areas
-                </li>
-
+                <li>Damp-looking areas</li>
                 <li>
                   Interior damage following leaks
                 </li>
-
                 <li>
                   Emergency property repairs
                 </li>
@@ -1093,21 +969,10 @@ export default function SeasonalAdvicePage() {
               </p>
 
               <div className={styles.topicPills}>
-                <span>
-                  Water leaks
-                </span>
-
-                <span>
-                  Burst pipes
-                </span>
-
-                <span>
-                  Stop tap
-                </span>
-
-                <span>
-                  Urgent water escape
-                </span>
+                <span>Water leaks</span>
+                <span>Burst pipes</span>
+                <span>Stop tap</span>
+                <span>Urgent water escape</span>
               </div>
 
               <Link
@@ -1197,9 +1062,7 @@ export default function SeasonalAdvicePage() {
 
           <PublishedSeasonArticles
             season="Winter"
-            articles={
-              currentSeasonArticles.Winter
-            }
+            articles={currentSeasonArticles.Winter}
           />
         </div>
       </section>
@@ -1228,9 +1091,7 @@ export default function SeasonalAdvicePage() {
 
               <div className={styles.landlordSeasons}>
                 <div>
-                  <strong>
-                    SPRING
-                  </strong>
+                  <strong>SPRING</strong>
 
                   <span>
                     Inspect winter damage
@@ -1246,9 +1107,7 @@ export default function SeasonalAdvicePage() {
                 </div>
 
                 <div>
-                  <strong>
-                    SUMMER
-                  </strong>
+                  <strong>SUMMER</strong>
 
                   <span>
                     Planned decorating
@@ -1264,9 +1123,7 @@ export default function SeasonalAdvicePage() {
                 </div>
 
                 <div>
-                  <strong>
-                    AUTUMN
-                  </strong>
+                  <strong>AUTUMN</strong>
 
                   <span>
                     Gutters
@@ -1282,9 +1139,7 @@ export default function SeasonalAdvicePage() {
                 </div>
 
                 <div>
-                  <strong>
-                    WINTER
-                  </strong>
+                  <strong>WINTER</strong>
 
                   <span>
                     Plumbing
@@ -1436,8 +1291,7 @@ export default function SeasonalAdvicePage() {
             </p>
           </div>
 
-          {articlesForCurrentSeason.length >
-          0 ? (
+          {articlesForCurrentSeason.length > 0 ? (
             <>
               <div className={styles.currentSeasonHeading}>
                 <strong>
@@ -1579,6 +1433,10 @@ export default function SeasonalAdvicePage() {
   );
 }
 
+/* =========================================================
+   PUBLISHED SEASON ARTICLES
+   ========================================================= */
+
 function PublishedSeasonArticles({
   season,
   articles,
@@ -1586,6 +1444,10 @@ function PublishedSeasonArticles({
   season: Season;
   articles: SeasonalArticle[];
 }) {
+  /*
+   * Do not display fake cards, dates, categories or
+   * READ ARTICLE buttons when there are no genuine articles.
+   */
   if (articles.length === 0) {
     return (
       <div className={styles.seasonArticleEmpty}>
@@ -1625,6 +1487,10 @@ function PublishedSeasonArticles({
     </div>
   );
 }
+
+/* =========================================================
+   CHECKLIST
+   ========================================================= */
 
 function ChecklistColumn({
   season,

@@ -41,8 +41,8 @@ const topicCards = [
       "Advice covering bathroom maintenance and warning signs.",
     topics:
       "Silicone sealant • Grout • Loose tiles • Toilet leaks • Shower leaks • Bathroom flooring • When a bathroom needs renovation",
-    href: "/our-services",
-    label: "View Bathroom Services",
+    href: "/advice/search?q=bathroom",
+    label: "View Bathroom Advice",
   },
   {
     number: "04",
@@ -51,8 +51,8 @@ const topicCards = [
       "Practical guidance for maintaining kitchens.",
     topics:
       "Sink leaks • Taps • Worktop damage • Sealant • Tiles • Flooring • Kitchen renovation planning",
-    href: "/our-services",
-    label: "View Kitchen Services",
+    href: "/advice/search?q=kitchen",
+    label: "View Kitchen Advice",
   },
   {
     number: "05",
@@ -71,7 +71,7 @@ const topicCards = [
       "Advice covering tiled and floor surfaces.",
     topics:
       "Loose tiles • Cracked tiles • Failed grout • Regrouting • Sealant • Uneven flooring • Flooring replacement",
-    href: "/our-services",
+    href: "/advice/search?q=tiling+flooring",
     label: "View Tiling & Flooring Advice",
   },
   {
@@ -81,7 +81,7 @@ const topicCards = [
       "Advice covering visible external maintenance.",
     topics:
       "Blocked gutters • Leaking gutters • Downpipes • Water ingress • Roofline defects • Weather damage",
-    href: "/roofing-and-gutter-services",
+    href: "/advice/search?q=roofing+gutters",
     label: "View Roof & Gutter Advice",
   },
   {
@@ -96,43 +96,15 @@ const topicCards = [
   },
 ];
 
-const publishedArticles = [
-  {
-    category: "HOME CARE",
-    title: "How to Keep Your Home Warm in Winter",
-    description:
-      "Practical guidance for looking after your home during colder weather.",
-    href: "/advice/how-to-keep-your-home-warm",
-  },
-  {
-    category: "PROPERTY MAINTENANCE",
-    title: "How to Prevent Damp and Mould",
-    description:
-      "Useful guidance on common damp and mould warning signs and property care.",
-    href: "/advice/how-to-prevent-damp-and-mould",
-  },
-  {
-    category: "HOME CARE",
-    title: "Improving Ventilation in Your Home",
-    description:
-      "Helpful advice on ventilation and maintaining better indoor conditions.",
-    href: "/advice/improving-home-ventilation",
-  },
-  {
-    category: "HOME CARE",
-    title: "Small Improvements That Make a Difference",
-    description:
-      "Practical ideas for keeping a property maintained and cared for.",
-    href: "/advice/small-home-improvements",
-  },
-  {
-    category: "PROPERTY MAINTENANCE",
-    title: "Easy DIY Maintenance Jobs Around the Home",
-    description:
-      "A practical guide to straightforward property maintenance tasks.",
-    href: "/advice/diy-maintenance-jobs",
-  },
-];
+// No articles are currently published.
+// Genuine article cards can be added here once the real
+// article pages have been created and published.
+const publishedArticles: {
+  category: string;
+  title: string;
+  description: string;
+  href: string;
+}[] = [];
 
 const checklistInside = [
   "Look for new water staining",
@@ -204,7 +176,7 @@ const warningSections = [
     copy:
       "Persistent mould, damp or staining can have different causes and may require further assessment rather than simply cleaning or repainting the surface.",
     linkLabel: "View Bathroom Services",
-    href: "/our-services",
+    href: "/bathroom-services",
   },
   {
     eyebrow: "KITCHEN CARE",
@@ -221,7 +193,7 @@ const warningSections = [
     copy:
       "Kitchens often combine plumbing, cabinetry, flooring and finishes in one space, so a small fault can affect several areas if left unresolved.",
     linkLabel: "View Kitchen Services",
-    href: "/our-services",
+    href: "/kitchen-services",
   },
   {
     eyebrow: "WALLS & CEILINGS",
@@ -269,7 +241,7 @@ const warningSections = [
     copy:
       "Regrouting or resealing can help where the underlying tiled area is sound, but loose tiles or movement may indicate that more than surface maintenance is required.",
     linkLabel: "View Tiling & Flooring",
-    href: "/our-services",
+    href: "/tiling-flooring",
   },
   {
     eyebrow: "FLOORING",
@@ -285,7 +257,7 @@ const warningSections = [
     copy:
       "The existing floor and underlying surface may need to be assessed before replacement flooring is installed.",
     linkLabel: "View Tiling & Flooring",
-    href: "/our-services",
+    href: "/tiling-flooring",
   },
   {
     eyebrow: "GUTTERS",
@@ -300,7 +272,7 @@ const warningSections = [
     copy:
       "If safe inspection is not possible from ground level, arrange appropriate professional assessment rather than attempting unsafe access.",
     linkLabel: "View Roofing & Gutters",
-    href: "/roofing-and-gutter-services",
+    href: "/roofing-gutters",
   },
   {
     eyebrow: "GARDEN CARE",
@@ -546,9 +518,11 @@ export default function HomecareAdvicePage() {
                     <p>{topic.description}</p>
 
                     <div className={styles.topicList}>
-                      {topic.topics.split(" • ").map((item) => (
-                        <span key={item}>{item}</span>
-                      ))}
+                      {topic.topics
+                        .split(" • ")
+                        .map((item) => (
+                          <span key={item}>{item}</span>
+                        ))}
                     </div>
 
                     <Link href={topic.href}>
@@ -572,8 +546,8 @@ export default function HomecareAdvicePage() {
                 <h2>Useful Home Care Guides</h2>
 
                 <p>
-                  Published articles covering practical property
-                  maintenance and home-care questions.
+                  Practical home-care guidance will appear here as
+                  genuine articles are created and published.
                 </p>
               </div>
 
@@ -585,35 +559,46 @@ export default function HomecareAdvicePage() {
               </Link>
             </div>
 
-            <div className={styles.articleGrid}>
-              {publishedArticles.map((article) => (
-                <article
-                  key={article.href}
-                  className={styles.articleCard}
-                >
-                  <div className={styles.articleCardTop}>
-                    <span>{article.category}</span>
-                  </div>
+            {publishedArticles.length === 0 ? (
+              <div className={styles.emptyArticles}>
+                <strong>More home care guides coming soon.</strong>
 
-                  <div className={styles.articleCardBody}>
-                    <h3>
-                      <Link href={article.href}>
-                        {article.title}
+                <p>
+                  New home care guidance will appear here when
+                  genuine article pages are created and published.
+                </p>
+              </div>
+            ) : (
+              <div className={styles.articleGrid}>
+                {publishedArticles.map((article) => (
+                  <article
+                    key={article.href}
+                    className={styles.articleCard}
+                  >
+                    <div className={styles.articleCardTop}>
+                      <span>{article.category}</span>
+                    </div>
+
+                    <div className={styles.articleCardBody}>
+                      <h3>
+                        <Link href={article.href}>
+                          {article.title}
+                        </Link>
+                      </h3>
+
+                      <p>{article.description}</p>
+
+                      <Link
+                        href={article.href}
+                        className={styles.articleLink}
+                      >
+                        Read Article <span>→</span>
                       </Link>
-                    </h3>
-
-                    <p>{article.description}</p>
-
-                    <Link
-                      href={article.href}
-                      className={styles.articleLink}
-                    >
-                      Read Article <span>→</span>
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
@@ -639,7 +624,10 @@ export default function HomecareAdvicePage() {
 
                 <div className={styles.checkItems}>
                   {checklistInside.map((item) => (
-                    <div key={item} className={styles.checkItem}>
+                    <div
+                      key={item}
+                      className={styles.checkItem}
+                    >
                       <span aria-hidden="true">☐</span>
                       <p>{item}</p>
                     </div>
@@ -652,7 +640,10 @@ export default function HomecareAdvicePage() {
 
                 <div className={styles.checkItems}>
                   {checklistOutside.map((item) => (
-                    <div key={item} className={styles.checkItem}>
+                    <div
+                      key={item}
+                      className={styles.checkItem}
+                    >
                       <span aria-hidden="true">☐</span>
                       <p>{item}</p>
                     </div>
@@ -719,7 +710,7 @@ export default function HomecareAdvicePage() {
                   {section.emergency && (
                     <div className={styles.emergencyMini}>
                       <strong>
-                        Active water escape?
+                        Active water escape? Call 01775 518068
                       </strong>
 
                       <a href="tel:01775518068">
@@ -947,7 +938,8 @@ export default function HomecareAdvicePage() {
 
               <div className={styles.emergencyCall}>
                 <strong>
-                  24/7 Emergency Property &amp; Plumbing Support
+                  24/7 Emergency Property &amp; Plumbing Support —
+                  Call 01775 518068
                 </strong>
 
                 <a href="tel:01775518068">
@@ -1052,7 +1044,7 @@ export default function HomecareAdvicePage() {
                 </Link>
 
                 <Link
-                  href="/our-services"
+                  href="/services"
                   className={styles.finalSecondary}
                 >
                   View Our Services

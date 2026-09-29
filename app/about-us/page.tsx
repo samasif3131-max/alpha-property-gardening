@@ -272,8 +272,7 @@ export default function AboutUsPage() {
             </p>
 
             <div className={styles.storyQuote}>
-              <span>One enquiry. One team.</span>
-              <strong>One point of contact.</strong>
+              <strong>One enquiry. One team. One point of contact.</strong>
               <i />
             </div>
           </div>
