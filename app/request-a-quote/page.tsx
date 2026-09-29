@@ -1,9 +1,13 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+
 import Link from "next/link";
+
 import Header from "../components/Header";
+
 import Footer from "../components/Footer";
+
 import styles from "./request-a-quote.module.css";
 
 type CustomerType =
@@ -30,15 +34,12 @@ type QuoteForm = {
   preferredContactMethod: ContactMethod | "";
   postcode: string;
   marketingConsent: boolean;
-
   service: string;
   message: string;
-
   propertyType: string;
   propertyPostcode: string;
   propertyAddress: string;
   propertyMessage: string;
-
   startedAt: string;
 };
 
@@ -127,15 +128,12 @@ const initialForm: QuoteForm = {
   preferredContactMethod: "",
   postcode: "",
   marketingConsent: false,
-
   service: "",
   message: "",
-
   propertyType: "",
   propertyPostcode: "",
   propertyAddress: "",
   propertyMessage: "",
-
   startedAt: "",
 };
 
@@ -150,7 +148,6 @@ export default function RequestAQuotePage() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<QuoteForm>(initialForm);
   const [submitted, setSubmitted] = useState(false);
-
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -187,6 +184,14 @@ export default function RequestAQuotePage() {
           parsed.step <= 4
         ) {
           setStep(parsed.step);
+
+          window.history.replaceState(
+            {
+              quoteStep: parsed.step,
+            },
+            "",
+            window.location.pathname
+          );
         }
       } catch {
         window.sessionStorage.removeItem(STORAGE_KEY);
@@ -209,6 +214,14 @@ export default function RequestAQuotePage() {
           form: newForm,
         })
       );
+
+      window.history.replaceState(
+        {
+          quoteStep: 1,
+        },
+        "",
+        window.location.pathname
+      );
     }
   }, []);
 
@@ -227,7 +240,19 @@ export default function RequestAQuotePage() {
   }, [form, step]);
 
   useEffect(() => {
-    const handlePopState = () => {
+    const handlePopState = (event: PopStateEvent) => {
+      const historyStep = event.state?.quoteStep;
+
+      if (
+        typeof historyStep === "number" &&
+        historyStep >= 1 &&
+        historyStep <= 4
+      ) {
+        setStep(historyStep);
+        setErrors({});
+        return;
+      }
+
       const stored = window.sessionStorage.getItem(STORAGE_KEY);
 
       if (!stored) {
@@ -248,6 +273,8 @@ export default function RequestAQuotePage() {
         if (parsed?.form) {
           setForm(parsed.form);
         }
+
+        setErrors({});
       } catch {
         // Ignore invalid session data.
       }
@@ -300,6 +327,7 @@ export default function RequestAQuotePage() {
     setErrors((current) => ({
       ...current,
       customerType: "",
+      tenantAuthorisation: "",
     }));
   };
 
@@ -312,6 +340,7 @@ export default function RequestAQuotePage() {
     setErrors((current) => ({
       ...current,
       emergency: "",
+      tenantAuthorisation: "",
     }));
   };
 
@@ -329,7 +358,6 @@ export default function RequestAQuotePage() {
     }
 
     if (
-      form.emergency !== true &&
       form.customerType === "tenant" &&
       !form.tenantAuthorisation
     ) {
@@ -355,7 +383,9 @@ export default function RequestAQuotePage() {
 
     if (!form.phone.trim()) {
       nextErrors.phone = "Please enter a phone number.";
-    } else if (form.phone.trim().replace(/\D/g, "").length < 7) {
+    } else if (
+      form.phone.trim().replace(/\D/g, "").length < 7
+    ) {
       nextErrors.phone = "Please enter a valid phone number.";
     }
 
@@ -405,7 +435,8 @@ export default function RequestAQuotePage() {
     }
 
     if (!form.propertyPostcode.trim()) {
-      nextErrors.propertyPostcode = "Please enter the property postcode.";
+      nextErrors.propertyPostcode =
+        "Please enter the property postcode.";
     }
 
     setErrors(nextErrors);
@@ -414,7 +445,12 @@ export default function RequestAQuotePage() {
   };
 
   const goToStep = (nextStep: number) => {
+    if (nextStep < 1 || nextStep > 4 || nextStep === step) {
+      return;
+    }
+
     setStep(nextStep);
+    setErrors({});
 
     window.history.pushState(
       {
@@ -457,7 +493,11 @@ export default function RequestAQuotePage() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!validateStepOne() || !validateStepTwo() || !validateStepThree()) {
+    if (
+      !validateStepOne() ||
+      !validateStepTwo() ||
+      !validateStepThree()
+    ) {
       return;
     }
 
@@ -661,11 +701,17 @@ export default function RequestAQuotePage() {
                               ? styles.serviceSelected
                               : ""
                           }`}
-                          onClick={() => selectCustomerType(customer.id)}
-                          aria-pressed={form.customerType === customer.id}
+                          onClick={() =>
+                            selectCustomerType(customer.id)
+                          }
+                          aria-pressed={
+                            form.customerType === customer.id
+                          }
                         >
                           <span className={styles.checkbox}>
-                            {form.customerType === customer.id ? "✓" : ""}
+                            {form.customerType === customer.id
+                              ? "✓"
+                              : ""}
                           </span>
 
                           <span className={styles.serviceIcon}>◆</span>
@@ -686,7 +732,9 @@ export default function RequestAQuotePage() {
                     {/* TENANT AUTHORISATION */}
                     {form.customerType === "tenant" && (
                       <div className={styles.formDivider}>
-                        <h2>Are You Responsible for Authorising the Work?</h2>
+                        <h2>
+                          Are You Responsible for Authorising the Work?
+                        </h2>
 
                         <div className={styles.serviceGrid}>
                           <button
@@ -707,7 +755,9 @@ export default function RequestAQuotePage() {
                             }
                           >
                             <span className={styles.checkbox}>
-                              {form.tenantAuthorisation === "yes" ? "✓" : ""}
+                              {form.tenantAuthorisation === "yes"
+                                ? "✓"
+                                : ""}
                             </span>
 
                             <span className={styles.serviceText}>
@@ -733,13 +783,15 @@ export default function RequestAQuotePage() {
                             }
                           >
                             <span className={styles.checkbox}>
-                              {form.tenantAuthorisation === "no" ? "✓" : ""}
+                              {form.tenantAuthorisation === "no"
+                                ? "✓"
+                                : ""}
                             </span>
 
                             <span className={styles.serviceText}>
                               <strong>
-                                No / I&apos;m Reporting This for My Landlord or
-                                Agent
+                                No / I&apos;m Reporting This for My Landlord
+                                or Agent
                               </strong>
                             </span>
                           </button>
@@ -768,6 +820,7 @@ export default function RequestAQuotePage() {
                     <div className={styles.formRow}>
                       <label>
                         First Name <span>*</span>
+
                         <input
                           type="text"
                           name="firstName"
@@ -778,9 +831,12 @@ export default function RequestAQuotePage() {
                           required
                           aria-invalid={Boolean(errors.firstName)}
                           aria-describedby={
-                            errors.firstName ? "first-name-error" : undefined
+                            errors.firstName
+                              ? "first-name-error"
+                              : undefined
                           }
                         />
+
                         {errors.firstName && (
                           <small id="first-name-error">
                             {errors.firstName}
@@ -790,6 +846,7 @@ export default function RequestAQuotePage() {
 
                       <label>
                         Last Name <span>*</span>
+
                         <input
                           type="text"
                           name="lastName"
@@ -800,9 +857,12 @@ export default function RequestAQuotePage() {
                           required
                           aria-invalid={Boolean(errors.lastName)}
                           aria-describedby={
-                            errors.lastName ? "last-name-error" : undefined
+                            errors.lastName
+                              ? "last-name-error"
+                              : undefined
                           }
                         />
+
                         {errors.lastName && (
                           <small id="last-name-error">
                             {errors.lastName}
@@ -818,6 +878,7 @@ export default function RequestAQuotePage() {
                         {form.customerType === "landlord" && (
                           <small>(optional)</small>
                         )}
+
                         <input
                           type="text"
                           name="organisation"
@@ -883,7 +944,8 @@ export default function RequestAQuotePage() {
 
                     {/* CONTACT METHOD */}
                     <label>
-                      How Would You Prefer Us to Contact You? <span>*</span>
+                      How Would You Prefer Us to Contact You?{" "}
+                      <span>*</span>
 
                       <select
                         name="preferredContactMethod"
@@ -939,7 +1001,10 @@ export default function RequestAQuotePage() {
                         surrounding communities.
                       </p>
 
-                      <Link href="/areas-we-cover" className={styles.textLink}>
+                      <Link
+                        href="/areas-we-cover"
+                        className={styles.textLink}
+                      >
                         VIEW AREAS WE COVER →
                       </Link>
                     </div>
@@ -965,8 +1030,10 @@ export default function RequestAQuotePage() {
                     <p className={styles.formIntro}>
                       We&apos;ll use the information you provide to respond to
                       your enquiry and manage your quotation. See our{" "}
-                      <Link href="/privacy-policy">Privacy Policy</Link> for
-                      more information.
+                      <Link href="/privacy-policy">
+                        Privacy Policy
+                      </Link>{" "}
+                      for more information.
                     </p>
 
                     <button
@@ -985,7 +1052,9 @@ export default function RequestAQuotePage() {
                           <strong>Need to speak to us?</strong>
 
                           <p>
-                            <a href="tel:01775518068">01775 518068</a>
+                            <a href="tel:01775518068">
+                              01775 518068
+                            </a>
                           </p>
                         </div>
                       </div>
@@ -1046,6 +1115,7 @@ export default function RequestAQuotePage() {
 
                     <label>
                       Tell us about your project
+
                       <textarea
                         name="message"
                         value={form.message}
@@ -1110,12 +1180,15 @@ export default function RequestAQuotePage() {
                       </select>
 
                       {errors.propertyType && (
-                        <small role="alert">{errors.propertyType}</small>
+                        <small role="alert">
+                          {errors.propertyType}
+                        </small>
                       )}
                     </label>
 
                     <label>
                       Property Address
+
                       <input
                         type="text"
                         name="propertyAddress"
@@ -1137,7 +1210,9 @@ export default function RequestAQuotePage() {
                         placeholder="e.g. PE11 1AA"
                         autoComplete="postal-code"
                         required
-                        aria-invalid={Boolean(errors.propertyPostcode)}
+                        aria-invalid={Boolean(
+                          errors.propertyPostcode
+                        )}
                       />
 
                       {errors.propertyPostcode && (
@@ -1149,6 +1224,7 @@ export default function RequestAQuotePage() {
 
                     <label>
                       Additional Information
+
                       <textarea
                         name="propertyMessage"
                         value={form.propertyMessage}
@@ -1193,6 +1269,7 @@ export default function RequestAQuotePage() {
                     <div className={styles.reviewBox}>
                       <div>
                         <strong>Emergency</strong>
+
                         <span>
                           {form.emergency === true
                             ? "Yes — urgent help"
@@ -1202,6 +1279,7 @@ export default function RequestAQuotePage() {
 
                       <div>
                         <strong>Customer Type</strong>
+
                         <span>
                           {customerTypes.find(
                             (item) => item.id === form.customerType
@@ -1209,8 +1287,22 @@ export default function RequestAQuotePage() {
                         </span>
                       </div>
 
+                      {form.customerType === "tenant" &&
+                        form.tenantAuthorisation && (
+                          <div>
+                            <strong>Tenant Authorisation</strong>
+
+                            <span>
+                              {form.tenantAuthorisation === "yes"
+                                ? "Yes"
+                                : "No / Reporting for Landlord or Agent"}
+                            </span>
+                          </div>
+                        )}
+
                       <div>
                         <strong>Name</strong>
+
                         <span>
                           {form.firstName} {form.lastName}
                         </span>
@@ -1219,22 +1311,26 @@ export default function RequestAQuotePage() {
                       {form.organisation && (
                         <div>
                           <strong>Organisation</strong>
+
                           <span>{form.organisation}</span>
                         </div>
                       )}
 
                       <div>
                         <strong>Phone</strong>
+
                         <span>{form.phone}</span>
                       </div>
 
                       <div>
                         <strong>Email</strong>
+
                         <span>{form.email}</span>
                       </div>
 
                       <div>
                         <strong>Preferred Contact</strong>
+
                         <span>
                           {form.preferredContactMethod === "phone"
                             ? "Phone"
@@ -1244,11 +1340,13 @@ export default function RequestAQuotePage() {
 
                       <div>
                         <strong>Customer Postcode</strong>
+
                         <span>{form.postcode}</span>
                       </div>
 
                       <div>
                         <strong>Service</strong>
+
                         <span>
                           {services.find(
                             (service) => service.id === form.service
@@ -1258,18 +1356,23 @@ export default function RequestAQuotePage() {
 
                       <div>
                         <strong>Project Details</strong>
+
                         <span>
-                          {form.message || "No additional details provided"}
+                          {form.message ||
+                            "No additional details provided"}
                         </span>
                       </div>
 
                       <div>
                         <strong>Property</strong>
+
                         <span>
                           {form.propertyType || "Not provided"}
+
                           {form.propertyAddress
                             ? ` — ${form.propertyAddress}`
                             : ""}
+
                           {form.propertyPostcode
                             ? `, ${form.propertyPostcode}`
                             : ""}
@@ -1291,7 +1394,10 @@ export default function RequestAQuotePage() {
                         ← BACK
                       </button>
 
-                      <button type="submit" className={styles.nextButton}>
+                      <button
+                        type="submit"
+                        className={styles.nextButton}
+                      >
                         SEND QUOTE REQUEST →
                       </button>
                     </div>
@@ -1303,7 +1409,9 @@ export default function RequestAQuotePage() {
                   <div className={styles.successBox}>
                     <div className={styles.successIcon}>✓</div>
 
-                    <p className={styles.eyebrow}>QUOTE REQUEST RECEIVED</p>
+                    <p className={styles.eyebrow}>
+                      QUOTE REQUEST RECEIVED
+                    </p>
 
                     <h2>Thank You!</h2>
 
@@ -1322,7 +1430,9 @@ export default function RequestAQuotePage() {
                     )}
 
                     <div className={styles.successLinks}>
-                      <a href="tel:01775518068">Call 01775 518068</a>
+                      <a href="tel:01775518068">
+                        Call 01775 518068
+                      </a>
 
                       <a href="mailto:info@alphapropertyandgardening.co.uk">
                         Email info@alphapropertyandgardening.co.uk
@@ -1405,7 +1515,10 @@ export default function RequestAQuotePage() {
                   surrounding communities.
                 </p>
 
-                <Link href="/areas-we-cover" className={styles.textLink}>
+                <Link
+                  href="/areas-we-cover"
+                  className={styles.textLink}
+                >
                   VIEW AREAS WE COVER →
                 </Link>
               </div>
