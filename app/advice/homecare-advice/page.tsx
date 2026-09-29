@@ -1,17 +1,7 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./homecare-advice.module.css";
-
-export const metadata: Metadata = {
-  title: "Home Maintenance & Property Care Advice | Alpha",
-  description:
-    "Practical home maintenance and property-care advice covering repairs, plumbing, bathrooms, kitchens, decorating, flooring, gutters and gardens.",
-  alternates: {
-    canonical: "/advice/homecare-advice",
-  },
-};
 
 const topicCards = [
   {

@@ -111,15 +111,20 @@ const faqs = [
 
 export default function ContactPage() {
   const [formState, setFormState] = useState<
-    "idle" | "success" | "error"
+    "idle" | "submitting" | "success" | "error"
   >("idle");
 
   useEffect(() => {
     document.title = "Contact Alpha Property & Gardening Services";
   }, []);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // Prevent duplicate submissions
+    if (formState === "submitting") {
+      return;
+    }
 
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -136,49 +141,77 @@ export default function ContactPage() {
       return;
     }
 
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    const postcode = String(data.get("postcode") ?? "").trim();
+    const enquiryType = String(
+      data.get("enquiryType") ?? ""
+    ).trim();
+    const message = String(data.get("message") ?? "").trim();
+
+    // Required field validation
+    if (
+      !name ||
+      !email ||
+      !phone ||
+      !enquiryType ||
+      !message
+    ) {
+      setFormState("error");
+      return;
+    }
+
+    // Email validation
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      setFormState("error");
+      return;
+    }
+
     try {
-      const name = String(data.get("name") ?? "").trim();
-      const email = String(data.get("email") ?? "").trim();
-      const phone = String(data.get("phone") ?? "").trim();
-      const postcode = String(data.get("postcode") ?? "").trim();
-      const enquiryType = String(
-        data.get("enquiryType") ?? ""
-      ).trim();
-      const message = String(data.get("message") ?? "").trim();
+      setFormState("submitting");
 
-      const subject = encodeURIComponent(
-        `Website enquiry - ${
-          enquiryType || "General Enquiry"
-        }`
-      );
-
-      const body = encodeURIComponent(
-        [
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Phone: ${phone}`,
-          `Postcode: ${postcode || "Not provided"}`,
-          `Enquiry type: ${
-            enquiryType || "Not selected"
-          }`,
-          "",
-          "Message:",
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          postcode,
+          enquiryType,
           message,
-        ].join("\n")
+          website: honeypot,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error || "Unable to send enquiry."
+        );
+      }
+
+      // Only reset the form after successful API response
+      setFormState("success");
+      form.reset();
+    } catch (error) {
+      console.error(
+        "Contact form submission error:",
+        error
       );
 
       /*
-       * No backend/API was supplied with the existing files.
-       * This uses the customer's email application as a
-       * no-backend fallback.
+       * Do NOT reset the form here.
+       * User-entered information remains available
+       * if the submission fails.
        */
-      window.location.href =
-        `mailto:info@alphapropertyandgardening.co.uk` +
-        `?subject=${subject}&body=${body}`;
-
-      setFormState("success");
-      form.reset();
-    } catch {
       setFormState("error");
     }
   }
@@ -418,10 +451,10 @@ export default function ContactPage() {
                 </h3>
 
                 <p>
-                  Please complete the sending step shown by
-                  your email application. For urgent property
-                  or plumbing problems, call 01775 518068
-                  rather than waiting for an email response.
+                  Your enquiry has been received successfully.
+                  For urgent property or plumbing problems, call
+                  01775 518068 rather than waiting for an email
+                  response.
                 </p>
 
                 <div className={styles.stateActions}>
@@ -454,13 +487,24 @@ export default function ContactPage() {
                 </h3>
 
                 <p>
-                  Please try again or contact Alpha directly.
+                  Please check the required fields and try
+                  again. Your entered information has been kept.
+                  If the problem continues, contact Alpha
+                  directly.
                 </p>
 
                 <div className={styles.stateActions}>
+                  <button
+                    type="button"
+                    className={styles.primaryButton}
+                    onClick={() => setFormState("idle")}
+                  >
+                    TRY AGAIN
+                  </button>
+
                   <a
                     href="tel:01775518068"
-                    className={styles.primaryButton}
+                    className={styles.lightButton}
                   >
                     CALL 01775 518068
                   </a>
@@ -628,8 +672,12 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   className={styles.submitButton}
+                  disabled={formState === "submitting"}
+                  aria-disabled={formState === "submitting"}
                 >
-                  SEND ENQUIRY
+                  {formState === "submitting"
+                    ? "SENDING..."
+                    : "SEND ENQUIRY"}
                 </button>
 
                 <p className={styles.privacyText}>

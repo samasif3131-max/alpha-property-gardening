@@ -166,7 +166,10 @@ export default function GardenServicesPage() {
               </p>
 
               <div className={styles.heroActions}>
-                <Link href="#garden-quote" className={styles.primaryButton}>
+                <Link
+                  href="/request-a-quote"
+                  className={styles.primaryButton}
+                >
                   REQUEST A GARDEN QUOTE
                 </Link>
 
@@ -353,7 +356,7 @@ export default function GardenServicesPage() {
                 </p>
 
                 <Link
-                  href="#garden-quote"
+                  href="/request-a-quote"
                   className={styles.lightButton}
                 >
                   DISCUSS REGULAR GARDEN MAINTENANCE →
@@ -481,7 +484,7 @@ export default function GardenServicesPage() {
                 </ul>
 
                 <Link
-                  href="#garden-quote"
+                  href="/request-a-quote"
                   className={styles.textLink}
                 >
                   REQUEST A GARDEN TIDY-UP QUOTE →
@@ -904,163 +907,6 @@ export default function GardenServicesPage() {
           </div>
         </section>
 
-        {/* QUOTE FORM */}
-        <section
-          id="garden-quote"
-          className={`${styles.section} ${styles.quoteSection}`}
-        >
-          <div className={styles.container}>
-            <div className={styles.quoteGrid}>
-              <div className={styles.quoteIntro}>
-                <span className={styles.sectionEyebrow}>GET A QUOTE</span>
-
-                <h2>Request a Garden Quote</h2>
-
-                <p>
-                  Tell us what needs doing and provide photos where possible.
-                  For overgrown gardens, wide photos showing the overall
-                  condition are particularly useful.
-                </p>
-
-                <div className={styles.quoteContact}>
-                  <span>Prefer to speak to us?</span>
-                  <a href="tel:+441775518068">01775 518068</a>
-                </div>
-              </div>
-
-              <form className={styles.quoteForm} action="/contact">
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="name">Your Name</label>
-
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      placeholder="Your name"
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="phone">Phone</label>
-
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="Your phone number"
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="email">Email</label>
-
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Your email address"
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="service">Garden Service</label>
-
-                    <select
-                      id="service"
-                      name="service"
-                      defaultValue=""
-                    >
-                      <option value="" disabled>
-                        Select a service
-                      </option>
-
-                      <option value="maintenance">
-                        Regular Garden Maintenance
-                      </option>
-
-                      <option value="grass">
-                        Grass Cutting / Lawn Mowing
-                      </option>
-
-                      <option value="strimming">Strimming</option>
-
-                      <option value="hedges">
-                        Hedge / Shrub Cutting
-                      </option>
-
-                      <option value="weeding">Garden Weeding</option>
-
-                      <option value="tidy-up">Garden Tidy-Up</option>
-
-                      <option value="clearance">
-                        Overgrown Garden Clearance
-                      </option>
-
-                      <option value="other">Other Garden Work</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="customerType">I Am A</label>
-
-                    <select
-                      id="customerType"
-                      name="customerType"
-                      defaultValue=""
-                    >
-                      <option value="" disabled>
-                        Select one
-                      </option>
-
-                      <option value="homeowner">Homeowner</option>
-                      <option value="landlord">Landlord</option>
-                      <option value="agent">Letting Agent</option>
-                      <option value="manager">Property Manager</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="postcode">Postcode</label>
-
-                    <input
-                      id="postcode"
-                      name="postcode"
-                      type="text"
-                      placeholder="Your postcode"
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label htmlFor="message">
-                    Tell Us About The Garden
-                  </label>
-
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    placeholder="Tell us what needs doing. Photos can be provided where possible."
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className={styles.submitButton}
-                >
-                  REQUEST A GARDEN QUOTE
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
-
         {/* FINAL CTA */}
         <section className={styles.finalCta}>
           <div className={styles.container}>
@@ -1088,7 +934,7 @@ export default function GardenServicesPage() {
 
               <div className={styles.finalActions}>
                 <Link
-                  href="#garden-quote"
+                  href="/request-a-quote"
                   className={styles.goldButton}
                 >
                   REQUEST A GARDEN QUOTE
