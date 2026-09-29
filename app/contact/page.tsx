@@ -633,11 +633,10 @@ export default function ContactPage() {
                 </button>
 
                 <p className={styles.privacyText}>
-                  By submitting this form, you agree that Alpha
-                  can use the information provided to respond
-                  to your enquiry.{" "}
+                  We’ll use the information you provide to
+                  respond to your enquiry.{" "}
                   <Link href="/privacy-policy">
-                    Privacy Policy
+                    See our Privacy Policy for more information.
                   </Link>
                 </p>
               </form>
