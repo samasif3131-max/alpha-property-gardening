@@ -97,8 +97,7 @@ const topicCards = [
 ];
 
 // No articles are currently published.
-// Genuine article cards can be added here once the real
-// article pages have been created and published.
+// Do not display unpublished or 404 article cards.
 const publishedArticles: {
   category: string;
   title: string;
@@ -709,9 +708,7 @@ export default function HomecareAdvicePage() {
 
                   {section.emergency && (
                     <div className={styles.emergencyMini}>
-                      <strong>
-                        Active water escape? Call 01775 518068
-                      </strong>
+                      <strong>Active water escape?</strong>
 
                       <a href="tel:01775518068">
                         Call 01775 518068
@@ -939,7 +936,6 @@ export default function HomecareAdvicePage() {
               <div className={styles.emergencyCall}>
                 <strong>
                   24/7 Emergency Property &amp; Plumbing Support —
-                  Call 01775 518068
                 </strong>
 
                 <a href="tel:01775518068">

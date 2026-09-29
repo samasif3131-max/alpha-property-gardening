@@ -41,8 +41,8 @@ type SeasonalArticle = {
  * - How to Keep Your Home Warm in Winter
  * - Preparing Your Property for Winter
  *
- * This prevents unpublished content from being shown as live
- * published advice.
+ * No unpublished article cards, dates, categories or
+ * READ ARTICLE links are shown on the public page.
  */
 const seasonalArticles: SeasonalArticle[] = [];
 
@@ -1270,24 +1270,24 @@ export default function SeasonalAdvicePage() {
       </section>
 
       {/* =====================================================
-          FEATURED SEASONAL ARTICLES
+          SEASONAL ARTICLES
       ===================================================== */}
 
       <section className={styles.featuredSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeading}>
             <span>
-              SEASONAL ADVICE TO READ NOW
+              SEASONAL ADVICE
             </span>
 
             <h2>
-              Published seasonal guides
+              Seasonal Advice Guides
             </h2>
 
             <p>
-              Genuine published seasonal articles from the
-              Alpha Advice Hub. Unpublished ideas are not shown
-              as live articles.
+              Genuine seasonal articles will appear here when
+              their real article pages have been created and
+              published.
             </p>
           </div>
 
@@ -1445,8 +1445,12 @@ function PublishedSeasonArticles({
   articles: SeasonalArticle[];
 }) {
   /*
-   * Do not display fake cards, dates, categories or
-   * READ ARTICLE buttons when there are no genuine articles.
+   * When no genuine article exists, show only the honest
+   * empty state. Do not show:
+   * - publication date
+   * - category
+   * - READ ARTICLE
+   * - Published advice
    */
   if (articles.length === 0) {
     return (
