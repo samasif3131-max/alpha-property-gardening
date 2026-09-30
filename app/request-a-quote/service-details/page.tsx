@@ -11,6 +11,7 @@ import {
   useState,
   type ChangeEvent,
   type FormEvent,
+  type ReactNode,
 } from "react";
 
 type PrimaryService =
@@ -159,6 +160,7 @@ type QuoteDraft = {
 
 const STEP17_STORAGE_KEY = "alphaQuoteRequest";
 const STEP18_STORAGE_KEY = "alphaQuoteServiceDetails";
+
 const ATTACHMENT_DB_NAME = "alphaQuoteAttachments";
 const ATTACHMENT_DB_VERSION = 1;
 const ATTACHMENT_STORE_NAME = "attachments";
@@ -285,6 +287,7 @@ const LANDLORD_OPTIONS = [
 const initialForm: ServiceDetailsForm = {
   primaryService: "",
   multipleServices: [],
+
   jobDescription: "",
   customerGoal: "",
 
@@ -403,7 +406,10 @@ function openAttachmentDatabase(): Promise<IDBDatabase> {
     };
 
     request.onerror = () => {
-      reject(request.error ?? new Error("Unable to open attachment storage."));
+      reject(
+        request.error ??
+          new Error("Unable to open attachment storage."),
+      );
     };
   });
 }
@@ -437,6 +443,7 @@ function saveAttachmentToIndexedDb(attachment: Attachment) {
 
       transaction.onerror = () => {
         database.close();
+
         reject(
           transaction.error ??
             new Error("Unable to save the attachment."),
@@ -467,6 +474,7 @@ function deleteAttachmentFromIndexedDb(id: string) {
 
       transaction.onerror = () => {
         database.close();
+
         reject(
           transaction.error ??
             new Error("Unable to remove the attachment."),
@@ -500,12 +508,15 @@ async function loadAttachmentsFromIndexedDb(
         const rows = request.result as Attachment[];
 
         resolve(
-          rows.filter((attachment) => attachment.enquiryId === enquiryId),
+          rows.filter(
+            (attachment) => attachment.enquiryId === enquiryId,
+          ),
         );
       };
 
       request.onerror = () => {
         database.close();
+
         reject(
           request.error ??
             new Error("Unable to load attachments."),
@@ -607,6 +618,7 @@ function RadioGroup({
               checked={value === option}
               onChange={() => onChange(option)}
             />
+
             <span>{option}</span>
           </label>
         ))}
@@ -647,6 +659,7 @@ function CheckboxGrid({
               checked={checked}
               onChange={() => onChange(option)}
             />
+
             <span>{option}</span>
           </label>
         );
@@ -659,7 +672,7 @@ function FieldLabel({
   children,
   required = false,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   required?: boolean;
 }) {
   return (
@@ -671,21 +684,35 @@ function FieldLabel({
 }
 
 export default function ServiceDetailsPage() {
-  const [form, setForm] = useState<ServiceDetailsForm>(initialForm);
+  const [form, setForm] =
+    useState<ServiceDetailsForm>(initialForm);
+
   const [step17, setStep17] = useState<Step17Data>({});
   const [enquiryId, setEnquiryId] = useState("");
   const [attachments, setAttachments] = useState<Attachment[]>([]);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] =
+    useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [notice, setNotice] = useState("");
-  const [attachmentError, setAttachmentError] = useState("");
-  const photoInputRef = useRef<HTMLInputElement | null>(null);
-  const videoInputRef = useRef<HTMLInputElement | null>(null);
-  const documentInputRef = useRef<HTMLInputElement | null>(null);
+  const [attachmentError, setAttachmentError] =
+    useState("");
 
+  const photoInputRef =
+    useRef<HTMLInputElement | null>(null);
+
+  const videoInputRef =
+    useRef<HTMLInputElement | null>(null);
+
+  const documentInputRef =
+    useRef<HTMLInputElement | null>(null);
+
+  /*
+   * SEO / browser title
+   */
   useEffect(() => {
-    document.title = "Service Details | Request a Quote | Alpha";
+    document.title =
+      "Service Details | Request a Quote | Alpha";
 
     const description =
       "Tell Alpha Property & Gardening Services what work you need, add relevant details and upload photos, videos or supporting documents for your quote request.";
@@ -703,21 +730,31 @@ export default function ServiceDetailsPage() {
     meta.content = description;
 
     const savedStep17 = getDraftStep17();
-    const generatedEnquiryId = getOrCreateEnquiryId(savedStep17);
+    const generatedEnquiryId =
+      getOrCreateEnquiryId(savedStep17);
 
     setStep17(savedStep17);
     setEnquiryId(generatedEnquiryId);
 
     try {
       const savedStep18 =
-        window.sessionStorage.getItem(STEP18_STORAGE_KEY);
+        window.sessionStorage.getItem(
+          STEP18_STORAGE_KEY,
+        );
 
       if (savedStep18) {
-        const parsed: unknown = JSON.parse(savedStep18);
+        const parsed: unknown =
+          JSON.parse(savedStep18);
 
-        if (parsed && typeof parsed === "object") {
-          const savedForm = (parsed as { form?: ServiceDetailsForm })
-            .form;
+        if (
+          parsed &&
+          typeof parsed === "object"
+        ) {
+          const savedForm = (
+            parsed as {
+              form?: ServiceDetailsForm;
+            }
+          ).form;
 
           if (savedForm) {
             setForm({
@@ -728,18 +765,23 @@ export default function ServiceDetailsPage() {
         }
       }
     } catch {
-      // Ignore invalid saved step 18 data.
+      // Ignore invalid saved Step 2 data.
     }
 
-    void loadAttachmentsFromIndexedDb(generatedEnquiryId).then(
-      (loaded) => {
-        setAttachments(loaded);
-      },
-    );
+    void loadAttachmentsFromIndexedDb(
+      generatedEnquiryId,
+    ).then((loaded) => {
+      setAttachments(loaded);
+    });
 
     setHydrated(true);
   }, []);
 
+  /*
+   * Persist Step 2 automatically.
+   * This means going back to Step 1 and returning to Step 2
+   * does not lose the entered information.
+   */
   useEffect(() => {
     if (!hydrated || !enquiryId) {
       return;
@@ -751,7 +793,8 @@ export default function ServiceDetailsPage() {
       customerType: step17.customerType ?? "",
       firstName: step17.firstName ?? "",
       lastName: step17.lastName ?? "",
-      organisationName: step17.organisationName ?? "",
+      organisationName:
+        step17.organisationName ?? "",
       email: step17.email ?? "",
       phone: step17.phone ?? "",
       preferredContactMethod:
@@ -759,32 +802,43 @@ export default function ServiceDetailsPage() {
       postcode: step17.postcode ?? "",
       form,
       step2CompletedAt: null,
-      attachments: attachments.map((attachment) => ({
-        id: attachment.id,
-        category: attachment.category,
-        name: attachment.name,
-        type: attachment.type,
-        size: attachment.size,
-        status: attachment.status,
-        createdAt: attachment.createdAt,
-      })),
+      attachments: attachments.map(
+        (attachment) => ({
+          id: attachment.id,
+          category: attachment.category,
+          name: attachment.name,
+          type: attachment.type,
+          size: attachment.size,
+          status: attachment.status,
+          createdAt: attachment.createdAt,
+        }),
+      ),
     };
 
     window.sessionStorage.setItem(
       STEP18_STORAGE_KEY,
       JSON.stringify(draft),
     );
-  }, [form, attachments, enquiryId, step17, hydrated]);
+  }, [
+    form,
+    attachments,
+    enquiryId,
+    step17,
+    hydrated,
+  ]);
 
-  const emergencySelected = step17.emergency === "Yes";
+  const emergencySelected =
+    step17.emergency === "Yes";
 
   const multiplePropertiesSelected =
-    form.jobCount === "Work across more than one property";
+    form.jobCount ===
+    "Work across more than one property";
 
   const selectedPhotoCount = useMemo(
     () =>
       attachments.filter(
-        (attachment) => attachment.category === "Photo",
+        (attachment) =>
+          attachment.category === "Photo",
       ).length,
     [attachments],
   );
@@ -792,7 +846,8 @@ export default function ServiceDetailsPage() {
   const selectedVideoCount = useMemo(
     () =>
       attachments.filter(
-        (attachment) => attachment.category === "Video",
+        (attachment) =>
+          attachment.category === "Video",
       ).length,
     [attachments],
   );
@@ -800,7 +855,8 @@ export default function ServiceDetailsPage() {
   const selectedDocumentCount = useMemo(
     () =>
       attachments.filter(
-        (attachment) => attachment.category === "Document",
+        (attachment) =>
+          attachment.category === "Document",
       ).length,
     [attachments],
   );
@@ -822,14 +878,22 @@ export default function ServiceDetailsPage() {
   }
 
   function handleTextChange(
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >,
   ) {
-    const field = event.target.name as keyof ServiceDetailsForm;
+    const field =
+      event.target.name as keyof ServiceDetailsForm;
 
-    updateForm(field, event.target.value as never);
+    updateForm(
+      field,
+      event.target.value as never,
+    );
   }
 
-  function handlePrimaryServiceChange(service: PrimaryService) {
+  function handlePrimaryServiceChange(
+    service: PrimaryService,
+  ) {
     setForm((current) => ({
       ...current,
       primaryService: service,
@@ -847,13 +911,20 @@ export default function ServiceDetailsPage() {
   }
 
   function validate() {
-    const nextErrors: Record<string, string> = {};
+    const nextErrors: Record<
+      string,
+      string
+    > = {};
 
     if (!form.primaryService) {
       nextErrors.primaryService =
         "Please select the main service you need.";
     }
 
+    /*
+     * Not Sure is intentionally allowed to continue.
+     * The customer only needs to describe what they need.
+     */
     if (!form.jobDescription.trim()) {
       nextErrors.jobDescription =
         "Please tell us what needs doing.";
@@ -869,8 +940,13 @@ export default function ServiceDetailsPage() {
         "Please select your preferred timescale.";
     }
 
-    if (form.primaryService === "Multiple Services") {
-      if (form.multipleServices.length === 0) {
+    if (
+      form.primaryService ===
+      "Multiple Services"
+    ) {
+      if (
+        form.multipleServices.length === 0
+      ) {
         nextErrors.multipleServices =
           "Please select the services involved, or choose Other.";
       }
@@ -879,16 +955,74 @@ export default function ServiceDetailsPage() {
     return nextErrors;
   }
 
-  async function handleContinue(event: FormEvent<HTMLFormElement>) {
+  function buildDraft(
+    completedAt: string | null,
+  ): QuoteDraft {
+    return {
+      enquiryId,
+      enquiryStatus: "Draft Quote Request",
+      emergency:
+        step17.emergency ?? "",
+      customerType:
+        step17.customerType ?? "",
+      firstName:
+        step17.firstName ?? "",
+      lastName:
+        step17.lastName ?? "",
+      organisationName:
+        step17.organisationName ?? "",
+      email:
+        step17.email ?? "",
+      phone:
+        step17.phone ?? "",
+      preferredContactMethod:
+        step17.preferredContactMethod ?? "",
+      postcode:
+        step17.postcode ?? "",
+      step1: step17,
+      step2: form,
+      step2CompletedAt: completedAt,
+      attachments:
+        attachments.map(
+          (attachment) => ({
+            id: attachment.id,
+            category:
+              attachment.category,
+            name: attachment.name,
+            type: attachment.type,
+            size: attachment.size,
+            status:
+              attachment.status,
+            createdAt:
+              attachment.createdAt,
+          }),
+        ),
+    };
+  }
+
+  async function handleContinue(
+    event: FormEvent<HTMLFormElement>,
+  ) {
     event.preventDefault();
 
-    const validationErrors = validate();
+    const validationErrors =
+      validate();
 
-    if (Object.keys(validationErrors).length > 0) {
+    if (
+      Object.keys(validationErrors)
+        .length > 0
+    ) {
       setErrors(validationErrors);
 
-      const firstErrorKey = Object.keys(validationErrors)[0];
-      const target = document.getElementById(firstErrorKey);
+      const firstErrorKey =
+        Object.keys(
+          validationErrors,
+        )[0];
+
+      const target =
+        document.getElementById(
+          firstErrorKey,
+        );
 
       target?.scrollIntoView({
         behavior: "smooth",
@@ -901,51 +1035,46 @@ export default function ServiceDetailsPage() {
     setSaving(true);
     setNotice("");
 
-    const completedAt = new Date().toISOString();
+    const completedAt =
+      new Date().toISOString();
 
-    const draft: QuoteDraft = {
-      enquiryId,
-      enquiryStatus: "Draft Quote Request",
-      emergency: step17.emergency ?? "",
-      customerType: step17.customerType ?? "",
-      firstName: step17.firstName ?? "",
-      lastName: step17.lastName ?? "",
-      organisationName: step17.organisationName ?? "",
-      email: step17.email ?? "",
-      phone: step17.phone ?? "",
-      preferredContactMethod:
-        step17.preferredContactMethod ?? "",
-      postcode: step17.postcode ?? "",
-      step1: step17,
-      step2: form,
-      step2CompletedAt: completedAt,
-      attachments: attachments.map((attachment) => ({
-        id: attachment.id,
-        category: attachment.category,
-        name: attachment.name,
-        type: attachment.type,
-        size: attachment.size,
-        status: attachment.status,
-        createdAt: attachment.createdAt,
-      })),
-    };
+    const draft =
+      buildDraft(completedAt);
 
     window.sessionStorage.setItem(
       STEP18_STORAGE_KEY,
       JSON.stringify(draft),
     );
 
-    setNotice("Service details saved. Moving to Property Details.");
+    setNotice(
+      "Service details saved. Moving to Property Details.",
+    );
 
+    /*
+     * Step 2 only saves the draft.
+     * It does NOT submit the final enquiry.
+     */
     window.setTimeout(() => {
-      window.location.href = "/request-a-quote/property-details";
+      window.location.href =
+        "/request-a-quote/property-details";
     }, 250);
-
-    setSaving(false);
   }
 
   function handleBack() {
-    window.location.href = "/request-a-quote";
+    /*
+     * Explicitly save the current Step 2 data
+     * before returning to Step 1.
+     */
+    const draft =
+      buildDraft(null);
+
+    window.sessionStorage.setItem(
+      STEP18_STORAGE_KEY,
+      JSON.stringify(draft),
+    );
+
+    window.location.href =
+      "/request-a-quote";
   }
 
   async function addAttachments(
@@ -958,10 +1087,17 @@ export default function ServiceDetailsPage() {
 
     setAttachmentError("");
 
-    const incomingFiles = Array.from(files);
+    const incomingFiles =
+      Array.from(files);
 
-    if (category === "Photo") {
-      const availableSlots = Math.max(0, 15 - selectedPhotoCount);
+    if (
+      category === "Photo"
+    ) {
+      const availableSlots =
+        Math.max(
+          0,
+          15 - selectedPhotoCount,
+        );
 
       if (availableSlots === 0) {
         setAttachmentError(
@@ -970,17 +1106,26 @@ export default function ServiceDetailsPage() {
         return;
       }
 
-      if (incomingFiles.length > availableSlots) {
+      if (
+        incomingFiles.length >
+        availableSlots
+      ) {
         setAttachmentError(
           `You can add ${availableSlots} more photo${
-            availableSlots === 1 ? "" : "s"
+            availableSlots === 1
+              ? ""
+              : "s"
           }.`,
         );
       }
     }
 
-    if (category === "Video") {
-      if (selectedVideoCount >= 3) {
+    if (
+      category === "Video"
+    ) {
+      if (
+        selectedVideoCount >= 3
+      ) {
         setAttachmentError(
           "You can add up to 3 short videos to this quote request.",
         );
@@ -990,20 +1135,35 @@ export default function ServiceDetailsPage() {
 
     const accepted: File[] = [];
 
-    for (const file of incomingFiles) {
-      if (category === "Photo" && !isImageFile(file)) {
+    for (
+      const file of incomingFiles
+    ) {
+      if (
+        category === "Photo" &&
+        !isImageFile(file)
+      ) {
         continue;
       }
 
-      if (category === "Video" && !isVideoFile(file)) {
+      if (
+        category === "Video" &&
+        !isVideoFile(file)
+      ) {
         continue;
       }
 
-      if (category === "Document" && !isDocumentFile(file)) {
+      if (
+        category === "Document" &&
+        !isDocumentFile(file)
+      ) {
         continue;
       }
 
-      if (category === "Video" && file.size > 100 * 1024 * 1024) {
+      if (
+        category === "Video" &&
+        file.size >
+          100 * 1024 * 1024
+      ) {
         setAttachmentError(
           "This video is too large to upload. Please choose a shorter video or send photographs instead.",
         );
@@ -1013,7 +1173,9 @@ export default function ServiceDetailsPage() {
       accepted.push(file);
     }
 
-    if (accepted.length === 0) {
+    if (
+      accepted.length === 0
+    ) {
       if (!attachmentError) {
         setAttachmentError(
           "We couldn't use that file. Please choose a supported file type and try again.",
@@ -1025,55 +1187,93 @@ export default function ServiceDetailsPage() {
 
     const limitedFiles =
       category === "Photo"
-        ? accepted.slice(0, Math.max(0, 15 - selectedPhotoCount))
+        ? accepted.slice(
+            0,
+            Math.max(
+              0,
+              15 - selectedPhotoCount,
+            ),
+          )
         : category === "Video"
-          ? accepted.slice(0, Math.max(0, 3 - selectedVideoCount))
+          ? accepted.slice(
+              0,
+              Math.max(
+                0,
+                3 - selectedVideoCount,
+              ),
+            )
           : accepted;
 
-    for (const file of limitedFiles) {
-      const attachment: Attachment = {
-        id: createId("attachment"),
-        enquiryId,
-        category,
-        name: file.name,
-        type: file.type || "application/octet-stream",
-        size: file.size,
-        status: "uploading",
-        createdAt: new Date().toISOString(),
-        file,
-      };
+    for (
+      const file of limitedFiles
+    ) {
+      const attachment: Attachment =
+        {
+          id: createId(
+            "attachment",
+          ),
+          enquiryId,
+          category,
+          name: file.name,
+          type:
+            file.type ||
+            "application/octet-stream",
+          size: file.size,
+          status: "uploading",
+          createdAt:
+            new Date().toISOString(),
+          file,
+        };
 
-      setAttachments((current) => [...current, attachment]);
+      setAttachments(
+        (current) => [
+          ...current,
+          attachment,
+        ],
+      );
 
       try {
-        await saveAttachmentToIndexedDb(attachment);
+        await saveAttachmentToIndexedDb(
+          attachment,
+        );
 
-        const uploadedAttachment: Attachment = {
-          ...attachment,
-          status: "uploaded",
-        };
+        const uploadedAttachment: Attachment =
+          {
+            ...attachment,
+            status:
+              "uploaded",
+          };
 
-        await saveAttachmentToIndexedDb(uploadedAttachment);
+        await saveAttachmentToIndexedDb(
+          uploadedAttachment,
+        );
 
-        setAttachments((current) =>
-          current.map((item) =>
-            item.id === attachment.id
-              ? uploadedAttachment
-              : item,
-          ),
+        setAttachments(
+          (current) =>
+            current.map(
+              (item) =>
+                item.id ===
+                attachment.id
+                  ? uploadedAttachment
+                  : item,
+            ),
         );
       } catch {
-        const failedAttachment: Attachment = {
-          ...attachment,
-          status: "failed",
-        };
+        const failedAttachment: Attachment =
+          {
+            ...attachment,
+            status: "failed",
+          };
 
-        setAttachments((current) =>
-          current.map((item) =>
-            item.id === attachment.id
-              ? failedAttachment
-              : item,
-          ),
+        setAttachments(
+          (current) =>
+            current.map(
+              (item) =>
+                item.id ===
+                attachment.id
+                  ? failedAttachment
+                  : item,
+            ),
         );
 
         setAttachmentError(
@@ -1083,45 +1283,78 @@ export default function ServiceDetailsPage() {
     }
   }
 
-  async function removeAttachment(id: string) {
-    await deleteAttachmentFromIndexedDb(id);
+  async function removeAttachment(
+    id: string,
+  ) {
+    await deleteAttachmentFromIndexedDb(
+      id,
+    );
 
-    setAttachments((current) =>
-      current.filter((attachment) => attachment.id !== id),
+    setAttachments(
+      (current) =>
+        current.filter(
+          (attachment) =>
+            attachment.id !== id,
+        ),
     );
   }
 
-  async function retryAttachment(attachment: Attachment) {
+  async function retryAttachment(
+    attachment: Attachment,
+  ) {
     setAttachmentError("");
 
-    setAttachments((current) =>
-      current.map((item) =>
-        item.id === attachment.id
-          ? { ...item, status: "uploading" }
-          : item,
-      ),
+    setAttachments(
+      (current) =>
+        current.map(
+          (item) =>
+            item.id ===
+            attachment.id
+              ? {
+                  ...item,
+                  status:
+                    "uploading",
+                }
+              : item,
+        ),
     );
 
     try {
-      await saveAttachmentToIndexedDb({
-        ...attachment,
-        status: "uploaded",
-      });
+      await saveAttachmentToIndexedDb(
+        {
+          ...attachment,
+          status: "uploaded",
+        },
+      );
 
-      setAttachments((current) =>
-        current.map((item) =>
-          item.id === attachment.id
-            ? { ...item, status: "uploaded" }
-            : item,
-        ),
+      setAttachments(
+        (current) =>
+          current.map(
+            (item) =>
+              item.id ===
+              attachment.id
+                ? {
+                    ...item,
+                    status:
+                      "uploaded",
+                  }
+                : item,
+          ),
       );
     } catch {
-      setAttachments((current) =>
-        current.map((item) =>
-          item.id === attachment.id
-            ? { ...item, status: "failed" }
-            : item,
-        ),
+      setAttachments(
+        (current) =>
+          current.map(
+            (item) =>
+              item.id ===
+              attachment.id
+                ? {
+                    ...item,
+                    status:
+                      "failed",
+                  }
+                : item,
+          ),
       );
 
       setAttachmentError(
@@ -1131,19 +1364,27 @@ export default function ServiceDetailsPage() {
   }
 
   function renderConditionalQuestions() {
-    switch (form.primaryService) {
+    switch (
+      form.primaryService
+    ) {
       case "Property Maintenance & Repairs":
         return (
           <section className="alphaConditionalSection">
-            <h2>Maintenance Details</h2>
+            <h2>
+              Maintenance Details
+            </h2>
 
             <FieldLabel>
               What Type of Maintenance Do You Need?
             </FieldLabel>
 
             <CheckboxGrid
-              options={MAINTENANCE_OPTIONS}
-              values={form.maintenanceTypes}
+              options={
+                MAINTENANCE_OPTIONS
+              }
+              values={
+                form.maintenanceTypes
+              }
               onChange={(value) =>
                 updateForm(
                   "maintenanceTypes",
@@ -1162,8 +1403,14 @@ export default function ServiceDetailsPage() {
 
               <RadioGroup
                 name="activeDamage"
-                value={form.activeDamage}
-                options={["Yes", "No", "Not sure"]}
+                value={
+                  form.activeDamage
+                }
+                options={[
+                  "Yes",
+                  "No",
+                  "Not sure",
+                ]}
                 onChange={(value) =>
                   updateForm(
                     "activeDamage",
@@ -1172,11 +1419,15 @@ export default function ServiceDetailsPage() {
                 }
               />
 
-              {form.activeDamage === "Yes" ? (
+              {form.activeDamage ===
+              "Yes" ? (
                 <div className="alphaInlineNotice">
                   If there is active property damage or an urgent
                   plumbing issue, please call{" "}
-                  <a href="tel:01775518068">01775 518068</a>.
+                  <a href="tel:01775518068">
+                    01775 518068
+                  </a>
+                  .
                 </div>
               ) : null}
             </div>
@@ -1186,14 +1437,20 @@ export default function ServiceDetailsPage() {
       case "Property Renovation":
         return (
           <section className="alphaConditionalSection">
-            <h2>Renovation Details</h2>
+            <h2>
+              Renovation Details
+            </h2>
 
             <div className="alphaField">
-              <FieldLabel>What Are You Planning?</FieldLabel>
+              <FieldLabel>
+                What Are You Planning?
+              </FieldLabel>
 
               <RadioGroup
                 name="renovationPlan"
-                value={form.renovationPlan}
+                value={
+                  form.renovationPlan
+                }
                 options={[
                   "One room",
                   "Several rooms",
@@ -1202,17 +1459,24 @@ export default function ServiceDetailsPage() {
                   "Not sure yet",
                 ]}
                 onChange={(value) =>
-                  updateForm("renovationPlan", value)
+                  updateForm(
+                    "renovationPlan",
+                    value,
+                  )
                 }
               />
             </div>
 
             <div className="alphaField">
-              <FieldLabel>What Stage Are You At?</FieldLabel>
+              <FieldLabel>
+                What Stage Are You At?
+              </FieldLabel>
 
               <RadioGroup
                 name="renovationStage"
-                value={form.renovationStage}
+                value={
+                  form.renovationStage
+                }
                 options={[
                   "Exploring options",
                   "Ready for quotation",
@@ -1222,7 +1486,10 @@ export default function ServiceDetailsPage() {
                   "Other",
                 ]}
                 onChange={(value) =>
-                  updateForm("renovationStage", value)
+                  updateForm(
+                    "renovationStage",
+                    value,
+                  )
                 }
               />
             </div>
@@ -1232,13 +1499,21 @@ export default function ServiceDetailsPage() {
       case "Plumbing":
         return (
           <section className="alphaConditionalSection">
-            <h2>Plumbing Details</h2>
+            <h2>
+              Plumbing Details
+            </h2>
 
-            <FieldLabel>What Type of Plumbing Work?</FieldLabel>
+            <FieldLabel>
+              What Type of Plumbing Work?
+            </FieldLabel>
 
             <CheckboxGrid
-              options={PLUMBING_OPTIONS}
-              values={form.plumbingTypes}
+              options={
+                PLUMBING_OPTIONS
+              }
+              values={
+                form.plumbingTypes
+              }
               onChange={(value) =>
                 updateForm(
                   "plumbingTypes",
@@ -1251,12 +1526,20 @@ export default function ServiceDetailsPage() {
             />
 
             <div className="alphaField">
-              <FieldLabel>Is Water Currently Escaping?</FieldLabel>
+              <FieldLabel>
+                Is Water Currently Escaping?
+              </FieldLabel>
 
               <RadioGroup
                 name="waterEscaping"
-                value={form.waterEscaping}
-                options={["Yes", "No", "Not sure"]}
+                value={
+                  form.waterEscaping
+                }
+                options={[
+                  "Yes",
+                  "No",
+                  "Not sure",
+                ]}
                 onChange={(value) =>
                   updateForm(
                     "waterEscaping",
@@ -1265,9 +1548,14 @@ export default function ServiceDetailsPage() {
                 }
               />
 
-              {form.waterEscaping === "Yes" ? (
+              {form.waterEscaping ===
+              "Yes" ? (
                 <div className="alphaEmergencyInline">
-                  <strong>Please call 01775 518068 for urgent assistance.</strong>
+                  <strong>
+                    Please call 01775 518068
+                    for urgent assistance.
+                  </strong>
+
                   <a href="tel:01775518068">
                     CALL 01775 518068
                   </a>
@@ -1280,14 +1568,20 @@ export default function ServiceDetailsPage() {
       case "Bathroom":
         return (
           <section className="alphaConditionalSection">
-            <h2>Bathroom Details</h2>
+            <h2>
+              Bathroom Details
+            </h2>
 
             <div className="alphaField">
-              <FieldLabel>What Do You Need?</FieldLabel>
+              <FieldLabel>
+                What Do You Need?
+              </FieldLabel>
 
               <RadioGroup
                 name="bathroomNeed"
-                value={form.bathroomNeed}
+                value={
+                  form.bathroomNeed
+                }
                 options={[
                   "Complete bathroom renovation",
                   "New bathroom installation",
@@ -1301,7 +1595,10 @@ export default function ServiceDetailsPage() {
                   "Not sure",
                 ]}
                 onChange={(value) =>
-                  updateForm("bathroomNeed", value)
+                  updateForm(
+                    "bathroomNeed",
+                    value,
+                  )
                 }
               />
             </div>
@@ -1313,7 +1610,9 @@ export default function ServiceDetailsPage() {
 
               <RadioGroup
                 name="bathroomProducts"
-                value={form.bathroomProducts}
+                value={
+                  form.bathroomProducts
+                }
                 options={[
                   "Yes",
                   "No",
@@ -1321,14 +1620,18 @@ export default function ServiceDetailsPage() {
                   "Not decided yet",
                 ]}
                 onChange={(value) =>
-                  updateForm("bathroomProducts", value)
+                  updateForm(
+                    "bathroomProducts",
+                    value,
+                  )
                 }
               />
             </div>
 
             <p className="alphaSupportingText">
-              If you have a bathroom plan, product list or
-              inspiration image, you can upload it below.
+              If you have a bathroom plan,
+              product list or inspiration
+              image, you can upload it below.
             </p>
           </section>
         );
@@ -1336,14 +1639,20 @@ export default function ServiceDetailsPage() {
       case "Kitchen":
         return (
           <section className="alphaConditionalSection">
-            <h2>Kitchen Details</h2>
+            <h2>
+              Kitchen Details
+            </h2>
 
             <div className="alphaField">
-              <FieldLabel>What Do You Need?</FieldLabel>
+              <FieldLabel>
+                What Do You Need?
+              </FieldLabel>
 
               <RadioGroup
                 name="kitchenNeed"
-                value={form.kitchenNeed}
+                value={
+                  form.kitchenNeed
+                }
                 options={[
                   "Complete kitchen renovation",
                   "Kitchen installation",
@@ -1356,7 +1665,10 @@ export default function ServiceDetailsPage() {
                   "Not sure",
                 ]}
                 onChange={(value) =>
-                  updateForm("kitchenNeed", value)
+                  updateForm(
+                    "kitchenNeed",
+                    value,
+                  )
                 }
               />
             </div>
@@ -1368,7 +1680,9 @@ export default function ServiceDetailsPage() {
 
               <RadioGroup
                 name="kitchenPurchased"
-                value={form.kitchenPurchased}
+                value={
+                  form.kitchenPurchased
+                }
                 options={[
                   "Yes",
                   "No",
@@ -1376,31 +1690,34 @@ export default function ServiceDetailsPage() {
                   "Still deciding",
                 ]}
                 onChange={(value) =>
-                  updateForm("kitchenPurchased", value)
+                  updateForm(
+                    "kitchenPurchased",
+                    value,
+                  )
                 }
               />
             </div>
-
-            {form.kitchenPurchased === "Yes" ||
-            form.kitchenPurchased === "Ordered but not delivered" ? (
-              <div className="alphaInlineNotice">
-                Upload your kitchen plan or product information if
-                available.
-              </div>
-            ) : null}
           </section>
         );
 
       case "Tiling & Flooring":
         return (
           <section className="alphaConditionalSection">
-            <h2>Tiling & Flooring Details</h2>
+            <h2>
+              Tiling & Flooring Details
+            </h2>
 
-            <FieldLabel>What Work Is Required?</FieldLabel>
+            <FieldLabel>
+              What Work Is Required?
+            </FieldLabel>
 
             <CheckboxGrid
-              options={TILING_OPTIONS}
-              values={form.tilingTypes}
+              options={
+                TILING_OPTIONS
+              }
+              values={
+                form.tilingTypes
+              }
               onChange={(value) =>
                 updateForm(
                   "tilingTypes",
@@ -1419,10 +1736,19 @@ export default function ServiceDetailsPage() {
 
               <RadioGroup
                 name="tilingProducts"
-                value={form.tilingProducts}
-                options={["Yes", "No", "Not yet"]}
+                value={
+                  form.tilingProducts
+                }
+                options={[
+                  "Yes",
+                  "No",
+                  "Not yet",
+                ]}
                 onChange={(value) =>
-                  updateForm("tilingProducts", value)
+                  updateForm(
+                    "tilingProducts",
+                    value,
+                  )
                 }
               />
             </div>
@@ -1432,13 +1758,21 @@ export default function ServiceDetailsPage() {
       case "Painting & Decorating":
         return (
           <section className="alphaConditionalSection">
-            <h2>Painting & Decorating Details</h2>
+            <h2>
+              Painting & Decorating Details
+            </h2>
 
-            <FieldLabel>What Do You Need Decorated?</FieldLabel>
+            <FieldLabel>
+              What Do You Need Decorated?
+            </FieldLabel>
 
             <CheckboxGrid
-              options={DECORATING_OPTIONS}
-              values={form.decoratingAreas}
+              options={
+                DECORATING_OPTIONS
+              }
+              values={
+                form.decoratingAreas
+              }
               onChange={(value) =>
                 updateForm(
                   "decoratingAreas",
@@ -1457,8 +1791,14 @@ export default function ServiceDetailsPage() {
 
               <RadioGroup
                 name="decoratingPreparation"
-                value={form.decoratingPreparation}
-                options={["Yes", "No", "Not sure"]}
+                value={
+                  form.decoratingPreparation
+                }
+                options={[
+                  "Yes",
+                  "No",
+                  "Not sure",
+                ]}
                 onChange={(value) =>
                   updateForm(
                     "decoratingPreparation",
@@ -1473,13 +1813,21 @@ export default function ServiceDetailsPage() {
       case "Roofing & Gutters":
         return (
           <section className="alphaConditionalSection">
-            <h2>Roofing & Gutters Details</h2>
+            <h2>
+              Roofing & Gutters Details
+            </h2>
 
-            <FieldLabel>What Have You Noticed?</FieldLabel>
+            <FieldLabel>
+              What Have You Noticed?
+            </FieldLabel>
 
             <CheckboxGrid
-              options={ROOFING_OPTIONS}
-              values={form.roofingIssues}
+              options={
+                ROOFING_OPTIONS
+              }
+              values={
+                form.roofingIssues
+              }
               onChange={(value) =>
                 updateForm(
                   "roofingIssues",
@@ -1498,8 +1846,14 @@ export default function ServiceDetailsPage() {
 
               <RadioGroup
                 name="waterEntering"
-                value={form.waterEntering}
-                options={["Yes", "No", "Not sure"]}
+                value={
+                  form.waterEntering
+                }
+                options={[
+                  "Yes",
+                  "No",
+                  "Not sure",
+                ]}
                 onChange={(value) =>
                   updateForm(
                     "waterEntering",
@@ -1508,12 +1862,15 @@ export default function ServiceDetailsPage() {
                 }
               />
 
-              {form.waterEntering === "Yes" ? (
+              {form.waterEntering ===
+              "Yes" ? (
                 <div className="alphaEmergencyInline">
                   <strong>
-                    If water is currently entering the property,
-                    please call 01775 518068.
+                    If water is currently entering
+                    the property, please call
+                    01775 518068.
                   </strong>
+
                   <a href="tel:01775518068">
                     CALL 01775 518068
                   </a>
@@ -1526,13 +1883,21 @@ export default function ServiceDetailsPage() {
       case "Garden Services":
         return (
           <section className="alphaConditionalSection">
-            <h2>Garden Details</h2>
+            <h2>
+              Garden Details
+            </h2>
 
-            <FieldLabel>What Garden Work Do You Need?</FieldLabel>
+            <FieldLabel>
+              What Garden Work Do You Need?
+            </FieldLabel>
 
             <CheckboxGrid
-              options={GARDEN_OPTIONS}
-              values={form.gardenWork}
+              options={
+                GARDEN_OPTIONS
+              }
+              values={
+                form.gardenWork
+              }
               onChange={(value) =>
                 updateForm(
                   "gardenWork",
@@ -1545,32 +1910,46 @@ export default function ServiceDetailsPage() {
             />
 
             <div className="alphaField">
-              <FieldLabel>Is This?</FieldLabel>
+              <FieldLabel>
+                Is This?
+              </FieldLabel>
 
               <RadioGroup
                 name="gardenFrequency"
-                value={form.gardenFrequency}
+                value={
+                  form.gardenFrequency
+                }
                 options={[
                   "One-off work",
                   "Regular maintenance",
                   "Not sure",
                 ]}
                 onChange={(value) =>
-                  updateForm("gardenFrequency", value)
+                  updateForm(
+                    "gardenFrequency",
+                    value,
+                  )
                 }
               />
             </div>
 
             <div className="alphaField">
               <FieldLabel>
-                Would you like garden-waste removal included where
+                Would you like garden-waste
+                removal included where
                 available?
               </FieldLabel>
 
               <RadioGroup
                 name="gardenWaste"
-                value={form.gardenWaste}
-                options={["Yes", "No", "Not sure"]}
+                value={
+                  form.gardenWaste
+                }
+                options={[
+                  "Yes",
+                  "No",
+                  "Not sure",
+                ]}
                 onChange={(value) =>
                   updateForm(
                     "gardenWaste",
@@ -1585,13 +1964,21 @@ export default function ServiceDetailsPage() {
       case "Landlord / Rental Property Work":
         return (
           <section className="alphaConditionalSection">
-            <h2>Landlord / Rental Property Details</h2>
+            <h2>
+              Landlord / Rental Property Details
+            </h2>
 
-            <FieldLabel>What Does the Property Need?</FieldLabel>
+            <FieldLabel>
+              What Does the Property Need?
+            </FieldLabel>
 
             <CheckboxGrid
-              options={LANDLORD_OPTIONS}
-              values={form.landlordNeeds}
+              options={
+                LANDLORD_OPTIONS
+              }
+              values={
+                form.landlordNeeds
+              }
               onChange={(value) =>
                 updateForm(
                   "landlordNeeds",
@@ -1604,11 +1991,15 @@ export default function ServiceDetailsPage() {
             />
 
             <div className="alphaField">
-              <FieldLabel>Is the Property Currently?</FieldLabel>
+              <FieldLabel>
+                Is the Property Currently?
+              </FieldLabel>
 
               <RadioGroup
                 name="rentalStatus"
-                value={form.rentalStatus}
+                value={
+                  form.rentalStatus
+                }
                 options={[
                   "Occupied",
                   "Vacant",
@@ -1617,14 +2008,18 @@ export default function ServiceDetailsPage() {
                   "Other",
                 ]}
                 onChange={(value) =>
-                  updateForm("rentalStatus", value)
+                  updateForm(
+                    "rentalStatus",
+                    value,
+                  )
                 }
               />
             </div>
 
             <p className="alphaSupportingText">
-              More detailed property and access questions will be
-              covered in the next step.
+              More detailed property and access
+              questions will be covered in the
+              next step.
             </p>
           </section>
         );
@@ -1632,12 +2027,18 @@ export default function ServiceDetailsPage() {
       case "Multiple Services":
         return (
           <section className="alphaConditionalSection">
-            <h2>Which Services Are Involved?</h2>
+            <h2>
+              Which Services Are Involved?
+            </h2>
 
             <div id="multipleServices">
               <CheckboxGrid
-                options={MULTIPLE_SERVICE_OPTIONS}
-                values={form.multipleServices}
+                options={
+                  MULTIPLE_SERVICE_OPTIONS
+                }
+                values={
+                  form.multipleServices
+                }
                 onChange={(value) =>
                   updateForm(
                     "multipleServices",
@@ -1651,17 +2052,24 @@ export default function ServiceDetailsPage() {
             </div>
 
             {errors.multipleServices ? (
-              <p className="alphaFieldError" role="alert">
+              <p
+                className="alphaFieldError"
+                role="alert"
+              >
                 {errors.multipleServices}
               </p>
             ) : null}
 
             <div className="alphaGreenNote">
-              If you have a list of different jobs at the property,
-              include everything below. Alpha can assess suitable
-              work together rather than requiring separate enquiries.
+              If you have a list of different jobs
+              at the property, include everything
+              below. Alpha can assess suitable work
+              together rather than requiring separate
+              enquiries.
+
               <strong>
-                One enquiry. One team. One point of contact.
+                One enquiry. One team. One point of
+                contact.
               </strong>
             </div>
           </section>
@@ -1670,13 +2078,21 @@ export default function ServiceDetailsPage() {
       case "Not Sure":
         return (
           <section className="alphaNotSureBox">
-            <strong>Not sure which service you need?</strong>
+            <strong>
+              Not sure which service you need?
+            </strong>
 
             <p>
-              That&apos;s fine. Describe what needs doing and upload
-              photographs where possible. We&apos;ll review the
-              information and determine which Alpha service is most
-              appropriate.
+              That&apos;s fine. Describe what needs
+              doing and upload photographs where
+              possible. We&apos;ll review the
+              information and determine which Alpha
+              service is most appropriate.
+            </p>
+
+            <p>
+              You can continue without selecting a
+              specific trade or service.
             </p>
           </section>
         );
@@ -1699,22 +2115,26 @@ export default function ServiceDetailsPage() {
             STEP 2 OF 4
           </div>
 
-          <h1>Tell Us What You Need</h1>
+          <h1>
+            Tell Us What You Need
+          </h1>
 
           <p>
-            Give us as much information as you can about the work you
-            need.
+            Give us as much information as you
+            can about the work you need.
           </p>
 
           <p>
-            Photos and videos are particularly useful and may help us
-            understand the job before arranging an assessment.
+            Photos and videos are particularly
+            useful and may help us understand the
+            job before arranging an assessment.
           </p>
 
           <p>
-            You don&apos;t need to know the technical name for the
-            problem — just describe what you&apos;re seeing and what
-            you&apos;d like Alpha to help with.
+            You don&apos;t need to know the
+            technical name for the problem — just
+            describe what you&apos;re seeing and
+            what you&apos;d like Alpha to help with.
           </p>
         </div>
       </section>
@@ -1724,33 +2144,53 @@ export default function ServiceDetailsPage() {
           <div className="alphaProgressGrid">
             <div className="alphaProgressItem alphaProgressComplete">
               <span>1</span>
+
               <div>
-                <small>YOUR DETAILS</small>
-                <strong>Your Details ✓</strong>
+                <small>
+                  YOUR DETAILS
+                </small>
+
+                <strong>
+                  Your Details ✓
+                </strong>
               </div>
             </div>
 
             <div className="alphaProgressItem alphaProgressActive">
               <span>2</span>
+
               <div>
-                <small>STEP 2 OF 4</small>
-                <strong>Service Details</strong>
+                <small>
+                  STEP 2 OF 4
+                </small>
+
+                <strong>
+                  Service Details
+                </strong>
               </div>
             </div>
 
             <div className="alphaProgressItem">
               <span>3</span>
+
               <div>
                 <small>NEXT</small>
-                <strong>Property Details</strong>
+
+                <strong>
+                  Property Details
+                </strong>
               </div>
             </div>
 
             <div className="alphaProgressItem">
               <span>4</span>
+
               <div>
                 <small>FINAL</small>
-                <strong>Review & Send</strong>
+
+                <strong>
+                  Review & Send
+                </strong>
               </div>
             </div>
           </div>
@@ -1770,15 +2210,19 @@ export default function ServiceDetailsPage() {
                   URGENT
                 </span>
 
-                <h2>You Told Us This Is Urgent</h2>
+                <h2>
+                  You Told Us This Is Urgent
+                </h2>
 
                 <p>
-                  For an active property or plumbing emergency,
-                  please call Alpha directly as well as completing
-                  the form.
+                  For an active property or plumbing
+                  emergency, please call Alpha directly
+                  as well as completing the form.
                 </p>
 
-                <strong>24/7 EMERGENCY CALL</strong>
+                <strong>
+                  24/7 EMERGENCY CALL
+                </strong>
 
                 <a
                   className="alphaEmergencyPhone"
@@ -1799,52 +2243,75 @@ export default function ServiceDetailsPage() {
 
           <section className="alphaFormSection">
             <div className="alphaSectionIntro">
-              <span className="alphaSectionNumber">01</span>
+              <span className="alphaSectionNumber">
+                01
+              </span>
 
               <div>
-                <h2>What Do You Need Help With?</h2>
+                <h2>
+                  What Do You Need Help With?
+                </h2>
+
                 <p>
-                  Choose the main service that best describes what
-                  you need. You can select Multiple Services or Not
-                  Sure if that better fits your enquiry.
+                  Choose the main service that best
+                  describes what you need. You can
+                  select Multiple Services or Not Sure
+                  if that better fits your enquiry.
                 </p>
               </div>
             </div>
 
-            <div id="primaryService" className="alphaServiceCards">
-              {PRIMARY_SERVICES.map((service) => (
-                <button
-                  key={service}
-                  type="button"
-                  className={`alphaServiceCard ${
-                    form.primaryService === service
-                      ? "alphaServiceCardActive"
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handlePrimaryServiceChange(service)
-                  }
-                  aria-pressed={
-                    form.primaryService === service
-                  }
-                >
-                  <span className="alphaServiceIcon">
-                    {service === "Plumbing"
-                      ? "⌁"
-                      : service === "Garden Services"
-                        ? "✦"
-                        : service === "Not Sure"
-                          ? "?"
-                          : "✓"}
-                  </span>
+            <div
+              id="primaryService"
+              className="alphaServiceCards"
+            >
+              {PRIMARY_SERVICES.map(
+                (service) => (
+                  <button
+                    key={service}
+                    type="button"
+                    className={`alphaServiceCard ${
+                      form.primaryService ===
+                      service
+                        ? "alphaServiceCardActive"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      handlePrimaryServiceChange(
+                        service,
+                      )
+                    }
+                    aria-pressed={
+                      form.primaryService ===
+                      service
+                    }
+                  >
+                    <span className="alphaServiceIcon">
+                      {service ===
+                      "Plumbing"
+                        ? "⌁"
+                        : service ===
+                            "Garden Services"
+                          ? "✦"
+                          : service ===
+                              "Not Sure"
+                            ? "?"
+                            : "✓"}
+                    </span>
 
-                  <strong>{service}</strong>
-                </button>
-              ))}
+                    <strong>
+                      {service}
+                    </strong>
+                  </button>
+                ),
+              )}
             </div>
 
             {errors.primaryService ? (
-              <p className="alphaFieldError" role="alert">
+              <p
+                className="alphaFieldError"
+                role="alert"
+              >
                 {errors.primaryService}
               </p>
             ) : null}
@@ -1854,14 +2321,20 @@ export default function ServiceDetailsPage() {
 
           <section className="alphaFormSection">
             <div className="alphaSectionIntro">
-              <span className="alphaSectionNumber">02</span>
+              <span className="alphaSectionNumber">
+                02
+              </span>
 
               <div>
-                <h2>Tell Us What Needs Doing</h2>
+                <h2>
+                  Tell Us What Needs Doing
+                </h2>
+
                 <p>
-                  Describe the problem, the work you want completed,
-                  or what you would like changed. You do not need to
-                  use trade terminology.
+                  Describe the problem, the work you
+                  want completed, or what you would like
+                  changed. You do not need to use trade
+                  terminology.
                 </p>
               </div>
             </div>
@@ -1874,12 +2347,18 @@ export default function ServiceDetailsPage() {
               <textarea
                 id="jobDescription"
                 name="jobDescription"
-                value={form.jobDescription}
-                onChange={handleTextChange}
+                value={
+                  form.jobDescription
+                }
+                onChange={
+                  handleTextChange
+                }
                 maxLength={5000}
                 rows={7}
                 placeholder="For example: Upstairs toilet leaking from the base. We'd like the leak repaired and the surrounding area checked."
-                aria-invalid={Boolean(errors.jobDescription)}
+                aria-invalid={Boolean(
+                  errors.jobDescription,
+                )}
                 aria-describedby={
                   errors.jobDescription
                     ? "jobDescription-error"
@@ -1889,13 +2368,17 @@ export default function ServiceDetailsPage() {
 
               <div className="alphaFieldMeta">
                 <span>
-                  A short description is fine — just tell us what
-                  you&apos;re seeing and what you&apos;d like Alpha
-                  to help with.
+                  A short description is fine — just tell
+                  us what you&apos;re seeing and what
+                  you&apos;d like Alpha to help with.
                 </span>
 
                 <span>
-                  {form.jobDescription.length}/5000
+                  {
+                    form.jobDescription
+                      .length
+                  }
+                  /5000
                 </span>
               </div>
 
@@ -1917,7 +2400,9 @@ export default function ServiceDetailsPage() {
 
               <select
                 name="customerGoal"
-                value={form.customerGoal}
+                value={
+                  form.customerGoal
+                }
                 onChange={(event) =>
                   updateForm(
                     "customerGoal",
@@ -1925,25 +2410,36 @@ export default function ServiceDetailsPage() {
                   )
                 }
               >
-                <option value="">Select if useful</option>
+                <option value="">
+                  Select if useful
+                </option>
+
                 <option value="Repair the problem">
                   Repair the problem
                 </option>
+
                 <option value="Replace something damaged">
                   Replace something damaged
                 </option>
+
                 <option value="Refresh the room">
                   Refresh the room
                 </option>
+
                 <option value="Complete renovation">
                   Complete renovation
                 </option>
+
                 <option value="Bring an overgrown garden under control">
-                  Bring an overgrown garden under control
+                  Bring an overgrown garden under
+                  control
                 </option>
+
                 <option value="Prepare rental property for new tenant">
-                  Prepare rental property for new tenant
+                  Prepare rental property for new
+                  tenant
                 </option>
+
                 <option value="Multiple maintenance jobs">
                   Multiple maintenance jobs
                 </option>
@@ -1953,14 +2449,20 @@ export default function ServiceDetailsPage() {
 
           <section className="alphaFormSection">
             <div className="alphaSectionIntro">
-              <span className="alphaSectionNumber">03</span>
+              <span className="alphaSectionNumber">
+                03
+              </span>
 
               <div>
-                <h2>Is This One Job or Several?</h2>
+                <h2>
+                  Is This One Job or Several?
+                </h2>
+
                 <p>
-                  This helps Alpha understand whether you need one
-                  repair, several jobs together, or work across more
-                  than one property.
+                  This helps Alpha understand whether
+                  you need one repair, several jobs
+                  together, or work across more than
+                  one property.
                 </p>
               </div>
             </div>
@@ -1968,34 +2470,50 @@ export default function ServiceDetailsPage() {
             <div id="jobCount">
               <RadioGroup
                 name="jobCount"
-                value={form.jobCount}
+                value={
+                  form.jobCount
+                }
                 options={[
                   "One job",
                   "Several jobs at the same property",
                   "Work across more than one property",
                 ]}
                 onChange={(value) =>
-                  updateForm("jobCount", value as JobCount)
+                  updateForm(
+                    "jobCount",
+                    value as JobCount,
+                  )
                 }
-                error={errors.jobCount}
+                error={
+                  errors.jobCount
+                }
               />
             </div>
 
             {form.jobCount ===
             "Several jobs at the same property" ? (
               <div className="alphaGreenNote">
-                Please include the complete list of jobs in your
-                description above.
+                <strong>
+                  Please include the complete job list.
+                </strong>
+
+                <span>
+                  Add every repair, maintenance task,
+                  room or area you want Alpha to consider
+                  in the description above.
+                </span>
               </div>
             ) : null}
 
             {multiplePropertiesSelected ? (
               <div className="alphaMultiPropertyBox">
                 <p>
-                  You&apos;ll be able to give us the main property
-                  details in the next step. If this involves a wider
-                  portfolio, tell us how many properties are
-                  involved.
+                  You can give Alpha wider portfolio
+                  context rather than creating a separate
+                  enquiry for every property. Tell us how
+                  many properties are involved and use
+                  the next step to provide the relevant
+                  property information.
                 </p>
 
                 <div className="alphaField">
@@ -2009,8 +2527,12 @@ export default function ServiceDetailsPage() {
                     max="999"
                     inputMode="numeric"
                     name="propertyCount"
-                    value={form.propertyCount}
-                    onChange={handleTextChange}
+                    value={
+                      form.propertyCount
+                    }
+                    onChange={
+                      handleTextChange
+                    }
                     placeholder="e.g. 5"
                   />
                 </div>
@@ -2020,13 +2542,19 @@ export default function ServiceDetailsPage() {
 
           <section className="alphaFormSection">
             <div className="alphaSectionIntro">
-              <span className="alphaSectionNumber">04</span>
+              <span className="alphaSectionNumber">
+                04
+              </span>
 
               <div>
-                <h2>When Would You Like the Work Done?</h2>
+                <h2>
+                  When Would You Like the Work Done?
+                </h2>
+
                 <p>
-                  This is your preferred timescale only. It does not
-                  mean Alpha is committing to that date.
+                  This is your preferred timescale only.
+                  It does not mean Alpha is committing
+                  to that date.
                 </p>
               </div>
             </div>
@@ -2034,7 +2562,9 @@ export default function ServiceDetailsPage() {
             <div id="timescale">
               <RadioGroup
                 name="timescale"
-                value={form.timescale}
+                value={
+                  form.timescale
+                }
                 options={[
                   "As soon as reasonably possible",
                   "Within 1–2 weeks",
@@ -2044,23 +2574,33 @@ export default function ServiceDetailsPage() {
                   "Just planning / gathering information",
                 ]}
                 onChange={(value) =>
-                  updateForm("timescale", value as Timescale)
+                  updateForm(
+                    "timescale",
+                    value as Timescale,
+                  )
                 }
-                error={errors.timescale}
+                error={
+                  errors.timescale
+                }
               />
             </div>
           </section>
 
           <section className="alphaFormSection">
             <div className="alphaSectionIntro">
-              <span className="alphaSectionNumber">05</span>
+              <span className="alphaSectionNumber">
+                05
+              </span>
 
               <div>
-                <h2>Products, Materials & Measurements</h2>
+                <h2>
+                  Products, Materials & Measurements
+                </h2>
+
                 <p>
-                  These details are optional and are mainly useful
-                  for renovation, bathroom, kitchen, flooring and
-                  similar projects.
+                  These details are optional and are
+                  mainly useful for renovation, bathroom,
+                  kitchen, flooring and similar projects.
                 </p>
               </div>
             </div>
@@ -2072,7 +2612,9 @@ export default function ServiceDetailsPage() {
 
               <RadioGroup
                 name="productsStatus"
-                value={form.productsStatus}
+                value={
+                  form.productsStatus
+                }
                 options={[
                   "Yes",
                   "No",
@@ -2080,13 +2622,18 @@ export default function ServiceDetailsPage() {
                   "Not applicable",
                 ]}
                 onChange={(value) =>
-                  updateForm("productsStatus", value)
+                  updateForm(
+                    "productsStatus",
+                    value,
+                  )
                 }
               />
             </div>
 
-            {form.productsStatus === "Yes" ||
-            form.productsStatus === "Some" ? (
+            {form.productsStatus ===
+              "Yes" ||
+            form.productsStatus ===
+              "Some" ? (
               <div className="alphaField">
                 <FieldLabel>
                   Tell Us What You Already Have
@@ -2094,8 +2641,12 @@ export default function ServiceDetailsPage() {
 
                 <textarea
                   name="productsDetails"
-                  value={form.productsDetails}
-                  onChange={handleTextChange}
+                  value={
+                    form.productsDetails
+                  }
+                  onChange={
+                    handleTextChange
+                  }
                   rows={4}
                   placeholder="For example: kitchen units, worktops, tiles, bathroom products or flooring."
                 />
@@ -2103,12 +2654,19 @@ export default function ServiceDetailsPage() {
             ) : null}
 
             <div className="alphaField">
-              <FieldLabel>Do You Have Measurements?</FieldLabel>
+              <FieldLabel>
+                Do You Have Measurements?
+              </FieldLabel>
 
               <RadioGroup
                 name="hasMeasurements"
-                value={form.hasMeasurements}
-                options={["Yes", "No"]}
+                value={
+                  form.hasMeasurements
+                }
+                options={[
+                  "Yes",
+                  "No",
+                ]}
                 onChange={(value) =>
                   updateForm(
                     "hasMeasurements",
@@ -2118,7 +2676,8 @@ export default function ServiceDetailsPage() {
               />
             </div>
 
-            {form.hasMeasurements === "Yes" ? (
+            {form.hasMeasurements ===
+            "Yes" ? (
               <div className="alphaField">
                 <FieldLabel>
                   Add Approximate Measurements
@@ -2126,48 +2685,64 @@ export default function ServiceDetailsPage() {
 
                 <textarea
                   name="measurements"
-                  value={form.measurements}
-                  onChange={handleTextChange}
+                  value={
+                    form.measurements
+                  }
+                  onChange={
+                    handleTextChange
+                  }
                   rows={4}
                   placeholder="For example: Bathroom approximately 2.4m × 1.8m or garden roughly 15m × 8m."
                 />
 
                 <p className="alphaSupportingText">
-                  Customer-provided measurements are for enquiry
-                  assessment only and are not final construction
-                  measurements.
+                  Customer-provided measurements are
+                  for enquiry assessment only and are
+                  not final construction measurements.
                 </p>
               </div>
             ) : null}
 
             <div className="alphaGreenNote">
-              Don&apos;t worry if you don&apos;t have exact
-              measurements. We can assess this where necessary.
+              Don&apos;t worry if you don&apos;t have
+              exact measurements. We can assess this
+              where necessary.
             </div>
           </section>
 
           <section className="alphaFormSection alphaUploadSection">
             <div className="alphaSectionIntro">
-              <span className="alphaSectionNumber">06</span>
+              <span className="alphaSectionNumber">
+                06
+              </span>
 
               <div>
-                <h2>Photos & Files</h2>
+                <h2>
+                  Photos & Files
+                </h2>
+
                 <p>
-                  Photos and short videos can help us understand the
-                  work before we contact you.
+                  Photos and short videos can help us
+                  understand the work before we contact
+                  you.
                 </p>
               </div>
             </div>
 
             <div className="alphaUploadGrid">
               <div className="alphaUploadCard">
-                <div className="alphaUploadIcon">▧</div>
+                <div className="alphaUploadIcon">
+                  ▧
+                </div>
 
-                <h3>Add Photos</h3>
+                <h3>
+                  Add Photos
+                </h3>
 
                 <p>
-                  Add up to 15 images showing the problem, overall
-                  area, damage, fittings, access or useful
+                  Add up to 15 images showing the
+                  problem, overall area, damage,
+                  fittings, access or useful
                   measurements.
                 </p>
 
@@ -2206,20 +2781,27 @@ export default function ServiceDetailsPage() {
                       "Photo",
                     );
 
-                    event.currentTarget.value = "";
+                    event.currentTarget.value =
+                      "";
                   }}
                 />
               </div>
 
               <div className="alphaUploadCard">
-                <div className="alphaUploadIcon">▶</div>
+                <div className="alphaUploadIcon">
+                  ▶
+                </div>
 
-                <h3>Add a Short Video</h3>
+                <h3>
+                  Add a Short Video
+                </h3>
 
                 <p>
-                  A short video can help show movement, leaks, room
-                  layout, garden condition or a problem that is
-                  difficult to explain in a photograph.
+                  A short video can help show
+                  movement, leaks, room layout,
+                  garden condition or a problem
+                  that is difficult to explain in a
+                  photograph.
                 </p>
 
                 <div className="alphaUploadButtons">
@@ -2256,25 +2838,32 @@ export default function ServiceDetailsPage() {
                       "Video",
                     );
 
-                    event.currentTarget.value = "";
+                    event.currentTarget.value =
+                      "";
                   }}
                 />
 
                 <small>
-                  Short videos only. Maximum 3 videos and
-                  approximately 100 MB per file.
+                  Short videos only. Maximum 3
+                  videos and approximately 100 MB
+                  per file.
                 </small>
               </div>
 
               <div className="alphaUploadCard">
-                <div className="alphaUploadIcon">▤</div>
+                <div className="alphaUploadIcon">
+                  ▤
+                </div>
 
-                <h3>Supporting Files</h3>
+                <h3>
+                  Supporting Files
+                </h3>
 
                 <p>
-                  Upload plans, measurements, product
-                  specifications, kitchen plans, bathroom layouts,
-                  inspection reports or previous quotations.
+                  Upload plans, measurements,
+                  product specifications, kitchen
+                  plans, bathroom layouts, inspection
+                  reports or previous quotations.
                 </p>
 
                 <button
@@ -2299,129 +2888,174 @@ export default function ServiceDetailsPage() {
                       "Document",
                     );
 
-                    event.currentTarget.value = "";
+                    event.currentTarget.value =
+                      "";
                   }}
                 />
 
-                <small>PDF and common image files supported.</small>
+                <small>
+                  PDF and common image files
+                  supported.
+                </small>
               </div>
             </div>
 
             {attachmentError ? (
-              <div className="alphaUploadError" role="alert">
+              <div
+                className="alphaUploadError"
+                role="alert"
+              >
                 {attachmentError}
               </div>
             ) : null}
 
             <div className="alphaPrivacyNote">
-              Please avoid uploading documents or photographs
-              containing unnecessary personal or sensitive
-              information.
+              Please avoid uploading documents or
+              photographs containing unnecessary
+              personal or sensitive information.
             </div>
 
             {attachments.length > 0 ? (
               <div className="alphaAttachments">
                 <div className="alphaAttachmentHeader">
                   <div>
-                    <h3>Your Attachments</h3>
+                    <h3>
+                      Your Attachments
+                    </h3>
 
                     <p>
                       {selectedPhotoCount} photo
-                      {selectedPhotoCount === 1 ? "" : "s"}
+                      {selectedPhotoCount ===
+                      1
+                        ? ""
+                        : "s"}
                       {" · "}
                       {selectedVideoCount} video
-                      {selectedVideoCount === 1 ? "" : "s"}
+                      {selectedVideoCount ===
+                      1
+                        ? ""
+                        : "s"}
                       {" · "}
                       {selectedDocumentCount} document
-                      {selectedDocumentCount === 1 ? "" : "s"}
+                      {selectedDocumentCount ===
+                      1
+                        ? ""
+                        : "s"}
                     </p>
                   </div>
                 </div>
 
                 <div className="alphaAttachmentGrid">
-                  {attachments.map((attachment) => {
-                    const previewUrl =
-                      attachment.category === "Photo"
-                        ? URL.createObjectURL(attachment.file)
-                        : "";
+                  {attachments.map(
+                    (attachment) => {
+                      const previewUrl =
+                        attachment.category ===
+                        "Photo"
+                          ? URL.createObjectURL(
+                              attachment.file,
+                            )
+                          : "";
 
-                    return (
-                      <article
-                        key={attachment.id}
-                        className="alphaAttachmentCard"
-                      >
-                        {previewUrl ? (
-                          <img
-                            src={previewUrl}
-                            alt={attachment.name}
-                            onLoad={() =>
-                              URL.revokeObjectURL(previewUrl)
-                            }
-                          />
-                        ) : (
-                          <div className="alphaAttachmentPlaceholder">
-                            {attachment.category === "Video"
-                              ? "▶"
-                              : "PDF"}
-                          </div>
-                        )}
+                      return (
+                        <article
+                          key={
+                            attachment.id
+                          }
+                          className="alphaAttachmentCard"
+                        >
+                          {previewUrl ? (
+                            <img
+                              src={
+                                previewUrl
+                              }
+                              alt={
+                                attachment.name
+                              }
+                              onLoad={() =>
+                                URL.revokeObjectURL(
+                                  previewUrl,
+                                )
+                              }
+                            />
+                          ) : (
+                            <div className="alphaAttachmentPlaceholder">
+                              {attachment.category ===
+                              "Video"
+                                ? "▶"
+                                : "PDF"}
+                            </div>
+                          )}
 
-                        <div className="alphaAttachmentInfo">
-                          <strong title={attachment.name}>
-                            {attachment.name}
-                          </strong>
+                          <div className="alphaAttachmentInfo">
+                            <strong
+                              title={
+                                attachment.name
+                              }
+                            >
+                              {
+                                attachment.name
+                              }
+                            </strong>
 
-                          <small>
-                            {formatFileSize(attachment.size)}
-                          </small>
+                            <small>
+                              {formatFileSize(
+                                attachment.size,
+                              )}
+                            </small>
 
-                          {attachment.status === "uploading" ? (
-                            <span className="alphaUploadStatus">
-                              Uploading…
-                            </span>
-                          ) : null}
+                            {attachment.status ===
+                            "uploading" ? (
+                              <span className="alphaUploadStatus">
+                                Uploading…
+                              </span>
+                            ) : null}
 
-                          {attachment.status === "uploaded" ? (
-                            <span className="alphaUploadSuccess">
-                              Uploaded ✓
-                            </span>
-                          ) : null}
+                            {attachment.status ===
+                            "uploaded" ? (
+                              <span className="alphaUploadSuccess">
+                                Uploaded ✓
+                              </span>
+                            ) : null}
 
-                          {attachment.status === "failed" ? (
-                            <span className="alphaUploadFailed">
-                              We couldn&apos;t upload this file.
-                            </span>
-                          ) : null}
+                            {attachment.status ===
+                            "failed" ? (
+                              <span className="alphaUploadFailed">
+                                We couldn&apos;t
+                                upload this file.
+                              </span>
+                            ) : null}
 
-                          <div className="alphaAttachmentActions">
-                            {attachment.status === "failed" ? (
+                            <div className="alphaAttachmentActions">
+                              {attachment.status ===
+                              "failed" ? (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    void retryAttachment(
+                                      attachment,
+                                    )
+                                  }
+                                >
+                                  Retry
+                                </button>
+                              ) : null}
+
                               <button
                                 type="button"
                                 onClick={() =>
-                                  void retryAttachment(
-                                    attachment,
+                                  void removeAttachment(
+                                    attachment.id,
                                   )
                                 }
                               >
-                                Retry
+                                Remove
                               </button>
-                            ) : null}
-
-                            <button
-                              type="button"
-                              onClick={() =>
-                                void removeAttachment(
-                                  attachment.id,
-                                )
-                              }
-                            >
-                              Remove
-                            </button>
+                            </div>
                           </div>
-                        </div>
-                      </article>
-                    );
-                  })}
+                        </article>
+                      );
+                    },
+                  )}
                 </div>
               </div>
             ) : null}
@@ -2431,7 +3065,9 @@ export default function ServiceDetailsPage() {
             <button
               type="button"
               className="alphaBackButton"
-              onClick={handleBack}
+              onClick={
+                handleBack
+              }
             >
               ← BACK TO YOUR DETAILS
             </button>
@@ -2448,7 +3084,10 @@ export default function ServiceDetailsPage() {
           </div>
 
           {notice ? (
-            <p className="alphaSavedNotice" role="status">
+            <p
+              className="alphaSavedNotice"
+              role="status"
+            >
               {notice}
             </p>
           ) : null}
@@ -2460,65 +3099,101 @@ export default function ServiceDetailsPage() {
               QUOTE JOURNEY
             </span>
 
-            <h2>What Happens Next?</h2>
+            <h2>
+              What Happens Next?
+            </h2>
 
             <ol>
               <li>
                 <span>1</span>
+
                 <div>
-                  <strong>Your Details</strong>
-                  <small>Who we&apos;re speaking to</small>
+                  <strong>
+                    Your Details
+                  </strong>
+
+                  <small>
+                    Who we&apos;re speaking to
+                  </small>
                 </div>
               </li>
 
               <li className="alphaSidebarActive">
                 <span>2</span>
+
                 <div>
-                  <strong>Service Details</strong>
-                  <small>What work you need</small>
+                  <strong>
+                    Service Details
+                  </strong>
+
+                  <small>
+                    What work you need
+                  </small>
                 </div>
               </li>
 
               <li>
                 <span>3</span>
+
                 <div>
-                  <strong>Property Details</strong>
-                  <small>Where the work is needed</small>
+                  <strong>
+                    Property Details
+                  </strong>
+
+                  <small>
+                    Where the work is needed
+                  </small>
                 </div>
               </li>
 
               <li>
                 <span>4</span>
+
                 <div>
-                  <strong>Review & Send</strong>
-                  <small>Check everything before sending</small>
+                  <strong>
+                    Review & Send
+                  </strong>
+
+                  <small>
+                    Check everything before sending
+                  </small>
                 </div>
               </li>
             </ol>
 
             <div className="alphaSidebarNote">
-              The details you entered in Step 1 will be carried through while you
-              complete the rest of your quote request.
+              The details you entered in Step 1 will be carried through while you complete the rest of your quote request.
             </div>
           </div>
 
           <div className="alphaSidebarEmergency">
-            <span>EMERGENCY?</span>
+            <span>
+              EMERGENCY?
+            </span>
 
-            <h3>Need urgent help?</h3>
+            <h3>
+              Need urgent help?
+            </h3>
 
             <p>
-              For an active property or plumbing emergency, call
-              Alpha directly as well as completing the form.
+              For an active property or plumbing
+              emergency, call Alpha directly as well
+              as completing the form.
             </p>
 
-            <a href="tel:01775518068">01775 518068</a>
+            <a href="tel:01775518068">
+              01775 518068
+            </a>
           </div>
 
           <div className="alphaSidebarContact">
-            <strong>Need to speak to Alpha?</strong>
+            <strong>
+              Need to speak to Alpha?
+            </strong>
 
-            <a href="tel:01775518068">01775 518068</a>
+            <a href="tel:01775518068">
+              01775 518068
+            </a>
 
             <a href="mailto:info@alphapropertyandgardening.co.uk">
               info@alphapropertyandgardening.co.uk

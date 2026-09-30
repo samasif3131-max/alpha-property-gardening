@@ -15,7 +15,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./property-details.module.css";
 
-type YesNo = "Yes" | "No" | "";
+type YesNo = "Yes" | "No" | "To be confirmed" | "";
 
 type PropertyType =
   | "House"
@@ -44,10 +44,9 @@ type PropertySize =
   | "";
 
 type OccupancyStatus =
-  | "Yes — I live there"
-  | "Yes — Tenant occupied"
-  | "Yes — Business occupied"
-  | "No — Property is vacant"
+  | "Owner occupied"
+  | "Tenant occupied"
+  | "Vacant"
   | "Between tenancies"
   | "Under renovation"
   | "Other"
@@ -63,9 +62,9 @@ type AccessMethod =
   | "";
 
 type ExternalAccessType =
-  | "Yes — Front / side access"
-  | "Yes — Rear access"
-  | "Access through the property"
+  | "Front / side access"
+  | "Rear access"
+  | "Access through property"
   | "Restricted access"
   | "Not sure"
   | "";
@@ -81,7 +80,7 @@ type ParkingType =
 
 type ProblemLocation =
   | "Ground level"
-  | "First-floor level"
+  | "First floor"
   | "Second floor or above"
   | "Roof / roofline"
   | "Not sure"
@@ -863,7 +862,8 @@ export default function PropertyDetailsPage() {
     hasService("Property Renovation") ||
     hasService("Painting & Decorating") ||
     hasService("Landlord / Rental Property Work") ||
-    hasService("Multiple Services");
+    hasService("Multiple Services") ||
+    Boolean(step18?.form?.propertyCount);
 
   const isOccupancyRelevant =
     isLandlordOrAgent ||
@@ -899,11 +899,13 @@ export default function PropertyDetailsPage() {
 
   const portfolioRequired =
     step18?.form?.jobCount ===
-    "Work across more than one property";
+      "Work across more than one property" ||
+    step18?.form?.propertyCount ===
+      "Work across more than one property";
 
   const shouldShowTenantContact =
     isLandlordOrAgent &&
-    form.occupancy === "Yes — Tenant occupied";
+    form.occupancy === "Tenant occupied";
 
   const shouldShowTenantApproval =
     isTenant;
@@ -1358,36 +1360,11 @@ export default function PropertyDetailsPage() {
   }
 
   function renderOccupancyOptions() {
-    if (isLandlordOrAgent) {
-      return [
-        "Yes — Tenant occupied",
-        "No — Property is vacant",
-        "Between tenancies",
-        "Under renovation",
-        "Other",
-      ];
-    }
-
-    if (isBusiness) {
-      return [
-        "Yes — Business occupied",
-        "No — Property is vacant",
-        "Under renovation",
-        "Other",
-      ];
-    }
-
-    if (isTenant) {
-      return [
-        "Yes — I live there",
-        "Under renovation",
-        "Other",
-      ];
-    }
-
     return [
-      "Yes — I live there",
-      "No — Property is vacant",
+      "Owner occupied",
+      "Tenant occupied",
+      "Vacant",
+      "Between tenancies",
       "Under renovation",
       "Other",
     ];
@@ -1900,7 +1877,7 @@ export default function PropertyDetailsPage() {
                   const nextValue = value as OccupancyStatus;
                   updateForm("occupancy", nextValue);
 
-                  if (nextValue !== "Yes — Tenant occupied") {
+                  if (nextValue !== "Tenant occupied") {
                     setForm((current) => ({
                       ...current,
                       shouldContactTenant: "",
@@ -2191,9 +2168,9 @@ export default function PropertyDetailsPage() {
                 name="externalAccessType"
                 value={form.externalAccessType}
                 options={[
-                  "Yes — Front / side access",
-                  "Yes — Rear access",
-                  "Access through the property",
+                  "Front / side access",
+                  "Rear access",
+                  "Access through property",
                   "Restricted access",
                   "Not sure",
                 ]}
@@ -2302,7 +2279,7 @@ export default function PropertyDetailsPage() {
                 value={form.problemLocation}
                 options={[
                   "Ground level",
-                  "First-floor level",
+                  "First floor",
                   "Second floor or above",
                   "Roof / roofline",
                   "Not sure",

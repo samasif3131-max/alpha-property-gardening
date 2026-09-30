@@ -335,9 +335,8 @@ export default function TilingFlooringPage() {
             </div>
 
             <div className={styles.statement}>
-              <span>One enquiry. </span>
-              <strong>One team. Complete property care.</strong>
-            </div>
+  <span>One enquiry. One team. Complete property care.</span>
+</div>
           </div>
         </section>
 

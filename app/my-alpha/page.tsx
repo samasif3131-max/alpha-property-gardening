@@ -6,13 +6,12 @@ import styles from "./my-alpha.module.css";
 
 export const metadata: Metadata = {
   title:
-    "My Alpha Client Login | Alpha Property & Gardening Services",
+  "My Alpha Login | Alpha Property & Gardening Services",
   description:
     "Securely sign in to My Alpha to manage your properties, jobs, quotes, appointments, invoices, documents and service requests.",
   robots: {
     index: false,
-    follow: false,
-  },
+follow: true,  },
 };
 
 const plannedFeatures = [

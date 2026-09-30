@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./CreateAccount.module.css";
+import { createSupabaseBrowserClient } from "@/app/lib/supabase-browser";
 
 export default function CreateAccount() {
   const [fullName, setFullName] = useState("");
@@ -56,13 +57,13 @@ export default function CreateAccount() {
     try {
       setLoading(true);
 
-      // Supabase ko sirf form submit hone par load karein
-      const { supabase } = await import("@/app/lib/supabase");
+      const supabase = createSupabaseBrowserClient();
 
       const { data, error: signUpError } = await supabase.auth.signUp({
         email: email.trim(),
         password,
         options: {
+          emailRedirectTo: `${window.location.origin}/my-alpha`,
           data: {
             full_name: fullName.trim(),
             phone: phone.trim(),
@@ -71,7 +72,10 @@ export default function CreateAccount() {
       });
 
       if (signUpError) {
-        setError(signUpError.message);
+        setError(
+          "We could not create your account at the moment. Please check your details and try again."
+        );
+        console.error(signUpError);
         return;
       }
 
@@ -81,7 +85,7 @@ export default function CreateAccount() {
       }
 
       setSuccess(
-        "Your account has been created successfully. You can now login to My Alpha."
+        "Your account has been created. Please check your email and click the verification link before signing in to My Alpha."
       );
 
       setFullName("");
@@ -107,9 +111,7 @@ export default function CreateAccount() {
         <div className={styles.createAccountHeroOverlay}>
           <div className={styles.createAccountHeroContainer}>
             <div className={styles.createAccountHeroContent}>
-              <p className={styles.createAccountEyebrow}>
-                HOMEOWNER PORTAL
-              </p>
+              <p className={styles.createAccountEyebrow}>MY ALPHA</p>
 
               <h1>
                 Create Your
@@ -118,9 +120,9 @@ export default function CreateAccount() {
               </h1>
 
               <p className={styles.createAccountHeroText}>
-                Get secure access to your property, services,
+                Get secure access to your Alpha account for properties,
                 <br />
-                jobs, quotes and invoices all in one place.
+                services, jobs, quotes, invoices and documents.
               </p>
 
               <div className={styles.createAccountPoints}>
@@ -147,19 +149,16 @@ export default function CreateAccount() {
       {/* CREATE ACCOUNT AREA */}
       <section className={styles.createAccountSection}>
         <div className={styles.createAccountContainer}>
-
           {/* LEFT INFORMATION */}
           <div className={styles.createAccountInfoColumn}>
             <div className={styles.createAccountInfoCard}>
-              <div className={styles.createAccountCardLabel}>
-                MY ALPHA
-              </div>
+              <div className={styles.createAccountCardLabel}>MY ALPHA</div>
 
               <h2>Everything in One Place</h2>
 
               <div className={styles.createAccountInfoItem}>
                 <span className={styles.createAccountInfoIcon}>⌂</span>
-                <p>Keep all your property details organised.</p>
+                <p>Keep your property details organised.</p>
               </div>
 
               <div className={styles.createAccountInfoItem}>
@@ -169,7 +168,7 @@ export default function CreateAccount() {
 
               <div className={styles.createAccountInfoItem}>
                 <span className={styles.createAccountInfoIcon}>◷</span>
-                <p>Track your jobs and service progress.</p>
+                <p>Track your job progress.</p>
               </div>
 
               <div className={styles.createAccountInfoItem}>
@@ -189,16 +188,14 @@ export default function CreateAccount() {
             </div>
 
             <div className={styles.createAccountHelpBox}>
-              <div className={styles.createAccountHelpIcon}>
-                ☎
-              </div>
+              <div className={styles.createAccountHelpIcon}>☎</div>
 
               <div>
                 <h3>Already have an account?</h3>
 
                 <p>
                   You can{" "}
-                  <a href="/account/homeowner-login">
+                  <a href="/my-alpha">
                     login to My Alpha
                   </a>{" "}
                   instead.
@@ -220,11 +217,10 @@ export default function CreateAccount() {
             <h2>Create Your Account</h2>
 
             <p className={styles.createAccountFormDescription}>
-              Enter your details below to create your secure
-              homeowner account.
+              Enter your details below to create your secure My Alpha
+              account.
             </p>
 
-            {/* ERROR MESSAGE */}
             {error && (
               <div
                 style={{
@@ -242,7 +238,6 @@ export default function CreateAccount() {
               </div>
             )}
 
-            {/* SUCCESS MESSAGE */}
             {success && (
               <div
                 style={{
@@ -266,9 +261,7 @@ export default function CreateAccount() {
             >
               {/* NAME */}
               <div className={styles.createAccountFormField}>
-                <label htmlFor="full-name">
-                  Full Name
-                </label>
+                <label htmlFor="full-name">Full Name</label>
 
                 <div className={styles.createAccountInputWrapper}>
                   <span>♙</span>
@@ -288,9 +281,7 @@ export default function CreateAccount() {
 
               {/* EMAIL */}
               <div className={styles.createAccountFormField}>
-                <label htmlFor="create-email">
-                  Email Address
-                </label>
+                <label htmlFor="create-email">Email Address</label>
 
                 <div className={styles.createAccountInputWrapper}>
                   <span>✉</span>
@@ -310,9 +301,7 @@ export default function CreateAccount() {
 
               {/* PHONE */}
               <div className={styles.createAccountFormField}>
-                <label htmlFor="phone">
-                  Phone Number
-                </label>
+                <label htmlFor="phone">Phone Number</label>
 
                 <div className={styles.createAccountInputWrapper}>
                   <span>☎</span>
@@ -332,9 +321,7 @@ export default function CreateAccount() {
 
               {/* PASSWORD */}
               <div className={styles.createAccountFormField}>
-                <label htmlFor="create-password">
-                  Password
-                </label>
+                <label htmlFor="create-password">Password</label>
 
                 <div className={styles.createAccountInputWrapper}>
                   <span>♢</span>
@@ -354,9 +341,7 @@ export default function CreateAccount() {
 
               {/* CONFIRM PASSWORD */}
               <div className={styles.createAccountFormField}>
-                <label htmlFor="confirm-password">
-                  Confirm Password
-                </label>
+                <label htmlFor="confirm-password">Confirm Password</label>
 
                 <div className={styles.createAccountInputWrapper}>
                   <span>♢</span>
@@ -368,9 +353,7 @@ export default function CreateAccount() {
                     placeholder="Confirm your password"
                     autoComplete="new-password"
                     value={confirmPassword}
-                    onChange={(e) =>
-                      setConfirmPassword(e.target.value)
-                    }
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     disabled={loading}
                   />
                 </div>
@@ -388,14 +371,9 @@ export default function CreateAccount() {
 
                 <span>
                   I agree to the{" "}
-                  <a href="/terms">
-                    Terms &amp; Conditions
-                  </a>{" "}
+                  <a href="/terms">Terms &amp; Conditions</a>{" "}
                   and{" "}
-                  <a href="/privacy">
-                    Privacy Policy
-                  </a>
-                  .
+                  <a href="/privacy-policy">Privacy Policy</a>.
                 </span>
               </label>
 
@@ -419,7 +397,6 @@ export default function CreateAccount() {
               </button>
             </form>
 
-            {/* LOGIN DIVIDER */}
             <div className={styles.createAccountDivider}>
               <span></span>
               <strong>ALREADY REGISTERED?</strong>
@@ -427,7 +404,7 @@ export default function CreateAccount() {
             </div>
 
             <a
-              href="/account/homeowner-login"
+              href="/my-alpha"
               className={styles.createAccountLoginButton}
             >
               Login to My Alpha
@@ -435,39 +412,27 @@ export default function CreateAccount() {
 
             <p className={styles.createAccountNewUser}>
               Already have an Alpha account?{" "}
-              <a href="/account/homeowner-login">
-                Login here
-              </a>
+              <a href="/my-alpha">Login here</a>
             </p>
           </div>
 
           {/* RIGHT COLUMN */}
           <div className={styles.createAccountRightColumn}>
-
-            {/* TESTIMONIAL */}
+            {/* ACCOUNT INFORMATION */}
             <div className={styles.createAccountTestimonialCard}>
-              <img
-                src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85"
-                alt="Beautiful property interior"
-              />
-
               <div className={styles.createAccountTestimonialContent}>
                 <div className={styles.createAccountTestimonialMark}>
-                  “
+                  ✓
                 </div>
+
+                <h2>Secure Account Access</h2>
 
                 <p>
-                  Brilliant service from start to finish.
-                  Easy to use portal and always kept updated.
+                  Your My Alpha account requires email verification before
+                  you can sign in. Your account is separate from any
+                  existing Alpha property or CRM records unless access is
+                  securely authorised.
                 </p>
-
-                <div className={styles.createAccountTestimonialRating}>
-                  <span>★★★★★</span>
-
-                  <strong>
-                    Verified Customer
-                  </strong>
-                </div>
               </div>
             </div>
 
@@ -479,22 +444,20 @@ export default function CreateAccount() {
                 <div>
                   <h2>Need Help?</h2>
 
-                  <p>
-                    Our team is here to help.
-                  </p>
+                  <p>Our team is here to help.</p>
                 </div>
               </div>
 
               <div className={styles.createAccountContactLine}>
                 <span>☎</span>
-                <strong>01234 567890</strong>
+                <strong>01775 518068</strong>
               </div>
 
               <div className={styles.createAccountContactLine}>
                 <span>✉</span>
 
                 <span>
-                  info@alphapropertyandgarden.co.uk
+                  info@alphapropertyandgardening.co.uk
                 </span>
               </div>
 
@@ -503,14 +466,11 @@ export default function CreateAccount() {
 
                 <span>
                   Use our{" "}
-                  <a href="/contact">
-                    Contact Form
-                  </a>
+                  <a href="/contact">Contact Form</a>
                 </span>
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
